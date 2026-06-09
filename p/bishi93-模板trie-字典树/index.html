@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us" dir="ltr">
+<html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" 思路 求解代码 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 /** * trie[p][i]: 字典树的节点存储。 * 第一维 p 代表节点的编号（行号）； * 第二维 i 代表字符的映射索引（0-51）。 * 值存储的是该字符指向的下一个节点的编号。 */ private static int[][] trie = new int[1000005][52]; /** * count[p]: 前缀统计的核心。 * 记录有多少个模式串在插入过程中经过了编号为 p 的节点。 * 因为我们要统计“以某串为前缀的个数”，所以每经过一个点都要加1。 */ private static int[] count = new int[1000005]; /** * nodes: 记录当前字典树已经创建的节点总数。 * 编号 0 始终代表根节点（不存储具体字符）。 */ private static int nodes = 0; public static void main(String[] args) throws IOException { // 使用高效的输入输出流处理百万级数据，防止超时 BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out)); // 读取第一行：模式串数量 n 和查询次数 q String[] strA = br.readLine().trim().split(&#34;\\\\s+&#34;); int n = Integer.parseInt(strA[0]); int q = Integer.parseInt(strA[1]); // 1. 构建字典树阶段 for (int i = 0; i &lt; n; i++) { insert(br.readLine().trim()); } // 2. 查询阶段 for (int i = 0; i &lt; q; i++) { // 直接输出以该文本串为前缀的模式串数量 out.println(query(br.readLine().trim())); } // 刷新缓冲区并释放资源 out.flush(); out.close(); br.close(); } /** * 将字符映射到 0-51 的索引空间。 * 区分大小写：&#39;A&#39;-&#39;Z&#39; 映射到 0-25，&#39;a&#39;-&#39;z&#39; 映射到 26-51。 */ private static int getIndex(char c) { return c &gt;= &#39;A&#39; &amp;&amp; c &lt;= &#39;Z&#39; ? c - &#39;A&#39; : c - &#39;a&#39; + 26; } /** * 模式串插入方法 * 核心逻辑：沿着路径在每个经过的节点打标记计数。 */ private static void insert(String s) { int p = 0; // 从根节点 (编号 0) 开始 for (char c : s.toCharArray()) { int i = getIndex(c); // 如果当前字符在当前节点下没有对应的子节点，则新建一个 if (trie[p][i] == 0) { trie[p][i] = ++nodes; } // 移动到子节点 p = trie[p][i]; /** * 关键：只要经过这个节点，count 就自增。 * 这样 count[p] 就代表了有多少个单词是以“从根到当前点”这一串字符为前缀的。 */ count[p]++; } } /** * 文本串查询方法 * 核心逻辑：在字典树中顺着文本串寻找路径，若能走完路径，返回最后的 count。 */ private static int query(String t) { int p = 0; // 从根节点开始 for (char c : t.toCharArray()) { int i = getIndex(c); /** * 如果在路径中发现某个字符没有对应的分支， * 说明没有任何一个模式串包含这个前缀，直接返回 0。 */ if (trie[p][i] == 0) { return 0; } p = trie[p][i]; // 顺着路径向下走 } /** * 成功走完文本串 t 的所有字符， * 此时节点 p 的 count 值就是在插入阶段经过该点的字符串总数。 */ return count[p]; } ">
 <title>BISHI93 【模板】Trie 字典树</title>
@@ -10,10 +10,12 @@
 <meta property='og:description' content=" 思路 求解代码 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 /** * trie[p][i]: 字典树的节点存储。 * 第一维 p 代表节点的编号（行号）； * 第二维 i 代表字符的映射索引（0-51）。 * 值存储的是该字符指向的下一个节点的编号。 */ private static int[][] trie = new int[1000005][52]; /** * count[p]: 前缀统计的核心。 * 记录有多少个模式串在插入过程中经过了编号为 p 的节点。 * 因为我们要统计“以某串为前缀的个数”，所以每经过一个点都要加1。 */ private static int[] count = new int[1000005]; /** * nodes: 记录当前字典树已经创建的节点总数。 * 编号 0 始终代表根节点（不存储具体字符）。 */ private static int nodes = 0; public static void main(String[] args) throws IOException { // 使用高效的输入输出流处理百万级数据，防止超时 BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out)); // 读取第一行：模式串数量 n 和查询次数 q String[] strA = br.readLine().trim().split(&#34;\\\\s+&#34;); int n = Integer.parseInt(strA[0]); int q = Integer.parseInt(strA[1]); // 1. 构建字典树阶段 for (int i = 0; i &lt; n; i++) { insert(br.readLine().trim()); } // 2. 查询阶段 for (int i = 0; i &lt; q; i++) { // 直接输出以该文本串为前缀的模式串数量 out.println(query(br.readLine().trim())); } // 刷新缓冲区并释放资源 out.flush(); out.close(); br.close(); } /** * 将字符映射到 0-51 的索引空间。 * 区分大小写：&#39;A&#39;-&#39;Z&#39; 映射到 0-25，&#39;a&#39;-&#39;z&#39; 映射到 26-51。 */ private static int getIndex(char c) { return c &gt;= &#39;A&#39; &amp;&amp; c &lt;= &#39;Z&#39; ? c - &#39;A&#39; : c - &#39;a&#39; + 26; } /** * 模式串插入方法 * 核心逻辑：沿着路径在每个经过的节点打标记计数。 */ private static void insert(String s) { int p = 0; // 从根节点 (编号 0) 开始 for (char c : s.toCharArray()) { int i = getIndex(c); // 如果当前字符在当前节点下没有对应的子节点，则新建一个 if (trie[p][i] == 0) { trie[p][i] = ++nodes; } // 移动到子节点 p = trie[p][i]; /** * 关键：只要经过这个节点，count 就自增。 * 这样 count[p] 就代表了有多少个单词是以“从根到当前点”这一串字符为前缀的。 */ count[p]++; } } /** * 文本串查询方法 * 核心逻辑：在字典树中顺着文本串寻找路径，若能走完路径，返回最后的 count。 */ private static int query(String t) { int p = 0; // 从根节点开始 for (char c : t.toCharArray()) { int i = getIndex(c); /** * 如果在路径中发现某个字符没有对应的分支， * 说明没有任何一个模式串包含这个前缀，直接返回 0。 */ if (trie[p][i] == 0) { return 0; } p = trie[p][i]; // 顺着路径向下走 } /** * 成功走完文本串 t 的所有字符， * 此时节点 p 的 count 值就是在插入阶段经过该点的字符串总数。 */ return count[p]; } ">
 <meta property='og:url' content='https://iamxurulin.github.io/p/bishi93-%E6%A8%A1%E6%9D%BFtrie-%E5%AD%97%E5%85%B8%E6%A0%91/'>
 <meta property='og:site_name' content='Coder_Studio'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='字符串' /><meta property='article:published_time' content='2026-03-05T22:07:17&#43;00:00'/><meta property='article:modified_time' content='2026-06-09T03:35:54&#43;00:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='字符串' /><meta property='article:published_time' content='2026-03-05T22:07:17&#43;00:00'/><meta property='article:modified_time' content='2026-06-09T14:35:08&#43;00:00'/>
 <meta name="twitter:title" content="BISHI93 【模板】Trie 字典树">
 <meta name="twitter:description" content=" 思路 求解代码 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 /** * trie[p][i]: 字典树的节点存储。 * 第一维 p 代表节点的编号（行号）； * 第二维 i 代表字符的映射索引（0-51）。 * 值存储的是该字符指向的下一个节点的编号。 */ private static int[][] trie = new int[1000005][52]; /** * count[p]: 前缀统计的核心。 * 记录有多少个模式串在插入过程中经过了编号为 p 的节点。 * 因为我们要统计“以某串为前缀的个数”，所以每经过一个点都要加1。 */ private static int[] count = new int[1000005]; /** * nodes: 记录当前字典树已经创建的节点总数。 * 编号 0 始终代表根节点（不存储具体字符）。 */ private static int nodes = 0; public static void main(String[] args) throws IOException { // 使用高效的输入输出流处理百万级数据，防止超时 BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out)); // 读取第一行：模式串数量 n 和查询次数 q String[] strA = br.readLine().trim().split(&#34;\\\\s+&#34;); int n = Integer.parseInt(strA[0]); int q = Integer.parseInt(strA[1]); // 1. 构建字典树阶段 for (int i = 0; i &lt; n; i++) { insert(br.readLine().trim()); } // 2. 查询阶段 for (int i = 0; i &lt; q; i++) { // 直接输出以该文本串为前缀的模式串数量 out.println(query(br.readLine().trim())); } // 刷新缓冲区并释放资源 out.flush(); out.close(); br.close(); } /** * 将字符映射到 0-51 的索引空间。 * 区分大小写：&#39;A&#39;-&#39;Z&#39; 映射到 0-25，&#39;a&#39;-&#39;z&#39; 映射到 26-51。 */ private static int getIndex(char c) { return c &gt;= &#39;A&#39; &amp;&amp; c &lt;= &#39;Z&#39; ? c - &#39;A&#39; : c - &#39;a&#39; + 26; } /** * 模式串插入方法 * 核心逻辑：沿着路径在每个经过的节点打标记计数。 */ private static void insert(String s) { int p = 0; // 从根节点 (编号 0) 开始 for (char c : s.toCharArray()) { int i = getIndex(c); // 如果当前字符在当前节点下没有对应的子节点，则新建一个 if (trie[p][i] == 0) { trie[p][i] = ++nodes; } // 移动到子节点 p = trie[p][i]; /** * 关键：只要经过这个节点，count 就自增。 * 这样 count[p] 就代表了有多少个单词是以“从根到当前点”这一串字符为前缀的。 */ count[p]++; } } /** * 文本串查询方法 * 核心逻辑：在字典树中顺着文本串寻找路径，若能走完路径，返回最后的 count。 */ private static int query(String t) { int p = 0; // 从根节点开始 for (char c : t.toCharArray()) { int i = getIndex(c); /** * 如果在路径中发现某个字符没有对应的分支， * 说明没有任何一个模式串包含这个前缀，直接返回 0。 */ if (trie[p][i] == 0) { return 0; } p = trie[p][i]; // 顺着路径向下走 } /** * 成功走完文本串 t 的所有字符， * 此时节点 p 的 count 值就是在插入阶段经过该点的字符串总数。 */ return count[p]; } "><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5123323391207523"
-     crossorigin="anonymous"></script><div class="loading">
+     crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href="/favicon.ico" />
+<div class="loading">
  
 <div class="liquid-loader">
   <div class="loading-text">
@@ -232,7 +234,7 @@
         
         <div class="site-meta">
             <h1 class="site-name"><a href="/">Coder_Studio</a></h1>
-            <h2 class="site-description">Welcome to my blog！</h2>
+            <h2 class="site-description">专注后端开发、算法与 AI 的技术博客</h2>
         </div>
     </header><ol class="menu-social">
             
@@ -407,6 +409,25 @@
 
                 
                 <span>友情链接</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E9%9A%90%E7%A7%81%E6%94%BF%E7%AD%96/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+                
+                <span>隐私政策</span>
             </a>
         </li>
         
@@ -807,6 +828,19 @@
     </section>
 
 
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>本文由 <a class="link" href="https://iamxurulin.blog.csdn.net/"  target="_blank" rel="noopener"
+    >iamxurulin</a> 原创发布，转载请保留原文链接。</span>
+    </section>
     <section class="article-lastmod">
         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
@@ -817,10 +851,64 @@
 
 
         <span>
-            最后更新于 2026-06-09 03:35:54
+            最后更新于 2026-06-09 14:35:08
         </span>
-    </section></footer>
+    </section><section class="article-original-declaration">
+        <div class="declaration-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
 
+
+</div>
+        <div class="declaration-content">
+            <strong>关于作者与文章</strong>
+            <p>本文为 <a href="https://github.com/iamxurulin" target="_blank" rel="noopener">iamxurulin</a> 原创技术文章，同步发布于 <a href="https://iamxurulin.blog.csdn.net/" target="_blank" rel="noopener">CSDN 博客</a> 与本站。两处内容完全一致，均由作者本人维护更新。如对内容有疑问或建议，欢迎在评论区交流讨论。</p>
+        </div>
+    </section>
+</footer>
+
+<style>
+.article-original-declaration {
+    margin-top: 2rem;
+    padding: 1.2rem 1.5rem;
+    background: var(--card-background);
+    border: 1px solid var(--card-border-color);
+    border-radius: var(--card-border-radius);
+    display: flex;
+    gap: 0.8rem;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--card-text-color-secondary);
+}
+.article-original-declaration .declaration-icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    margin-top: 2px;
+    color: var(--accent-color);
+}
+.article-original-declaration .declaration-content {
+    flex: 1;
+}
+.article-original-declaration strong {
+    display: block;
+    margin-bottom: 0.3rem;
+    color: var(--card-text-color-main);
+    font-size: 0.95rem;
+}
+.article-original-declaration p {
+    margin: 0.3rem 0;
+}
+.article-original-declaration a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+.article-original-declaration a:hover {
+    text-decoration: underline;
+}
+</style>
 
     
         <link 
@@ -1016,12 +1104,14 @@
     <section class="copyright">
         &copy; 
         
+            2025 - 
+        
         2026 iamxurulin
     </section>
     
     <section class="powerby">
         
-            Code Road Record <br/>
+            Coder_Studio - 记录后端开发、算法与 AI 的成长之路 <br/>
         
 
     </section>

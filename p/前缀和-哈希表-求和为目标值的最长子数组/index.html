@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us" dir="ltr">
+<html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="\n求解思路 这道题，维护一个累加和sum，对于当前位置i，如果存在某个更早的位置j使得从j+1到i的子数组和等于aim，那么必然有sum[i] - sum[j] = aim，即sum[j] = sum[i] - aim。\n">
 <title>前缀和&#43;哈希表-求和为目标值的最长子数组</title>
@@ -10,10 +10,12 @@
 <meta property='og:description' content="\n求解思路 这道题，维护一个累加和sum，对于当前位置i，如果存在某个更早的位置j使得从j+1到i的子数组和等于aim，那么必然有sum[i] - sum[j] = aim，即sum[j] = sum[i] - aim。\n">
 <meta property='og:url' content='https://iamxurulin.github.io/p/%E5%89%8D%E7%BC%80%E5%92%8C-%E5%93%88%E5%B8%8C%E8%A1%A8-%E6%B1%82%E5%92%8C%E4%B8%BA%E7%9B%AE%E6%A0%87%E5%80%BC%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E6%95%B0%E7%BB%84/'>
 <meta property='og:site_name' content='Coder_Studio'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='HashMap' /><meta property='article:published_time' content='2025-11-24T20:42:36&#43;00:00'/><meta property='article:modified_time' content='2026-06-09T03:35:54&#43;00:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='HashMap' /><meta property='article:published_time' content='2025-11-24T20:42:36&#43;00:00'/><meta property='article:modified_time' content='2026-06-09T14:35:08&#43;00:00'/>
 <meta name="twitter:title" content="前缀和+哈希表-求和为目标值的最长子数组">
 <meta name="twitter:description" content="\n求解思路 这道题，维护一个累加和sum，对于当前位置i，如果存在某个更早的位置j使得从j+1到i的子数组和等于aim，那么必然有sum[i] - sum[j] = aim，即sum[j] = sum[i] - aim。\n"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5123323391207523"
-     crossorigin="anonymous"></script><div class="loading">
+     crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href="/favicon.ico" />
+<div class="loading">
  
 <div class="liquid-loader">
   <div class="loading-text">
@@ -232,7 +234,7 @@
         
         <div class="site-meta">
             <h1 class="site-name"><a href="/">Coder_Studio</a></h1>
-            <h2 class="site-description">Welcome to my blog！</h2>
+            <h2 class="site-description">专注后端开发、算法与 AI 的技术博客</h2>
         </div>
     </header><ol class="menu-social">
             
@@ -407,6 +409,25 @@
 
                 
                 <span>友情链接</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E9%9A%90%E7%A7%81%E6%94%BF%E7%AD%96/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+                
+                <span>隐私政策</span>
             </a>
         </li>
         
@@ -700,6 +721,19 @@
     </section>
 
 
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>本文由 <a class="link" href="https://iamxurulin.blog.csdn.net/"  target="_blank" rel="noopener"
+    >iamxurulin</a> 原创发布，转载请保留原文链接。</span>
+    </section>
     <section class="article-lastmod">
         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
@@ -710,10 +744,64 @@
 
 
         <span>
-            最后更新于 2026-06-09 03:35:54
+            最后更新于 2026-06-09 14:35:08
         </span>
-    </section></footer>
+    </section><section class="article-original-declaration">
+        <div class="declaration-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
 
+
+</div>
+        <div class="declaration-content">
+            <strong>关于作者与文章</strong>
+            <p>本文为 <a href="https://github.com/iamxurulin" target="_blank" rel="noopener">iamxurulin</a> 原创技术文章，同步发布于 <a href="https://iamxurulin.blog.csdn.net/" target="_blank" rel="noopener">CSDN 博客</a> 与本站。两处内容完全一致，均由作者本人维护更新。如对内容有疑问或建议，欢迎在评论区交流讨论。</p>
+        </div>
+    </section>
+</footer>
+
+<style>
+.article-original-declaration {
+    margin-top: 2rem;
+    padding: 1.2rem 1.5rem;
+    background: var(--card-background);
+    border: 1px solid var(--card-border-color);
+    border-radius: var(--card-border-radius);
+    display: flex;
+    gap: 0.8rem;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--card-text-color-secondary);
+}
+.article-original-declaration .declaration-icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    margin-top: 2px;
+    color: var(--accent-color);
+}
+.article-original-declaration .declaration-content {
+    flex: 1;
+}
+.article-original-declaration strong {
+    display: block;
+    margin-bottom: 0.3rem;
+    color: var(--card-text-color-main);
+    font-size: 0.95rem;
+}
+.article-original-declaration p {
+    margin: 0.3rem 0;
+}
+.article-original-declaration a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+.article-original-declaration a:hover {
+    text-decoration: underline;
+}
+</style>
 
     
         <link 
@@ -909,12 +997,14 @@
     <section class="copyright">
         &copy; 
         
+            2025 - 
+        
         2026 iamxurulin
     </section>
     
     <section class="powerby">
         
-            Code Road Record <br/>
+            Coder_Studio - 记录后端开发、算法与 AI 的成长之路 <br/>
         
 
     </section>
