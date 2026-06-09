@@ -1,0 +1,1829 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="MySQL的锁按两个维度分，刚好对应开发中最常遇到的问题：\n按解决并发冲突的思路分，是悲观锁和乐观锁——这俩决定了“你是先占坑再干活，还是先干活最后再检查”；\n">
+<title>【面试真题】能讲讲MySQL的锁机制吗</title>
+
+<link rel='canonical' href='https://iamxurulin.github.io/p/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98%E8%83%BD%E8%AE%B2%E8%AE%B2mysql%E7%9A%84%E9%94%81%E6%9C%BA%E5%88%B6%E5%90%97/'>
+
+<link rel="stylesheet" href="/scss/style.min.941ad973a59353fc2ac1283514266190a5d6af31d0e32f5f55f93f16d5aa5945.css"><meta property='og:title' content="【面试真题】能讲讲MySQL的锁机制吗">
+<meta property='og:description' content="MySQL的锁按两个维度分，刚好对应开发中最常遇到的问题：\n按解决并发冲突的思路分，是悲观锁和乐观锁——这俩决定了“你是先占坑再干活，还是先干活最后再检查”；\n">
+<meta property='og:url' content='https://iamxurulin.github.io/p/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98%E8%83%BD%E8%AE%B2%E8%AE%B2mysql%E7%9A%84%E9%94%81%E6%9C%BA%E5%88%B6%E5%90%97/'>
+<meta property='og:site_name' content='Coder_Studio'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='数据库' /><meta property='article:published_time' content='2026-03-15T16:44:46&#43;00:00'/><meta property='article:modified_time' content='2026-06-09T01:34:43&#43;00:00'/>
+<meta name="twitter:title" content="【面试真题】能讲讲MySQL的锁机制吗">
+<meta name="twitter:description" content="MySQL的锁按两个维度分，刚好对应开发中最常遇到的问题：\n按解决并发冲突的思路分，是悲观锁和乐观锁——这俩决定了“你是先占坑再干活，还是先干活最后再检查”；\n"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5123323391207523"
+     crossorigin="anonymous"></script><div class="loading">
+ 
+<div class="liquid-loader">
+  <div class="loading-text">
+    Loading<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span>
+  </div>
+  <div class="loader-track">
+    <div class="liquid-fill"></div>
+  </div>
+</div>
+</div>
+
+<style>
+    .loading {
+        position: fixed;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;  
+        background-color: #f5f5fa;
+         
+        transition: all 0.3s ease;
+    }
+	
+  
+.liquid-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;  
+  padding: 20px;
+  font-family: system-ui, sans-serif;
+}
+
+.loader-track {
+  position: relative;
+  width: 180px;
+  height: 32px;
+  background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.6),0 1px 3px rgba(255, 255, 255, 0.1);
+}
+
+.liquid-fill {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  height: calc(100% - 4px);
+  background: linear-gradient(90deg, #4f46e5, #7c3aed, #ec4899, #f59e0b);
+  border-radius: 14px;
+  animation: fillProgress 4s ease-out infinite, colorShift 3s linear infinite;
+  box-shadow:0 0 12px rgba(124, 58, 237, 0.4),inset 0 1px 2px rgba(255, 255, 255, 0.2);
+}
+
+ 
+.animated-stop {
+  animation-play-state: paused !important;
+  -webkit-animation-play-state: paused !important;
+}
+
+.loading-text {
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  animation: textGlow 1s ease-in-out infinite;
+}
+
+.dot {
+  margin-left: 3px;
+  animation: blink 1.5s infinite;
+}
+.dot:nth-of-type(1) { animation-delay: 0s; }
+.dot:nth-of-type(2) { animation-delay: 0.3s; }
+.dot:nth-of-type(3) { animation-delay: 0.6s; }
+
+@keyframes fillProgress {
+  0% { width: 4px; }
+  25% { width: 25%; }
+  50% { width: 50%; }
+  75% { width: 75%; }
+  100% { width: calc(100% - 4px); }
+}
+@keyframes colorShift {
+  0% { filter: hue-rotate(0deg) brightness(1); }
+  33% { filter: hue-rotate(120deg) brightness(1.1); }
+  66% { filter: hue-rotate(240deg) brightness(0.9); }
+  100% { filter: hue-rotate(360deg) brightness(1); }
+}
+@keyframes textGlow {
+  0%,100% { opacity: 0.7;text-shadow: 0 0 8px rgba(139, 92, 246, 0.3); }
+  50% { opacity: 1;text-shadow: 0 0 16px rgba(139, 92, 246, 0.6); }
+}
+@keyframes blink {
+  0%,50% { opacity: 1; }
+  51%,100% { opacity: 0; }
+}
+
+ 
+@keyframes scaleAndFadeout {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.2);  
+    opacity: 0;
+  }
+}
+.scaleAndFadeout {
+  animation: scaleAndFadeout 1.5s ease-out forwards !important;
+}
+
+ 
+.article-view {
+    display: flex;
+}
+
+ 
+ 
+.article-list .article-view {
+    display: none !important;
+}
+ 
+</style>
+
+<script>	
+    function initLoading() {
+        const isFirstVisit = !sessionStorage.getItem('visited');
+        if (isFirstVisit) {
+            const loading = document.querySelector(".loading");
+            const liquidFill = document.querySelector(".liquid-fill"); 
+            loading.style.display = "flex";
+            
+            
+            setTimeout(() => {
+                loadFinish(loading, liquidFill);
+                
+                setTimeout(() => {
+                    loading.style.display = "none";
+                }, 1500);
+                
+                sessionStorage.setItem('visited', 'true');
+            }, 4000); 
+        }
+    }
+	
+    function loadFinish(loading, liquidFill) {
+        
+        liquidFill.classList.add("animated-stop");
+        
+        loading.classList.add("scaleAndFadeout");
+    }
+	
+    
+    initLoading();
+</script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_5b4689d2dc4cdce3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">💦</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coder_Studio</a></h1>
+            <h2 class="site-description">Welcome to my blog！</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://blog.csdn.net/qq_44678890'
+                        target="_blank"
+                        title="CSDN"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" ?><svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500" fill="none"><path d="M82 199.474L173.5 73L345 81.4833L417.103 199.474V300.974L345 427.718H173.5L82 327.474V199.474Z" fill="#84C253"/><path d="M282.182 284.936L347.636 288.867C344.56 317.464 333.964 339.396 315.849 354.663C297.847 369.93 275.688 377.563 249.369 377.563C217.696 377.563 192.118 367.081 172.636 346.118C153.153 325.154 143.412 296.215 143.412 259.301C143.412 222.729 152.641 193.221 171.098 170.776C189.555 148.331 215.303 137.109 248.344 137.109C279.219 137.109 302.917 145.654 319.438 162.744C336.072 179.833 345.471 202.506 347.636 230.761L280.814 234.35C280.814 218.741 277.795 207.462 271.757 200.512C265.832 193.562 258.826 190.087 250.736 190.087C228.178 190.087 216.898 212.76 216.898 258.105C216.898 283.512 219.804 300.773 225.614 309.887C231.539 319.002 239.799 323.559 250.395 323.559C269.307 323.559 279.903 310.685 282.182 284.936Z" fill="white"/></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/iamxurulin/'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                
+                <span>分类</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/tags/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11 3L20 12a1.5 1.5 0 0 1 0 2L14 20a1.5 1.5 0 0 1 -2 0L3 11v-4a4 4 0 0 1 4 -4h4" />
+  <circle cx="9" cy="9" r="2" />
+</svg>
+
+
+
+                
+                <span>标签</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友情链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#悲观锁">悲观锁</a></li>
+    <li><a href="#乐观锁">乐观锁</a>
+      <ol>
+        <li><a href="#举个具体的sql操作实例">举个具体的SQL操作实例</a>
+          <ol>
+            <li><a href="#1会话a运营a先查商品">1.会话A（运营A先查商品）</a></li>
+            <li><a href="#2会话b运营b同时查商品">2.会话B（运营B同时查商品）</a></li>
+            <li><a href="#3会话a运营a先提交修改">3.会话A（运营A先提交修改）</a></li>
+            <li><a href="#4会话b运营b后提交修改">4.会话B（运营B后提交修改）</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#表锁">表锁</a>
+      <ol>
+        <li>
+          <ol>
+            <li><a href="#举个例子">举个例子</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#行锁">行锁</a>
+      <ol>
+        <li>
+          <ol>
+            <li><a href="#举两个例子对比一下">举两个例子对比一下</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#间隙锁临键锁">间隙锁+临键锁</a>
+      <ol>
+        <li>
+          <ol>
+            <li><a href="#先举个电商场景的例子说明一下什么是幻读">先举个电商场景的例子说明一下什么是幻读？</a></li>
+            <li><a href="#间隙锁gap-lock">间隙锁（Gap Lock）</a></li>
+            <li><a href="#临键锁next-key-lock">临键锁（Next-Key Lock）</a></li>
+            <li><a href="#举个例子-1">举个例子</a></li>
+            <li><a href="#小贴士"><strong>小贴士</strong></a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#夺命连环问什么是死锁又怎么避免呢">夺命连环问：什么是死锁？又怎么避免呢？</a>
+      <ol>
+        <li>
+          <ol>
+            <li><a href="#举个例子-2">举个例子</a></li>
+            <li><a href="#死锁的四个必要条件">死锁的四个必要条件</a></li>
+            <li><a href="#怎么避免死锁">怎么避免死锁？</a></li>
+            <li><a href="#-按固定顺序加锁">① 按固定顺序加锁</a></li>
+            <li><a href="#-减少锁的范围和持有时间">② 减少锁的范围和持有时间</a></li>
+            <li><a href="#-避免大事务">③ 避免大事务</a></li>
+            <li><a href="#小贴士-1"><strong>小贴士</strong></a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+  
+  <header class="article-category">
+    
+    <a
+      href="/categories/%E5%85%AB%E8%82%A1/"
+      
+    >
+      八股
+    </a>
+    
+  </header>
+  
+
+  <div class="article-title-wrapper">
+    <h2 class="article-title">
+      <a href="/p/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98%E8%83%BD%E8%AE%B2%E8%AE%B2mysql%E7%9A%84%E9%94%81%E6%9C%BA%E5%88%B6%E5%90%97/">【面试真题】能讲讲MySQL的锁机制吗</a>
+    </h2>
+
+    
+  </div>
+
+     
+  <footer class="article-time">
+    
+    <div style="display: flex; flex-direction: column; gap: 4px;font-size: 14px;">
+      
+      <div class="article-date" style="display: flex; align-items: center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+        <span style="margin-left: 5px">发布于: </span>
+        <time
+          class="article-time--published"
+          datetime='2026-03-15T16:44:46Z'
+          style="margin-left: 5px"
+        >2026-03-15 16:44:46</time>
+      </div>
+
+      
+      
+    </div>
+
+    
+    <div
+      class="article-view"
+      style="align-items: center; gap: 5px; margin-left: auto; font-size: 14px;"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="icon icon-tabler icon-tabler-eye"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <circle cx="12" cy="12" r="2"></circle>
+        <path
+          d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s10 2.333 10 7"
+        ></path>
+      </svg>
+      <span class="temp-pv-container">
+        <span class="temp-pv-value"></span> 次
+      </span>
+    </div>
+  </footer>
+   
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>MySQL的锁按两个维度分，刚好对应开发中最常遇到的问题：</p>
+<p>按<strong>解决并发冲突</strong>的思路分，是悲观锁和乐观锁——这俩决定了“你是先占坑再干活，还是先干活最后再检查”；</p>
+<p>按<strong>锁的范围大小</strong>分，是表锁、行锁，还有 InnoDB 特有的间隙锁 + 临键锁 —— 这三类锁决定了 “你是锁整个仓库（表锁）、只锁你要的那一件商品（行锁），还是锁仓库里的某个货架区间（间隙锁 + 临键锁）”。</p>
+<p>先建一张最简单的电商商品表 <code>product</code>，插几条测试数据，等会更好理解举的例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="o">`</span><span class="n">product</span><span class="o">`</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="o">`</span><span class="n">id</span><span class="o">`</span><span class="w"> </span><span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="w"> </span><span class="k">COMMENT</span><span class="w"> </span><span class="s1">&#39;主键ID&#39;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="o">`</span><span class="n">name</span><span class="o">`</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">COMMENT</span><span class="w"> </span><span class="s1">&#39;商品名称&#39;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="o">`</span><span class="n">stock</span><span class="o">`</span><span class="w"> </span><span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;0&#39;</span><span class="w"> </span><span class="k">COMMENT</span><span class="w"> </span><span class="s1">&#39;库存&#39;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="o">`</span><span class="k">version</span><span class="o">`</span><span class="w"> </span><span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;0&#39;</span><span class="w"> </span><span class="k">COMMENT</span><span class="w"> </span><span class="s1">&#39;乐观锁版本号&#39;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="o">`</span><span class="n">id</span><span class="o">`</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">)</span><span class="w"> </span><span class="n">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">CHARSET</span><span class="o">=</span><span class="n">utf8mb4</span><span class="w"> </span><span class="k">COMMENT</span><span class="o">=</span><span class="s1">&#39;商品表&#39;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">-- 插入测试数据：id=1是iPhone，库存100；id=3是华为，库存200；id=5是小米，库存150
+</span></span></span><span class="line"><span class="cl"><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="o">`</span><span class="n">product</span><span class="o">`</span><span class="w"> </span><span class="p">(</span><span class="o">`</span><span class="n">id</span><span class="o">`</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">name</span><span class="o">`</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">stock</span><span class="o">`</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="k">version</span><span class="o">`</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;iPhone 17&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Mate 70&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Xiaomi 15&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="悲观锁">悲观锁
+</h2><p>举个<strong>电商秒杀扣库存</strong>的真实例子，也是悲观锁最典型的应用：</p>
+<p>比如有两个用户同时秒杀iPhone 17，库存100。</p>
+<p>如果不用锁，俩人同时查出来库存100，都扣减1，就超卖了。<br>
+用悲观锁的话，就是在查库存的时候用 <code>SELECT ... FOR UPDATE</code> 显式加排他锁——</p>
+<p>第一个用户的事务先把这行数据锁住，第二个用户的查询就会阻塞，等第一个用户扣减完库存、提交事务释放锁，第二个用户才能拿到最新的库存，这样就保证了不超卖。</p>
+<h2 id="乐观锁">乐观锁
+</h2><p>这也是开发中很常见的场景：<strong>两个运营同时修改同一件商品的标题</strong>。</p>
+<p>这种场景并发冲突概率很低（因为很少会有两个人同时改同一个商品的标题），如果用悲观锁，每次修改都要加锁，太影响性能了，所以用<strong>乐观锁</strong>更合适。</p>
+<p>乐观锁的意思就是：我<strong>假设没人跟我抢</strong>，所以我先直接修改，最后提交的时候再检查一下：</p>
+<p>在我修改的这段时间里，有没有别人也改过这条数据？</p>
+<p>如果没有，就修改成功；</p>
+<p>如果有，就提示用户“数据已被修改，请刷新后重试”。</p>
+<h3 id="举个具体的sql操作实例">举个具体的SQL操作实例
+</h3><p>我们打开两个命令行窗口，分表代表两个会话。</p>
+<h4 id="1会话a运营a先查商品">1.会话A（运营A先查商品）
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="c1">-- 1. 运营A查出来iPhone的信息，此时 version = 0
+</span></span></span><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">product</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="2会话b运营b同时查商品">2.会话B（运营B同时查商品）
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="c1">-- 1. 运营B也查出来iPhone的信息，此时 version 也是 0
+</span></span></span><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">product</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="3会话a运营a先提交修改">3.会话A（运营A先提交修改）
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="c1">-- 1. 运营A把标题改成“iPhone 17 Pro Max”，WHERE条件带上 version = 0
+</span></span></span><span class="line"><span class="cl"><span class="k">UPDATE</span><span class="w"> </span><span class="n">product</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="k">SET</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;iPhone 17 Pro Max&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">version</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="k">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">-- 现象：返回更新行数为 1，修改成功！此时数据库里的 version 变成了 1
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="4会话b运营b后提交修改">4.会话B（运营B后提交修改）
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="c1">-- 1. 运营B把标题改成“iPhone 17 特价版”，WHERE条件也带上 version = 0
+</span></span></span><span class="line"><span class="cl"><span class="k">UPDATE</span><span class="w"> </span><span class="n">product</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="k">SET</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;iPhone 17 特价版&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">version</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="k">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">-- 现象：返回更新行数为 0，修改失败！
+</span></span></span><span class="line"><span class="cl"><span class="c1">-- 因为数据库里的 version 已经变成 1 了，找不到 id=1 AND version=0 的行
+</span></span></span><span class="line"><span class="cl"><span class="c1">-- 此时业务代码就可以提示用户：“商品已被其他运营修改，请刷新页面后重试”
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="表锁">表锁
+</h2><p>直接锁<strong>整张表</strong>，其他会话对这张表的任何读写（不管是查哪一行、改哪一行）都会被阻塞。</p>
+<h4 id="举个例子">举个例子
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="c1">-- 会话A：给全表商品库存+10，显式加表锁
+</span></span></span><span class="line"><span class="cl"><span class="k">LOCK</span><span class="w"> </span><span class="n">TABLES</span><span class="w"> </span><span class="n">product</span><span class="w"> </span><span class="k">WRITE</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">UPDATE</span><span class="w"> </span><span class="n">product</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">stock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stock</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">-- 此时会话B想查id=1的商品，会直接阻塞！
+</span></span></span><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">product</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">-- 会话A提交事务并释放表锁后，会话B才能执行
+</span></span></span><span class="line"><span class="cl"><span class="n">UNLOCK</span><span class="w"> </span><span class="n">TABLES</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>表锁的优点是加锁开销小、速度快，不会死锁，但缺点就是并发度极低，一锁全表，电商场景下用它会直接让网站卡死。</p>
+<h2 id="行锁">行锁
+</h2><p>只锁<strong>具体的某一行数据</strong>，其他行完全不受影响，是InnoDB支持高并发的核心。</p>
+<p>需要注意的是行锁的<strong>前提</strong>是【走索引】。</p>
+<p>如果你的查询没走索引，InnoDB会<strong>退化成表锁</strong>。</p>
+<h4 id="举两个例子对比一下">举两个例子对比一下
+</h4><p>先看<strong>走索引的情况（行锁生效）</strong>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="c1">-- 会话A：用主键id=1查，加排他锁（走主键索引，只锁id=1这行）
+</span></span></span><span class="line"><span class="cl"><span class="k">BEGIN</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">product</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="k">UPDATE</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">-- 会话B：查id=3的商品，完全不阻塞！直接拿到锁
+</span></span></span><span class="line"><span class="cl"><span class="k">BEGIN</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">product</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="k">UPDATE</span><span class="p">;</span><span class="w"> </span><span class="c1">-- 执行成功
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">-- 会话B：查id=1的商品，会阻塞！需要等会话A释放锁
+</span></span></span><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">product</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="k">UPDATE</span><span class="p">;</span><span class="w"> </span><span class="c1">-- 阻塞
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>再看<strong>没走索引的情况（退化成表锁）</strong>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="c1">-- 先确认name字段没加索引（前面建表的时候只给id加了主键）
+</span></span></span><span class="line"><span class="cl"><span class="c1">-- 会话A：用name=&#39;iPhone 17&#39;查，加排他锁（没走索引，锁全表！）
+</span></span></span><span class="line"><span class="cl"><span class="k">BEGIN</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">product</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;iPhone 17&#39;</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="k">UPDATE</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">-- 会话B：查id=3的商品，居然也阻塞了！因为锁了全表
+</span></span></span><span class="line"><span class="cl"><span class="k">BEGIN</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">product</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="k">UPDATE</span><span class="p">;</span><span class="w"> </span><span class="c1">-- 阻塞
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>行锁的优点是并发度极高，只锁需要的行，不影响其他操作；但缺点是加锁开销大、速度慢，<strong>可能产生死锁</strong>。</p>
+<h2 id="间隙锁临键锁">间隙锁+临键锁
+</h2><p>这俩是InnoDB特有的，专门用来解决【幻读】问题的。</p>
+<h4 id="先举个电商场景的例子说明一下什么是幻读">先举个电商场景的例子说明一下什么是幻读？
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="c1">-- 会话A：查id&gt;1的所有商品（此时表里只有id=1、3、5）
+</span></span></span><span class="line"><span class="cl"><span class="k">BEGIN</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">product</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="k">UPDATE</span><span class="p">;</span><span class="w"> </span><span class="c1">-- 第一次查：查到id=3、5两条
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">-- 会话B：插了一条id=2的商品，提交事务
+</span></span></span><span class="line"><span class="cl"><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">product</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">stock</span><span class="p">,</span><span class="w"> </span><span class="k">version</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;OPPO Find X8&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">COMMIT</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">-- 会话A：再查id&gt;1的商品，居然查到了id=2、3、5三条！
+</span></span></span><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">product</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="k">UPDATE</span><span class="p">;</span><span class="w"> </span><span class="c1">-- 第二次查：多了一条，像产生了幻觉
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>这就是<strong>幻读</strong>：同一个事务里，两次相同的范围查询，结果却是不一样的。</p>
+<h4 id="间隙锁gap-lock">间隙锁（Gap Lock）
+</h4><p>间隙锁，间隙锁，顾名思义，它不锁具体的行，锁的是两个索引值之间的“间隙”，也就是只锁<strong>两个相邻索引值之间的空白区间</strong>，以防止别人在这个区间里插数据。</p>
+<p>以刚开始建的那个product表为例：</p>
+<p>id=1、3、5，间隙就是：<code>(-∞,1)</code>、<code>(1,3)</code>、<code>(3,5)</code>、<code>(5,+∞)</code>。</p>
+<h4 id="临键锁next-key-lock">临键锁（Next-Key Lock）
+</h4><p>临键锁其实是【行锁】+【间隙锁】的组合，锁的是<strong>左开右闭</strong>的区间。</p>
+<p>比如<code>(1,3]</code>（锁id=3这一行，同时锁1到3之间的间隙）。</p>
+<p>还是以刚开始建的那个product表为例，临键区间就是：<code>(-∞,1]</code>、<code>(1,3]</code>、<code>(3,5]</code>、<code>(5,+∞)</code>。</p>
+<h4 id="举个例子-1">举个例子
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="c1">-- 会话A：用id=3查，加排他锁（走主键索引，加临键锁(1,3]）
+</span></span></span><span class="line"><span class="cl"><span class="k">BEGIN</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">product</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="k">UPDATE</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">-- 会话B：想插id=2的商品，直接阻塞！因为间隙(1,3)被锁了
+</span></span></span><span class="line"><span class="cl"><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">product</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">stock</span><span class="p">,</span><span class="w"> </span><span class="k">version</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;OPPO Find X8&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"> </span><span class="c1">-- 阻塞
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">-- 会话B：想插id=6的商品，不阻塞！因为(5,+∞)没被锁
+</span></span></span><span class="line"><span class="cl"><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">product</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">stock</span><span class="p">,</span><span class="w"> </span><span class="k">version</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Vivo X200&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"> </span><span class="c1">-- 执行成功
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="小贴士"><strong>小贴士</strong>
+</h4><p>间隙锁 + 临键锁只在 InnoDB 的默认隔离级别【可重复读（RR）】下生效。</p>
+<p>如果是【读提交（RC）】隔离级别，会关闭间隙锁，只保留行锁。</p>
+<h2 id="夺命连环问什么是死锁又怎么避免呢">夺命连环问：什么是死锁？又怎么避免呢？
+</h2><p>两个或多个会话，<strong>互相持有对方需要的锁</strong>，都在等待对方释放，导致谁都执行不下去，形成“死循环”，这就是死锁。</p>
+<h4 id="举个例子-2">举个例子
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="c1">-- 会话A：先锁id=1，再想锁id=3
+</span></span></span><span class="line"><span class="cl"><span class="k">BEGIN</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">product</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="k">UPDATE</span><span class="p">;</span><span class="w"> </span><span class="c1">-- 持有id=1的锁
+</span></span></span><span class="line"><span class="cl"><span class="c1">-- 此时会话A想拿id=3的锁，但被会话B持有了，阻塞
+</span></span></span><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">product</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="k">UPDATE</span><span class="p">;</span><span class="w"> </span><span class="c1">-- 阻塞
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">-- 会话B：先锁id=3，再想锁id=1
+</span></span></span><span class="line"><span class="cl"><span class="k">BEGIN</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">product</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="k">UPDATE</span><span class="p">;</span><span class="w"> </span><span class="c1">-- 持有id=3的锁
+</span></span></span><span class="line"><span class="cl"><span class="c1">-- 此时会话B想拿id=1的锁，但被会话A持有了，阻塞
+</span></span></span><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">product</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="k">UPDATE</span><span class="p">;</span><span class="w"> </span><span class="c1">-- 阻塞
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">-- 结果：死锁！
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="死锁的四个必要条件">死锁的四个必要条件
+</h4><p>只要破坏其中任意一个，就能避免死锁：</p>
+<ol>
+<li><strong>互斥条件</strong>：一个锁只能被一个会话持有（行锁就是这样，没法破坏）；</li>
+<li><strong>请求与保持条件</strong>：持有一个锁的同时，又请求另一个锁；</li>
+<li><strong>不剥夺条件</strong>：锁只能由持有者主动释放，不能被别人强行抢走；</li>
+<li><strong>循环等待条件</strong>：会话之间形成循环等待链（A等B，B等A）。</li>
+</ol>
+<h4 id="怎么避免死锁">怎么避免死锁？
+</h4><h4 id="-按固定顺序加锁">① 按固定顺序加锁
+</h4><p>所有会话都按<strong>相同的顺序</strong>加锁，比如都先锁id小的，再锁id大的，这样就不会形成循环等待。</p>
+<h4 id="-减少锁的范围和持有时间">② 减少锁的范围和持有时间
+</h4><p>尽量用<strong>行锁</strong>不用表锁；</p>
+<p>事务尽量<strong>小</strong>，不要在事务里做无关操作（比如不要在事务里调第三方接口、查无关表），锁持有时间越短，死锁概率越低。</p>
+<h4 id="-避免大事务">③ 避免大事务
+</h4><p>大事务持有锁的时间长，涉及的行多，更容易死锁，把大事务拆成多个小事务。</p>
+<h4 id="小贴士-1"><strong>小贴士</strong>
+</h4><p>InnoDB 有自动死锁检测机制，它会实时扫描锁等待链，一旦发现死锁，会自动回滚其中一个，一般是代价较小的那个事务，比如更新行数少的那个，让另一个事务继续执行，不会让系统无限期卡死。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+        
+    </section>
+
+
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            最后更新于 2026-06-09 01:34:43
+        </span>
+    </section></footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        const elementsToRender = [".main-article", ".widget--toc"];
+
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98%E6%8B%86%E8%A7%A3spring%E4%B8%AD%E7%9A%84%E6%B3%A8%E8%A7%A3/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【面试真题拆解】Spring中的注解</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/mysql%E7%9A%84%E4%B8%89%E5%B1%82b-%E6%A0%91%E8%83%BD%E5%AD%98%E5%A4%9A%E5%B0%91%E6%95%B0%E6%8D%AE/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">MySQL的三层B&#43;树能存多少数据？</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98%E7%BC%93%E5%AD%98%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7%E9%97%AE%E9%A2%98%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【面试真题】缓存和数据库的一致性问题如何保证？</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/redis%E5%86%85%E5%AD%98%E7%BC%93%E5%AD%98mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%99%E4%BA%9B%E7%9A%84%E5%8C%BA%E5%88%AB%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Redis、内存、缓存、MySQL、数据库，这些的区别到底是什么</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/mysql%E4%B8%AD%E6%9C%89%E5%93%AA%E4%BA%9B%E6%97%A5%E5%BF%97%E7%B1%BB%E5%9E%8B/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">MySQL中有哪些日志类型？</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+<div id="giscus-container" class="giscus-container"></div>
+
+<script>
+    (function() {
+        function reloadGiscus() {
+            const container = document.getElementById('giscus-container');
+            if (!container) return;
+
+            console.log('🚀 [Giscus] 正在重载 (自定义半透明背景)...');
+
+            container.innerHTML = '';
+
+            const script = document.createElement('script');
+            script.src = "https://giscus.app/client.js";
+            
+            
+            script.setAttribute("data-repo", "iamxurulin/iamxurulin.github.io");
+            script.setAttribute("data-repo-id", "R_kgDOQ4sEwg");
+            script.setAttribute("data-category", "Announcements");
+            script.setAttribute("data-category-id", "DIC_kwDOQ4sEws4C1Yw9");
+            script.setAttribute("data-mapping", "title");
+            script.setAttribute("data-strict", "0");
+            script.setAttribute("data-reactions-enabled", "1");
+            script.setAttribute("data-emit-metadata", "0");
+            script.setAttribute("data-input-position", "top");
+            script.setAttribute("data-lang", "zh-CN");
+            script.setAttribute("crossorigin", "anonymous");
+            script.async = true;
+
+            
+            script.setAttribute("data-theme", "transparent_dark");
+
+            container.appendChild(script);
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', reloadGiscus);
+        } else {
+            reloadGiscus();
+        }
+
+        document.addEventListener('pjax:complete', function() {
+            setTimeout(reloadGiscus, 50);
+        });
+    })();
+</script>
+
+<style>
+     
+    #giscus-container {
+        min-height: 150px;
+        width: 100%;
+        margin-top: 2rem;
+        
+         
+        background: rgba(30, 30, 30, 0.8) !important;
+        
+         
+         
+        
+         
+        border-radius: 15px;
+        padding: 20px;
+        box-sizing: border-box;
+        
+         
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 4px 15px rgba(0,0,0, 0.2);
+    }
+</style>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2026 iamxurulin
+    </section>
+    
+    <section class="powerby">
+        
+            Code Road Record <br/>
+        
+
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+    
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.b4654cd74006fe7475d7723cd7373672b5ea2035ab23404eb9ff511cb27b581c.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<div id="aplayer"></div>
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<script>
+const staticDir = "https://iamxurulin.github.io/"
+const ap = new APlayer({
+    container: document.getElementById('aplayer'),
+	fixed: true,
+	lrcType: 3,
+    audio: [
+	    {
+             name: '远行', 
+             artist: '大青山', 
+             url: '/music/大青山-远行.mp3', 
+             cover: '/music/cover.jpg', 
+             lrc: '/music/大青山-远行-歌词.lrc', 
+        }
+    ]
+});
+    
+
+    window.onbeforeunload = () => {
+        
+        const playInfo = {
+            index: ap.list.index,
+            currentTime: ap.audio.currentTime,
+            paused: ap.paused
+        };
+        localStorage.setItem("playInfo", JSON.stringify(playInfo));
+    };
+
+    
+
+    window.onload = () => {
+        
+        const playInfo = JSON.parse(localStorage.getItem("playInfo"));
+        if (!playInfo) {
+            return;
+        }
+        
+        ap.list.switch(playInfo.index);
+        
+        setTimeout(() => {
+            
+            ap.seek(playInfo.currentTime);
+            
+            if (!playInfo.paused) {
+                ap.play()
+            }
+        }, 500);
+    };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+
+    
+    <script src=https://iamxurulin.github.io/js/topbar.min.js></script>
+
+<script>
+	var pjax = new Pjax({
+	  selectors: [
+	    ".main-container"
+	  ]
+	})
+
+    pjax._handleResponse = pjax.handleResponse;
+    pjax.handleResponse = function(responseText, request, href, options) {
+        if (request.responseText.match("<html")) {
+            if (responseText) {
+                
+                let newDom = new DOMParser().parseFromString(responseText, 'text/html');
+                
+                let bodyClass = newDom.body.className;
+                document.body.setAttribute("class", bodyClass)
+                
+				
+					
+				
+				pjax._handleResponse(responseText, request, href, options);
+            }
+        } else {
+            
+        }
+    }
+	
+    topbar.config({
+        barColors: {
+            '0': 'rgba(255,  255, 255, 1)', 
+            '1.0': 'rgba(0, 149, 234,  1)' 
+        }
+    })
+	
+    document.addEventListener('pjax:send', () => {
+        
+        topbar.show();
+    })
+	
+    document.addEventListener('pjax:complete', () => {
+        
+        window.Stack.init();
+		
+        topbar.hide();
+    })
+
+</script>
+
+<style>
+  @font-face {
+    font-family: 'FiraCode-Medium';
+    src: url(https://iamxurulin.github.io/font/FiraCode-Medium.ttf) format('truetype');
+  }
+
+  :root {
+    --base-font-family: 'FiraCode-Medium';
+    --code-font-family: 'FiraCode-Medium';
+  }
+</style>
+
+<style>
+    #TableOfContents > ul, ol {
+        ul, ol {
+            display: none;
+        }
+        .open {
+            display: block;
+        }
+    }
+</style>
+
+<script>
+    function initTocHide() {
+        
+        let toc = document.querySelector(".widget--toc");
+        if (!toc) {
+            return;
+        }
+        
+        window.addEventListener('scroll', function() {
+            
+            let openUl = document.querySelectorAll(".open");
+            if (openUl.length > 0) {
+              openUl.forEach((ul) => {
+                ul.classList.remove("open")
+              })
+            }
+            
+            let currentLi = document.querySelector(".active-class");
+            if (!currentLi) {
+                return
+            }
+            
+            if (currentLi.children.length > 1) {
+                currentLi.children[1].classList.add("open")
+            }
+            
+            let ul = currentLi.parentElement;
+            do {
+                ul.classList.add("open");
+                ul = ul.parentElement.parentElement
+            } while (ul !== undefined && (ul.localName === 'ul' || ul.localName === 'ol'))
+        });
+    }
+    initTocHide()
+</script>
+
+<style>
+    #backTopBtn {
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        z-index: 99;
+        cursor: pointer;
+        width: 20px;
+        height: 20px;
+        background-image: url(https://iamxurulin.github.io/icons/backTop.svg);
+    }
+</style>
+
+<script>
+    
+
+    function initScrollTop() {
+        let rightSideBar = document.querySelector(".right-sidebar");
+        if (!rightSideBar) {
+            return;
+        }
+        
+        let btn = document.createElement("div");
+        btn.id = "backTopBtn";
+        btn.onclick = backToTop
+        rightSideBar.appendChild(btn)
+        
+        window.onscroll = function() {
+            
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        };
+    }
+
+    
+
+    function backToTop(){
+        window.scrollTo({ top: 0, behavior: "smooth" })
+    }
+
+    initScrollTop();
+</script>
+
+<style>
+    .highlight {
+         
+        max-height: 400px;
+        overflow: hidden;
+    }
+
+    .code-show {
+        max-height: none !important;
+    }
+
+    .code-more-box {
+        width: 100%;
+        padding-top: 78px;
+        background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0)), to(#fff));
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+    }
+
+    .code-more-btn {
+        display: block;
+        margin: auto;
+        width: 44px;
+        height: 22px;
+        background: #f0f0f5;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        padding-top: 6px;
+        cursor: pointer;
+    }
+
+    .code-more-img {
+        cursor: pointer !important;
+        display: block;
+        margin: auto;
+        width: 22px;
+        height: 16px;
+    }
+</style>
+
+<style>
+    .highlight {
+        max-height: 400px;
+        overflow: hidden;
+        position: relative;  
+    }
+
+    .code-show {
+        max-height: none !important;
+    }
+
+    .code-more-box {
+        width: 100%;
+        padding-top: 78px;
+        background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0)), to(#fff));
+        background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+        pointer-events: none;  
+    }
+
+    .code-more-btn {
+        pointer-events: auto;  
+        display: block;
+        margin: auto;
+        width: 44px;
+        height: 22px;
+        background: var(--card-background);
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        padding-top: 6px;
+        cursor: pointer;
+        box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    }
+
+    .code-more-img {
+        display: block;
+        margin: auto;
+        width: 22px;
+        height: 16px;
+    }
+
+     
+    [data-scheme="dark"] .code-more-box {
+        background-image: linear-gradient(to bottom, rgba(30,30,40,0), #1e1e28);
+    }
+    [data-scheme="dark"] .code-more-btn {
+        background: var(--card-background);
+    }
+</style>
+
+<script>
+  function initCodeMoreBox() {
+    const codeBlocks = document.querySelectorAll(".highlight:not(.code-inited)");
+    
+    codeBlocks.forEach(codeBlock => {
+      
+      codeBlock.classList.add("code-inited");
+
+      
+      if (codeBlock.scrollHeight <= codeBlock.clientHeight + 5) { 
+        return;
+      }
+
+      
+      const codeMoreBox = document.createElement('div');
+      codeMoreBox.classList.add('code-more-box');
+
+      const codeMoreBtn = document.createElement('span');
+      codeMoreBtn.classList.add('code-more-btn');
+      codeMoreBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        codeBlock.classList.add('code-show');
+        codeMoreBox.style.display = 'none';
+        
+        window.dispatchEvent(new Event('resize'));
+      });
+
+      const img = document.createElement('img');
+      img.classList.add('code-more-img');
+      img.src = "https://iamxurulin.github.io/icons/codeMore.png";
+      img.alt = "展开代码";
+
+      codeMoreBtn.appendChild(img);
+      codeMoreBox.appendChild(codeMoreBtn);
+      codeBlock.appendChild(codeMoreBox);
+    });
+  }
+
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCodeMoreBox);
+  } else {
+    initCodeMoreBox();
+  }
+
+  
+  document.addEventListener('pjax:complete', initCodeMoreBox);
+  document.addEventListener('swup:contentReplaced', initCodeMoreBox); 
+  window.addEventListener('popstate', initCodeMoreBox); 
+
+  
+  const observer = new MutationObserver((mutations) => {
+    let shouldRun = false;
+    mutations.forEach(mutation => {
+      if (mutation.addedNodes.length) {
+        shouldRun = true;
+      }
+    });
+    if (shouldRun) {
+      
+      setTimeout(initCodeMoreBox, 100);
+    }
+  });
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+</script>
+<style>
+  body {
+    background: url(https://iamxurulin.github.io/background/wallhaven-qr27rq.jpg) no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+</style>
+
+<script src=https://iamxurulin.github.io/background/sakura.js></script>
+
+<div id="particles-js"></div>
+
+<script src=https://iamxurulin.github.io/background/particles.min.js></script>
+<script>
+  particlesJS.load('particles-js', "https://iamxurulin.github.io/background/particlesjs-config.json", function() {
+    console.log('particles.js loaded - callback');
+  });
+</script>
+
+<style>
+  #particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: -1;
+  }
+</style>
+
+<script>
+    const cdnPath = "https://cdn.jsdelivr.net/gh/iamxurulin/live2d-widget-v3@v1.0.2";
+    const localCssPath = "https://iamxurulin.github.io/waifu/waifu.css";
+    const localTipsJsonPath = "https://iamxurulin.github.io/waifu/waifu-tips.json";
+    const localTipsJsPath = "https://iamxurulin.github.io/waifu/waifu-tips.js";
+    const config = {
+      
+      path: {
+        homePath: "/",
+        modelPath: cdnPath + "/Resources/",
+        tipsJsPath: localTipsJsPath,
+        live2dCorePath: cdnPath + "/Core/live2dcubismcore.js",
+        live2dSdkPath: cdnPath + "/live2d-sdk.js",
+        cssPath: localCssPath,
+        tipsJsonPath: localTipsJsonPath
+      },
+      
+      tools: ["hitokoto", "asteroids",  "express","photo", "info", "quit"],
+      
+      drag: {
+        enable: true,
+        direction: ["x", "y"]
+      }
+      
+      
+    }
+
+    function preloadResource(host) {
+      const link = document.createElement('link');
+      link.rel = 'preconnect';
+      link.href = host;
+      link.crossOrigin = 'anonymous';
+      document.head.appendChild(link);
+    }
+
+    function loadScript(url) {
+      return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = url;
+        script.async = false;
+        script.onload = () => resolve(url);
+        script.onerror = () => reject(new Error(`Failed to load ${url}`));
+        document.head.appendChild(script);
+      });
+    }
+
+    function loadStylesheet(url) {
+      return new Promise((resolve, reject) => {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = url;
+        link.onload = () => resolve(url);
+        link.onerror = () => reject(new Error(`Failed to load ${url}`));
+        document.head.appendChild(link);
+      });
+    }
+
+    if (screen.width >= 768) {
+      preloadResource('https://cdn.jsdelivr.net');
+      preloadResource('https://fastly.jsdelivr.net');
+
+      const cssPromise = loadStylesheet(config.path.cssPath);
+      const corePromise = loadScript(config.path.live2dCorePath);
+      const sdkPromise = corePromise.then(() => loadScript(config.path.live2dSdkPath));
+      const tipsPromise = loadScript(config.path.tipsJsPath);
+
+      Promise.all([cssPromise, sdkPromise, tipsPromise]).then(() => {
+        localStorage.setItem("modelId", "0");
+        localStorage.setItem("modelTexturesId", "0");
+        initWidget({
+          waifuPath: config.path.tipsJsonPath,
+          cdnPath: config.path.modelPath,
+          tools: config.tools,
+          dragEnable: config.drag.enable,
+          dragDirection: config.drag.direction,
+          switchType: config.switchType
+        });
+      }).catch(error => {
+        console.warn('Live2D resources failed to load:', error);
+      });
+    }
+</script>
+
+<script>
+    (function() {
+        const PRIMARY_SCRIPT = 'https://cn.vercount.one/js';
+        const FALLBACK_SCRIPT = 'https://busuanzi.ibruce.info/busuanzi.pure.mini.js';
+        const FALLBACK_TIMEOUT = 3000;
+
+        function removeOldBusuanzi() {
+            document.querySelectorAll('[id^="busuanzi_"]').forEach(el => el.removeAttribute('id'));
+            const oldScript = document.getElementById('vercount-script');
+            if (oldScript) oldScript.remove();
+            const oldFallback = document.getElementById('vercount-fallback-script');
+            if (oldFallback) oldFallback.remove();
+            if (window.busuanzi) delete window.busuanzi;
+        }
+
+        function bindBusuanziIds() {
+            const pvContainer = document.querySelector('.temp-pv-container');
+            const pvValue = document.querySelector('.temp-pv-value');
+            if (pvContainer) pvContainer.id = 'busuanzi_container_page_pv';
+            if (pvValue) {
+                pvValue.id = 'busuanzi_value_page_pv';
+                pvValue.textContent = '...';
+            }
+            return pvValue;
+        }
+
+        function insertScript(src, id, onload, onerror) {
+            const script = document.createElement('script');
+            script.src = src;
+            script.id = id;
+            script.async = true;
+            if (onload) script.onload = onload;
+            if (onerror) script.onerror = onerror;
+            document.head.appendChild(script);
+            return script;
+        }
+
+        function insertFallback(pvValue) {
+            if (document.getElementById('vercount-fallback-script')) return;
+            console.warn('⚠️ [Vercount] primary script failed, fallback to busuanzi official script');
+            insertScript(FALLBACK_SCRIPT, 'vercount-fallback-script');
+            if (pvValue && pvValue.textContent === '...') {
+                setTimeout(() => {
+                    if (pvValue.textContent === '...') {
+                        pvValue.textContent = '0';
+                    }
+                }, 1000);
+            }
+        }
+
+        function reloadVercount() {
+            console.log('🔵 [Vercount] 开始重载...');
+            const container = document.querySelector('.article-view');
+            if (!container) {
+                document.querySelectorAll('.article-view').forEach(el => el.style.display = 'none');
+                return;
+            }
+            container.style.display = 'flex';
+            removeOldBusuanzi();
+            const pvValue = bindBusuanziIds();
+
+            insertScript(`${PRIMARY_SCRIPT}?t=${Date.now()}`, 'vercount-script', () => {
+                console.log('✅ [Vercount] primary 脚本已加载');
+            }, () => {
+                insertFallback(pvValue);
+            });
+
+            setTimeout(() => {
+                if (pvValue && pvValue.textContent === '...') {
+                    insertFallback(pvValue);
+                }
+            }, FALLBACK_TIMEOUT);
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', reloadVercount);
+        } else {
+            reloadVercount();
+        }
+
+        document.addEventListener('pjax:complete', reloadVercount);
+    })();
+</script>
+
+
+    </body>
+</html>

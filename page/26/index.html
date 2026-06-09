@@ -1,0 +1,1966 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head>
+	<meta name="generator" content="Hugo 0.163.0"><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Welcome to my blog！">
+<title>Pager 26 - Coder_Studio</title>
+
+<link rel='canonical' href='https://iamxurulin.github.io/'>
+
+<link rel="stylesheet" href="/scss/style.min.941ad973a59353fc2ac1283514266190a5d6af31d0e32f5f55f93f16d5aa5945.css"><meta property='og:title' content="Coder_Studio">
+<meta property='og:description' content="Welcome to my blog！">
+<meta property='og:url' content='https://iamxurulin.github.io/'>
+<meta property='og:site_name' content='Coder_Studio'>
+<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2026-06-09T01:34:43&#43;00:00 '/>
+<meta name="twitter:title" content="Coder_Studio">
+<meta name="twitter:description" content="Welcome to my blog！"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5123323391207523"
+     crossorigin="anonymous"></script><link rel="alternate" type="application/rss&#43;xml" href="https://iamxurulin.github.io/index.xml"><div class="loading">
+ 
+<div class="liquid-loader">
+  <div class="loading-text">
+    Loading<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span>
+  </div>
+  <div class="loader-track">
+    <div class="liquid-fill"></div>
+  </div>
+</div>
+</div>
+
+<style>
+    .loading {
+        position: fixed;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;  
+        background-color: #f5f5fa;
+         
+        transition: all 0.3s ease;
+    }
+	
+  
+.liquid-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;  
+  padding: 20px;
+  font-family: system-ui, sans-serif;
+}
+
+.loader-track {
+  position: relative;
+  width: 180px;
+  height: 32px;
+  background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.6),0 1px 3px rgba(255, 255, 255, 0.1);
+}
+
+.liquid-fill {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  height: calc(100% - 4px);
+  background: linear-gradient(90deg, #4f46e5, #7c3aed, #ec4899, #f59e0b);
+  border-radius: 14px;
+  animation: fillProgress 4s ease-out infinite, colorShift 3s linear infinite;
+  box-shadow:0 0 12px rgba(124, 58, 237, 0.4),inset 0 1px 2px rgba(255, 255, 255, 0.2);
+}
+
+ 
+.animated-stop {
+  animation-play-state: paused !important;
+  -webkit-animation-play-state: paused !important;
+}
+
+.loading-text {
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  animation: textGlow 1s ease-in-out infinite;
+}
+
+.dot {
+  margin-left: 3px;
+  animation: blink 1.5s infinite;
+}
+.dot:nth-of-type(1) { animation-delay: 0s; }
+.dot:nth-of-type(2) { animation-delay: 0.3s; }
+.dot:nth-of-type(3) { animation-delay: 0.6s; }
+
+@keyframes fillProgress {
+  0% { width: 4px; }
+  25% { width: 25%; }
+  50% { width: 50%; }
+  75% { width: 75%; }
+  100% { width: calc(100% - 4px); }
+}
+@keyframes colorShift {
+  0% { filter: hue-rotate(0deg) brightness(1); }
+  33% { filter: hue-rotate(120deg) brightness(1.1); }
+  66% { filter: hue-rotate(240deg) brightness(0.9); }
+  100% { filter: hue-rotate(360deg) brightness(1); }
+}
+@keyframes textGlow {
+  0%,100% { opacity: 0.7;text-shadow: 0 0 8px rgba(139, 92, 246, 0.3); }
+  50% { opacity: 1;text-shadow: 0 0 16px rgba(139, 92, 246, 0.6); }
+}
+@keyframes blink {
+  0%,50% { opacity: 1; }
+  51%,100% { opacity: 0; }
+}
+
+ 
+@keyframes scaleAndFadeout {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.2);  
+    opacity: 0;
+  }
+}
+.scaleAndFadeout {
+  animation: scaleAndFadeout 1.5s ease-out forwards !important;
+}
+
+ 
+.article-view {
+    display: flex;
+}
+
+ 
+ 
+.article-list .article-view {
+    display: none !important;
+}
+ 
+</style>
+
+<script>	
+    function initLoading() {
+        const isFirstVisit = !sessionStorage.getItem('visited');
+        if (isFirstVisit) {
+            const loading = document.querySelector(".loading");
+            const liquidFill = document.querySelector(".liquid-fill"); 
+            loading.style.display = "flex";
+            
+            
+            setTimeout(() => {
+                loadFinish(loading, liquidFill);
+                
+                setTimeout(() => {
+                    loading.style.display = "none";
+                }, 1500);
+                
+                sessionStorage.setItem('visited', 'true');
+            }, 4000); 
+        }
+    }
+	
+    function loadFinish(loading, liquidFill) {
+        
+        liquidFill.classList.add("animated-stop");
+        
+        loading.classList.add("scaleAndFadeout");
+    }
+	
+    
+    initLoading();
+</script>
+    </head>
+    <body class="">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_5b4689d2dc4cdce3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">💦</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coder_Studio</a></h1>
+            <h2 class="site-description">Welcome to my blog！</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://blog.csdn.net/qq_44678890'
+                        target="_blank"
+                        title="CSDN"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" ?><svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500" fill="none"><path d="M82 199.474L173.5 73L345 81.4833L417.103 199.474V300.974L345 427.718H173.5L82 327.474V199.474Z" fill="#84C253"/><path d="M282.182 284.936L347.636 288.867C344.56 317.464 333.964 339.396 315.849 354.663C297.847 369.93 275.688 377.563 249.369 377.563C217.696 377.563 192.118 367.081 172.636 346.118C153.153 325.154 143.412 296.215 143.412 259.301C143.412 222.729 152.641 193.221 171.098 170.776C189.555 148.331 215.303 137.109 248.344 137.109C279.219 137.109 302.917 145.654 319.438 162.744C336.072 179.833 345.471 202.506 347.636 230.761L280.814 234.35C280.814 218.741 277.795 207.462 271.757 200.512C265.832 193.562 258.826 190.087 250.736 190.087C228.178 190.087 216.898 212.76 216.898 258.105C216.898 283.512 219.804 300.773 225.614 309.887C231.539 319.002 239.799 323.559 250.395 323.559C269.307 323.559 279.903 310.685 282.182 284.936Z" fill="white"/></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/iamxurulin/'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li  class='current' >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                
+                <span>分类</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/tags/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11 3L20 12a1.5 1.5 0 0 1 0 2L14 20a1.5 1.5 0 0 1 -2 0L3 11v-4a4 4 0 0 1 4 -4h4" />
+  <circle cx="9" cy="9" r="2" />
+</svg>
+
+
+
+                
+                <span>标签</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友情链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+<style>
+ 
+.clock-wrapper { position: relative; right: 30px; width: 460px; height: 460px; zoom: 0.4; overflow: hidden; }
+.clock-border { position: absolute; margin: auto; width: 460px; height: 460px; border: 18px solid transparent; border-color: transparent #d2d8df #d2d8df; border-radius: 50%; transform: rotate(45deg); animation: rotate-clock-border 0.69s cubic-bezier(0.645, -0.18, 0.605, 1.36) 0.69s 1 forwards; }
+.clock { position: absolute; top: 0; bottom: 0; left: 0; right: 0; margin: auto; width: 400px; height: 400px; background-color: #262c33; border: 18px solid #373f4a; border-radius: 50%; transform: rotate(-45deg); animation: counterrotate-clock 0.69s cubic-bezier(0.645, -0.18, 0.605, 1.36) 0.69s 1 forwards; }
+
+ 
+.hour, .minute { position: absolute; top: 0; bottom: 0; left: 0; right: 0; margin: auto; transition: transform 0.5s cubic-bezier(0.4, 2.08, 0.55, 0.44); }
+
+ 
+.second { position: absolute; top: 0; bottom: 0; left: 0; right: 0; margin: auto; transition: none !important; }
+
+.hour .hand:before { content: ""; position: absolute; bottom: 0; left: 0; right: 0; margin: auto; top: 0; width: 16px; height: 0; border-radius: 2px 2px 0 0; background-color: #fff; transform-origin: center 100%; animation: hour-grow-before 0.4s cubic-bezier(0.69, -0.06, 0.49, 1.4) 1.35s 1 forwards; }
+.hour .hand:after { content: ""; position: absolute; bottom: 0; left: 0; right: 0; margin: auto; top: 0; border-bottom: 16px solid #ffffff; border-left: 8px solid transparent; border-right: 8px solid transparent; width: 0; height: 0; transform-origin: center 100%; animation: hour-grow-after 0.4s cubic-bezier(0.69, -0.06, 0.49, 1.4) 1.35s 1 forwards; }
+.minute .hand:before { content: ""; position: absolute; bottom: 0; left: 0; right: 0; margin: auto; top: 0; width: 12px; height: 0; border-radius: 2px 2px 0 0; background-color: #fff; transform-origin: center 100%; animation: minute-grow-before 0.4s cubic-bezier(0.69, -0.06, 0.49, 1.4) 1.6s 1 forwards; }
+.minute .hand:after { content: ""; position: absolute; bottom: 0; left: 0; right: 0; margin: auto; top: 0; border-bottom: 12px solid #ffffff; border-left: 6px solid transparent; border-right: 6px solid transparent; width: 0; height: 0; transform-origin: center 100%; animation: minute-grow-after 0.4s cubic-bezier(0.69, -0.06, 0.49, 1.4) 1.6s 1 forwards; }
+.second .hand:before { content: ""; position: absolute; bottom: 0; left: 0; right: 0; margin: auto; top: 0; width: 8px; height: 0; background-color: #f16b41; border-radius: 8px; transform-origin: center 180px; animation: second-grow 1.6s cubic-bezier(1, 0, 0, 1) 1.45s 1 forwards; }
+.second .hand:after { content: ""; position: absolute; top: 0; bottom: 0; left: 0; right: 0; margin: auto; width: 32px; height: 32px; border-radius: 32px; background-color: #f16b41; }
+
+@keyframes rotate-clock-border { 0% { transform: rotate(45deg); } 100% { transform: rotate(315deg); } }
+@keyframes counterrotate-clock { 0% { transform: rotate(-45deg); } 100% { transform: rotate(-315deg); } }
+@keyframes hour-grow-before { 0% { height: 0; top: 0; } 100% { height: 120px; top: -120px; } }
+@keyframes hour-grow-after { 0% { top: 0; } 100% { top: -254px; } }
+@keyframes minute-grow-before { 0% { height: 0; top: 0; } 100% { height: 168px; top: -168px; } }
+@keyframes minute-grow-after { 0% { top: 0; } 100% { top: -346px; } }
+@keyframes second-grow { from { top: 0; height: 0; } 100% { top: -120px; height: 240px; } }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+
+.minute-marks { display: inline-block; padding: 0; margin: 0; list-style-type: none; width: 0; height: 0; }
+.minute-marks li { position: absolute; top: 0; bottom: 0; left: 0; right: 0; margin: auto; width: 200px; height: 200px; }
+.minute-marks li:before, .minute-marks li:after { content: ""; position: absolute; top: 0; bottom: 0; left: 0; right: 0; margin: auto; width: 0; height: 0; border: 4px solid #d4d5d6; border-radius: 4px; opacity: 0; animation: fade-in 0.1s ease 0s 1 forwards; }
+.minute-marks li:before { top: -380px; }
+.minute-marks li:after { bottom: -380px; }
+.minute-marks li.five:before, .minute-marks li.five:after { height: 20px; }
+.minute-marks li.five:before { top: -360px; }
+.minute-marks li.five:after { bottom: -360px; }
+.minute-marks li:nth-child(1) { transform: rotate(0deg); } .minute-marks li:nth-child(2) { transform: rotate(6deg); } .minute-marks li:nth-child(3) { transform: rotate(12deg); } .minute-marks li:nth-child(4) { transform: rotate(18deg); } .minute-marks li:nth-child(5) { transform: rotate(24deg); } .minute-marks li:nth-child(6) { transform: rotate(30deg); } .minute-marks li:nth-child(7) { transform: rotate(36deg); } .minute-marks li:nth-child(8) { transform: rotate(42deg); } .minute-marks li:nth-child(9) { transform: rotate(48deg); } .minute-marks li:nth-child(10) { transform: rotate(54deg); } .minute-marks li:nth-child(11) { transform: rotate(60deg); } .minute-marks li:nth-child(12) { transform: rotate(66deg); } .minute-marks li:nth-child(13) { transform: rotate(72deg); } .minute-marks li:nth-child(14) { transform: rotate(78deg); } .minute-marks li:nth-child(15) { transform: rotate(84deg); } .minute-marks li:nth-child(16) { transform: rotate(90deg); } .minute-marks li:nth-child(17) { transform: rotate(96deg); } .minute-marks li:nth-child(18) { transform: rotate(102deg); } .minute-marks li:nth-child(19) { transform: rotate(108deg); } .minute-marks li:nth-child(20) { transform: rotate(114deg); } .minute-marks li:nth-child(21) { transform: rotate(120deg); } .minute-marks li:nth-child(22) { transform: rotate(126deg); } .minute-marks li:nth-child(23) { transform: rotate(132deg); } .minute-marks li:nth-child(24) { transform: rotate(138deg); } .minute-marks li:nth-child(25) { transform: rotate(144deg); } .minute-marks li:nth-child(26) { transform: rotate(150deg); } .minute-marks li:nth-child(27) { transform: rotate(156deg); } .minute-marks li:nth-child(28) { transform: rotate(162deg); } .minute-marks li:nth-child(29) { transform: rotate(168deg); } .minute-marks li:nth-child(30) { transform: rotate(174deg); }
+</style>
+
+<script>
+ 
+(function() {
+    function tick() {
+        var d = new Date();
+        var h = d.getHours();
+        var m = d.getMinutes();
+        var s = d.getSeconds();
+
+        
+        var hD = (h % 12) * 30 + m * 0.5;
+        
+        var mD = m * 6 + s * 0.1;
+        
+        var sD = s * 6;
+
+        var hE = document.getElementById("js-hour");
+        var mE = document.getElementById("js-minute");
+        var sE = document.getElementById("js-second");
+
+        if (hE) hE.style.transform = "rotate(" + hD + "deg)";
+        if (mE) mE.style.transform = "rotate(" + mD + "deg)";
+        if (sE) sE.style.transform = "rotate(" + sD + "deg)";
+    }
+    
+    tick();
+    setInterval(tick, 200);
+})();
+</script>
+
+
+
+<div class="clock-wrapper">
+    <div class="clock-border">
+        <div class="clock">
+            <ul class="minute-marks">
+                <li class="five"></li><li></li><li></li><li></li><li></li>
+                <li class="five"></li><li></li><li></li><li></li><li></li>
+                <li class="five"></li><li></li><li></li><li></li><li></li>
+                <li class="five"></li><li></li><li></li><li></li><li></li>
+                <li class="five"></li><li></li><li></li><li></li><li></li>
+                <li class="five"></li><li></li><li></li><li></li><li></li>
+            </ul>
+            <div class="hour" id="js-hour"><div class="hand"></div></div>
+            <div class="minute" id="js-minute"><div class="hand"></div></div>
+            <div class="second" id="js-second"><div class="hand"></div></div>
+        </div>
+    </div>
+</div>
+            
+        
+            
+                <form action="/search/" class="search-form widget" >
+        <p>
+            <label>搜索</label>
+            <input name="keyword" required placeholder="输入关键词..." />
+        
+            <button title="搜索">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+            </button>
+        </p>
+    </form>
+            
+        
+            
+                <section class="widget archives">
+
+        <h2 class="widget-title section-title">归档</h2>
+
+        
+        
+        
+        
+        <div class="widget-archive--list">
+            <div class="archives-year">
+                    <a href="/archives/#2026">
+                        
+                            <span class="year">2026</span>
+                            <span class="count">400</span>
+                        
+                    </a> 
+                </div>
+            <div class="archives-year">
+                    <a href="/archives/#2025">
+                        
+                            <span class="year">2025</span>
+                            <span class="count">138</span>
+                        
+                    </a> 
+                </div>
+            
+        </div>
+    </section>
+            
+        
+            
+                <section class="widget tagCloud">
+    <h2 class="widget-title section-title"></h2>
+
+    <div class="tagCloud-tags">
+        
+            <a href="/categories/%E7%AE%97%E6%B3%95/" class="font_size_326">
+                算法
+            </a>
+        
+            <a href="/categories/%E5%85%AB%E8%82%A1/" class="font_size_125">
+                八股
+            </a>
+        
+            <a href="/categories/ai/" class="font_size_57">
+                AI
+            </a>
+        
+            <a href="/categories/%E9%A1%B9%E7%9B%AE/" class="font_size_30">
+                项目
+            </a>
+        
+    </div>
+</section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    
+    
+    
+
+    <section class="article-list">
+        
+            
+<article class="">
+    <header class="article-header">
+
+    <div class="article-details">
+  
+  <header class="article-category">
+    
+    <a
+      href="/categories/%E5%85%AB%E8%82%A1/"
+      
+    >
+      八股
+    </a>
+    
+  </header>
+  
+
+  <div class="article-title-wrapper">
+    <h2 class="article-title">
+      <a href="/p/jdk%E7%89%88%E6%9C%AC%E7%9A%84%E5%8C%BA%E5%88%AB/">JDK版本的区别</a>
+    </h2>
+
+    
+  </div>
+
+     
+  <footer class="article-time">
+    
+    <div style="display: flex; flex-direction: column; gap: 4px;font-size: 14px;">
+      
+      <div class="article-date" style="display: flex; align-items: center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+        <span style="margin-left: 5px">发布于: </span>
+        <time
+          class="article-time--published"
+          datetime='2026-01-26T15:05:04Z'
+          style="margin-left: 5px"
+        >2026-01-26 15:05:04</time>
+      </div>
+
+      
+      
+    </div>
+
+    
+    <div
+      class="article-view"
+      style="align-items: center; gap: 5px; margin-left: auto; font-size: 14px;"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="icon icon-tabler icon-tabler-eye"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <circle cx="12" cy="12" r="2"></circle>
+        <path
+          d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s10 2.333 10 7"
+        ></path>
+      </svg>
+      <span class="temp-pv-container">
+        <span class="temp-pv-value"></span> 次
+      </span>
+    </div>
+  </footer>
+   
+</div>
+
+</header>
+</article>
+        
+            
+<article class="">
+    <header class="article-header">
+
+    <div class="article-details">
+  
+  <header class="article-category">
+    
+    <a
+      href="/categories/%E7%AE%97%E6%B3%95/"
+      
+    >
+      算法
+    </a>
+    
+  </header>
+  
+
+  <div class="article-title-wrapper">
+    <h2 class="article-title">
+      <a href="/p/%E5%8F%8C%E6%8C%87%E9%92%88%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84/">【双指针】合并两个有序数组</a>
+    </h2>
+
+    
+  </div>
+
+     
+  <footer class="article-time">
+    
+    <div style="display: flex; flex-direction: column; gap: 4px;font-size: 14px;">
+      
+      <div class="article-date" style="display: flex; align-items: center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+        <span style="margin-left: 5px">发布于: </span>
+        <time
+          class="article-time--published"
+          datetime='2026-01-26T04:15:00Z'
+          style="margin-left: 5px"
+        >2026-01-26 04:15:00</time>
+      </div>
+
+      
+      
+    </div>
+
+    
+    <div
+      class="article-view"
+      style="align-items: center; gap: 5px; margin-left: auto; font-size: 14px;"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="icon icon-tabler icon-tabler-eye"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <circle cx="12" cy="12" r="2"></circle>
+        <path
+          d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s10 2.333 10 7"
+        ></path>
+      </svg>
+      <span class="temp-pv-container">
+        <span class="temp-pv-value"></span> 次
+      </span>
+    </div>
+  </footer>
+   
+</div>
+
+</header>
+</article>
+        
+            
+<article class="">
+    <header class="article-header">
+
+    <div class="article-details">
+  
+  <header class="article-category">
+    
+    <a
+      href="/categories/%E5%85%AB%E8%82%A1/"
+      
+    >
+      八股
+    </a>
+    
+  </header>
+  
+
+  <div class="article-title-wrapper">
+    <h2 class="article-title">
+      <a href="/p/%E5%AD%97%E8%8A%82%E9%9D%A2%E8%AF%95%E6%89%8B%E6%92%95%E5%A4%A7%E6%95%B0%E5%8A%A0%E6%B3%95/">【字节面试手撕】大数加法</a>
+    </h2>
+
+    
+  </div>
+
+     
+  <footer class="article-time">
+    
+    <div style="display: flex; flex-direction: column; gap: 4px;font-size: 14px;">
+      
+      <div class="article-date" style="display: flex; align-items: center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+        <span style="margin-left: 5px">发布于: </span>
+        <time
+          class="article-time--published"
+          datetime='2026-01-25T22:48:06Z'
+          style="margin-left: 5px"
+        >2026-01-25 22:48:06</time>
+      </div>
+
+      
+      
+    </div>
+
+    
+    <div
+      class="article-view"
+      style="align-items: center; gap: 5px; margin-left: auto; font-size: 14px;"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="icon icon-tabler icon-tabler-eye"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <circle cx="12" cy="12" r="2"></circle>
+        <path
+          d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s10 2.333 10 7"
+        ></path>
+      </svg>
+      <span class="temp-pv-container">
+        <span class="temp-pv-value"></span> 次
+      </span>
+    </div>
+  </footer>
+   
+</div>
+
+</header>
+</article>
+        
+            
+<article class="">
+    <header class="article-header">
+
+    <div class="article-details">
+  
+  <header class="article-category">
+    
+    <a
+      href="/categories/%E7%AE%97%E6%B3%95/"
+      
+    >
+      算法
+    </a>
+    
+  </header>
+  
+
+  <div class="article-title-wrapper">
+    <h2 class="article-title">
+      <a href="/p/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%88%86%E5%89%B2%E9%AA%8C%E8%AF%81ip%E5%9C%B0%E5%9D%80/">【字符串分割】验证IP地址</a>
+    </h2>
+
+    
+  </div>
+
+     
+  <footer class="article-time">
+    
+    <div style="display: flex; flex-direction: column; gap: 4px;font-size: 14px;">
+      
+      <div class="article-date" style="display: flex; align-items: center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+        <span style="margin-left: 5px">发布于: </span>
+        <time
+          class="article-time--published"
+          datetime='2026-01-25T22:00:54Z'
+          style="margin-left: 5px"
+        >2026-01-25 22:00:54</time>
+      </div>
+
+      
+      
+    </div>
+
+    
+    <div
+      class="article-view"
+      style="align-items: center; gap: 5px; margin-left: auto; font-size: 14px;"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="icon icon-tabler icon-tabler-eye"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <circle cx="12" cy="12" r="2"></circle>
+        <path
+          d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s10 2.333 10 7"
+        ></path>
+      </svg>
+      <span class="temp-pv-container">
+        <span class="temp-pv-value"></span> 次
+      </span>
+    </div>
+  </footer>
+   
+</div>
+
+</header>
+</article>
+        
+            
+<article class="">
+    <header class="article-header">
+
+    <div class="article-details">
+  
+  <header class="article-category">
+    
+    <a
+      href="/categories/%E7%AE%97%E6%B3%95/"
+      
+    >
+      算法
+    </a>
+    
+  </header>
+  
+
+  <div class="article-title-wrapper">
+    <h2 class="article-title">
+      <a href="/p/%E7%BA%B5%E5%90%91%E6%89%AB%E6%8F%8F%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%89%8D%E7%BC%80/">【纵向扫描】最长公共前缀</a>
+    </h2>
+
+    
+  </div>
+
+     
+  <footer class="article-time">
+    
+    <div style="display: flex; flex-direction: column; gap: 4px;font-size: 14px;">
+      
+      <div class="article-date" style="display: flex; align-items: center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+        <span style="margin-left: 5px">发布于: </span>
+        <time
+          class="article-time--published"
+          datetime='2026-01-25T20:27:14Z'
+          style="margin-left: 5px"
+        >2026-01-25 20:27:14</time>
+      </div>
+
+      
+      
+    </div>
+
+    
+    <div
+      class="article-view"
+      style="align-items: center; gap: 5px; margin-left: auto; font-size: 14px;"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="icon icon-tabler icon-tabler-eye"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <circle cx="12" cy="12" r="2"></circle>
+        <path
+          d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s10 2.333 10 7"
+        ></path>
+      </svg>
+      <span class="temp-pv-container">
+        <span class="temp-pv-value"></span> 次
+      </span>
+    </div>
+  </footer>
+   
+</div>
+
+</header>
+</article>
+        
+            
+<article class="">
+    <header class="article-header">
+
+    <div class="article-details">
+  
+  <header class="article-category">
+    
+    <a
+      href="/categories/%E7%AE%97%E6%B3%95/"
+      
+    >
+      算法
+    </a>
+    
+  </header>
+  
+
+  <div class="article-title-wrapper">
+    <h2 class="article-title">
+      <a href="/p/%E5%8F%8C%E6%8C%87%E9%92%88-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8F%98%E5%BD%A2/">【双指针&#43;字符串】字符串变形</a>
+    </h2>
+
+    
+  </div>
+
+     
+  <footer class="article-time">
+    
+    <div style="display: flex; flex-direction: column; gap: 4px;font-size: 14px;">
+      
+      <div class="article-date" style="display: flex; align-items: center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+        <span style="margin-left: 5px">发布于: </span>
+        <time
+          class="article-time--published"
+          datetime='2026-01-25T19:30:16Z'
+          style="margin-left: 5px"
+        >2026-01-25 19:30:16</time>
+      </div>
+
+      
+      
+    </div>
+
+    
+    <div
+      class="article-view"
+      style="align-items: center; gap: 5px; margin-left: auto; font-size: 14px;"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="icon icon-tabler icon-tabler-eye"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <circle cx="12" cy="12" r="2"></circle>
+        <path
+          d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s10 2.333 10 7"
+        ></path>
+      </svg>
+      <span class="temp-pv-container">
+        <span class="temp-pv-value"></span> 次
+      </span>
+    </div>
+  </footer>
+   
+</div>
+
+</header>
+</article>
+        
+            
+<article class="">
+    <header class="article-header">
+
+    <div class="article-details">
+  
+  <header class="article-category">
+    
+    <a
+      href="/categories/%E7%AE%97%E6%B3%95/"
+      
+    >
+      算法
+    </a>
+    
+  </header>
+  
+
+  <div class="article-title-wrapper">
+    <h2 class="article-title">
+      <a href="/p/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E5%A5%BD%E6%97%B6%E6%9C%BAi-ii-iii/">动态规划-买卖股票的最好时机I-II-III</a>
+    </h2>
+
+    
+  </div>
+
+     
+  <footer class="article-time">
+    
+    <div style="display: flex; flex-direction: column; gap: 4px;font-size: 14px;">
+      
+      <div class="article-date" style="display: flex; align-items: center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+        <span style="margin-left: 5px">发布于: </span>
+        <time
+          class="article-time--published"
+          datetime='2026-01-25T00:04:30Z'
+          style="margin-left: 5px"
+        >2026-01-25 00:04:30</time>
+      </div>
+
+      
+      
+    </div>
+
+    
+    <div
+      class="article-view"
+      style="align-items: center; gap: 5px; margin-left: auto; font-size: 14px;"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="icon icon-tabler icon-tabler-eye"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <circle cx="12" cy="12" r="2"></circle>
+        <path
+          d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s10 2.333 10 7"
+        ></path>
+      </svg>
+      <span class="temp-pv-container">
+        <span class="temp-pv-value"></span> 次
+      </span>
+    </div>
+  </footer>
+   
+</div>
+
+</header>
+</article>
+        
+            
+<article class="">
+    <header class="article-header">
+
+    <div class="article-details">
+  
+  <header class="article-category">
+    
+    <a
+      href="/categories/%E7%AE%97%E6%B3%95/"
+      
+    >
+      算法
+    </a>
+    
+  </header>
+  
+
+  <div class="article-title-wrapper">
+    <h2 class="article-title">
+      <a href="/p/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8Di-ii/">动态规划-打家劫舍I-II</a>
+    </h2>
+
+    
+  </div>
+
+     
+  <footer class="article-time">
+    
+    <div style="display: flex; flex-direction: column; gap: 4px;font-size: 14px;">
+      
+      <div class="article-date" style="display: flex; align-items: center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+        <span style="margin-left: 5px">发布于: </span>
+        <time
+          class="article-time--published"
+          datetime='2026-01-24T23:49:36Z'
+          style="margin-left: 5px"
+        >2026-01-24 23:49:36</time>
+      </div>
+
+      
+      
+    </div>
+
+    
+    <div
+      class="article-view"
+      style="align-items: center; gap: 5px; margin-left: auto; font-size: 14px;"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="icon icon-tabler icon-tabler-eye"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <circle cx="12" cy="12" r="2"></circle>
+        <path
+          d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s10 2.333 10 7"
+        ></path>
+      </svg>
+      <span class="temp-pv-container">
+        <span class="temp-pv-value"></span> 次
+      </span>
+    </div>
+  </footer>
+   
+</div>
+
+</header>
+</article>
+        
+    </section><nav class="pagination" role="navigation" aria-label="pagination"><a class="page-link "href="/page/25/"aria-label="Previous page">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-left"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 6l-6 6l6 6" /></svg>
+    </a><a class="page-link " aria-label="Page 1"href="/">
+        1
+    </a><span class="page-link pagination-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-dots"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M19 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /></svg>
+    </span><a class="page-link "href="/page/22/"
+                aria-label="Page 22">
+                22
+            </a><a class="page-link "href="/page/23/"
+                aria-label="Page 23">
+                23
+            </a><a class="page-link "href="/page/24/"
+                aria-label="Page 24">
+                24
+            </a><a class="page-link "href="/page/25/"
+                aria-label="Page 25">
+                25
+            </a><a class="page-link current"aria-current="page"href="/page/26/"
+                aria-label="Page 26">
+                26
+            </a><a class="page-link "href="/page/27/"
+                aria-label="Page 27">
+                27
+            </a><a class="page-link "href="/page/28/"
+                aria-label="Page 28">
+                28
+            </a><a class="page-link "href="/page/29/"
+                aria-label="Page 29">
+                29
+            </a><a class="page-link "href="/page/30/"
+                aria-label="Page 30">
+                30
+            </a><span class="page-link pagination-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-dots"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M19 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /></svg>
+    </span><a class="page-link "href="/page/68/"aria-label="Page 68">
+        68
+    </a><a class="page-link "href="/page/27/"aria-label="Next page">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>
+    </a>
+</nav><footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2026 iamxurulin
+    </section>
+    
+    <section class="powerby">
+        
+            Code Road Record <br/>
+        
+
+    </section>
+</footer>
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.b4654cd74006fe7475d7723cd7373672b5ea2035ab23404eb9ff511cb27b581c.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<div id="aplayer"></div>
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<script>
+const staticDir = "https://iamxurulin.github.io/"
+const ap = new APlayer({
+    container: document.getElementById('aplayer'),
+	fixed: true,
+	lrcType: 3,
+    audio: [
+	    {
+             name: '远行', 
+             artist: '大青山', 
+             url: '/music/大青山-远行.mp3', 
+             cover: '/music/cover.jpg', 
+             lrc: '/music/大青山-远行-歌词.lrc', 
+        }
+    ]
+});
+    
+
+    window.onbeforeunload = () => {
+        
+        const playInfo = {
+            index: ap.list.index,
+            currentTime: ap.audio.currentTime,
+            paused: ap.paused
+        };
+        localStorage.setItem("playInfo", JSON.stringify(playInfo));
+    };
+
+    
+
+    window.onload = () => {
+        
+        const playInfo = JSON.parse(localStorage.getItem("playInfo"));
+        if (!playInfo) {
+            return;
+        }
+        
+        ap.list.switch(playInfo.index);
+        
+        setTimeout(() => {
+            
+            ap.seek(playInfo.currentTime);
+            
+            if (!playInfo.paused) {
+                ap.play()
+            }
+        }, 500);
+    };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+
+    
+    <script src=https://iamxurulin.github.io/js/topbar.min.js></script>
+
+<script>
+	var pjax = new Pjax({
+	  selectors: [
+	    ".main-container"
+	  ]
+	})
+
+    pjax._handleResponse = pjax.handleResponse;
+    pjax.handleResponse = function(responseText, request, href, options) {
+        if (request.responseText.match("<html")) {
+            if (responseText) {
+                
+                let newDom = new DOMParser().parseFromString(responseText, 'text/html');
+                
+                let bodyClass = newDom.body.className;
+                document.body.setAttribute("class", bodyClass)
+                
+				
+					
+				
+				pjax._handleResponse(responseText, request, href, options);
+            }
+        } else {
+            
+        }
+    }
+	
+    topbar.config({
+        barColors: {
+            '0': 'rgba(255,  255, 255, 1)', 
+            '1.0': 'rgba(0, 149, 234,  1)' 
+        }
+    })
+	
+    document.addEventListener('pjax:send', () => {
+        
+        topbar.show();
+    })
+	
+    document.addEventListener('pjax:complete', () => {
+        
+        window.Stack.init();
+		
+        topbar.hide();
+    })
+
+</script>
+
+<style>
+  @font-face {
+    font-family: 'FiraCode-Medium';
+    src: url(https://iamxurulin.github.io/font/FiraCode-Medium.ttf) format('truetype');
+  }
+
+  :root {
+    --base-font-family: 'FiraCode-Medium';
+    --code-font-family: 'FiraCode-Medium';
+  }
+</style>
+
+<style>
+    #TableOfContents > ul, ol {
+        ul, ol {
+            display: none;
+        }
+        .open {
+            display: block;
+        }
+    }
+</style>
+
+<script>
+    function initTocHide() {
+        
+        let toc = document.querySelector(".widget--toc");
+        if (!toc) {
+            return;
+        }
+        
+        window.addEventListener('scroll', function() {
+            
+            let openUl = document.querySelectorAll(".open");
+            if (openUl.length > 0) {
+              openUl.forEach((ul) => {
+                ul.classList.remove("open")
+              })
+            }
+            
+            let currentLi = document.querySelector(".active-class");
+            if (!currentLi) {
+                return
+            }
+            
+            if (currentLi.children.length > 1) {
+                currentLi.children[1].classList.add("open")
+            }
+            
+            let ul = currentLi.parentElement;
+            do {
+                ul.classList.add("open");
+                ul = ul.parentElement.parentElement
+            } while (ul !== undefined && (ul.localName === 'ul' || ul.localName === 'ol'))
+        });
+    }
+    initTocHide()
+</script>
+
+<style>
+    #backTopBtn {
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        z-index: 99;
+        cursor: pointer;
+        width: 20px;
+        height: 20px;
+        background-image: url(https://iamxurulin.github.io/icons/backTop.svg);
+    }
+</style>
+
+<script>
+    
+
+    function initScrollTop() {
+        let rightSideBar = document.querySelector(".right-sidebar");
+        if (!rightSideBar) {
+            return;
+        }
+        
+        let btn = document.createElement("div");
+        btn.id = "backTopBtn";
+        btn.onclick = backToTop
+        rightSideBar.appendChild(btn)
+        
+        window.onscroll = function() {
+            
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        };
+    }
+
+    
+
+    function backToTop(){
+        window.scrollTo({ top: 0, behavior: "smooth" })
+    }
+
+    initScrollTop();
+</script>
+
+<style>
+    .highlight {
+         
+        max-height: 400px;
+        overflow: hidden;
+    }
+
+    .code-show {
+        max-height: none !important;
+    }
+
+    .code-more-box {
+        width: 100%;
+        padding-top: 78px;
+        background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0)), to(#fff));
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+    }
+
+    .code-more-btn {
+        display: block;
+        margin: auto;
+        width: 44px;
+        height: 22px;
+        background: #f0f0f5;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        padding-top: 6px;
+        cursor: pointer;
+    }
+
+    .code-more-img {
+        cursor: pointer !important;
+        display: block;
+        margin: auto;
+        width: 22px;
+        height: 16px;
+    }
+</style>
+
+<style>
+    .highlight {
+        max-height: 400px;
+        overflow: hidden;
+        position: relative;  
+    }
+
+    .code-show {
+        max-height: none !important;
+    }
+
+    .code-more-box {
+        width: 100%;
+        padding-top: 78px;
+        background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0)), to(#fff));
+        background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+        pointer-events: none;  
+    }
+
+    .code-more-btn {
+        pointer-events: auto;  
+        display: block;
+        margin: auto;
+        width: 44px;
+        height: 22px;
+        background: var(--card-background);
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        padding-top: 6px;
+        cursor: pointer;
+        box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    }
+
+    .code-more-img {
+        display: block;
+        margin: auto;
+        width: 22px;
+        height: 16px;
+    }
+
+     
+    [data-scheme="dark"] .code-more-box {
+        background-image: linear-gradient(to bottom, rgba(30,30,40,0), #1e1e28);
+    }
+    [data-scheme="dark"] .code-more-btn {
+        background: var(--card-background);
+    }
+</style>
+
+<script>
+  function initCodeMoreBox() {
+    const codeBlocks = document.querySelectorAll(".highlight:not(.code-inited)");
+    
+    codeBlocks.forEach(codeBlock => {
+      
+      codeBlock.classList.add("code-inited");
+
+      
+      if (codeBlock.scrollHeight <= codeBlock.clientHeight + 5) { 
+        return;
+      }
+
+      
+      const codeMoreBox = document.createElement('div');
+      codeMoreBox.classList.add('code-more-box');
+
+      const codeMoreBtn = document.createElement('span');
+      codeMoreBtn.classList.add('code-more-btn');
+      codeMoreBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        codeBlock.classList.add('code-show');
+        codeMoreBox.style.display = 'none';
+        
+        window.dispatchEvent(new Event('resize'));
+      });
+
+      const img = document.createElement('img');
+      img.classList.add('code-more-img');
+      img.src = "https://iamxurulin.github.io/icons/codeMore.png";
+      img.alt = "展开代码";
+
+      codeMoreBtn.appendChild(img);
+      codeMoreBox.appendChild(codeMoreBtn);
+      codeBlock.appendChild(codeMoreBox);
+    });
+  }
+
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCodeMoreBox);
+  } else {
+    initCodeMoreBox();
+  }
+
+  
+  document.addEventListener('pjax:complete', initCodeMoreBox);
+  document.addEventListener('swup:contentReplaced', initCodeMoreBox); 
+  window.addEventListener('popstate', initCodeMoreBox); 
+
+  
+  const observer = new MutationObserver((mutations) => {
+    let shouldRun = false;
+    mutations.forEach(mutation => {
+      if (mutation.addedNodes.length) {
+        shouldRun = true;
+      }
+    });
+    if (shouldRun) {
+      
+      setTimeout(initCodeMoreBox, 100);
+    }
+  });
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+</script>
+<style>
+  body {
+    background: url(https://iamxurulin.github.io/background/wallhaven-qr27rq.jpg) no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+</style>
+
+<script src=https://iamxurulin.github.io/background/sakura.js></script>
+
+<div id="particles-js"></div>
+
+<script src=https://iamxurulin.github.io/background/particles.min.js></script>
+<script>
+  particlesJS.load('particles-js', "https://iamxurulin.github.io/background/particlesjs-config.json", function() {
+    console.log('particles.js loaded - callback');
+  });
+</script>
+
+<style>
+  #particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: -1;
+  }
+</style>
+
+<script>
+    const cdnPath = "https://cdn.jsdelivr.net/gh/iamxurulin/live2d-widget-v3@v1.0.2";
+    const localCssPath = "https://iamxurulin.github.io/waifu/waifu.css";
+    const localTipsJsonPath = "https://iamxurulin.github.io/waifu/waifu-tips.json";
+    const localTipsJsPath = "https://iamxurulin.github.io/waifu/waifu-tips.js";
+    const config = {
+      
+      path: {
+        homePath: "/",
+        modelPath: cdnPath + "/Resources/",
+        tipsJsPath: localTipsJsPath,
+        live2dCorePath: cdnPath + "/Core/live2dcubismcore.js",
+        live2dSdkPath: cdnPath + "/live2d-sdk.js",
+        cssPath: localCssPath,
+        tipsJsonPath: localTipsJsonPath
+      },
+      
+      tools: ["hitokoto", "asteroids",  "express","photo", "info", "quit"],
+      
+      drag: {
+        enable: true,
+        direction: ["x", "y"]
+      }
+      
+      
+    }
+
+    function preloadResource(host) {
+      const link = document.createElement('link');
+      link.rel = 'preconnect';
+      link.href = host;
+      link.crossOrigin = 'anonymous';
+      document.head.appendChild(link);
+    }
+
+    function loadScript(url) {
+      return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = url;
+        script.async = false;
+        script.onload = () => resolve(url);
+        script.onerror = () => reject(new Error(`Failed to load ${url}`));
+        document.head.appendChild(script);
+      });
+    }
+
+    function loadStylesheet(url) {
+      return new Promise((resolve, reject) => {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = url;
+        link.onload = () => resolve(url);
+        link.onerror = () => reject(new Error(`Failed to load ${url}`));
+        document.head.appendChild(link);
+      });
+    }
+
+    if (screen.width >= 768) {
+      preloadResource('https://cdn.jsdelivr.net');
+      preloadResource('https://fastly.jsdelivr.net');
+
+      const cssPromise = loadStylesheet(config.path.cssPath);
+      const corePromise = loadScript(config.path.live2dCorePath);
+      const sdkPromise = corePromise.then(() => loadScript(config.path.live2dSdkPath));
+      const tipsPromise = loadScript(config.path.tipsJsPath);
+
+      Promise.all([cssPromise, sdkPromise, tipsPromise]).then(() => {
+        localStorage.setItem("modelId", "0");
+        localStorage.setItem("modelTexturesId", "0");
+        initWidget({
+          waifuPath: config.path.tipsJsonPath,
+          cdnPath: config.path.modelPath,
+          tools: config.tools,
+          dragEnable: config.drag.enable,
+          dragDirection: config.drag.direction,
+          switchType: config.switchType
+        });
+      }).catch(error => {
+        console.warn('Live2D resources failed to load:', error);
+      });
+    }
+</script>
+
+<script>
+    (function() {
+        const PRIMARY_SCRIPT = 'https://cn.vercount.one/js';
+        const FALLBACK_SCRIPT = 'https://busuanzi.ibruce.info/busuanzi.pure.mini.js';
+        const FALLBACK_TIMEOUT = 3000;
+
+        function removeOldBusuanzi() {
+            document.querySelectorAll('[id^="busuanzi_"]').forEach(el => el.removeAttribute('id'));
+            const oldScript = document.getElementById('vercount-script');
+            if (oldScript) oldScript.remove();
+            const oldFallback = document.getElementById('vercount-fallback-script');
+            if (oldFallback) oldFallback.remove();
+            if (window.busuanzi) delete window.busuanzi;
+        }
+
+        function bindBusuanziIds() {
+            const pvContainer = document.querySelector('.temp-pv-container');
+            const pvValue = document.querySelector('.temp-pv-value');
+            if (pvContainer) pvContainer.id = 'busuanzi_container_page_pv';
+            if (pvValue) {
+                pvValue.id = 'busuanzi_value_page_pv';
+                pvValue.textContent = '...';
+            }
+            return pvValue;
+        }
+
+        function insertScript(src, id, onload, onerror) {
+            const script = document.createElement('script');
+            script.src = src;
+            script.id = id;
+            script.async = true;
+            if (onload) script.onload = onload;
+            if (onerror) script.onerror = onerror;
+            document.head.appendChild(script);
+            return script;
+        }
+
+        function insertFallback(pvValue) {
+            if (document.getElementById('vercount-fallback-script')) return;
+            console.warn('⚠️ [Vercount] primary script failed, fallback to busuanzi official script');
+            insertScript(FALLBACK_SCRIPT, 'vercount-fallback-script');
+            if (pvValue && pvValue.textContent === '...') {
+                setTimeout(() => {
+                    if (pvValue.textContent === '...') {
+                        pvValue.textContent = '0';
+                    }
+                }, 1000);
+            }
+        }
+
+        function reloadVercount() {
+            console.log('🔵 [Vercount] 开始重载...');
+            const container = document.querySelector('.article-view');
+            if (!container) {
+                document.querySelectorAll('.article-view').forEach(el => el.style.display = 'none');
+                return;
+            }
+            container.style.display = 'flex';
+            removeOldBusuanzi();
+            const pvValue = bindBusuanziIds();
+
+            insertScript(`${PRIMARY_SCRIPT}?t=${Date.now()}`, 'vercount-script', () => {
+                console.log('✅ [Vercount] primary 脚本已加载');
+            }, () => {
+                insertFallback(pvValue);
+            });
+
+            setTimeout(() => {
+                if (pvValue && pvValue.textContent === '...') {
+                    insertFallback(pvValue);
+                }
+            }, FALLBACK_TIMEOUT);
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', reloadVercount);
+        } else {
+            reloadVercount();
+        }
+
+        document.addEventListener('pjax:complete', reloadVercount);
+    })();
+</script>
+
+
+    </body>
+</html>

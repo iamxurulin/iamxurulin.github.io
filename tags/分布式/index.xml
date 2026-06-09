@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>分布式 on Coder_Studio</title>
+        <link>https://iamxurulin.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/</link>
+        <description>Recent content in 分布式 on Coder_Studio</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <copyright>iamxurulin</copyright>
+        <lastBuildDate>Tue, 09 Jun 2026 01:34:43 +0000</lastBuildDate><atom:link href="https://iamxurulin.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>分布式事务其实很简单：下单场景带你吃透核心原理</title>
+        <link>https://iamxurulin.github.io/p/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E5%85%B6%E5%AE%9E%E5%BE%88%E7%AE%80%E5%8D%95%E4%B8%8B%E5%8D%95%E5%9C%BA%E6%99%AF%E5%B8%A6%E4%BD%A0%E5%90%83%E9%80%8F%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86/</link>
+        <pubDate>Sun, 03 May 2026 16:02:57 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E5%85%B6%E5%AE%9E%E5%BE%88%E7%AE%80%E5%8D%95%E4%B8%8B%E5%8D%95%E5%9C%BA%E6%99%AF%E5%B8%A6%E4%BD%A0%E5%90%83%E9%80%8F%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86/</guid>
+        <description>&lt;p&gt;这个原理其实并不复杂，分布式事务，本质就是保证分布式架构下，跨多个服务、多个独立数据源的一组操作，具备和本地事务一致的核心诉求：&lt;strong&gt;原子性（要么全成功，要么全回滚）&lt;/strong&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;举个例子&#34;&gt;举个例子
+&lt;/h2&gt;&lt;p&gt;用户下单，必然要经过【账户中心】扣减用户余额，还要经过【商品中心】扣减商品库存，这就是典型的分布式事务场景。&lt;br&gt;
+如果只扣了用户的钱，商品库存没扣，会出现用户付款却拿不到商品的问题；&lt;br&gt;
+如果钱没扣成功，却把商品库存扣了，就等于用户白嫖了商品，这两种情况都是业务绝对不能接受的。&lt;/p&gt;
+&lt;h2 id=&#34;为什么分布式事务不好处理&#34;&gt;为什么分布式事务不好处理？
+&lt;/h2&gt;&lt;p&gt;核心原因是，跨服务的网络调用（HTTP/RPC）让多个服务的本地事务完全隔离，无法共享事务上下文：&lt;/p&gt;
+&lt;p&gt;账户中心本地事务的执行结果，商品中心无法实时感知；&lt;/p&gt;
+&lt;p&gt;商品中心的执行结果，账户中心也无法直接控制，无法像本地事务一样做到统一的提交和回滚。&lt;/p&gt;
+&lt;p&gt;而分布式系统的CAP定理，也决定了我们无法同时满足强一致性、高可用性和分区容错性，必须根据业务场景做取舍。&lt;/p&gt;
+&lt;p&gt;行业内主流的分布式事务实现方案，核心分为两大类：&lt;/p&gt;
+&lt;p&gt;一类是&lt;strong&gt;强一致性方案&lt;/strong&gt;，代表是基于XA协议的2PC（两阶段提交），3PC是2PC的理论优化方案，几乎无生产落地；&lt;/p&gt;
+&lt;p&gt;另一类是&lt;strong&gt;最终一致性方案&lt;/strong&gt;，也是互联网高并发场景的主流选择，代表有TCC、SAGA，以及最常用的基于RocketMQ事务消息的可靠消息方案。&lt;/p&gt;
+&lt;h2 id=&#34;什么是强一致性事务&#34;&gt;什么是强一致性事务？
+&lt;/h2&gt;&lt;p&gt;我们常说的分布式事务强一致性，核心是&lt;strong&gt;原子提交级的强一致&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;分布式事务的提交对调用方是原子性的，要么所有分支事务全成功提交，要么全回滚，对外不存在部分成功的中间状态，调用方在事务完成前，不会读到部分修改的数据。&lt;/p&gt;
+&lt;p&gt;放到我们的下单场景里，就是账户中心扣钱和商品中心扣库存，两个操作对用户来说必须同时成功、同时失败，不会出现一个成功一个失败的情况。&lt;br&gt;
+但强一致性方案有天然的短板：&lt;/p&gt;
+&lt;p&gt;2PC的两阶段流程中，会在准备阶段锁定账户余额、商品库存等数据库资源，直到事务提交/回滚才释放，整个过程同步阻塞用户请求，资源锁定时间远长于本地事务，高并发下极易出现锁冲突、数据库连接池打满，吞吐量会受到严重限制，因此只适用于低并发、对数据一致性要求极高的场景。&lt;/p&gt;
+&lt;h2 id=&#34;最终一致性非强一致性是什么&#34;&gt;最终一致性（非强一致性）是什么？
+&lt;/h2&gt;&lt;p&gt;最终一致性的核心，是放宽了“瞬时强一致”的要求，允许系统存在短暂的中间状态，但保证经过一段时间后，所有节点的数据最终能达到一致状态，以此换取极高的可用性和并发能力。&lt;/p&gt;
+&lt;p&gt;基于RocketMQ事务消息的可靠消息方案，就是高并发场景下最经典的最终一致性方案：&lt;/p&gt;
+&lt;p&gt;账户中心先执行本地扣钱事务，事务完全提交成功后，再确保消息能被商品中心消费；&lt;/p&gt;
+&lt;p&gt;消息投递完成后，账户中心就可以直接结束当前请求，处理新的用户业务，完全不需要等待商品中心的任何执行结果；&lt;/p&gt;
+&lt;p&gt;商品中心只会监听目标业务Topic的消息，收到后再执行扣库存的操作，两个服务互不阻塞、可以并行处理请求，下单主流程的吞吐量完全由账户中心的处理能力决定，不会被商品中心阻塞，整体并发承载能力远高于强一致性同步方案。&lt;/p&gt;
+&lt;h2 id=&#34;rocketmq事务消息的核心原理&#34;&gt;RocketMQ事务消息的核心原理
+&lt;/h2&gt;&lt;p&gt;整个流程核心分为两步，从根源上避免了“钱没扣、库存先扣”的问题：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;半消息预投递&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;在执行账户扣钱的本地事务之前，先给RocketMQ发送一条半消息。&lt;/p&gt;
+&lt;p&gt;这条消息会被存储到RocketMQ内置的系统Topic &lt;code&gt;RMQ_SYS_TRANS_HALF_TOPIC&lt;/code&gt; 中，业务侧的商品中心不会监听这个系统Topic，因此这条消息完全不可见、绝对不会被消费。&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;&lt;strong&gt;事务提交与消息投递&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;半消息投递成功后，执行账户扣钱的本地事务，以及事务内的其他关联业务操作。&lt;/p&gt;
+&lt;p&gt;如果本地事务执行成功，就给RocketMQ发送事务提交指令，RocketMQ会把半消息从系统Topic转储到目标业务Topic中，此时商品中心就能正常消费这条消息，执行扣库存操作；&lt;/p&gt;
+&lt;p&gt;如果本地事务执行失败，就发送回滚指令，RocketMQ会直接丢弃这条半消息，绝不会被消费。&lt;/p&gt;
+&lt;p&gt;除此之外，RocketMQ还有一套兜底的事务回查机制：&lt;/p&gt;
+&lt;p&gt;如果账户中心因为宕机、网络中断等原因，没有给MQ发送提交/回滚指令，MQ会定时（默认1分钟）回调账户中心的回查接口，查询对应本地事务的执行状态，根据回查结果决定提交还是回滚半消息，从机制上避免消息长期挂起、数据不一致的问题。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

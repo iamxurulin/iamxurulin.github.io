@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>阿里云 on Coder_Studio</title>
+        <link>https://iamxurulin.github.io/tags/%E9%98%BF%E9%87%8C%E4%BA%91/</link>
+        <description>Recent content in 阿里云 on Coder_Studio</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <copyright>iamxurulin</copyright>
+        <lastBuildDate>Tue, 09 Jun 2026 01:34:43 +0000</lastBuildDate><atom:link href="https://iamxurulin.github.io/tags/%E9%98%BF%E9%87%8C%E4%BA%91/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Windows系统Codex 接入阿里云百炼的国产大模型</title>
+        <link>https://iamxurulin.github.io/p/windows%E7%B3%BB%E7%BB%9Fcodex-%E6%8E%A5%E5%85%A5%E9%98%BF%E9%87%8C%E4%BA%91%E7%99%BE%E7%82%BC%E7%9A%84%E5%9B%BD%E4%BA%A7%E5%A4%A7%E6%A8%A1%E5%9E%8B/</link>
+        <pubDate>Tue, 02 Jun 2026 00:21:35 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/windows%E7%B3%BB%E7%BB%9Fcodex-%E6%8E%A5%E5%85%A5%E9%98%BF%E9%87%8C%E4%BA%91%E7%99%BE%E7%82%BC%E7%9A%84%E5%9B%BD%E4%BA%A7%E5%A4%A7%E6%A8%A1%E5%9E%8B/</guid>
+        <description>&lt;p&gt;Codex作为 OpenAI 推出的终端级 AI 编程智能体，凭借其对 Responses API 的原生支持、强大的插件/技能系统和灵活的工具调用能力，迅速成为开发者日常编码的得力助手。&lt;/p&gt;
+&lt;p&gt;然而在国内使用 Codex 时，相信在通过Microsoft Store安装好Codex之后，很多人一定见过这个图片：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://iamxurulin.github.io/images/05e5f33f33926a55fc0543d5392dcbf6-1ef1d28b.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;本文将介绍如何将 &lt;strong&gt;阿里云百炼&lt;/strong&gt; 平台的国产大模型接入 Codex，配合开源增强工具 &lt;a class=&#34;link&#34; href=&#34;https://github.com/BigPizzaV3/CodexPlusPlus/releases/tag/v1.1.7&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Codex++&lt;/a&gt;，实现更快、更稳、更低成本的编码体验。&lt;/p&gt;
+&lt;h2 id=&#34;具体步骤&#34;&gt;具体步骤
+&lt;/h2&gt;&lt;h3 id=&#34;获取百炼-api-key&#34;&gt;获取百炼 API Key
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;登录 &lt;a class=&#34;link&#34; href=&#34;https://bailian.console.aliyun.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;阿里云百炼控制台&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;进入「API-KEY 管理」页面&lt;/li&gt;
+&lt;li&gt;创建并复制你的 API Key&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;安装和配置-codex&#34;&gt;安装和配置 Codex++
+&lt;/h3&gt;&lt;p&gt;Codex++是一个基于 CDP (Chrome DevTools Protocol) 注入的第三方增强启动器，它不修改 Codex 原始文件，通过旁路注入方式为 Codex App 增添了丰富的附加功能。&lt;/p&gt;
+&lt;p&gt;先进入Codex++的网址下载 &lt;a class=&#34;link&#34; href=&#34;https://github.com/BigPizzaV3/CodexPlusPlus/releases/tag/v1.1.7&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Codex++&lt;/a&gt;：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://iamxurulin.github.io/images/3d63975a51836784ee49f4d90f891a02-14d8b5ec.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;如果访问Github有困难，也可以通过以下方式下载：&lt;/p&gt;
+&lt;p&gt;链接：&lt;a class=&#34;link&#34; href=&#34;https://pan.quark.cn/s/e140711346d2&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Codex++安装包&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;安装完成Codex++之后，会多出这两个东西：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://iamxurulin.github.io/images/dee2a6d6f0a3dd831b63b8330e50309a-077c70f7.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;先点击Codex++管理工具，依次进行以下操作，【供应商配置】→【添加供应商】：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://iamxurulin.github.io/images/59ea8da1f1da9f95d70c5889be2375ed-6e4be3e7.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;之后点击【重启Codex】，Codex中就能显示阿里云百炼提供的国产大模型了。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://iamxurulin.github.io/images/f7ff42bdbe4ba1dac38e81d75c5ca907-58e30652.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这样一来，就将阿里云百炼接入了 Codex，不仅解决了网络访问问题，更带来了一个高性能、低成本、合规可控的国产 AI 编程体验。&lt;/p&gt;
+&lt;p&gt;配合 Codex++ 的强大增强功能，你获得的不仅仅是一个聊天机器人，而是一个真正懂你的编程伙伴。&lt;/p&gt;
+&lt;h2 id=&#34;小贴士&#34;&gt;小贴士
+&lt;/h2&gt;&lt;p&gt;1.如果重启之后，还是没有显示国产的大模型或者一直显示Reconnecting，可以重启一下电脑试试。&lt;/p&gt;
+&lt;p&gt;2.如果开了上网代理的话，记得关掉，不然还是会出错。&lt;/p&gt;
+&lt;p&gt;3.后续可以直接使用Codex++启动Codex了。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

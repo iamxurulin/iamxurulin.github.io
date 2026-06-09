@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>哈希算法 on Coder_Studio</title>
+        <link>https://iamxurulin.github.io/tags/%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/</link>
+        <description>Recent content in 哈希算法 on Coder_Studio</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <copyright>iamxurulin</copyright>
+        <lastBuildDate>Tue, 09 Jun 2026 01:34:43 +0000</lastBuildDate><atom:link href="https://iamxurulin.github.io/tags/%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>哈希、对称_非对称加密、数字签名，一次性讲清</title>
+        <link>https://iamxurulin.github.io/p/%E5%93%88%E5%B8%8C%E5%AF%B9%E7%A7%B0_%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D%E4%B8%80%E6%AC%A1%E6%80%A7%E8%AE%B2%E6%B8%85/</link>
+        <pubDate>Thu, 02 Apr 2026 18:43:59 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E5%93%88%E5%B8%8C%E5%AF%B9%E7%A7%B0_%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D%E4%B8%80%E6%AC%A1%E6%80%A7%E8%AE%B2%E6%B8%85/</guid>
+        <description>&lt;p&gt;不管是做用户密码存储、文件完整性校验、接口幂等设计，还是HTTPS通信、支付回调验签、敏感信息加密，总会绕不开哈希、加密、签名这些概念。&lt;/p&gt;
+&lt;p&gt;本文就把这些东西一次性理清楚，分清楚每个技术的核心作用、主流算法以及适用场景。&lt;/p&gt;
+&lt;h2 id=&#34;单向哈希摘要算法&#34;&gt;单向哈希摘要算法
+&lt;/h2&gt;&lt;p&gt;不管你输入多长的内容，它都能生成固定长度的哈希摘要字符串；&lt;/p&gt;
+&lt;p&gt;相同的输入，永远会得到完全相同的输出；&lt;/p&gt;
+&lt;p&gt;最关键的是它&lt;strong&gt;单向不可逆&lt;/strong&gt;，也就是说你没法从生成的哈希摘要，反推出原来的原始数据。&lt;/p&gt;
+&lt;p&gt;理论上它存在哈希碰撞的概率（也就是两个不同的输入，生成了相同的哈希值），但在正常的生产环境里，这个概率可以完全忽略不计。&lt;/p&gt;
+&lt;h3 id=&#34;主流算法&#34;&gt;主流算法
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;不安全已淘汰：MD5、SHA-1（已经被证实存在高效哈希碰撞的手段，安全场景绝对不能用）&lt;/li&gt;
+&lt;li&gt;生产环境推荐：SHA-256、SHA-512、bcrypt、Argon2、国密SM3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;业务场景举例&#34;&gt;业务场景举例
+&lt;/h3&gt;&lt;h4 id=&#34;1-用户密码存储&#34;&gt;1. 用户密码存储
+&lt;/h4&gt;&lt;p&gt;如果用 SHA-256 这类普通哈希算法：&lt;/p&gt;
+&lt;p&gt;需要先生成全局唯一的随机盐值（salt），把【用户密码 + salt】拼接后做哈希运算，最终把&lt;strong&gt;哈希值+盐值一起存入数据库&lt;/strong&gt;；&lt;/p&gt;
+&lt;p&gt;如果用 bcrypt/Argon2 这类&lt;strong&gt;慢哈希算法&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;不用自己手动生成盐，算法会内置随机盐，并且自动把盐嵌入到最终的哈希结果里，直接传入用户密码生成哈希值，最终只需要把这一个哈希值存入数据库就行。&lt;/p&gt;
+&lt;p&gt;登录校验的逻辑也很简单：&lt;/p&gt;
+&lt;p&gt;用户提交账号密码后，后端根据账号从数据库取出对应的哈希值（SHA系列还要单独取出盐值），用相同的算法对用户输入的密码做哈希，比对两个哈希值是否一致，一致就校验通过。&lt;/p&gt;
+&lt;h4 id=&#34;2-文件完整性校验&#34;&gt;2. 文件完整性校验
+&lt;/h4&gt;&lt;p&gt;比如我们把后端服务打包成JAR包发布时，会提前计算JAR包的SHA-256哈希值，和安装包一起发布到服务器；&lt;/p&gt;
+&lt;p&gt;服务器下载完成后，会重新计算自身磁盘上该文件的哈希值，和发布时给出的官方哈希值比对，一致就说明文件在传输过程中没有被篡改、没有丢失内容。&lt;/p&gt;
+&lt;h4 id=&#34;3-接口请求幂等性保证&#34;&gt;3. 接口请求幂等性保证
+&lt;/h4&gt;&lt;p&gt;比如用户下单接口，我们可以把用户ID、商品ID、订单号、请求时间戳等核心参数，按固定规则排序拼接后做SHA-256哈希，生成唯一的幂等号，存入Redis并设置过期时间；&lt;br&gt;
+当同一个重复请求第二次进来时，计算出的哈希值已经存在于Redis中，直接拒绝请求，保证接口幂等性。&lt;/p&gt;
+&lt;h3 id=&#34;小贴士&#34;&gt;小贴士
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;MD5、SHA-1已经被破解，存在明确的哈希碰撞风险，生产环境禁止用于密码存储等安全相关场景。&lt;/li&gt;
+&lt;li&gt;密码存储优先用bcrypt、Argon2这类慢哈希算法，别直接用SHA-256。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;对称加密&#34;&gt;对称加密
+&lt;/h2&gt;&lt;p&gt;哈希是不可逆的，只做摘要不做解密；&lt;/p&gt;
+&lt;p&gt;而加密的核心是&lt;strong&gt;可逆&lt;/strong&gt;，有加密就一定有对应的解密。&lt;/p&gt;
+&lt;p&gt;对称加密指的是：&lt;/p&gt;
+&lt;p&gt;加密和解密用的是&lt;strong&gt;完全同一个密钥&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;它的运算速度特别快，非常适合给大数据量的内容做加密，唯一的痛点就是密钥的安全分发与保管。&lt;/p&gt;
+&lt;p&gt;因为，一旦这个密钥泄露了，你所有加密的数据，都能被直接破解。&lt;/p&gt;
+&lt;h3 id=&#34;主流算法-1&#34;&gt;主流算法
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;不安全已淘汰：DES、3DES&lt;/li&gt;
+&lt;li&gt;生产环境推荐：AES-128/AES-256、国密SM4&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;业务场景举例-1&#34;&gt;业务场景举例
+&lt;/h3&gt;&lt;p&gt;我们每天都在用的HTTPS，通信逻辑就是【非对称加密协商密钥+对称加密传输内容】的组合。&lt;/p&gt;
+&lt;p&gt;浏览器和服务器在HTTPS握手阶段，会通过非对称加密协商出一个临时的AES会话密钥；&lt;/p&gt;
+&lt;p&gt;握手完成后，后续所有的请求、响应数据，都用这个AES密钥做加密传输。&lt;/p&gt;
+&lt;p&gt;这样的话，既解决了密钥分发的安全问题，又利用对称加密速度快的优势，保证了大数据量传输的性能。&lt;/p&gt;
+&lt;h2 id=&#34;非对称加密&#34;&gt;非对称加密
+&lt;/h2&gt;&lt;p&gt;非对称加密，就是为了解决对称加密的密钥分发痛点诞生的。&lt;/p&gt;
+&lt;p&gt;它的特点是加密和解密用的不是同一个密钥，而是一对&lt;strong&gt;数学上强关联的密钥对&lt;/strong&gt;：一个叫公钥，一个叫私钥。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;公钥：可以完全公开给所有人，哪怕全网都知道，也没有任何泄露风险；&lt;/li&gt;
+&lt;li&gt;私钥：必须由持有者自己严格保密，绝对不能泄露给任何人。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这里有两个不能搞反的规则：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;用公钥加密的内容，只有对应的私钥能解密；&lt;/li&gt;
+&lt;li&gt;用私钥加密的内容，只有对应的公钥能解密（这也是后面数字签名的核心原理）。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;需要注意的是：&lt;/p&gt;
+&lt;p&gt;非对称加密的运算速度很慢，只适合给小数据量的内容做加密，绝对不适合用来加密大数据量的内容。&lt;/p&gt;
+&lt;h3 id=&#34;主流算法-2&#34;&gt;主流算法
+&lt;/h3&gt;&lt;p&gt;生产环境推荐：RSA-2048、ECC椭圆曲线算法、国密SM2&lt;/p&gt;
+&lt;h3 id=&#34;业务场景举例-2&#34;&gt;业务场景举例
+&lt;/h3&gt;&lt;p&gt;金融、支付场景中，用户身份证号、银行卡号、支付密码等核心敏感信息的传输，必须用非对称加密。&lt;/p&gt;
+&lt;p&gt;比如用户在平台绑定银行卡，前端页面会用平台提前公开的RSA公钥，对银行卡号、身份证号做加密后再传给后端；&lt;/p&gt;
+&lt;p&gt;后端用自己保管的私钥解密出明文，做合规校验和存储。&lt;/p&gt;
+&lt;p&gt;哪怕请求被中间人截获，没有对应的私钥，也绝对无法解密出用户的敏感信息，从根源上避免信息泄露。&lt;/p&gt;
+&lt;h2 id=&#34;数字签名与验签&#34;&gt;数字签名与验签
+&lt;/h2&gt;&lt;p&gt;数字签名与验签，是基于【非对称加密+单向哈希】实现的，它的目标&lt;strong&gt;不是数据保密&lt;/strong&gt;，而是以下两个：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;身份认证，证明这个数据的发送方是真的；&lt;/li&gt;
+&lt;li&gt;防篡改，证明这个数据在传输过程中没有被修改过。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;很多人会把加密和签名的逻辑搞反，这里再梳理一遍：&lt;/p&gt;
+&lt;p&gt;普通加密是【公钥加密、私钥解密】，目标是数据保密，不让第三方看到内容；&lt;/p&gt;
+&lt;p&gt;数字签名是【私钥加密、公钥解密】，目标是身份认证+防篡改，核心逻辑和我们平时做密码校验的哈希比对，完全是一回事：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;发送方先给要发送的原始数据，算一个唯一的哈希摘要，用自己持有的私钥给这个摘要加密，加密后的结果就是【数字签名】，和原始数据一起发给接收方；&lt;/li&gt;
+&lt;li&gt;接收方拿到数据和签名后，先用发送方公开的公钥解密签名，还原出发送方当初生成的原始哈希摘要——这个摘要，就是绝对可信的【基准哈希】，只有持有私钥的官方能生成，伪造不了；&lt;/li&gt;
+&lt;li&gt;最后，我们将收到的原始数据，用和发送方完全相同的算法，重新算一遍哈希摘要，比对两个摘要是否完全一致。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;只要一致，就同时验证了两件事：&lt;/p&gt;
+&lt;p&gt;第一，这个数据一定是持有私钥的官方发送的，不是伪造的；&lt;/p&gt;
+&lt;p&gt;第二，数据在传输过程中没有被篡改过。&lt;/p&gt;
+&lt;h3 id=&#34;画个图加深理解&#34;&gt;画个图加深理解
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://iamxurulin.github.io/images/e948f66c6cf74bc4874d5263aaff04ef-b409712c.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;在这里插入图片描述&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;业务场景举例-3&#34;&gt;业务场景举例
+&lt;/h3&gt;&lt;p&gt;电商系统里，微信/支付宝的支付结果回调，必须做&lt;strong&gt;验签&lt;/strong&gt;，就是为了防止恶意伪造支付成功的回调。&lt;/p&gt;
+&lt;p&gt;用户支付完成后，支付平台会给我们的后端发送支付结果回调，回调参数里包含订单号、支付金额、支付状态等核心信息，同时支付平台会用自己的私钥，对回调参数做签名，和参数一起发给我们；&lt;/p&gt;
+&lt;p&gt;后端收到回调后，必须先按规范流程做验签，验签通过，才会认为这个回调是支付平台官方发出的，再去修改订单的支付状态。&lt;/p&gt;
+&lt;p&gt;哪怕攻击者伪造了支付成功的回调请求，没有支付平台的私钥，就绝对无法生成合法的签名，验签会直接失败，从根源上避免了恶意伪造支付成功的风险。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

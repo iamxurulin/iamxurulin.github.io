@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>C&#43;&#43; on Coder_Studio</title>
+        <link>https://iamxurulin.github.io/tags/c&#43;&#43;/</link>
+        <description>Recent content in C&#43;&#43; on Coder_Studio</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <copyright>iamxurulin</copyright>
+        <lastBuildDate>Tue, 09 Jun 2026 01:34:43 +0000</lastBuildDate><atom:link href="https://iamxurulin.github.io/tags/c++/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>量化C&#43;&#43;笔试题</title>
+        <link>https://iamxurulin.github.io/p/%E9%87%8F%E5%8C%96c-%E7%AC%94%E8%AF%95%E9%A2%98/</link>
+        <pubDate>Sun, 12 Apr 2026 12:12:49 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E9%87%8F%E5%8C%96c-%E7%AC%94%E8%AF%95%E9%A2%98/</guid>
+        <description>&lt;p&gt;1 . &lt;strong&gt;在C++中，用于声明整数类型变量的是什么？（A）&lt;/strong&gt;&lt;br&gt;
+&lt;strong&gt;A. int&lt;/strong&gt;&lt;br&gt;
+B. float&lt;br&gt;
+C. char&lt;br&gt;
+D. double
+2 . &lt;strong&gt;下面哪种循环结构在C++中是无限循环？（D）&lt;/strong&gt;&lt;br&gt;
+A. for&lt;br&gt;
+B. while&lt;br&gt;
+C. do-while&lt;br&gt;
+&lt;strong&gt;D. None of the above&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;解析：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在 C++ 中，for、while 和 do-while 都是循环控制结构，它们本身都不是无限循环。&lt;/p&gt;
+&lt;p&gt;只有当程序员为它们设置了永远为真（true）的条件时，它们才会变成无限循环。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;3 . &lt;strong&gt;在C++中，用于定义预处理器宏的符号是什么？（C）&lt;/strong&gt;&lt;br&gt;
+A. $&lt;br&gt;
+B. &amp;amp;&lt;br&gt;
+&lt;strong&gt;C. #&lt;/strong&gt;&lt;br&gt;
+D. *
+4 . &lt;strong&gt;C++中，用于获取一个变量的地址的操作符是什么？（B）&lt;/strong&gt;&lt;br&gt;
+A. *&lt;br&gt;
+&lt;strong&gt;B. &amp;amp;&lt;/strong&gt;&lt;br&gt;
+C. -&amp;gt;&lt;br&gt;
+D. ::
+5 . &lt;strong&gt;在C++中，用于创建子类的关键字是什么？（D）&lt;/strong&gt;&lt;br&gt;
+A. extends&lt;br&gt;
+B. implements&lt;br&gt;
+C. subclass&lt;br&gt;
+&lt;strong&gt;D. class&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;解析：&lt;/strong&gt;&lt;br&gt;
+在C++中，创建子类并没有像 Java 那样的专用关键字（如 extends），而是继续使用 class（或 struct）关键字来定义新类，并通过冒号（:）符号来表示继承关系。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;6 . &lt;strong&gt;下面哪个关键字用于在C++中终止当前循环并立即执行下一次迭代？（C）&lt;/strong&gt;&lt;br&gt;
+A. skip&lt;br&gt;
+B. next&lt;br&gt;
+&lt;strong&gt;C. continue&lt;/strong&gt;&lt;br&gt;
+D. break
+7 . &lt;strong&gt;在C++中，通过 std::unique_ptr 管理的对象的所有权是？（B）&lt;/strong&gt;&lt;br&gt;
+A. 可以被多个 std::unique_ptr 共享&lt;br&gt;
+&lt;strong&gt;B. 只能被一个 std::unique_ptr 拥有&lt;/strong&gt;&lt;br&gt;
+C. 可以被 std::unique_ptr 和 std::shared_ptr 共享&lt;br&gt;
+D. 不能被 std::unique_ptr 管理
+8 . &lt;strong&gt;下面哪个关键字用于定义一个函数，该函数不返回任何值？（A）&lt;/strong&gt;&lt;br&gt;
+&lt;strong&gt;A. void&lt;/strong&gt;&lt;br&gt;
+B. null&lt;br&gt;
+C. none&lt;br&gt;
+D. empty
+9 . &lt;strong&gt;在C++中，std::vector 的 emplace_back() 和 push_back() 之间的主要区别是什么？（C）&lt;/strong&gt;&lt;br&gt;
+A. emplace_back() 接受可变数量的参数，push_back() 只接受一个参数。&lt;br&gt;
+B. emplace_back() 会复制参数，push_back() 会移动参数。&lt;br&gt;
+&lt;strong&gt;C. emplace_back() 可以直接构造对象，push_back() 需要先创建对象再添加到容器中。&lt;/strong&gt;&lt;br&gt;
+D. emplace_back() 会在容器的末尾添加元素，而 push_back() 则可以在任意位置添加。&lt;/p&gt;
+&lt;p&gt;10 . &lt;strong&gt;在C++中，用于从标准输入流中读取用户输入的对象是什么？（A）&lt;/strong&gt;&lt;br&gt;
+&lt;strong&gt;A. std::cin&lt;/strong&gt;&lt;br&gt;
+B. std::cout&lt;br&gt;
+C. std::ifstream&lt;br&gt;
+D. std::ofstream
+11 . &lt;strong&gt;在C++中，下列哪种数据类型用于存储整数值？（C）&lt;/strong&gt;&lt;br&gt;
+A. float&lt;br&gt;
+B. double&lt;br&gt;
+&lt;strong&gt;C. int&lt;/strong&gt;&lt;br&gt;
+D. char
+12 . &lt;strong&gt;下列代码的输出是什么？（B）&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;lt;iostream&amp;gt;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;**&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;q&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;std&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cout&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;**&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;q&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;A. 0&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B. 10&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;C. 编译错误&lt;/p&gt;
+&lt;p&gt;D. 运行时错误&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;解析：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;p 指向 x，q 指向 p。* * q 等同于 * ( * q) ➡️ * ( p ) ➡️ x，所以输出 10。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;13 . &lt;strong&gt;下列哪种运算符用于获取变量的地址？（B）&lt;/strong&gt;&lt;br&gt;
+A. *&lt;br&gt;
+&lt;strong&gt;B. &amp;amp;&lt;/strong&gt;&lt;br&gt;
+C. %&lt;br&gt;
+D. /
+14 . &lt;strong&gt;在C++中，下列哪种关键字用于定义一个类？（A）&lt;/strong&gt;&lt;br&gt;
+&lt;strong&gt;A. class&lt;/strong&gt;&lt;br&gt;
+B. struct&lt;br&gt;
+C. private&lt;br&gt;
+D. public
+15 . &lt;strong&gt;下列哪种语句用于在C++中定义一个函数？（D）&lt;/strong&gt;&lt;br&gt;
+A. method&lt;br&gt;
+B. function&lt;br&gt;
+C. def&lt;br&gt;
+&lt;strong&gt;D. void&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;解析&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;严格来说，void 是一个数据类型（表示无类型），而不是一种“语句”，而C++ 定义函数时必须指定返回类型。&lt;/p&gt;
+&lt;p&gt;但在给出的选项（method, function, def, void）中，只有 void 是 C++ 的合法关键字并常用于函数定义。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;16 . 下列哪个关键字用于在C++中表示在编译时替换的常量？（B）&lt;br&gt;
+A. static&lt;br&gt;
+&lt;strong&gt;B. constexpr&lt;/strong&gt;&lt;br&gt;
+C. const&lt;br&gt;
+D. define&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;解析：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;constexpr（C++11引入）明确要求表达式在编译时求值。&lt;/p&gt;
+&lt;p&gt;const 仅表示只读，不一定在编译时确定。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;17 . &lt;strong&gt;下列哪种数据结构用于按照先进先出（FIFO）的顺序存储元素？（B）&lt;/strong&gt;&lt;br&gt;
+A. 栈（Stack）&lt;br&gt;
+&lt;strong&gt;B. 队列（Queue）&lt;/strong&gt;&lt;br&gt;
+C. 链表（Linked List）&lt;br&gt;
+D. 树（Tree）
+18 . &lt;strong&gt;在C++中，下列哪种关键字用于终止循环并立即退出循环体？（A）&lt;/strong&gt;&lt;br&gt;
+&lt;strong&gt;A. break&lt;/strong&gt;&lt;br&gt;
+B. continue&lt;br&gt;
+C. return&lt;br&gt;
+D. exit
+19 . &lt;strong&gt;下列哪种语句用于在C++中引入一个外部头文件？（A）&lt;/strong&gt;&lt;br&gt;
+&lt;strong&gt;A. #include&lt;/strong&gt;&lt;br&gt;
+B. #import&lt;br&gt;
+C. #define&lt;br&gt;
+D. #using
+20 . &lt;strong&gt;下列代码的输出是什么？（B）&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;lt;iostream&amp;gt;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ref&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;ref&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;++&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;std&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cout&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;A. 5&lt;br&gt;
+&lt;strong&gt;B. 6&lt;/strong&gt;&lt;br&gt;
+C. 0（未定义行为）&lt;br&gt;
+D. 未定义&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;解析&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;ref 是 x 的引用（别名），对 ref 的操作就是对 x 的操作。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;21 . &lt;strong&gt;在C++中，下列哪种关键字用于在类定义中指定一个成员函数只能由类的其他成员函数调用，而不能被外部调用？（A）&lt;/strong&gt;&lt;br&gt;
+&lt;strong&gt;A. private&lt;/strong&gt;&lt;br&gt;
+B. protected&lt;br&gt;
+C. public&lt;br&gt;
+D. friend
+22 . &lt;strong&gt;下列哪种语句用于在C++中抛出一个异常？（A）&lt;/strong&gt;&lt;br&gt;
+&lt;strong&gt;A. throw exception;&lt;/strong&gt;&lt;br&gt;
+B. raise exception;&lt;br&gt;
+C. catch(exception);&lt;br&gt;
+D. try { throw exception; }
+23 . &lt;strong&gt;在C++中，下列哪种关键字用于在派生类中重写基类的成员函数？（A）&lt;/strong&gt;&lt;br&gt;
+&lt;strong&gt;A. override&lt;/strong&gt;&lt;br&gt;
+B. virtual&lt;br&gt;
+C. super&lt;br&gt;
+D. extend
+24 . &lt;strong&gt;下列哪种数据结构在C++标准库中被实现为模板类？（C）&lt;/strong&gt;&lt;br&gt;
+A. 栈（Stack）&lt;br&gt;
+B. 队列（Queue）&lt;br&gt;
+&lt;strong&gt;C. 向量（Vector）&lt;/strong&gt;&lt;br&gt;
+D. 链表（Linked List）&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;解析&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;实际上，选项 A（栈 std::stack）、B（队列 std::queue）和 D（链表 std::list）在 C++ 标准库（STL）中全部都是模板类。&lt;/p&gt;
+&lt;p&gt;但是，在大多数初级教材中，std::vector 是最典型的模板类示例。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;25.&lt;strong&gt;在C++中，下列哪种关键字用于声明一个纯虚函数？（B）&lt;/strong&gt;&lt;br&gt;
+A. abstract&lt;br&gt;
+&lt;strong&gt;B. virtual&lt;/strong&gt;&lt;br&gt;
+C. pure&lt;br&gt;
+D. override&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;小贴士&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;virtual 用于声明虚函数。&lt;/p&gt;
+&lt;p&gt;而纯虚函数是指在虚函数的基础上后面加了 = 0（比如 virtual void func() = 0;）。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;26 . &lt;strong&gt;下列哪种语句用于在C++中动态转换对象的类型？（A）&lt;/strong&gt;&lt;br&gt;
+&lt;strong&gt;A. dynamic_cast&amp;lt;&amp;gt;&lt;/strong&gt;&lt;br&gt;
+B. static_cast&amp;lt;&amp;gt;&lt;br&gt;
+C. reinterpret_cast&amp;lt;&amp;gt;&lt;br&gt;
+D. const_cast&amp;lt;&amp;gt;
+27. &lt;strong&gt;在C++中，下列哪种关键字用于防止类被继承？（B）&lt;/strong&gt;&lt;br&gt;
+A. sealed&lt;br&gt;
+&lt;strong&gt;B. final&lt;/strong&gt;&lt;br&gt;
+C. static&lt;br&gt;
+D. const
+28. &lt;strong&gt;下列哪种语句用于在C++中创建一个线程？（C）&lt;/strong&gt;&lt;br&gt;
+A. start_thread()&lt;br&gt;
+B. create_thread()&lt;br&gt;
+&lt;strong&gt;C. thread()&lt;/strong&gt;&lt;br&gt;
+D. spawn_thread()
+29. &lt;strong&gt;在C++中，下列哪种关键字用于将一个函数声明为内联函数？（A）&lt;/strong&gt;&lt;br&gt;
+&lt;strong&gt;A. inline&lt;/strong&gt;&lt;br&gt;
+B. fast&lt;br&gt;
+C. quick&lt;br&gt;
+D. rapid
+30. &lt;strong&gt;下列哪种语句用于在C++中实现多态性？（A）&lt;/strong&gt;&lt;br&gt;
+&lt;strong&gt;A. virtual functions&lt;/strong&gt;&lt;br&gt;
+B. abstract classes&lt;br&gt;
+C. friend functions&lt;br&gt;
+D. static functions&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

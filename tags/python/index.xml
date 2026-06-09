@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Python on Coder_Studio</title>
+        <link>https://iamxurulin.github.io/tags/python/</link>
+        <description>Recent content in Python on Coder_Studio</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <copyright>iamxurulin</copyright>
+        <lastBuildDate>Tue, 09 Jun 2026 01:34:43 +0000</lastBuildDate><atom:link href="https://iamxurulin.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>量化Python笔试题</title>
+        <link>https://iamxurulin.github.io/p/%E9%87%8F%E5%8C%96python%E7%AC%94%E8%AF%95%E9%A2%98/</link>
+        <pubDate>Tue, 14 Apr 2026 23:45:00 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E9%87%8F%E5%8C%96python%E7%AC%94%E8%AF%95%E9%A2%98/</guid>
+        <description>&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;在Python中，下列哪个不是合法的变量名？（B）&lt;/strong&gt;&lt;br&gt;
+A. my_var&lt;br&gt;
+&lt;strong&gt;B. 1_var&lt;/strong&gt;&lt;br&gt;
+C. _var&lt;br&gt;
+D. var_1&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;解析：&lt;/strong&gt;&lt;br&gt;
+Python 变量命名规则：变量名必须以字母或下划线开头，不能以数字开头（如 1_var）。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;&lt;strong&gt;下列哪个不是Python的关键字？（C）&lt;/strong&gt;&lt;br&gt;
+A. if&lt;br&gt;
+B. else&lt;br&gt;
+&lt;strong&gt;C. elseif&lt;/strong&gt;&lt;br&gt;
+D. while&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;解析：&lt;/strong&gt;&lt;br&gt;
+Python 使用 &lt;code&gt;elif&lt;/code&gt; 作为 &amp;ldquo;else if&amp;rdquo; 的缩写，&lt;code&gt;elseif&lt;/code&gt; 是其他语言（如 PHP）的关键字，在 Python 中使用会报错。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;下列哪个函数可以用来计算列表中元素的个数？（D）&lt;/strong&gt;&lt;br&gt;
+A. count()&lt;br&gt;
+B. length()&lt;br&gt;
+C. size()&lt;br&gt;
+&lt;strong&gt;D. len()&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;在Python中，如何打印输出 &amp;ldquo;Hello, World!&amp;quot;？（B）&lt;/strong&gt;&lt;br&gt;
+A. console.log(&amp;ldquo;Hello, World!&amp;rdquo;)&lt;br&gt;
+&lt;strong&gt;B. print(&amp;ldquo;Hello, World!&amp;rdquo;)&lt;/strong&gt;&lt;br&gt;
+C. echo &amp;ldquo;Hello, World!&amp;rdquo;&lt;br&gt;
+D. System.out.println(&amp;ldquo;Hello, World!&amp;rdquo;)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;下列哪个选项可以用来删除字典中的一个键值对？（C）&lt;/strong&gt;&lt;br&gt;
+A. remove()&lt;br&gt;
+B. delete()&lt;br&gt;
+&lt;strong&gt;C. pop()&lt;/strong&gt;&lt;br&gt;
+D. discard()&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;下列哪个选项可以将一个字符串转换为小写？（B）&lt;/strong&gt;&lt;br&gt;
+A. tolower()&lt;br&gt;
+&lt;strong&gt;B. lower()&lt;/strong&gt;&lt;br&gt;
+C. lowercase()&lt;br&gt;
+D. casefold()&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;小贴士&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;casefold() 也可用于字符串转小写（且对 Unicode 字符更友好），&lt;/p&gt;
+&lt;p&gt;只是lower() 是最常用方式，casefold() 适用于更严格的场景。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol start=&#34;7&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;下列哪个选项是 Python 中正确的字符串拼接方式？（C）&lt;/strong&gt;&lt;br&gt;
+A. str1 .concat(str2)&lt;br&gt;
+B. str1.append(str2)&lt;br&gt;
+&lt;strong&gt;C. str1 + str2&lt;/strong&gt;&lt;br&gt;
+D. str1.add(str2)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;在 Python 中，以下哪个选项用于移除列表中指定位置的元素？（B）&lt;/strong&gt;&lt;br&gt;
+A. list.remove(index)&lt;br&gt;
+&lt;strong&gt;B. list.pop(index)&lt;/strong&gt;&lt;br&gt;
+C. list.delete(index)&lt;br&gt;
+D. list[index] = None&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;在 Python 中，以下哪个选项用于创建一个字典并初始化其键值对？（A）&lt;/strong&gt;&lt;br&gt;
+&lt;strong&gt;A. {key1: value1, key2: value2}&lt;/strong&gt;&lt;br&gt;
+B. dict(key1=value1, key2=value2)&lt;br&gt;
+C. new dict(key1=value1, key2=value2)&lt;br&gt;
+D. dict([key1, value1], [key2, value2])&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;解析&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;选项A和B都是创建字典的正确方式，两种方式均有效，只是字面量写法A更常用。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;10 . &lt;strong&gt;下列哪个选项可以用来循环遍历一个列表？（A）&lt;/strong&gt;&lt;br&gt;
+&lt;strong&gt;A. for i in list:&lt;/strong&gt;&lt;br&gt;
+B. foreach i in list:&lt;br&gt;
+C. iterate list:&lt;br&gt;
+D. for i from list:&lt;/p&gt;
+&lt;p&gt;11 . &lt;strong&gt;在 Python 中，下列哪个选项用于创建一个生成器函数？（C）&lt;/strong&gt;&lt;br&gt;
+A. def generator_function():&lt;br&gt;
+B. generator_function = lambda:&lt;br&gt;
+&lt;strong&gt;C. def generator_function(): yield&lt;/strong&gt;&lt;br&gt;
+D. def generator_function(): return&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;解析&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;只要函数体中包含 yield 关键字，该函数就变成一个生成器（Generator）。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;12 . &lt;strong&gt;在 Python 中，下列哪个选项用于将一个函数作为参数传递，并返回一个添加了额外功能的新函数？（A）&lt;/strong&gt;&lt;br&gt;
+&lt;strong&gt;A. 装饰器（Decorator）&lt;/strong&gt;&lt;br&gt;
+B. 生成器（Generator）&lt;br&gt;
+C. 闭包（Closure）&lt;br&gt;
+D. 装饰器工厂（Decorator Factory）&lt;/p&gt;
+&lt;p&gt;13 . &lt;strong&gt;下列哪个选项可以用来在Python中打开一个文件以供读取？（B）&lt;/strong&gt;&lt;br&gt;
+A. open_file(&amp;ldquo;file.txt&amp;rdquo;, &amp;ldquo;r&amp;rdquo;)&lt;br&gt;
+&lt;strong&gt;B. open(&amp;ldquo;file.txt&amp;rdquo;, &amp;ldquo;r&amp;rdquo;)&lt;/strong&gt;&lt;br&gt;
+C. read_file(&amp;ldquo;file.txt&amp;rdquo;)&lt;br&gt;
+D. read(&amp;ldquo;file.txt&amp;rdquo;)&lt;/p&gt;
+&lt;p&gt;14 . &lt;strong&gt;下列哪个选项可以用来在Python中写入文本到文件？（C）&lt;/strong&gt;&lt;br&gt;
+A. write_file(&amp;ldquo;file.txt&amp;rdquo;, &amp;ldquo;Hello!&amp;rdquo;)&lt;br&gt;
+B. write(&amp;ldquo;file.txt&amp;rdquo;, &amp;ldquo;Hello!&amp;rdquo;)&lt;br&gt;
+&lt;strong&gt;C. open(&amp;ldquo;file.txt&amp;rdquo;, &amp;ldquo;w&amp;rdquo;).write(&amp;ldquo;Hello!&amp;rdquo;)&lt;/strong&gt;&lt;br&gt;
+D. open_file(&amp;ldquo;file.txt&amp;rdquo;, &amp;ldquo;w&amp;rdquo;).write(&amp;ldquo;Hello!&amp;rdquo;)&lt;/p&gt;
+&lt;p&gt;15 . &lt;strong&gt;在 Python 中，下列代码的输出是什么？（B）&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;10&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;func&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;global&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;func&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;A. 10&lt;br&gt;
+&lt;strong&gt;B. 15&lt;/strong&gt;&lt;br&gt;
+C. 函数调用失败&lt;br&gt;
+D. 错误：全局变量未定义&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;解析：&lt;/strong&gt;&lt;br&gt;
+使用 &lt;code&gt;global&lt;/code&gt; 关键字可以在函数内部修改全局作用域中的变量。&lt;/p&gt;
+&lt;p&gt;执行 &lt;code&gt;func()&lt;/code&gt; 后，全局变量 &lt;code&gt;x&lt;/code&gt; 由 10 变为 15。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;16 . &lt;strong&gt;下列哪个选项可以用来从列表中移除指定位置的元素？（C）&lt;/strong&gt;&lt;br&gt;
+A. remove_at()&lt;br&gt;
+B. delete()&lt;br&gt;
+&lt;strong&gt;C. pop()&lt;/strong&gt;&lt;br&gt;
+D. discard()&lt;/p&gt;
+&lt;p&gt;17 . &lt;strong&gt;下列哪个选项可以用来创建一个空的集合？（B）&lt;/strong&gt;&lt;br&gt;
+A. new_set = {}&lt;br&gt;
+&lt;strong&gt;B. new_set = set()&lt;/strong&gt;&lt;br&gt;
+C. new_set = set([])&lt;br&gt;
+D. new_set = set({})&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;解析：&lt;/strong&gt;&lt;br&gt;
+&lt;code&gt;{}&lt;/code&gt; 在 Python 中默认用于创建空&lt;strong&gt;字典&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;要创建空&lt;strong&gt;集合&lt;/strong&gt;，必须使用 &lt;code&gt;set()&lt;/code&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;18 . &lt;strong&gt;下列哪个选项可以用来判断一个字符串是否以特定子串开头？（B）&lt;/strong&gt;&lt;br&gt;
+A. starts_with()&lt;br&gt;
+&lt;strong&gt;B. startswith()&lt;/strong&gt;&lt;br&gt;
+C. begins_with()&lt;br&gt;
+D. start()&lt;/p&gt;
+&lt;p&gt;19 . &lt;strong&gt;下列哪个选项可以用来将一个列表中的元素连接成一个字符串？（A）&lt;/strong&gt;&lt;br&gt;
+&lt;strong&gt;A. join()&lt;/strong&gt;&lt;br&gt;
+B. merge()&lt;br&gt;
+C. concat()&lt;br&gt;
+D. combine()&lt;/p&gt;
+&lt;p&gt;20 . &lt;strong&gt;下列哪个选项可以用来在Python中引发一个自定义异常？（A）&lt;/strong&gt;&lt;br&gt;
+&lt;strong&gt;A. raise Exception(&amp;ldquo;Custom Exception&amp;rdquo;)&lt;/strong&gt;&lt;br&gt;
+B. throw &amp;ldquo;Custom Exception&amp;rdquo;&lt;br&gt;
+C. exception(&amp;ldquo;Custom Exception&amp;rdquo;)&lt;br&gt;
+D. custom_exception(&amp;ldquo;Custom Exception&amp;rdquo;)&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;解析&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;Python 使用 raise 关键字抛出异常，throw 是 Java/C++/JS 的用法。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;21 . &lt;strong&gt;在 Python 中，下列哪个选项用于打开一个文件并在读取后自动处理资源释放？（A）&lt;/strong&gt;&lt;br&gt;
+&lt;strong&gt;A. with open(&amp;lsquo;filename.txt&amp;rsquo;, &amp;lsquo;r&amp;rsquo;) as file:&lt;/strong&gt;&lt;br&gt;
+B. file.open(&amp;lsquo;filename.txt&amp;rsquo;, &amp;lsquo;r&amp;rsquo;)&lt;br&gt;
+C. open(&amp;lsquo;filename.txt&amp;rsquo;, &amp;lsquo;r&amp;rsquo;)&lt;br&gt;
+D. open(&amp;lsquo;filename.txt&amp;rsquo;, &amp;lsquo;r&amp;rsquo;).close()&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;解析&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;with 语句是上下文管理器，无论是否发生异常，都会在退出代码块时自动关闭文件。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;22 . &lt;strong&gt;在 Python 中，下列代码的输出是什么？（A）&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;result&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;list&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;map&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;lambda&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;result&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;A. [4, 10, 18]&lt;/strong&gt;&lt;br&gt;
+B. [1, 4, 9, 4, 5, 6]&lt;br&gt;
+C. [1, 2, 3, 4, 5, 6]&lt;br&gt;
+D. [1, 10, 36]&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;解析：&lt;/strong&gt;&lt;br&gt;
+&lt;code&gt;lambda x, y: x * y&lt;/code&gt;是一个匿名函数（没有名字的小函数），作用是：接收两个数 x 和 y，返回它们的乘积。&lt;/p&gt;
+&lt;p&gt;map 是一个 “映射工具”，主要是从 a 里按顺序取一个数，从 b 里按顺序取一个数，然后把这两个数扔给lambda定义的匿名函数做乘法。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;23 . &lt;strong&gt;下列哪个选项可以用来在Python中将一个函数作为另一个函数的参数传递？（D）&lt;/strong&gt;&lt;br&gt;
+A. pass_function()&lt;br&gt;
+B. call_function()&lt;br&gt;
+C. apply_function()&lt;br&gt;
+&lt;strong&gt;D. higher_order_function()&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;解析&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;接受函数作为参数或返回函数的函数被称为“高阶函数”（Higher-order function）。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;24 . &lt;strong&gt;下列哪个选项可以用来在Python中处理异常的最通用方式？（A）&lt;/strong&gt;&lt;br&gt;
+&lt;strong&gt;A. try/except block&lt;/strong&gt;&lt;br&gt;
+B. catch/throw block&lt;br&gt;
+C. handle/raise block&lt;br&gt;
+D. exception/finally block&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;解析&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;Python 的异常处理结构是 try&amp;hellip;except&amp;hellip;finally。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;25 . &lt;strong&gt;下列哪个选项可以用来在Python中创建一个生成器？（D）&lt;/strong&gt;&lt;br&gt;
+A. create_generator()&lt;br&gt;
+B. generator()&lt;br&gt;
+C. yield_generator()&lt;br&gt;
+&lt;strong&gt;D. yield&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;26 . &lt;strong&gt;下列哪个选项可以用来在Python中进行多线程编程？（A）&lt;/strong&gt;&lt;br&gt;
+&lt;strong&gt;A. threading module&lt;/strong&gt;&lt;br&gt;
+B. multithread module&lt;br&gt;
+C. parallel module&lt;br&gt;
+D. thread module&lt;/p&gt;
+&lt;p&gt;27 . &lt;strong&gt;下列哪个选项可以用来在Python中进行装饰器（Decorator）的应用？（A）&lt;/strong&gt;&lt;br&gt;
+&lt;strong&gt;A. @decorator&lt;/strong&gt;&lt;br&gt;
+B. apply_decorator()&lt;br&gt;
+C. use_decorator()&lt;br&gt;
+D. decorate()&lt;/p&gt;
+&lt;p&gt;28 . &lt;strong&gt;下列哪个选项可以用来在Python中实现面向对象编程中的多重继承？（D）&lt;/strong&gt;&lt;br&gt;
+A. multiple_inheritance()&lt;br&gt;
+B. inherit_from()&lt;br&gt;
+C. super()&lt;br&gt;
+&lt;strong&gt;D. class SubClass(BaseClass1, BaseClass2):&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;29 . &lt;strong&gt;在 Python 中，下列哪个选项用于将一个函数的参数设置为可选，并提供一个默认值？（B）&lt;/strong&gt;&lt;br&gt;
+A. 使用 Optional 类型&lt;br&gt;
+&lt;strong&gt;B. 使用 default 关键字参数&lt;/strong&gt;&lt;br&gt;
+C. 使用 Optional 类型与 default 关键字参数的组合&lt;br&gt;
+D. 使用函数重载&lt;/p&gt;
+&lt;p&gt;30 . &lt;strong&gt;下列代码的输出是什么？（B）&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;add_to_list&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;item&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;lst&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[]):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;lst&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;append&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;item&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;lst&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;add_to_list&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;add_to_list&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;A. [1], [2]&lt;br&gt;
+&lt;strong&gt;B. [1], [1, 2]&lt;/strong&gt;&lt;br&gt;
+C. [1], [2]&lt;br&gt;
+D. [1], [1]&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;解析：&lt;/strong&gt;&lt;br&gt;
+Python 的默认参数在函数定义时仅评估一次。&lt;/p&gt;
+&lt;p&gt;由于 &lt;code&gt;lst=[]&lt;/code&gt; 是可变对象，它在多次调用间共享。&lt;/p&gt;
+&lt;p&gt;第一次调用后列表变为 &lt;code&gt;[1]&lt;/code&gt;，第二次调用在同一列表基础上变为 &lt;code&gt;[1, 2]&lt;/code&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Http on Coder_Studio</title>
+        <link>https://iamxurulin.github.io/tags/http/</link>
+        <description>Recent content in Http on Coder_Studio</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <copyright>iamxurulin</copyright>
+        <lastBuildDate>Tue, 09 Jun 2026 01:34:43 +0000</lastBuildDate><atom:link href="https://iamxurulin.github.io/tags/http/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>【面试真题拆解】5秒内限10次HTTP接口访问，结合数据结构和算法说说你的思路</title>
+        <link>https://iamxurulin.github.io/p/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98%E6%8B%86%E8%A7%A35%E7%A7%92%E5%86%85%E9%99%9010%E6%AC%A1http%E6%8E%A5%E5%8F%A3%E8%AE%BF%E9%97%AE%E7%BB%93%E5%90%88%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95%E8%AF%B4%E8%AF%B4%E4%BD%A0%E7%9A%84%E6%80%9D%E8%B7%AF/</link>
+        <pubDate>Fri, 20 Mar 2026 15:00:00 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98%E6%8B%86%E8%A7%A35%E7%A7%92%E5%86%85%E9%99%9010%E6%AC%A1http%E6%8E%A5%E5%8F%A3%E8%AE%BF%E9%97%AE%E7%BB%93%E5%90%88%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95%E8%AF%B4%E8%AF%B4%E4%BD%A0%E7%9A%84%E6%80%9D%E8%B7%AF/</guid>
+        <description>&lt;p&gt;面试官问：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;做Web项目的时候，会暴露出一些HTTP接口，我现在想对它进行限流，限制5秒内只能访问10次，结合数据结构和算法，看如何实现，说说你的思路&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;当时只说了个滑动窗口就没说其他的，然后就没有然后了。。。&lt;/p&gt;
+&lt;p&gt;首先，为什么要限流？&lt;/p&gt;
+&lt;p&gt;主要有以下三个原因：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;防止恶意刷接口，比如爬虫爬数据、黑客DDoS攻击。&lt;/li&gt;
+&lt;li&gt;保护服务器不被压垮，比如一个接口挂了，拖垮整个服务。&lt;/li&gt;
+&lt;li&gt;保证核心业务的可用性，比如大促场景下，支付接口优先，对普通接口进行限流。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;技术选型&#34;&gt;技术选型
+&lt;/h2&gt;&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;方案&lt;/th&gt;
+					&lt;th&gt;数据结构+算法&lt;/th&gt;
+					&lt;th&gt;核心思想&lt;/th&gt;
+					&lt;th&gt;优缺点&lt;/th&gt;
+					&lt;th&gt;适用场景&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;固定窗口计数器&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;数组/Map + 时间戳&lt;/td&gt;
+					&lt;td&gt;把时间分成固定的窗口，每个窗口内计数&lt;/td&gt;
+					&lt;td&gt;简单易实现；   有&lt;strong&gt;临界问题&lt;/strong&gt;（比如4.9秒刷10次，5.1秒又刷10次，实际0.2秒内刷了20次）&lt;/td&gt;
+					&lt;td&gt;对精度要求不高的场景&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;滑动窗口计数器&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;本地：LinkedList（双向链表）&lt;br/&gt;分布式：Redis ZSet（有序集合） + 时间戳&lt;/td&gt;
+					&lt;td&gt;窗口是“滑动”的，只保留当前窗口内的请求&lt;/td&gt;
+					&lt;td&gt;解决了固定窗口的临界问题；&lt;br/&gt;本地版 LinkedList 删头加尾 O (1)，分布式版 ZSet 按时间范围操作高效；&lt;br/&gt;本地版不适合分布式集群&lt;/td&gt;
+					&lt;td&gt;固定时间窗口内精确计数的场景&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;漏桶算法&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;队列 + 定时器&lt;/td&gt;
+					&lt;td&gt;像漏桶一样，请求先存到队列里，然后匀速处理&lt;/td&gt;
+					&lt;td&gt;可以削峰填谷；   突发流量处理不了（秒杀时很多请求直接被拒）&lt;/td&gt;
+					&lt;td&gt;对流量稳定性要求高的场景（比如消息队列）&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;令牌桶算法&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;队列 + 定时器&lt;/td&gt;
+					&lt;td&gt;像令牌桶一样，匀速生成令牌，请求拿到令牌才能通过&lt;/td&gt;
+					&lt;td&gt;可以削峰填谷，也 可以处理突发流量&lt;/td&gt;
+					&lt;td&gt;对流量稳定性和突发流量都有要求的场景（比如API网关）&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;滑动窗口计数器&#34;&gt;滑动窗口计数器
+&lt;/h2&gt;&lt;p&gt;滑动窗口的核心，是窗口不再是静止分段的，而是随当前时间连续移动、互相重叠的：&lt;/p&gt;
+&lt;p&gt;比如固定窗口，窗口是死的，0-5秒、5-10秒，边界固定不变。&lt;/p&gt;
+&lt;p&gt;而滑动窗口，窗口的右边界永远是当前请求的时间，左边界永远是当前时间 - 窗口大小，窗口会跟着每一次请求一直往前滑。&lt;/p&gt;
+&lt;h3 id=&#34;数据结构选型&#34;&gt;数据结构选型
+&lt;/h3&gt;&lt;h4 id=&#34;本地linkedlist双向链表&#34;&gt;本地：LinkedList（双向链表）
+&lt;/h4&gt;&lt;p&gt;选择双向链表是因为我们需要频繁删除链表头部的过期时间戳，并且还需要频繁在链表尾部新增新的请求时间戳，而双向链表的删头、加尾操作时间复杂度都是O(1)，效率极高。&lt;/p&gt;
+&lt;h4 id=&#34;分布式redis-zset有序集合&#34;&gt;分布式：Redis ZSet（有序集合）
+&lt;/h4&gt;&lt;p&gt;Web项目基本都是集群部署，本地计数器无法多实例同步，考虑用Redis实现。&lt;/p&gt;
+&lt;p&gt;选择Redis中的ZSet数据结构，ZSet的&lt;code&gt;score&lt;/code&gt;字段可以存请求的时间戳，天然支持按时间范围排序。&lt;/p&gt;
+&lt;h4 id=&#34;实现逻辑&#34;&gt;实现逻辑
+&lt;/h4&gt;&lt;p&gt;每次请求进来，执行 3 步：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;删掉所有早于当前时间 - 窗口大小的请求&lt;/li&gt;
+&lt;li&gt;统计当前窗口内的请求数，超过 10 次直接拒绝&lt;/li&gt;
+&lt;li&gt;把当前请求的时间戳加入数据结构，放行请求&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;小贴士&#34;&gt;小贴士
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;令牌桶的令牌生成速度要合理&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;不能太快（等于没限流），也不能太慢（很多请求被拒），要根据业务场景调整。&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;Redis ZSet的过期时间要设置对&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;要设置成窗口大小+一点缓冲（比如1秒），防止数据提前过期，导致计数不准确。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

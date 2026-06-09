@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Pages on Coder_Studio</title>
+        <link>https://iamxurulin.github.io/page/</link>
+        <description>Recent content in Pages on Coder_Studio</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <copyright>iamxurulin</copyright>
+        <lastBuildDate>Tue, 09 Jun 2026 01:34:43 +0000</lastBuildDate><atom:link href="https://iamxurulin.github.io/page/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>关于</title>
+        <link>https://iamxurulin.github.io/%E5%85%B3%E4%BA%8E/</link>
+        <pubDate>Tue, 09 Jun 2026 01:34:43 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/%E5%85%B3%E4%BA%8E/</guid>
+        <description>&lt;p&gt;这里是我的个人技术博客,记录八股、算法和项目实战。&lt;/p&gt;
+&lt;h1 id=&#34;coder_studio---个人技术博客&#34;&gt;Coder_Studio - 个人技术博客
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;网站地址&lt;/strong&gt;：&lt;a class=&#34;link&#34; href=&#34;https://iamxurulin.github.io&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://iamxurulin.github.io&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;采用 Hugo 静态站点生成器 + GitHub Pages 托管，实现零服务器成本、全自动部署。&lt;/p&gt;
+&lt;h2 id=&#34;-主要特性&#34;&gt;🚀 主要特性
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;全自动 CI/CD&lt;/strong&gt;：代码 Push 即触发 GitHub Actions 自动构建与部署，支持并发控制与强制覆盖，避免部署冲突&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;文章图片自托管&lt;/strong&gt;：Python 脚本自动迁移 CSDN 图床图片到本地仓库，彻底解决外链失效问题&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Live2D 看板娘&lt;/strong&gt;：集成 Natori 模型，支持拖拽，提升趣味性&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;用户体验优化&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;响应式布局 + 暗色模式&lt;/li&gt;
+&lt;li&gt;长代码自动折叠（点击展开）&lt;/li&gt;
+&lt;li&gt;页面加载动画 + 音乐播放器（切换页面不中断）&lt;/li&gt;
+&lt;li&gt;自定义鼠标光标、时钟组件&lt;/li&gt;
+&lt;li&gt;浏览量统计（busuanzi）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;-技术栈&#34;&gt;🛠️ 技术栈
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;静态站点生成&lt;/strong&gt;：Hugo (Go)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;主题&lt;/strong&gt;：hugo-theme-stack&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;部署&lt;/strong&gt;：GitHub Actions + peaceiris/actions-gh-pages@v4&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;脚本&lt;/strong&gt;：Python（requests + BeautifulSoup 迁移 CSDN 图片）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;前端&lt;/strong&gt;：SCSS、JavaScript、Live2D、APlayer&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;版本控制&lt;/strong&gt;：Git + GitHub&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;-开发与部署流程&#34;&gt;📝 开发与部署流程
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;开发 Python 脚本按需从 CSDN 批量导出文章为标准 Markdown 格式&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;git push&lt;/code&gt; 到源码仓库&lt;/li&gt;
+&lt;li&gt;GitHub Actions 自动触发：
+&lt;ul&gt;
+&lt;li&gt;执行 Python 脚本下载并上传图片到仓库&lt;/li&gt;
+&lt;li&gt;Hugo 构建静态站点&lt;/li&gt;
+&lt;li&gt;强制部署到 &lt;code&gt;iamxurulin.github.io&lt;/code&gt; 仓库的 main 分支&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;GitHub Pages 自动更新，几分钟内新文章上线&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;博客首页&#34;&gt;博客首页
+&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;https://iamxurulin.github.io/cover/image.jpg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;alt text&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;博客分类&#34;&gt;博客分类
+&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;https://iamxurulin.github.io/cover/image-1.jpg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;alt text&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;博客标签&#34;&gt;博客标签
+&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;https://iamxurulin.github.io/cover/image-2.jpg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;alt text&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;开发和维护者&lt;/strong&gt;：&lt;a class=&#34;link&#34; href=&#34;https://github.com/iamxurulin&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;@iamxurulin&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;CSDN: &lt;a class=&#34;link&#34; href=&#34;https://iamxurulin.blog.csdn.net/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://iamxurulin.blog.csdn.net/&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;GitHub: &lt;a class=&#34;link&#34; href=&#34;https://github.com/iamxurulin/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/iamxurulin/&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;个人博客： &lt;a class=&#34;link&#34; href=&#34;https://iamxurulin.github.io/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://iamxurulin.github.io/&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;欢迎交流!&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>搜索</title>
+        <link>https://iamxurulin.github.io/search/</link>
+        <pubDate>Tue, 09 Jun 2026 01:34:43 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/search/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>友情链接</title>
+        <link>https://iamxurulin.github.io/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/</link>
+        <pubDate>Tue, 09 Jun 2026 01:34:43 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>归档</title>
+        <link>https://iamxurulin.github.io/archives/</link>
+        <pubDate>Wed, 14 Jan 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/archives/</guid>
+        <description></description>
+        </item>
+        
+    </channel>
+</rss>
