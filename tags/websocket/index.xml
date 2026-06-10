@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>iamxurulin</copyright>
-        <lastBuildDate>Wed, 10 Jun 2026 00:14:23 +0000</lastBuildDate><atom:link href="https://iamxurulin.github.io/tags/websocket/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 10 Jun 2026 00:27:10 +0000</lastBuildDate><atom:link href="https://iamxurulin.github.io/tags/websocket/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>GoCloud - 基于 WebSocket 的实时聊天应用</title>
         <link>https://iamxurulin.github.io/p/gocloud-%E5%9F%BA%E4%BA%8E-websocket-%E7%9A%84%E5%AE%9E%E6%97%B6%E8%81%8A%E5%A4%A9%E5%BA%94%E7%94%A8/</link>
         <pubDate>Wed, 03 Jun 2026 17:16:55 +0000</pubDate>

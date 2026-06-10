@@ -10,7 +10,7 @@
 <meta property='og:description' content="Coder_Studio 个人技术博客 - 专注后端开发、数据结构与算法、分布式系统、AI 应用的技术分享">
 <meta property='og:url' content='https://iamxurulin.github.io/tags/code/'>
 <meta property='og:site_name' content='Coder_Studio'>
-<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2026-06-10T00:14:23&#43;00:00 '/><meta property='og:image' content='https://iamxurulin.github.io/cover/the-creative-exchange-d2zvqp3fpro-unsplash.jpg' />
+<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2026-06-10T00:27:10&#43;00:00 '/><meta property='og:image' content='https://iamxurulin.github.io/cover/the-creative-exchange-d2zvqp3fpro-unsplash.jpg' />
 <meta name="twitter:title" content="Tag: Code - Coder_Studio">
 <meta name="twitter:description" content="Coder_Studio 个人技术博客 - 专注后端开发、数据结构与算法、分布式系统、AI 应用的技术分享"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://iamxurulin.github.io/cover/the-creative-exchange-d2zvqp3fpro-unsplash.jpg' /><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5123323391207523"
@@ -786,7 +786,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.b4654cd74006fe7475d7723cd7373672b5ea2035ab23404eb9ff511cb27b581c.js" defer></script><script type="text/javascript" src="/ts/custom.977dfb68adff05ba57efe82368664b22247f17a8e6c9df5e421e556757398a62.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.b4654cd74006fe7475d7723cd7373672b5ea2035ab23404eb9ff511cb27b581c.js" defer></script><script type="text/javascript" src="/ts/custom.a44e77be05939c79d8ffe173c1d5909c71671fd04b7c41ba7a267bd17b1507bf.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');
@@ -851,7 +851,6 @@ if (window.requestIdleCallback) {
 </script>
 <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
 
-    
     <script src=https://iamxurulin.github.io/js/topbar.min.js></script>
 
 <script>
@@ -865,43 +864,64 @@ if (window.requestIdleCallback) {
     pjax.handleResponse = function(responseText, request, href, options) {
         if (request.responseText.match("<html")) {
             if (responseText) {
-                
                 let newDom = new DOMParser().parseFromString(responseText, 'text/html');
-                
                 let bodyClass = newDom.body.className;
                 document.body.setAttribute("class", bodyClass)
                 
-				
-					
-				
+                const newTitle = newDom.title;
+                if (newTitle) document.title = newTitle;
 				pjax._handleResponse(responseText, request, href, options);
             }
-        } else {
-            
         }
     }
-	
+
+    
+    const prefetchMap = new Map();
+    const PREFETCH_DELAY = 80; 
+
+    document.addEventListener('mouseover', function(e) {
+        const link = (e.target as HTMLElement).closest<HTMLAnchorElement>('a[href]');
+        if (!link) return;
+        const href = link.href;
+        
+        if (!href || href.startsWith('#') || !href.startsWith(location.origin)) return;
+
+        const key = href.replace(/#.*$/, '');
+        if (prefetchMap.has(key)) return; 
+
+        const timer = setTimeout(() => {
+            prefetchMap.set(key, fetch(key, { credentials: 'same-origin' }).catch(() => {}));
+        }, PREFETCH_DELAY);
+        prefetchMap.set(key, timer); 
+
+        link.addEventListener('mouseleave', () => {
+            clearTimeout(timer);
+            if (prefetchMap.get(key) === timer) prefetchMap.delete(key);
+        }, { once: true });
+    }, { passive: true });
+
+    
+    document.addEventListener('pjax:complete', () => {
+        prefetchMap.clear();
+    });
+
+    
     topbar.config({
         barColors: {
-            '0': 'rgba(255,  255, 255, 1)', 
-            '1.0': 'rgba(0, 149, 234,  1)' 
+            '0': 'rgba(255,  255, 255, 1)',
+            '1.0': 'rgba(0, 149, 234,  1)'
         }
     })
-	
+
     document.addEventListener('pjax:send', () => {
-        
         topbar.show();
     })
-	
+
     document.addEventListener('pjax:complete', () => {
-        
-        window.Stack.init();
-		
+        window.Stack && window.Stack.init();
         topbar.hide();
     })
-
 </script>
-
 <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -983,14 +1003,13 @@ if (window.requestIdleCallback) {
         btn.onclick = backToTop
         rightSideBar.appendChild(btn)
         
-        window.onscroll = function() {
-            
+        window.addEventListener('scroll', function() {
             if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
                 btn.style.display = "block";
             } else {
                 btn.style.display = "none";
             }
-        };
+        }, { passive: true });
     }
 
     
@@ -1282,10 +1301,11 @@ if (screen.width >= 768) {
 
 (function() {
     const BUSUANZI_SCRIPT = 'https://busuanzi.ibruce.info/busuanzi.pure.mini.js';
+    let _busuanziLoaded = false;
 
     function loadBusuanzi() {
-        
-        if (document.getElementById('busuanzi-script')) return;
+        if (_busuanziLoaded) return;
+        _busuanziLoaded = true;
 
         const script = document.createElement('script');
         script.src = BUSUANZI_SCRIPT;
@@ -1293,14 +1313,12 @@ if (screen.width >= 768) {
         script.async = true;
         document.head.appendChild(script);
 
-        
         script.onerror = function() {
             const container = document.querySelector('#busuanzi_container_page_pv');
             if (container) container.style.display = 'none';
         };
     }
 
-    
     function initCounter() {
         const container = document.querySelector('#busuanzi_container_page_pv');
         if (!container) return;
@@ -1325,12 +1343,9 @@ if (screen.width >= 768) {
 
     
     document.addEventListener('pjax:complete', () => {
-        
-        const oldScript = document.getElementById('busuanzi-script');
-        if (oldScript) oldScript.remove();
-
         initCounter();
-        loadBusuanzi();
+        
+        
     });
 })();
 </script>

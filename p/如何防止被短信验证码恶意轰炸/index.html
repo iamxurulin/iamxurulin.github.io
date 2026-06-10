@@ -10,7 +10,7 @@
 <meta property='og:description' content="为了防止被短信验证码恶意轰炸，可以从两方面考虑：一是增加攻击者的成本，再就是降低攻击者的收益。\n可以通过以下几种方式实现：\n1.在调用发送短信的接口之前，需要先校验图形验证码，只有图形验证码校验通过了，才允许请求短信接口，这种方式可以拦截大量的脚本自动刷量。\n">
 <meta property='og:url' content='https://iamxurulin.github.io/p/%E5%A6%82%E4%BD%95%E9%98%B2%E6%AD%A2%E8%A2%AB%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81%E7%A0%81%E6%81%B6%E6%84%8F%E8%BD%B0%E7%82%B8/'>
 <meta property='og:site_name' content='Coder_Studio'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Linux' /><meta property='article:published_time' content='2025-12-31T14:16:30&#43;00:00'/><meta property='article:modified_time' content='2026-06-10T00:14:22&#43;00:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Linux' /><meta property='article:published_time' content='2025-12-31T14:16:30&#43;00:00'/><meta property='article:modified_time' content='2026-06-10T00:27:10&#43;00:00'/>
 <meta name="twitter:title" content="如何防止被短信验证码恶意轰炸">
 <meta name="twitter:description" content="为了防止被短信验证码恶意轰炸，可以从两方面考虑：一是增加攻击者的成本，再就是降低攻击者的收益。\n可以通过以下几种方式实现：\n1.在调用发送短信的接口之前，需要先校验图形验证码，只有图形验证码校验通过了，才允许请求短信接口，这种方式可以拦截大量的脚本自动刷量。\n"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5123323391207523"
      crossorigin="anonymous"></script>
@@ -599,7 +599,7 @@
 
 
         <span>
-            最后更新于 2026-06-10 00:14:22
+            最后更新于 2026-06-10 00:27:10
         </span>
     </section><section class="article-original-declaration">
         <div class="declaration-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -951,7 +951,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.b4654cd74006fe7475d7723cd7373672b5ea2035ab23404eb9ff511cb27b581c.js" defer></script><script type="text/javascript" src="/ts/custom.977dfb68adff05ba57efe82368664b22247f17a8e6c9df5e421e556757398a62.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.b4654cd74006fe7475d7723cd7373672b5ea2035ab23404eb9ff511cb27b581c.js" defer></script><script type="text/javascript" src="/ts/custom.a44e77be05939c79d8ffe173c1d5909c71671fd04b7c41ba7a267bd17b1507bf.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');
@@ -1016,7 +1016,6 @@ if (window.requestIdleCallback) {
 </script>
 <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
 
-    
     <script src=https://iamxurulin.github.io/js/topbar.min.js></script>
 
 <script>
@@ -1030,43 +1029,64 @@ if (window.requestIdleCallback) {
     pjax.handleResponse = function(responseText, request, href, options) {
         if (request.responseText.match("<html")) {
             if (responseText) {
-                
                 let newDom = new DOMParser().parseFromString(responseText, 'text/html');
-                
                 let bodyClass = newDom.body.className;
                 document.body.setAttribute("class", bodyClass)
                 
-				
-					
-				
+                const newTitle = newDom.title;
+                if (newTitle) document.title = newTitle;
 				pjax._handleResponse(responseText, request, href, options);
             }
-        } else {
-            
         }
     }
-	
+
+    
+    const prefetchMap = new Map();
+    const PREFETCH_DELAY = 80; 
+
+    document.addEventListener('mouseover', function(e) {
+        const link = (e.target as HTMLElement).closest<HTMLAnchorElement>('a[href]');
+        if (!link) return;
+        const href = link.href;
+        
+        if (!href || href.startsWith('#') || !href.startsWith(location.origin)) return;
+
+        const key = href.replace(/#.*$/, '');
+        if (prefetchMap.has(key)) return; 
+
+        const timer = setTimeout(() => {
+            prefetchMap.set(key, fetch(key, { credentials: 'same-origin' }).catch(() => {}));
+        }, PREFETCH_DELAY);
+        prefetchMap.set(key, timer); 
+
+        link.addEventListener('mouseleave', () => {
+            clearTimeout(timer);
+            if (prefetchMap.get(key) === timer) prefetchMap.delete(key);
+        }, { once: true });
+    }, { passive: true });
+
+    
+    document.addEventListener('pjax:complete', () => {
+        prefetchMap.clear();
+    });
+
+    
     topbar.config({
         barColors: {
-            '0': 'rgba(255,  255, 255, 1)', 
-            '1.0': 'rgba(0, 149, 234,  1)' 
+            '0': 'rgba(255,  255, 255, 1)',
+            '1.0': 'rgba(0, 149, 234,  1)'
         }
     })
-	
+
     document.addEventListener('pjax:send', () => {
-        
         topbar.show();
     })
-	
+
     document.addEventListener('pjax:complete', () => {
-        
-        window.Stack.init();
-		
+        window.Stack && window.Stack.init();
         topbar.hide();
     })
-
 </script>
-
 <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -1148,14 +1168,13 @@ if (window.requestIdleCallback) {
         btn.onclick = backToTop
         rightSideBar.appendChild(btn)
         
-        window.onscroll = function() {
-            
+        window.addEventListener('scroll', function() {
             if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
                 btn.style.display = "block";
             } else {
                 btn.style.display = "none";
             }
-        };
+        }, { passive: true });
     }
 
     
@@ -1447,10 +1466,11 @@ if (screen.width >= 768) {
 
 (function() {
     const BUSUANZI_SCRIPT = 'https://busuanzi.ibruce.info/busuanzi.pure.mini.js';
+    let _busuanziLoaded = false;
 
     function loadBusuanzi() {
-        
-        if (document.getElementById('busuanzi-script')) return;
+        if (_busuanziLoaded) return;
+        _busuanziLoaded = true;
 
         const script = document.createElement('script');
         script.src = BUSUANZI_SCRIPT;
@@ -1458,14 +1478,12 @@ if (screen.width >= 768) {
         script.async = true;
         document.head.appendChild(script);
 
-        
         script.onerror = function() {
             const container = document.querySelector('#busuanzi_container_page_pv');
             if (container) container.style.display = 'none';
         };
     }
 
-    
     function initCounter() {
         const container = document.querySelector('#busuanzi_container_page_pv');
         if (!container) return;
@@ -1490,12 +1508,9 @@ if (screen.width >= 768) {
 
     
     document.addEventListener('pjax:complete', () => {
-        
-        const oldScript = document.getElementById('busuanzi-script');
-        if (oldScript) oldScript.remove();
-
         initCounter();
-        loadBusuanzi();
+        
+        
     });
 })();
 </script>
