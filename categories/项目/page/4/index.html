@@ -10,7 +10,7 @@
 <meta property='og:description' content="实战项目经验总结与复盘">
 <meta property='og:url' content='https://iamxurulin.github.io/categories/%E9%A1%B9%E7%9B%AE/'>
 <meta property='og:site_name' content='Coder_Studio'>
-<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2026-06-10T01:11:41&#43;00:00 '/><meta property='og:image' content='https://iamxurulin.github.io/cover/the-creative-exchange-d2zvqp3fpro-unsplash.jpg' />
+<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2026-06-10T02:05:41&#43;00:00 '/><meta property='og:image' content='https://iamxurulin.github.io/cover/the-creative-exchange-d2zvqp3fpro-unsplash.jpg' />
 <meta name="twitter:title" content="Category: 项目 - Coder_Studio">
 <meta name="twitter:description" content="实战项目经验总结与复盘"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://iamxurulin.github.io/cover/the-creative-exchange-d2zvqp3fpro-unsplash.jpg' /><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5123323391207523"
@@ -1259,42 +1259,40 @@ if (screen.width >= 768) {
 <script>
 
 (function() {
-    const VERCOUNT_SCRIPT = 'https://cn.vercount.one/js';
-    let _vercountLoaded = false;
+    function fetchVercount() {
+        var el = document.querySelector('#vercount_value_page_pv');
+        if (!el) return;
 
-    function loadVercount() {
-        if (_vercountLoaded) return;
-        _vercountLoaded = true;
+        
+        el.textContent = '...';
 
-        const script = document.createElement('script');
-        script.src = VERCOUNT_SCRIPT;
-        script.id = 'vercount-script';
-        script.async = true;
-        document.head.appendChild(script);
-    }
-
-    function initCounter() {
-        const value = document.querySelector('#vercount_value_page_pv');
-        if (value && !value.textContent) {
-            value.textContent = '...';
-        }
-    }
-
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => {
-            initCounter();
-            loadVercount();
-        });
-    } else {
-        initCounter();
-        loadVercount();
+        var api = 'https://cn.vercount.one/log?url=' + encodeURIComponent(window.location.href);
+        fetch(api)
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+                if (data && data.page_pv !== undefined) {
+                    el.textContent = data.page_pv;
+                }
+            })
+            .catch(function() {
+                el.textContent = 'N/A';
+            });
     }
 
     
-    document.addEventListener('pjax:complete', () => {
-        initCounter();
-        
-    });
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', fetchVercount);
+    } else {
+        fetchVercount();
+    }
+
+    
+    if (!window._vercountPjaxBound) {
+        window._vercountPjaxBound = true;
+        document.addEventListener('pjax:complete', function() {
+            setTimeout(fetchVercount, 100);
+        });
+    }
 })();
 </script>
 
