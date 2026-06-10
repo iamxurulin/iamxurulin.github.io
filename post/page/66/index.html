@@ -10,7 +10,7 @@
 <meta property='og:description' content="Coder_Studio 个人技术博客 - 专注后端开发、数据结构与算法、分布式系统、AI 应用的技术分享">
 <meta property='og:url' content='https://iamxurulin.github.io/post/'>
 <meta property='og:site_name' content='Coder_Studio'>
-<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2026-06-10T00:36:46&#43;00:00 '/>
+<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2026-06-10T00:52:30&#43;00:00 '/>
 <meta name="twitter:title" content="Posts">
 <meta name="twitter:description" content="Coder_Studio 个人技术博客 - 专注后端开发、数据结构与算法、分布式系统、AI 应用的技术分享"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5123323391207523"
      crossorigin="anonymous"></script><link rel="alternate" type="application/rss&#43;xml" href="https://iamxurulin.github.io/post/index.xml">
@@ -873,67 +873,38 @@ if (window.requestIdleCallback) {
 	  ]
 	})
 
+    
     pjax._handleResponse = pjax.handleResponse;
     pjax.handleResponse = function(responseText, request, href, options) {
         if (request.responseText.match("<html")) {
             if (responseText) {
                 let newDom = new DOMParser().parseFromString(responseText, 'text/html');
                 let bodyClass = newDom.body.className;
-                document.body.setAttribute("class", bodyClass)
-                
+                document.body.setAttribute("class", bodyClass);
                 const newTitle = newDom.title;
                 if (newTitle) document.title = newTitle;
-				pjax._handleResponse(responseText, request, href, options);
             }
         }
-    }
-
-    
-    const prefetchMap = new Map();
-    const PREFETCH_DELAY = 80; 
-
-    document.addEventListener('mouseover', function(e) {
-        const link = e.target.closest('a[href]');
-        if (!link) return;
-        const href = link.href;
         
-        if (!href || href.startsWith('#') || !href.startsWith(location.origin)) return;
-
-        const key = href.replace(/#.*$/, '');
-        if (prefetchMap.has(key)) return; 
-
-        const timer = setTimeout(() => {
-            prefetchMap.set(key, fetch(key, { credentials: 'same-origin' }).catch(() => {}));
-        }, PREFETCH_DELAY);
-        prefetchMap.set(key, timer); 
-
-        link.addEventListener('mouseleave', () => {
-            clearTimeout(timer);
-            if (prefetchMap.get(key) === timer) prefetchMap.delete(key);
-        }, { once: true });
-    }, { passive: true });
-
-    
-    document.addEventListener('pjax:complete', () => {
-        prefetchMap.clear();
-    });
+        pjax._handleResponse(responseText, request, href, options);
+    };
 
     
     topbar.config({
         barColors: {
-            '0': 'rgba(255,  255, 255, 1)',
-            '1.0': 'rgba(0, 149, 234,  1)'
+            '0': 'rgba(255, 255, 255, 1)',
+            '1.0': 'rgba(0, 149, 234, 1)'
         }
-    })
+    });
 
     document.addEventListener('pjax:send', () => {
         topbar.show();
-    })
+    });
 
     document.addEventListener('pjax:complete', () => {
         window.Stack && window.Stack.init();
         topbar.hide();
-    })
+    });
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
 <style>

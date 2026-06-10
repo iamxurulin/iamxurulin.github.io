@@ -10,7 +10,7 @@
 <meta property='og:description' content="\n求解代码 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 public static ListNode mergeKLists(ArrayList&lt;ListNode&gt; arr) { // 初始化小顶堆：按节点值升序排序，每次取出当前最小的节点 PriorityQueue&lt;ListNode&gt; pq = new PriorityQueue&lt;ListNode&gt;((a, b) -&gt; (a.val - b.val)); // 将非空的头节点加入小顶堆 for (int i = 0; i &lt; arr.size(); i++) { ListNode head = arr.get(i); if (head != null) { // 跳过空链表，避免堆中加入null pq.add(head); } } // 哨兵节点：简化链表拼接逻辑，无需处理头节点为空的情况 ListNode dummy = new ListNode(-1); ListNode curr = dummy; // 合并链表的尾节点指针，初始指向哨兵节点 while (!pq.isEmpty()) { ListNode minNode = pq.poll(); // 取出当前所有链表的最小节点 curr.next = minNode; // 拼接到合并链表尾部 curr = curr.next; // 尾节点指针后移 // 若当前最小节点的下一个节点非空，加入堆中继续参与排序 if (minNode.next != null) { pq.add(minNode.next); } } // 哨兵节点的next即为合并后的真实头节点 return dummy.next; } ">
 <meta property='og:url' content='https://iamxurulin.github.io/p/%E5%90%88%E5%B9%B6k%E4%B8%AA%E5%B7%B2%E6%8E%92%E5%BA%8F%E7%9A%84%E9%93%BE%E8%A1%A8/'>
 <meta property='og:site_name' content='Coder_Studio'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='链表' /><meta property='article:published_time' content='2026-01-07T21:30:37&#43;00:00'/><meta property='article:modified_time' content='2026-06-10T00:36:46&#43;00:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='链表' /><meta property='article:published_time' content='2026-01-07T21:30:37&#43;00:00'/><meta property='article:modified_time' content='2026-06-10T00:52:30&#43;00:00'/>
 <meta name="twitter:title" content="合并k个已排序的链表">
 <meta name="twitter:description" content="\n求解代码 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 public static ListNode mergeKLists(ArrayList&lt;ListNode&gt; arr) { // 初始化小顶堆：按节点值升序排序，每次取出当前最小的节点 PriorityQueue&lt;ListNode&gt; pq = new PriorityQueue&lt;ListNode&gt;((a, b) -&gt; (a.val - b.val)); // 将非空的头节点加入小顶堆 for (int i = 0; i &lt; arr.size(); i++) { ListNode head = arr.get(i); if (head != null) { // 跳过空链表，避免堆中加入null pq.add(head); } } // 哨兵节点：简化链表拼接逻辑，无需处理头节点为空的情况 ListNode dummy = new ListNode(-1); ListNode curr = dummy; // 合并链表的尾节点指针，初始指向哨兵节点 while (!pq.isEmpty()) { ListNode minNode = pq.poll(); // 取出当前所有链表的最小节点 curr.next = minNode; // 拼接到合并链表尾部 curr = curr.next; // 尾节点指针后移 // 若当前最小节点的下一个节点非空，加入堆中继续参与排序 if (minNode.next != null) { pq.add(minNode.next); } } // 哨兵节点的next即为合并后的真实头节点 return dummy.next; } "><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5123323391207523"
      crossorigin="anonymous"></script>
@@ -693,7 +693,7 @@
 
 
         <span>
-            最后更新于 2026-06-10 00:36:46
+            最后更新于 2026-06-10 00:52:30
         </span>
     </section><section class="article-original-declaration">
         <div class="declaration-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -1119,67 +1119,38 @@ if (window.requestIdleCallback) {
 	  ]
 	})
 
+    
     pjax._handleResponse = pjax.handleResponse;
     pjax.handleResponse = function(responseText, request, href, options) {
         if (request.responseText.match("<html")) {
             if (responseText) {
                 let newDom = new DOMParser().parseFromString(responseText, 'text/html');
                 let bodyClass = newDom.body.className;
-                document.body.setAttribute("class", bodyClass)
-                
+                document.body.setAttribute("class", bodyClass);
                 const newTitle = newDom.title;
                 if (newTitle) document.title = newTitle;
-				pjax._handleResponse(responseText, request, href, options);
             }
         }
-    }
-
-    
-    const prefetchMap = new Map();
-    const PREFETCH_DELAY = 80; 
-
-    document.addEventListener('mouseover', function(e) {
-        const link = e.target.closest('a[href]');
-        if (!link) return;
-        const href = link.href;
         
-        if (!href || href.startsWith('#') || !href.startsWith(location.origin)) return;
-
-        const key = href.replace(/#.*$/, '');
-        if (prefetchMap.has(key)) return; 
-
-        const timer = setTimeout(() => {
-            prefetchMap.set(key, fetch(key, { credentials: 'same-origin' }).catch(() => {}));
-        }, PREFETCH_DELAY);
-        prefetchMap.set(key, timer); 
-
-        link.addEventListener('mouseleave', () => {
-            clearTimeout(timer);
-            if (prefetchMap.get(key) === timer) prefetchMap.delete(key);
-        }, { once: true });
-    }, { passive: true });
-
-    
-    document.addEventListener('pjax:complete', () => {
-        prefetchMap.clear();
-    });
+        pjax._handleResponse(responseText, request, href, options);
+    };
 
     
     topbar.config({
         barColors: {
-            '0': 'rgba(255,  255, 255, 1)',
-            '1.0': 'rgba(0, 149, 234,  1)'
+            '0': 'rgba(255, 255, 255, 1)',
+            '1.0': 'rgba(0, 149, 234, 1)'
         }
-    })
+    });
 
     document.addEventListener('pjax:send', () => {
         topbar.show();
-    })
+    });
 
     document.addEventListener('pjax:complete', () => {
         window.Stack && window.Stack.init();
         topbar.hide();
-    })
+    });
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
 <style>

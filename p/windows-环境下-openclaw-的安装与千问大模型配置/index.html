@@ -10,7 +10,7 @@
 <meta property='og:description' content="为了不占用 C 盘空间，重装系统也不丢失配置，本文详细记录了如何将 OpenClaw 安装在非系统盘，比如D 盘，并对接阿里云 通义千问大模型的全过程。\n主要是利用 NVM 和 npm 进行安装，方便后续一键升级，配置具有免费额度的Qwen API，这个只需要在阿里云百炼注册一个账号就能获得免费额度。\n">
 <meta property='og:url' content='https://iamxurulin.github.io/p/windows-%E7%8E%AF%E5%A2%83%E4%B8%8B-openclaw-%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E5%8D%83%E9%97%AE%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%85%8D%E7%BD%AE/'>
 <meta property='og:site_name' content='Coder_Studio'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='大模型' /><meta property='article:published_time' content='2026-02-20T16:53:53&#43;00:00'/><meta property='article:modified_time' content='2026-06-10T00:36:46&#43;00:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='大模型' /><meta property='article:published_time' content='2026-02-20T16:53:53&#43;00:00'/><meta property='article:modified_time' content='2026-06-10T00:52:30&#43;00:00'/>
 <meta name="twitter:title" content="Windows 环境下 OpenClaw 的安装与千问大模型配置">
 <meta name="twitter:description" content="为了不占用 C 盘空间，重装系统也不丢失配置，本文详细记录了如何将 OpenClaw 安装在非系统盘，比如D 盘，并对接阿里云 通义千问大模型的全过程。\n主要是利用 NVM 和 npm 进行安装，方便后续一键升级，配置具有免费额度的Qwen API，这个只需要在阿里云百炼注册一个账号就能获得免费额度。\n"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5123323391207523"
      crossorigin="anonymous"></script>
@@ -937,7 +937,7 @@
 
 
         <span>
-            最后更新于 2026-06-10 00:36:46
+            最后更新于 2026-06-10 00:52:30
         </span>
     </section><section class="article-original-declaration">
         <div class="declaration-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -1363,67 +1363,38 @@ if (window.requestIdleCallback) {
 	  ]
 	})
 
+    
     pjax._handleResponse = pjax.handleResponse;
     pjax.handleResponse = function(responseText, request, href, options) {
         if (request.responseText.match("<html")) {
             if (responseText) {
                 let newDom = new DOMParser().parseFromString(responseText, 'text/html');
                 let bodyClass = newDom.body.className;
-                document.body.setAttribute("class", bodyClass)
-                
+                document.body.setAttribute("class", bodyClass);
                 const newTitle = newDom.title;
                 if (newTitle) document.title = newTitle;
-				pjax._handleResponse(responseText, request, href, options);
             }
         }
-    }
-
-    
-    const prefetchMap = new Map();
-    const PREFETCH_DELAY = 80; 
-
-    document.addEventListener('mouseover', function(e) {
-        const link = e.target.closest('a[href]');
-        if (!link) return;
-        const href = link.href;
         
-        if (!href || href.startsWith('#') || !href.startsWith(location.origin)) return;
-
-        const key = href.replace(/#.*$/, '');
-        if (prefetchMap.has(key)) return; 
-
-        const timer = setTimeout(() => {
-            prefetchMap.set(key, fetch(key, { credentials: 'same-origin' }).catch(() => {}));
-        }, PREFETCH_DELAY);
-        prefetchMap.set(key, timer); 
-
-        link.addEventListener('mouseleave', () => {
-            clearTimeout(timer);
-            if (prefetchMap.get(key) === timer) prefetchMap.delete(key);
-        }, { once: true });
-    }, { passive: true });
-
-    
-    document.addEventListener('pjax:complete', () => {
-        prefetchMap.clear();
-    });
+        pjax._handleResponse(responseText, request, href, options);
+    };
 
     
     topbar.config({
         barColors: {
-            '0': 'rgba(255,  255, 255, 1)',
-            '1.0': 'rgba(0, 149, 234,  1)'
+            '0': 'rgba(255, 255, 255, 1)',
+            '1.0': 'rgba(0, 149, 234, 1)'
         }
-    })
+    });
 
     document.addEventListener('pjax:send', () => {
         topbar.show();
-    })
+    });
 
     document.addEventListener('pjax:complete', () => {
         window.Stack && window.Stack.init();
         topbar.hide();
-    })
+    });
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
 <style>

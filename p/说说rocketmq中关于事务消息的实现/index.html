@@ -10,7 +10,7 @@
 <meta property='og:description' content="在RocketMQ中，为了确保消息与本地事务的一致性，生产者会先将消息发送到RocketMQ的Topic中，这个时候消息的状态为半消息，对于消费者来说，还是不可见的。\n">
 <meta property='og:url' content='https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4rocketmq%E4%B8%AD%E5%85%B3%E4%BA%8E%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF%E7%9A%84%E5%AE%9E%E7%8E%B0/'>
 <meta property='og:site_name' content='Coder_Studio'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='消息队列' /><meta property='article:published_time' content='2025-12-26T16:46:06&#43;00:00'/><meta property='article:modified_time' content='2026-06-10T00:36:46&#43;00:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='消息队列' /><meta property='article:published_time' content='2025-12-26T16:46:06&#43;00:00'/><meta property='article:modified_time' content='2026-06-10T00:52:30&#43;00:00'/>
 <meta name="twitter:title" content="说说RocketMQ中关于事务消息的实现">
 <meta name="twitter:description" content="在RocketMQ中，为了确保消息与本地事务的一致性，生产者会先将消息发送到RocketMQ的Topic中，这个时候消息的状态为半消息，对于消费者来说，还是不可见的。\n"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5123323391207523"
      crossorigin="anonymous"></script>
@@ -598,7 +598,7 @@
 
 
         <span>
-            最后更新于 2026-06-10 00:36:46
+            最后更新于 2026-06-10 00:52:30
         </span>
     </section><section class="article-original-declaration">
         <div class="declaration-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -1024,67 +1024,38 @@ if (window.requestIdleCallback) {
 	  ]
 	})
 
+    
     pjax._handleResponse = pjax.handleResponse;
     pjax.handleResponse = function(responseText, request, href, options) {
         if (request.responseText.match("<html")) {
             if (responseText) {
                 let newDom = new DOMParser().parseFromString(responseText, 'text/html');
                 let bodyClass = newDom.body.className;
-                document.body.setAttribute("class", bodyClass)
-                
+                document.body.setAttribute("class", bodyClass);
                 const newTitle = newDom.title;
                 if (newTitle) document.title = newTitle;
-				pjax._handleResponse(responseText, request, href, options);
             }
         }
-    }
-
-    
-    const prefetchMap = new Map();
-    const PREFETCH_DELAY = 80; 
-
-    document.addEventListener('mouseover', function(e) {
-        const link = e.target.closest('a[href]');
-        if (!link) return;
-        const href = link.href;
         
-        if (!href || href.startsWith('#') || !href.startsWith(location.origin)) return;
-
-        const key = href.replace(/#.*$/, '');
-        if (prefetchMap.has(key)) return; 
-
-        const timer = setTimeout(() => {
-            prefetchMap.set(key, fetch(key, { credentials: 'same-origin' }).catch(() => {}));
-        }, PREFETCH_DELAY);
-        prefetchMap.set(key, timer); 
-
-        link.addEventListener('mouseleave', () => {
-            clearTimeout(timer);
-            if (prefetchMap.get(key) === timer) prefetchMap.delete(key);
-        }, { once: true });
-    }, { passive: true });
-
-    
-    document.addEventListener('pjax:complete', () => {
-        prefetchMap.clear();
-    });
+        pjax._handleResponse(responseText, request, href, options);
+    };
 
     
     topbar.config({
         barColors: {
-            '0': 'rgba(255,  255, 255, 1)',
-            '1.0': 'rgba(0, 149, 234,  1)'
+            '0': 'rgba(255, 255, 255, 1)',
+            '1.0': 'rgba(0, 149, 234, 1)'
         }
-    })
+    });
 
     document.addEventListener('pjax:send', () => {
         topbar.show();
-    })
+    });
 
     document.addEventListener('pjax:complete', () => {
         window.Stack && window.Stack.init();
         topbar.hide();
-    })
+    });
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
