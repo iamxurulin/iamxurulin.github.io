@@ -6,11 +6,11 @@
 
 <link rel='canonical' href='https://iamxurulin.github.io/p/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98%E6%8B%86%E8%A7%A3%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%A8sse%E5%81%9A%E6%B5%81%E5%BC%8F%E8%BE%93%E5%87%BA%E5%92%8Cwebsocket%E6%9C%89%E5%95%A5%E5%8C%BA%E5%88%AB/'>
 
-<link rel="stylesheet" href="/scss/style.min.2ac33fea5fd3ec430b1147b4869d2ce3e7a4fa79b8ed2288207b3c323dabc144.css"><meta property='og:title' content="【面试真题拆解】为什么用SSE做流式输出？和WebSocket有啥区别？">
+<link rel="stylesheet" href="/scss/style.min.6e9c513e2b18fb90ba80ef8f1310b1122153a8397e5271e51b034f6a1f7377f5.css"><meta property='og:title' content="【面试真题拆解】为什么用SSE做流式输出？和WebSocket有啥区别？">
 <meta property='og:description' content="面试官问：\n“你项目里用了SSE做流式输出，为什么选SSE？它的原理你知道吗？为什么不用WebSocket？”\n为什么用SSE做流式输出？ 一句话：\nSSE 是为服务器单向给客户端推数据的场景量身定做的，完美匹配 AIGC 流式打字机的需求，开发简单、好用、运维成本低。\n">
 <meta property='og:url' content='https://iamxurulin.github.io/p/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98%E6%8B%86%E8%A7%A3%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%A8sse%E5%81%9A%E6%B5%81%E5%BC%8F%E8%BE%93%E5%87%BA%E5%92%8Cwebsocket%E6%9C%89%E5%95%A5%E5%8C%BA%E5%88%AB/'>
 <meta property='og:site_name' content='Coder_Studio'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='面试' /><meta property='article:tag' content='websocket' /><meta property='article:tag' content='职场和发展' /><meta property='article:published_time' content='2026-03-25T17:41:32&#43;00:00'/><meta property='article:modified_time' content='2026-06-10T00:52:30&#43;00:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='面试' /><meta property='article:tag' content='websocket' /><meta property='article:tag' content='职场和发展' /><meta property='article:published_time' content='2026-03-25T17:41:32&#43;00:00'/><meta property='article:modified_time' content='2026-06-10T01:11:41&#43;00:00'/>
 <meta name="twitter:title" content="【面试真题拆解】为什么用SSE做流式输出？和WebSocket有啥区别？">
 <meta name="twitter:description" content="面试官问：\n“你项目里用了SSE做流式输出，为什么选SSE？它的原理你知道吗？为什么不用WebSocket？”\n为什么用SSE做流式输出？ 一句话：\nSSE 是为服务器单向给客户端推数据的场景量身定做的，完美匹配 AIGC 流式打字机的需求，开发简单、好用、运维成本低。\n"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5123323391207523"
      crossorigin="anonymous"></script>
@@ -565,8 +565,8 @@
           d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s10 2.333 10 7"
         ></path>
       </svg>
-      <span id="busuanzi_container_page_pv">
-        <span id="busuanzi_value_page_pv"></span> 次
+      <span id="vercount_container_page_pv">阅读
+        <span id="vercount_value_page_pv">...</span> 次
       </span>
     </div>
   </footer>
@@ -693,7 +693,7 @@
 
 
         <span>
-            最后更新于 2026-06-10 00:52:30
+            最后更新于 2026-06-10 01:11:41
         </span>
     </section><section class="article-original-declaration">
         <div class="declaration-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -1045,7 +1045,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.b4654cd74006fe7475d7723cd7373672b5ea2035ab23404eb9ff511cb27b581c.js" defer></script><script type="text/javascript" src="/ts/custom.e51a4765978a36efd24b81fd88d916db6b70445c7270d56af3dcb66c2641fe65.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.b4654cd74006fe7475d7723cd7373672b5ea2035ab23404eb9ff511cb27b581c.js" defer></script><script type="text/javascript" src="/ts/custom.d06f31744de6062060249fb2de5a784912bfa25d124b9b3d97c1f1281811a258.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');
@@ -1530,69 +1530,41 @@ if (screen.width >= 768) {
 <script>
 
 (function() {
-    const BUSUANZI_SCRIPT = 'https://busuanzi.ibruce.info/busuanzi.pure.mini.js';
-    let _busuanziLoaded = false;
-    let _loadTimer = null;
+    const VERCOUNT_SCRIPT = 'https://cn.vercount.one/js';
+    let _vercountLoaded = false;
 
-    function loadBusuanzi() {
-        if (_busuanziLoaded) return;
-        _busuanziLoaded = true;
+    function loadVercount() {
+        if (_vercountLoaded) return;
+        _vercountLoaded = true;
 
         const script = document.createElement('script');
-        script.src = BUSUANZI_SCRIPT;
-        script.id = 'busuanzi-script';
+        script.src = VERCOUNT_SCRIPT;
+        script.id = 'vercount-script';
         script.async = true;
         document.head.appendChild(script);
-
-        script.onerror = function() {
-            fallbackDisplay();
-        };
-
-        
-        _loadTimer = setTimeout(function() {
-            const value = document.querySelector('#busuanzi_value_page_pv');
-            if (value && (!value.textContent || value.textContent === '...')) {
-                fallbackDisplay();
-            }
-        }, 8000);
-    }
-
-    function fallbackDisplay() {
-        const value = document.querySelector('#busuanzi_value_page_pv');
-        if (value) {
-            if (!value.textContent || value.textContent === '...') {
-                value.textContent = 'N/A';
-                value.title = '统计服务暂时不可用，可能是广告拦截器屏蔽了计数脚本';
-            }
-        }
     }
 
     function initCounter() {
-        const container = document.querySelector('#busuanzi_container_page_pv');
-        if (!container) return;
-        container.style.display = '';
-
-        const value = document.querySelector('#busuanzi_value_page_pv');
+        const value = document.querySelector('#vercount_value_page_pv');
         if (value && !value.textContent) {
             value.textContent = '...';
         }
     }
 
-    
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => {
             initCounter();
-            loadBusuanzi();
+            loadVercount();
         });
     } else {
         initCounter();
-        loadBusuanzi();
+        loadVercount();
     }
 
     
     document.addEventListener('pjax:complete', () => {
-        if (_loadTimer) clearTimeout(_loadTimer);
         initCounter();
+        
     });
 })();
 </script>

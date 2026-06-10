@@ -6,11 +6,11 @@
 
 <link rel='canonical' href='https://iamxurulin.github.io/p/%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%80%83-%E5%A6%82%E4%BD%95%E5%8E%9F%E5%9C%B0%E9%87%8D%E6%8E%92%E6%95%B0%E7%BB%84-%E8%BF%99%E4%B8%AA%E6%80%9D%E8%B7%AF%E7%BB%9D%E4%BA%86/'>
 
-<link rel="stylesheet" href="/scss/style.min.2ac33fea5fd3ec430b1147b4869d2ce3e7a4fa79b8ed2288207b3c323dabc144.css"><meta property='og:title' content="面试常考-如何原地重排数组-这个思路绝了">
+<link rel="stylesheet" href="/scss/style.min.6e9c513e2b18fb90ba80ef8f1310b1122153a8397e5271e51b034f6a1f7377f5.css"><meta property='og:title' content="面试常考-如何原地重排数组-这个思路绝了">
 <meta property='og:description' content="\n解题思路 这道题我们用两个指针分别追踪奇数位和偶数位,每次检查最后一个元素是奇数还是偶数,然后把它交换到对应的位置上。\n比如最后一个元素是奇数,就把它换到下一个需要填充的奇数位(1, 3, 5&hellip;),换过来的元素又成为新的&quot;最后一个元素&quot;,继续这个过程。\n">
 <meta property='og:url' content='https://iamxurulin.github.io/p/%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%80%83-%E5%A6%82%E4%BD%95%E5%8E%9F%E5%9C%B0%E9%87%8D%E6%8E%92%E6%95%B0%E7%BB%84-%E8%BF%99%E4%B8%AA%E6%80%9D%E8%B7%AF%E7%BB%9D%E4%BA%86/'>
 <meta property='og:site_name' content='Coder_Studio'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='数组' /><meta property='article:published_time' content='2025-12-13T18:49:08&#43;00:00'/><meta property='article:modified_time' content='2026-06-10T00:52:30&#43;00:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='数组' /><meta property='article:published_time' content='2025-12-13T18:49:08&#43;00:00'/><meta property='article:modified_time' content='2026-06-10T01:11:41&#43;00:00'/>
 <meta name="twitter:title" content="面试常考-如何原地重排数组-这个思路绝了">
 <meta name="twitter:description" content="\n解题思路 这道题我们用两个指针分别追踪奇数位和偶数位,每次检查最后一个元素是奇数还是偶数,然后把它交换到对应的位置上。\n比如最后一个元素是奇数,就把它换到下一个需要填充的奇数位(1, 3, 5&hellip;),换过来的元素又成为新的&quot;最后一个元素&quot;,继续这个过程。\n"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5123323391207523"
      crossorigin="anonymous"></script>
@@ -569,8 +569,8 @@
           d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s10 2.333 10 7"
         ></path>
       </svg>
-      <span id="busuanzi_container_page_pv">
-        <span id="busuanzi_value_page_pv"></span> 次
+      <span id="vercount_container_page_pv">阅读
+        <span id="vercount_value_page_pv">...</span> 次
       </span>
     </div>
   </footer>
@@ -693,7 +693,7 @@
 
 
         <span>
-            最后更新于 2026-06-10 00:52:30
+            最后更新于 2026-06-10 01:11:41
         </span>
     </section><section class="article-original-declaration">
         <div class="declaration-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -1045,7 +1045,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.b4654cd74006fe7475d7723cd7373672b5ea2035ab23404eb9ff511cb27b581c.js" defer></script><script type="text/javascript" src="/ts/custom.e51a4765978a36efd24b81fd88d916db6b70445c7270d56af3dcb66c2641fe65.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.b4654cd74006fe7475d7723cd7373672b5ea2035ab23404eb9ff511cb27b581c.js" defer></script><script type="text/javascript" src="/ts/custom.d06f31744de6062060249fb2de5a784912bfa25d124b9b3d97c1f1281811a258.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');
@@ -1530,69 +1530,41 @@ if (screen.width >= 768) {
 <script>
 
 (function() {
-    const BUSUANZI_SCRIPT = 'https://busuanzi.ibruce.info/busuanzi.pure.mini.js';
-    let _busuanziLoaded = false;
-    let _loadTimer = null;
+    const VERCOUNT_SCRIPT = 'https://cn.vercount.one/js';
+    let _vercountLoaded = false;
 
-    function loadBusuanzi() {
-        if (_busuanziLoaded) return;
-        _busuanziLoaded = true;
+    function loadVercount() {
+        if (_vercountLoaded) return;
+        _vercountLoaded = true;
 
         const script = document.createElement('script');
-        script.src = BUSUANZI_SCRIPT;
-        script.id = 'busuanzi-script';
+        script.src = VERCOUNT_SCRIPT;
+        script.id = 'vercount-script';
         script.async = true;
         document.head.appendChild(script);
-
-        script.onerror = function() {
-            fallbackDisplay();
-        };
-
-        
-        _loadTimer = setTimeout(function() {
-            const value = document.querySelector('#busuanzi_value_page_pv');
-            if (value && (!value.textContent || value.textContent === '...')) {
-                fallbackDisplay();
-            }
-        }, 8000);
-    }
-
-    function fallbackDisplay() {
-        const value = document.querySelector('#busuanzi_value_page_pv');
-        if (value) {
-            if (!value.textContent || value.textContent === '...') {
-                value.textContent = 'N/A';
-                value.title = '统计服务暂时不可用，可能是广告拦截器屏蔽了计数脚本';
-            }
-        }
     }
 
     function initCounter() {
-        const container = document.querySelector('#busuanzi_container_page_pv');
-        if (!container) return;
-        container.style.display = '';
-
-        const value = document.querySelector('#busuanzi_value_page_pv');
+        const value = document.querySelector('#vercount_value_page_pv');
         if (value && !value.textContent) {
             value.textContent = '...';
         }
     }
 
-    
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => {
             initCounter();
-            loadBusuanzi();
+            loadVercount();
         });
     } else {
         initCounter();
-        loadBusuanzi();
+        loadVercount();
     }
 
     
     document.addEventListener('pjax:complete', () => {
-        if (_loadTimer) clearTimeout(_loadTimer);
         initCounter();
+        
     });
 })();
 </script>

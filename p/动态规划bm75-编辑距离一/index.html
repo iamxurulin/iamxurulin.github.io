@@ -6,11 +6,11 @@
 
 <link rel='canonical' href='https://iamxurulin.github.io/p/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92bm75-%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB%E4%B8%80/'>
 
-<link rel="stylesheet" href="/scss/style.min.2ac33fea5fd3ec430b1147b4869d2ce3e7a4fa79b8ed2288207b3c323dabc144.css"><meta property='og:title' content="【动态规划】BM75 编辑距离(一)">
+<link rel="stylesheet" href="/scss/style.min.6e9c513e2b18fb90ba80ef8f1310b1122153a8397e5271e51b034f6a1f7377f5.css"><meta property='og:title' content="【动态规划】BM75 编辑距离(一)">
 <meta property='og:description' content="\n求解代码 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 public int editDistance(String str1, String str2) { int m = str1.length(); int n = str2.length(); int[][] dp = new int[m + 1][n + 1]; for (int i = 0; i &lt;= m; i++) { dp[i][0] = i; } for (int j = 0; j &lt;= n; j++) { dp[0][j] = j; } for (int i = 1; i &lt;= m; i++) { for (int j = 1; j &lt;= n; j++) { if (str1.charAt(i - 1) == str2.charAt(j - 1)) { dp[i][j] = dp[i - 1][j - 1]; } else { dp[i][j] = Math.min(Math.min(dp[i - 1][j], dp[i][j - 1]), dp[i - 1][j - 1]) + 1; } } } return dp[m][n]; } 小贴士 1.dp[i][j]的意思是将str1的前i个字符转换为str2的前j个字符，所需要的最小编辑距离。 至于为什么要加1，是因为这里考虑了下标为0位置代表的空字符串，也就是DP的边界条件。 单独拎出来的那两个for循环，处理的是把空字符串转成str2的前j个字符需要j次插入操作，以及把str1的前i个字符转成空字符串需要i次删除操作。\n">
 <meta property='og:url' content='https://iamxurulin.github.io/p/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92bm75-%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB%E4%B8%80/'>
 <meta property='og:site_name' content='Coder_Studio'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='动态规划' /><meta property='article:published_time' content='2026-01-23T19:50:03&#43;00:00'/><meta property='article:modified_time' content='2026-06-10T00:52:30&#43;00:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='动态规划' /><meta property='article:published_time' content='2026-01-23T19:50:03&#43;00:00'/><meta property='article:modified_time' content='2026-06-10T01:11:41&#43;00:00'/>
 <meta name="twitter:title" content="【动态规划】BM75 编辑距离(一)">
 <meta name="twitter:description" content="\n求解代码 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 public int editDistance(String str1, String str2) { int m = str1.length(); int n = str2.length(); int[][] dp = new int[m + 1][n + 1]; for (int i = 0; i &lt;= m; i++) { dp[i][0] = i; } for (int j = 0; j &lt;= n; j++) { dp[0][j] = j; } for (int i = 1; i &lt;= m; i++) { for (int j = 1; j &lt;= n; j++) { if (str1.charAt(i - 1) == str2.charAt(j - 1)) { dp[i][j] = dp[i - 1][j - 1]; } else { dp[i][j] = Math.min(Math.min(dp[i - 1][j], dp[i][j - 1]), dp[i - 1][j - 1]) + 1; } } } return dp[m][n]; } 小贴士 1.dp[i][j]的意思是将str1的前i个字符转换为str2的前j个字符，所需要的最小编辑距离。 至于为什么要加1，是因为这里考虑了下标为0位置代表的空字符串，也就是DP的边界条件。 单独拎出来的那两个for循环，处理的是把空字符串转成str2的前j个字符需要j次插入操作，以及把str1的前i个字符转成空字符串需要i次删除操作。\n"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5123323391207523"
      crossorigin="anonymous"></script>
@@ -568,8 +568,8 @@
           d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s10 2.333 10 7"
         ></path>
       </svg>
-      <span id="busuanzi_container_page_pv">
-        <span id="busuanzi_value_page_pv"></span> 次
+      <span id="vercount_container_page_pv">阅读
+        <span id="vercount_value_page_pv">...</span> 次
       </span>
     </div>
   </footer>
@@ -689,7 +689,7 @@
 
 
         <span>
-            最后更新于 2026-06-10 00:52:30
+            最后更新于 2026-06-10 01:11:41
         </span>
     </section><section class="article-original-declaration">
         <div class="declaration-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -1041,7 +1041,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.b4654cd74006fe7475d7723cd7373672b5ea2035ab23404eb9ff511cb27b581c.js" defer></script><script type="text/javascript" src="/ts/custom.e51a4765978a36efd24b81fd88d916db6b70445c7270d56af3dcb66c2641fe65.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.b4654cd74006fe7475d7723cd7373672b5ea2035ab23404eb9ff511cb27b581c.js" defer></script><script type="text/javascript" src="/ts/custom.d06f31744de6062060249fb2de5a784912bfa25d124b9b3d97c1f1281811a258.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');
@@ -1526,69 +1526,41 @@ if (screen.width >= 768) {
 <script>
 
 (function() {
-    const BUSUANZI_SCRIPT = 'https://busuanzi.ibruce.info/busuanzi.pure.mini.js';
-    let _busuanziLoaded = false;
-    let _loadTimer = null;
+    const VERCOUNT_SCRIPT = 'https://cn.vercount.one/js';
+    let _vercountLoaded = false;
 
-    function loadBusuanzi() {
-        if (_busuanziLoaded) return;
-        _busuanziLoaded = true;
+    function loadVercount() {
+        if (_vercountLoaded) return;
+        _vercountLoaded = true;
 
         const script = document.createElement('script');
-        script.src = BUSUANZI_SCRIPT;
-        script.id = 'busuanzi-script';
+        script.src = VERCOUNT_SCRIPT;
+        script.id = 'vercount-script';
         script.async = true;
         document.head.appendChild(script);
-
-        script.onerror = function() {
-            fallbackDisplay();
-        };
-
-        
-        _loadTimer = setTimeout(function() {
-            const value = document.querySelector('#busuanzi_value_page_pv');
-            if (value && (!value.textContent || value.textContent === '...')) {
-                fallbackDisplay();
-            }
-        }, 8000);
-    }
-
-    function fallbackDisplay() {
-        const value = document.querySelector('#busuanzi_value_page_pv');
-        if (value) {
-            if (!value.textContent || value.textContent === '...') {
-                value.textContent = 'N/A';
-                value.title = '统计服务暂时不可用，可能是广告拦截器屏蔽了计数脚本';
-            }
-        }
     }
 
     function initCounter() {
-        const container = document.querySelector('#busuanzi_container_page_pv');
-        if (!container) return;
-        container.style.display = '';
-
-        const value = document.querySelector('#busuanzi_value_page_pv');
+        const value = document.querySelector('#vercount_value_page_pv');
         if (value && !value.textContent) {
             value.textContent = '...';
         }
     }
 
-    
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => {
             initCounter();
-            loadBusuanzi();
+            loadVercount();
         });
     } else {
         initCounter();
-        loadBusuanzi();
+        loadVercount();
     }
 
     
     document.addEventListener('pjax:complete', () => {
-        if (_loadTimer) clearTimeout(_loadTimer);
         initCounter();
+        
     });
 })();
 </script>
