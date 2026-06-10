@@ -10,7 +10,7 @@
 <meta property='og:description' content="实战项目经验总结与复盘">
 <meta property='og:url' content='https://iamxurulin.github.io/categories/%E9%A1%B9%E7%9B%AE/'>
 <meta property='og:site_name' content='Coder_Studio'>
-<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2026-06-10T02:05:41&#43;00:00 '/><meta property='og:image' content='https://iamxurulin.github.io/cover/the-creative-exchange-d2zvqp3fpro-unsplash.jpg' />
+<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2026-06-10T04:42:03&#43;00:00 '/><meta property='og:image' content='https://iamxurulin.github.io/cover/the-creative-exchange-d2zvqp3fpro-unsplash.jpg' />
 <meta name="twitter:title" content="Category: 项目 - Coder_Studio">
 <meta name="twitter:description" content="实战项目经验总结与复盘"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://iamxurulin.github.io/cover/the-creative-exchange-d2zvqp3fpro-unsplash.jpg' /><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5123323391207523"
@@ -859,49 +859,76 @@ if (window.requestIdleCallback) {
     setTimeout(window._aplayerInit, 2000);
 }
 </script>
-<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
-
-    <script src=https://iamxurulin.github.io/js/topbar.min.js></script>
-
 <script>
-	var pjax = new Pjax({
-	  selectors: [
-	    ".main-container"
-	  ]
-	})
-
+(function() {
+    var PJAX_CDN = 'https://cdn.jsdelivr.net/npm/pjax/pjax.min.js';
+    var PJAX_FALLBACK = 'https://unpkg.com/pjax/pjax.min.js';
     
-    pjax._handleResponse = pjax.handleResponse;
-    pjax.handleResponse = function(responseText, request, href, options) {
-        if (request.responseText.match("<html")) {
-            if (responseText) {
-                let newDom = new DOMParser().parseFromString(responseText, 'text/html');
-                let bodyClass = newDom.body.className;
-                document.body.setAttribute("class", bodyClass);
-                const newTitle = newDom.title;
-                if (newTitle) document.title = newTitle;
+    var TOPBAR_URL = 'https:\/\/iamxurulin.github.io\/js\/topbar.min.js';
+    
+
+    function loadJs(url, timeout) {
+        return new Promise(function(resolve, reject) {
+            var done = false;
+            var s = document.createElement('script');
+            s.src = url;
+            s.async = true;
+            function finish(err) {
+                if (done) return;
+                done = true;
+                s.onload = s.onerror = null;
+                clearTimeout(timer);
+                if (err) reject(err); else resolve();
             }
+            s.onload = function() { finish(null); };
+            s.onerror = function() { finish(new Error('HTTP error: ' + url)); };
+            var timer = timeout ? setTimeout(function() { finish(new Error('Timeout: ' + url)); }, timeout) : null;
+            document.head.appendChild(s);
+        });
+    }
+
+    function loadPjax(cdnUrl) {
+        return loadJs(cdnUrl, 10000).catch(function() {
+            
+            if (cdnUrl === PJAX_CDN) return loadPjax(PJAX_FALLBACK);
+            throw new Error('All PJAX CDNs failed');
+        });
+    }
+
+    var scripts = [loadPjax(PJAX_CDN)];
+    if (TOPBAR_URL) scripts.push(loadJs(TOPBAR_URL, 8000));
+
+    Promise.all(scripts).then(function() {
+        var pjax = new Pjax({ selectors: ['.main-container'] });
+
+        pjax._handleResponse = pjax.handleResponse;
+        pjax.handleResponse = function(responseText, request, href, options) {
+            if (request.responseText.match('<html')) {
+                if (responseText) {
+                    var newDom = new DOMParser().parseFromString(responseText, 'text/html');
+                    document.body.setAttribute('class', newDom.body.className);
+                    var t = newDom.title;
+                    if (t) document.title = t;
+                }
+            }
+            pjax._handleResponse(responseText, request, href, options);
+        };
+
+        if (typeof topbar !== 'undefined') {
+            topbar.config({ barColors: { '0': 'rgba(255,255,255,1)', '1.0': 'rgba(0,149,234,1)' } });
         }
-        
-        pjax._handleResponse(responseText, request, href, options);
-    };
 
-    
-    topbar.config({
-        barColors: {
-            '0': 'rgba(255, 255, 255, 1)',
-            '1.0': 'rgba(0, 149, 234, 1)'
-        }
+        document.addEventListener('pjax:send', function() {
+            if (typeof topbar !== 'undefined') topbar.show();
+        });
+        document.addEventListener('pjax:complete', function() {
+            window.Stack && window.Stack.init();
+            if (typeof topbar !== 'undefined') topbar.hide();
+        });
+    }).catch(function(err) {
+        console.warn('PJAX 未加载，使用普通导航:', err.message);
     });
-
-    document.addEventListener('pjax:send', () => {
-        topbar.show();
-    });
-
-    document.addEventListener('pjax:complete', () => {
-        window.Stack && window.Stack.init();
-        topbar.hide();
-    });
+})();
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
 <style>

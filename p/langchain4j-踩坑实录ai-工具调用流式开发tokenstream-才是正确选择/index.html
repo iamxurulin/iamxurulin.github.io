@@ -10,7 +10,7 @@
 <meta property='og:description' content="在基于 LangChain4j + Spring Boot 开发AI代码生成平台的过程中，主要想实现Vue项目带工具调用的流式生成能力，比如自动写入项目文件、构建打包，同时通过响应式流向前端推送实时进度。\n">
 <meta property='og:url' content='https://iamxurulin.github.io/p/langchain4j-%E8%B8%A9%E5%9D%91%E5%AE%9E%E5%BD%95ai-%E5%B7%A5%E5%85%B7%E8%B0%83%E7%94%A8%E6%B5%81%E5%BC%8F%E5%BC%80%E5%8F%91tokenstream-%E6%89%8D%E6%98%AF%E6%AD%A3%E7%A1%AE%E9%80%89%E6%8B%A9/'>
 <meta property='og:site_name' content='Coder_Studio'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Code' /><meta property='article:published_time' content='2026-02-03T12:35:47&#43;00:00'/><meta property='article:modified_time' content='2026-06-10T02:05:41&#43;00:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Code' /><meta property='article:published_time' content='2026-02-03T12:35:47&#43;00:00'/><meta property='article:modified_time' content='2026-06-10T04:42:03&#43;00:00'/>
 <meta name="twitter:title" content="LangChain4j 踩坑实录：AI 工具调用流式开发，TokenStream 才是正确选择">
 <meta name="twitter:description" content="在基于 LangChain4j + Spring Boot 开发AI代码生成平台的过程中，主要想实现Vue项目带工具调用的流式生成能力，比如自动写入项目文件、构建打包，同时通过响应式流向前端推送实时进度。\n"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5123323391207523"
      crossorigin="anonymous"></script>
@@ -696,7 +696,7 @@
 
 
         <span>
-            最后更新于 2026-06-10 02:05:41
+            最后更新于 2026-06-10 04:42:03
         </span>
     </section><section class="article-original-declaration">
         <div class="declaration-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -1110,49 +1110,76 @@ if (window.requestIdleCallback) {
     setTimeout(window._aplayerInit, 2000);
 }
 </script>
-<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
-
-    <script src=https://iamxurulin.github.io/js/topbar.min.js></script>
-
 <script>
-	var pjax = new Pjax({
-	  selectors: [
-	    ".main-container"
-	  ]
-	})
-
+(function() {
+    var PJAX_CDN = 'https://cdn.jsdelivr.net/npm/pjax/pjax.min.js';
+    var PJAX_FALLBACK = 'https://unpkg.com/pjax/pjax.min.js';
     
-    pjax._handleResponse = pjax.handleResponse;
-    pjax.handleResponse = function(responseText, request, href, options) {
-        if (request.responseText.match("<html")) {
-            if (responseText) {
-                let newDom = new DOMParser().parseFromString(responseText, 'text/html');
-                let bodyClass = newDom.body.className;
-                document.body.setAttribute("class", bodyClass);
-                const newTitle = newDom.title;
-                if (newTitle) document.title = newTitle;
+    var TOPBAR_URL = 'https:\/\/iamxurulin.github.io\/js\/topbar.min.js';
+    
+
+    function loadJs(url, timeout) {
+        return new Promise(function(resolve, reject) {
+            var done = false;
+            var s = document.createElement('script');
+            s.src = url;
+            s.async = true;
+            function finish(err) {
+                if (done) return;
+                done = true;
+                s.onload = s.onerror = null;
+                clearTimeout(timer);
+                if (err) reject(err); else resolve();
             }
+            s.onload = function() { finish(null); };
+            s.onerror = function() { finish(new Error('HTTP error: ' + url)); };
+            var timer = timeout ? setTimeout(function() { finish(new Error('Timeout: ' + url)); }, timeout) : null;
+            document.head.appendChild(s);
+        });
+    }
+
+    function loadPjax(cdnUrl) {
+        return loadJs(cdnUrl, 10000).catch(function() {
+            
+            if (cdnUrl === PJAX_CDN) return loadPjax(PJAX_FALLBACK);
+            throw new Error('All PJAX CDNs failed');
+        });
+    }
+
+    var scripts = [loadPjax(PJAX_CDN)];
+    if (TOPBAR_URL) scripts.push(loadJs(TOPBAR_URL, 8000));
+
+    Promise.all(scripts).then(function() {
+        var pjax = new Pjax({ selectors: ['.main-container'] });
+
+        pjax._handleResponse = pjax.handleResponse;
+        pjax.handleResponse = function(responseText, request, href, options) {
+            if (request.responseText.match('<html')) {
+                if (responseText) {
+                    var newDom = new DOMParser().parseFromString(responseText, 'text/html');
+                    document.body.setAttribute('class', newDom.body.className);
+                    var t = newDom.title;
+                    if (t) document.title = t;
+                }
+            }
+            pjax._handleResponse(responseText, request, href, options);
+        };
+
+        if (typeof topbar !== 'undefined') {
+            topbar.config({ barColors: { '0': 'rgba(255,255,255,1)', '1.0': 'rgba(0,149,234,1)' } });
         }
-        
-        pjax._handleResponse(responseText, request, href, options);
-    };
 
-    
-    topbar.config({
-        barColors: {
-            '0': 'rgba(255, 255, 255, 1)',
-            '1.0': 'rgba(0, 149, 234, 1)'
-        }
+        document.addEventListener('pjax:send', function() {
+            if (typeof topbar !== 'undefined') topbar.show();
+        });
+        document.addEventListener('pjax:complete', function() {
+            window.Stack && window.Stack.init();
+            if (typeof topbar !== 'undefined') topbar.hide();
+        });
+    }).catch(function(err) {
+        console.warn('PJAX 未加载，使用普通导航:', err.message);
     });
-
-    document.addEventListener('pjax:send', () => {
-        topbar.show();
-    });
-
-    document.addEventListener('pjax:complete', () => {
-        window.Stack && window.Stack.init();
-        topbar.hide();
-    });
+})();
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
 <style>

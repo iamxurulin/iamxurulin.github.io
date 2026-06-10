@@ -10,7 +10,7 @@
 <meta property='og:description' content="在开发 Spring Boot +LangGraph4J项目时，打算利用阿里云百炼的文生图模型生成Logo图片，在引入了阿里云百炼 SDK（dashscope-sdk-java）后，执行单元测试（LogoGeneratorToolTest）时，项目直接启动失败，控制台打印大量报错日志:\n">
 <meta property='og:url' content='https://iamxurulin.github.io/p/spring-boot%E6%B5%8B%E8%AF%95%E5%90%AF%E5%8A%A8%E5%A4%B1%E8%B4%A5slf4j%E6%97%A5%E5%BF%97%E5%A4%9A%E5%AE%9E%E7%8E%B0%E5%86%B2%E7%AA%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/'>
 <meta property='og:site_name' content='Coder_Studio'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Code' /><meta property='article:published_time' content='2026-02-05T12:22:13&#43;00:00'/><meta property='article:modified_time' content='2026-06-10T02:05:41&#43;00:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Code' /><meta property='article:published_time' content='2026-02-05T12:22:13&#43;00:00'/><meta property='article:modified_time' content='2026-06-10T04:42:03&#43;00:00'/>
 <meta name="twitter:title" content="Spring Boot测试启动失败：SLF4J日志多实现冲突解决方案">
 <meta name="twitter:description" content="在开发 Spring Boot +LangGraph4J项目时，打算利用阿里云百炼的文生图模型生成Logo图片，在引入了阿里云百炼 SDK（dashscope-sdk-java）后，执行单元测试（LogoGeneratorToolTest）时，项目直接启动失败，控制台打印大量报错日志:\n"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5123323391207523"
      crossorigin="anonymous"></script>
@@ -674,7 +674,7 @@
 
 
         <span>
-            最后更新于 2026-06-10 02:05:41
+            最后更新于 2026-06-10 04:42:03
         </span>
     </section><section class="article-original-declaration">
         <div class="declaration-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -1088,49 +1088,76 @@ if (window.requestIdleCallback) {
     setTimeout(window._aplayerInit, 2000);
 }
 </script>
-<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
-
-    <script src=https://iamxurulin.github.io/js/topbar.min.js></script>
-
 <script>
-	var pjax = new Pjax({
-	  selectors: [
-	    ".main-container"
-	  ]
-	})
-
+(function() {
+    var PJAX_CDN = 'https://cdn.jsdelivr.net/npm/pjax/pjax.min.js';
+    var PJAX_FALLBACK = 'https://unpkg.com/pjax/pjax.min.js';
     
-    pjax._handleResponse = pjax.handleResponse;
-    pjax.handleResponse = function(responseText, request, href, options) {
-        if (request.responseText.match("<html")) {
-            if (responseText) {
-                let newDom = new DOMParser().parseFromString(responseText, 'text/html');
-                let bodyClass = newDom.body.className;
-                document.body.setAttribute("class", bodyClass);
-                const newTitle = newDom.title;
-                if (newTitle) document.title = newTitle;
+    var TOPBAR_URL = 'https:\/\/iamxurulin.github.io\/js\/topbar.min.js';
+    
+
+    function loadJs(url, timeout) {
+        return new Promise(function(resolve, reject) {
+            var done = false;
+            var s = document.createElement('script');
+            s.src = url;
+            s.async = true;
+            function finish(err) {
+                if (done) return;
+                done = true;
+                s.onload = s.onerror = null;
+                clearTimeout(timer);
+                if (err) reject(err); else resolve();
             }
+            s.onload = function() { finish(null); };
+            s.onerror = function() { finish(new Error('HTTP error: ' + url)); };
+            var timer = timeout ? setTimeout(function() { finish(new Error('Timeout: ' + url)); }, timeout) : null;
+            document.head.appendChild(s);
+        });
+    }
+
+    function loadPjax(cdnUrl) {
+        return loadJs(cdnUrl, 10000).catch(function() {
+            
+            if (cdnUrl === PJAX_CDN) return loadPjax(PJAX_FALLBACK);
+            throw new Error('All PJAX CDNs failed');
+        });
+    }
+
+    var scripts = [loadPjax(PJAX_CDN)];
+    if (TOPBAR_URL) scripts.push(loadJs(TOPBAR_URL, 8000));
+
+    Promise.all(scripts).then(function() {
+        var pjax = new Pjax({ selectors: ['.main-container'] });
+
+        pjax._handleResponse = pjax.handleResponse;
+        pjax.handleResponse = function(responseText, request, href, options) {
+            if (request.responseText.match('<html')) {
+                if (responseText) {
+                    var newDom = new DOMParser().parseFromString(responseText, 'text/html');
+                    document.body.setAttribute('class', newDom.body.className);
+                    var t = newDom.title;
+                    if (t) document.title = t;
+                }
+            }
+            pjax._handleResponse(responseText, request, href, options);
+        };
+
+        if (typeof topbar !== 'undefined') {
+            topbar.config({ barColors: { '0': 'rgba(255,255,255,1)', '1.0': 'rgba(0,149,234,1)' } });
         }
-        
-        pjax._handleResponse(responseText, request, href, options);
-    };
 
-    
-    topbar.config({
-        barColors: {
-            '0': 'rgba(255, 255, 255, 1)',
-            '1.0': 'rgba(0, 149, 234, 1)'
-        }
+        document.addEventListener('pjax:send', function() {
+            if (typeof topbar !== 'undefined') topbar.show();
+        });
+        document.addEventListener('pjax:complete', function() {
+            window.Stack && window.Stack.init();
+            if (typeof topbar !== 'undefined') topbar.hide();
+        });
+    }).catch(function(err) {
+        console.warn('PJAX 未加载，使用普通导航:', err.message);
     });
-
-    document.addEventListener('pjax:send', () => {
-        topbar.show();
-    });
-
-    document.addEventListener('pjax:complete', () => {
-        window.Stack && window.Stack.init();
-        topbar.hide();
-    });
+})();
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
