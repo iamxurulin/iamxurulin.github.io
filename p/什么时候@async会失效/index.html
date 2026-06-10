@@ -6,11 +6,11 @@
 
 <link rel='canonical' href='https://iamxurulin.github.io/p/%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99@async%E4%BC%9A%E5%A4%B1%E6%95%88/'>
 
-<link rel="stylesheet" href="/scss/style.min.aa923504a4c47e34e7f447c4d8095c9c90cddb24a500d93528eeeae1818abf33.css"><meta property='og:title' content="什么时候@Async会失效">
+<link rel="stylesheet" href="/scss/style.min.2ac33fea5fd3ec430b1147b4869d2ce3e7a4fa79b8ed2288207b3c323dabc144.css"><meta property='og:title' content="什么时候@Async会失效">
 <meta property='og:description' content="有多种原因可造成@Async失效：\n1.@Async依赖于Spring AOP，如果是内部调用的话则会绕过代理对象，直接调用原始方法。\n2.Spring AOP默认只会对public方法生效，对于非public方法则不会被代理，所以此时@Async是失效的。\n">
 <meta property='og:url' content='https://iamxurulin.github.io/p/%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99@async%E4%BC%9A%E5%A4%B1%E6%95%88/'>
 <meta property='og:site_name' content='Coder_Studio'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Java' /><meta property='article:published_time' content='2026-01-01T14:12:06&#43;00:00'/><meta property='article:modified_time' content='2026-06-10T00:27:10&#43;00:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Java' /><meta property='article:published_time' content='2026-01-01T14:12:06&#43;00:00'/><meta property='article:modified_time' content='2026-06-10T00:36:46&#43;00:00'/>
 <meta name="twitter:title" content="什么时候@Async会失效">
 <meta name="twitter:description" content="有多种原因可造成@Async失效：\n1.@Async依赖于Spring AOP，如果是内部调用的话则会绕过代理对象，直接调用原始方法。\n2.Spring AOP默认只会对public方法生效，对于非public方法则不会被代理，所以此时@Async是失效的。\n"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5123323391207523"
      crossorigin="anonymous"></script>
@@ -598,7 +598,7 @@
 
 
         <span>
-            最后更新于 2026-06-10 00:27:10
+            最后更新于 2026-06-10 00:36:46
         </span>
     </section><section class="article-original-declaration">
         <div class="declaration-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -950,7 +950,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.b4654cd74006fe7475d7723cd7373672b5ea2035ab23404eb9ff511cb27b581c.js" defer></script><script type="text/javascript" src="/ts/custom.a44e77be05939c79d8ffe173c1d5909c71671fd04b7c41ba7a267bd17b1507bf.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.b4654cd74006fe7475d7723cd7373672b5ea2035ab23404eb9ff511cb27b581c.js" defer></script><script type="text/javascript" src="/ts/custom.e51a4765978a36efd24b81fd88d916db6b70445c7270d56af3dcb66c2641fe65.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');
@@ -1044,7 +1044,7 @@ if (window.requestIdleCallback) {
     const PREFETCH_DELAY = 80; 
 
     document.addEventListener('mouseover', function(e) {
-        const link = (e.target as HTMLElement).closest<HTMLAnchorElement>('a[href]');
+        const link = e.target.closest('a[href]');
         if (!link) return;
         const href = link.href;
         
@@ -1466,6 +1466,7 @@ if (screen.width >= 768) {
 (function() {
     const BUSUANZI_SCRIPT = 'https://busuanzi.ibruce.info/busuanzi.pure.mini.js';
     let _busuanziLoaded = false;
+    let _loadTimer = null;
 
     function loadBusuanzi() {
         if (_busuanziLoaded) return;
@@ -1478,9 +1479,26 @@ if (screen.width >= 768) {
         document.head.appendChild(script);
 
         script.onerror = function() {
-            const container = document.querySelector('#busuanzi_container_page_pv');
-            if (container) container.style.display = 'none';
+            fallbackDisplay();
         };
+
+        
+        _loadTimer = setTimeout(function() {
+            const value = document.querySelector('#busuanzi_value_page_pv');
+            if (value && (!value.textContent || value.textContent === '...')) {
+                fallbackDisplay();
+            }
+        }, 8000);
+    }
+
+    function fallbackDisplay() {
+        const value = document.querySelector('#busuanzi_value_page_pv');
+        if (value) {
+            if (!value.textContent || value.textContent === '...') {
+                value.textContent = 'N/A';
+                value.title = '统计服务暂时不可用，可能是广告拦截器屏蔽了计数脚本';
+            }
+        }
     }
 
     function initCounter() {
@@ -1507,9 +1525,8 @@ if (screen.width >= 768) {
 
     
     document.addEventListener('pjax:complete', () => {
+        if (_loadTimer) clearTimeout(_loadTimer);
         initCounter();
-        
-        
     });
 })();
 </script>

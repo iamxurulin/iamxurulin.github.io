@@ -6,11 +6,11 @@
 
 <link rel='canonical' href='https://iamxurulin.github.io/tags/java/'>
 
-<link rel="stylesheet" href="/scss/style.min.aa923504a4c47e34e7f447c4d8095c9c90cddb24a500d93528eeeae1818abf33.css"><meta property='og:title' content="Tag: Java - Coder_Studio">
+<link rel="stylesheet" href="/scss/style.min.2ac33fea5fd3ec430b1147b4869d2ce3e7a4fa79b8ed2288207b3c323dabc144.css"><meta property='og:title' content="Tag: Java - Coder_Studio">
 <meta property='og:description' content="Coder_Studio 个人技术博客 - 专注后端开发、数据结构与算法、分布式系统、AI 应用的技术分享">
 <meta property='og:url' content='https://iamxurulin.github.io/tags/java/'>
 <meta property='og:site_name' content='Coder_Studio'>
-<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2026-06-10T00:27:10&#43;00:00 '/><meta property='og:image' content='https://iamxurulin.github.io/cover/java_original_wordmark_logo_icon_146459.png' />
+<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2026-06-10T00:36:46&#43;00:00 '/><meta property='og:image' content='https://iamxurulin.github.io/cover/java_original_wordmark_logo_icon_146459.png' />
 <meta name="twitter:title" content="Tag: Java - Coder_Studio">
 <meta name="twitter:description" content="Coder_Studio 个人技术博客 - 专注后端开发、数据结构与算法、分布式系统、AI 应用的技术分享"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://iamxurulin.github.io/cover/java_original_wordmark_logo_icon_146459.png' /><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5123323391207523"
@@ -803,7 +803,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.b4654cd74006fe7475d7723cd7373672b5ea2035ab23404eb9ff511cb27b581c.js" defer></script><script type="text/javascript" src="/ts/custom.a44e77be05939c79d8ffe173c1d5909c71671fd04b7c41ba7a267bd17b1507bf.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.b4654cd74006fe7475d7723cd7373672b5ea2035ab23404eb9ff511cb27b581c.js" defer></script><script type="text/javascript" src="/ts/custom.e51a4765978a36efd24b81fd88d916db6b70445c7270d56af3dcb66c2641fe65.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');
@@ -897,7 +897,7 @@ if (window.requestIdleCallback) {
     const PREFETCH_DELAY = 80; 
 
     document.addEventListener('mouseover', function(e) {
-        const link = (e.target as HTMLElement).closest<HTMLAnchorElement>('a[href]');
+        const link = e.target.closest('a[href]');
         if (!link) return;
         const href = link.href;
         
@@ -1319,6 +1319,7 @@ if (screen.width >= 768) {
 (function() {
     const BUSUANZI_SCRIPT = 'https://busuanzi.ibruce.info/busuanzi.pure.mini.js';
     let _busuanziLoaded = false;
+    let _loadTimer = null;
 
     function loadBusuanzi() {
         if (_busuanziLoaded) return;
@@ -1331,9 +1332,26 @@ if (screen.width >= 768) {
         document.head.appendChild(script);
 
         script.onerror = function() {
-            const container = document.querySelector('#busuanzi_container_page_pv');
-            if (container) container.style.display = 'none';
+            fallbackDisplay();
         };
+
+        
+        _loadTimer = setTimeout(function() {
+            const value = document.querySelector('#busuanzi_value_page_pv');
+            if (value && (!value.textContent || value.textContent === '...')) {
+                fallbackDisplay();
+            }
+        }, 8000);
+    }
+
+    function fallbackDisplay() {
+        const value = document.querySelector('#busuanzi_value_page_pv');
+        if (value) {
+            if (!value.textContent || value.textContent === '...') {
+                value.textContent = 'N/A';
+                value.title = '统计服务暂时不可用，可能是广告拦截器屏蔽了计数脚本';
+            }
+        }
     }
 
     function initCounter() {
@@ -1360,9 +1378,8 @@ if (screen.width >= 768) {
 
     
     document.addEventListener('pjax:complete', () => {
+        if (_loadTimer) clearTimeout(_loadTimer);
         initCounter();
-        
-        
     });
 })();
 </script>
