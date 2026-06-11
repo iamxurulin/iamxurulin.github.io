@@ -10,7 +10,7 @@
 <meta property='og:description' content="Coder_Studio 个人技术博客 - 专注后端开发、数据结构与算法、分布式系统、AI 应用的技术分享">
 <meta property='og:url' content='https://iamxurulin.github.io/tags/spring-boot/'>
 <meta property='og:site_name' content='Coder_Studio'>
-<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2026-06-10T04:42:03&#43;00:00 '/>
+<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2026-06-11T07:40:13&#43;00:00 '/>
 <meta name="twitter:title" content="Tag: Spring Boot - Coder_Studio">
 <meta name="twitter:description" content="Coder_Studio 个人技术博客 - 专注后端开发、数据结构与算法、分布式系统、AI 应用的技术分享"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5123323391207523"
      crossorigin="anonymous"></script><link rel="alternate" type="application/rss&#43;xml" href="https://iamxurulin.github.io/tags/spring-boot/index.xml">
@@ -1249,38 +1249,31 @@ if (screen.width >= 768) {
 <script>
 
 (function() {
-    function fetchVercount() {
-        var el = document.querySelector('#vercount_value_page_pv');
-        if (!el) return;
+    var VERCOUNT_JS = 'https://cn.vercount.one/js';
 
+    function injectVercount() {
         
-        el.textContent = '...';
+        var old = document.querySelectorAll('script[data-vercount-loader]');
+        for (var i = 0; i < old.length; i++) {
+            old[i].remove();
+        }
 
-        var api = 'https://cn.vercount.one/log?url=' + encodeURIComponent(window.location.href);
-        fetch(api)
-            .then(function(r) { return r.json(); })
-            .then(function(data) {
-                if (data && data.page_pv !== undefined) {
-                    el.textContent = data.page_pv;
-                }
-            })
-            .catch(function() {
-                el.textContent = 'N/A';
-            });
+        var s = document.createElement('script');
+        s.src = VERCOUNT_JS;
+        s.setAttribute('data-vercount-loader', 'true');
+        s.async = true;
+        document.head.appendChild(s);
     }
 
     
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', fetchVercount);
-    } else {
-        fetchVercount();
-    }
+    injectVercount();
 
     
     if (!window._vercountPjaxBound) {
         window._vercountPjaxBound = true;
         document.addEventListener('pjax:complete', function() {
-            setTimeout(fetchVercount, 100);
+            
+            setTimeout(injectVercount, 300);
         });
     }
 })();

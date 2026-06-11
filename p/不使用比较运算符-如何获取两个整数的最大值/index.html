@@ -10,7 +10,7 @@
 <meta property='og:description' content=" 这道题如果用 a-b 的符号判断，在两数处于比较极端的情况下可能会发生整数溢出。\n比如当 a 是Integer.MIN_VALUE（-2147483648）、b 是Integer.MAX_VALUE（2147483647）时，a-b 会溢出成正数，导致错误地认为 a 比 b 大。\n">
 <meta property='og:url' content='https://iamxurulin.github.io/p/%E4%B8%8D%E4%BD%BF%E7%94%A8%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97%E7%AC%A6-%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E4%B8%A4%E4%B8%AA%E6%95%B4%E6%95%B0%E7%9A%84%E6%9C%80%E5%A4%A7%E5%80%BC/'>
 <meta property='og:site_name' content='Coder_Studio'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='位运算' /><meta property='article:published_time' content='2025-10-09T20:18:41&#43;00:00'/><meta property='article:modified_time' content='2026-06-10T04:42:03&#43;00:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='位运算' /><meta property='article:published_time' content='2025-10-09T20:18:41&#43;00:00'/><meta property='article:modified_time' content='2026-06-11T07:40:13&#43;00:00'/>
 <meta name="twitter:title" content="不使用比较运算符-如何获取两个整数的最大值">
 <meta name="twitter:description" content=" 这道题如果用 a-b 的符号判断，在两数处于比较极端的情况下可能会发生整数溢出。\n比如当 a 是Integer.MIN_VALUE（-2147483648）、b 是Integer.MAX_VALUE（2147483647）时，a-b 会溢出成正数，导致错误地认为 a 比 b 大。\n"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5123323391207523"
      crossorigin="anonymous"></script>
@@ -726,7 +726,7 @@
 
 
         <span>
-            最后更新于 2026-06-10 04:42:03
+            最后更新于 2026-06-11 07:40:13
         </span>
     </section><section class="article-original-declaration">
         <div class="declaration-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -1589,38 +1589,31 @@ if (screen.width >= 768) {
 <script>
 
 (function() {
-    function fetchVercount() {
-        var el = document.querySelector('#vercount_value_page_pv');
-        if (!el) return;
+    var VERCOUNT_JS = 'https://cn.vercount.one/js';
 
+    function injectVercount() {
         
-        el.textContent = '...';
+        var old = document.querySelectorAll('script[data-vercount-loader]');
+        for (var i = 0; i < old.length; i++) {
+            old[i].remove();
+        }
 
-        var api = 'https://cn.vercount.one/log?url=' + encodeURIComponent(window.location.href);
-        fetch(api)
-            .then(function(r) { return r.json(); })
-            .then(function(data) {
-                if (data && data.page_pv !== undefined) {
-                    el.textContent = data.page_pv;
-                }
-            })
-            .catch(function() {
-                el.textContent = 'N/A';
-            });
+        var s = document.createElement('script');
+        s.src = VERCOUNT_JS;
+        s.setAttribute('data-vercount-loader', 'true');
+        s.async = true;
+        document.head.appendChild(s);
     }
 
     
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', fetchVercount);
-    } else {
-        fetchVercount();
-    }
+    injectVercount();
 
     
     if (!window._vercountPjaxBound) {
         window._vercountPjaxBound = true;
         document.addEventListener('pjax:complete', function() {
-            setTimeout(fetchVercount, 100);
+            
+            setTimeout(injectVercount, 300);
         });
     }
 })();

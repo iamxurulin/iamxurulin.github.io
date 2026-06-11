@@ -10,7 +10,7 @@
 <meta property='og:description' content="哈希、二叉树、回溯、递归、DFS、BFS">
 <meta property='og:url' content='https://iamxurulin.github.io/categories/%E7%AE%97%E6%B3%95/'>
 <meta property='og:site_name' content='Coder_Studio'>
-<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2026-06-10T04:42:03&#43;00:00 '/><meta property='og:image' content='https://iamxurulin.github.io/cover/luca-bravo-alS7ewQ41M8-unsplash.jpg' />
+<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2026-06-11T07:40:13&#43;00:00 '/><meta property='og:image' content='https://iamxurulin.github.io/cover/luca-bravo-alS7ewQ41M8-unsplash.jpg' />
 <meta name="twitter:title" content="Category: 算法 - Coder_Studio">
 <meta name="twitter:description" content="哈希、二叉树、回溯、递归、DFS、BFS"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://iamxurulin.github.io/cover/luca-bravo-alS7ewQ41M8-unsplash.jpg' /><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5123323391207523"
@@ -1325,38 +1325,31 @@ if (screen.width >= 768) {
 <script>
 
 (function() {
-    function fetchVercount() {
-        var el = document.querySelector('#vercount_value_page_pv');
-        if (!el) return;
+    var VERCOUNT_JS = 'https://cn.vercount.one/js';
 
+    function injectVercount() {
         
-        el.textContent = '...';
+        var old = document.querySelectorAll('script[data-vercount-loader]');
+        for (var i = 0; i < old.length; i++) {
+            old[i].remove();
+        }
 
-        var api = 'https://cn.vercount.one/log?url=' + encodeURIComponent(window.location.href);
-        fetch(api)
-            .then(function(r) { return r.json(); })
-            .then(function(data) {
-                if (data && data.page_pv !== undefined) {
-                    el.textContent = data.page_pv;
-                }
-            })
-            .catch(function() {
-                el.textContent = 'N/A';
-            });
+        var s = document.createElement('script');
+        s.src = VERCOUNT_JS;
+        s.setAttribute('data-vercount-loader', 'true');
+        s.async = true;
+        document.head.appendChild(s);
     }
 
     
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', fetchVercount);
-    } else {
-        fetchVercount();
-    }
+    injectVercount();
 
     
     if (!window._vercountPjaxBound) {
         window._vercountPjaxBound = true;
         document.addEventListener('pjax:complete', function() {
-            setTimeout(fetchVercount, 100);
+            
+            setTimeout(injectVercount, 300);
         });
     }
 })();
