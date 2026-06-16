@@ -1,19 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-    <channel>
-        <title>Prompt on Coder_Studio</title>
-        <link>https://iamxurulin.github.io/tags/prompt/</link>
-        <description>Recent content in Prompt on Coder_Studio</description>
-        <generator>Hugo -- gohugo.io</generator>
-        <language>zh-cn</language>
-        <copyright>iamxurulin</copyright>
-        <lastBuildDate>Tue, 16 Jun 2026 05:16:10 +0000</lastBuildDate><atom:link href="https://iamxurulin.github.io/tags/prompt/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>Prompt Engineering和context engineering有什么区别?为什么Transformer架构在处理超长上下文时会变慢？</title>
-        <link>https://iamxurulin.github.io/p/prompt-engineering%E5%92%8Ccontext-engineering%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%E4%B8%BA%E4%BB%80%E4%B9%88transformer%E6%9E%B6%E6%9E%84%E5%9C%A8%E5%A4%84%E7%90%86%E8%B6%85%E9%95%BF%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%B6%E4%BC%9A%E5%8F%98%E6%85%A2/</link>
-        <pubDate>Thu, 04 Jun 2026 17:14:35 +0000</pubDate>
-        
-        <guid>https://iamxurulin.github.io/p/prompt-engineering%E5%92%8Ccontext-engineering%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%E4%B8%BA%E4%BB%80%E4%B9%88transformer%E6%9E%B6%E6%9E%84%E5%9C%A8%E5%A4%84%E7%90%86%E8%B6%85%E9%95%BF%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%B6%E4%BC%9A%E5%8F%98%E6%85%A2/</guid>
-        <description>&lt;h2 id=&#34;prompt-engineering和context-engineering有什么区别&#34;&gt;Prompt Engineering和context engineering有什么区别?
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Prompt on Coder_Studio</title><link>https://iamxurulin.github.io/tags/prompt/</link><description>Recent content in Prompt on Coder_Studio</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>iamxurulin</copyright><lastBuildDate>Tue, 16 Jun 2026 05:48:35 +0000</lastBuildDate><atom:link href="https://iamxurulin.github.io/tags/prompt/index.xml" rel="self" type="application/rss+xml"/><item><title>Prompt Engineering和context engineering有什么区别?为什么Transformer架构在处理超长上下文时会变慢？</title><link>https://iamxurulin.github.io/p/prompt-engineering%E5%92%8Ccontext-engineering%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%E4%B8%BA%E4%BB%80%E4%B9%88transformer%E6%9E%B6%E6%9E%84%E5%9C%A8%E5%A4%84%E7%90%86%E8%B6%85%E9%95%BF%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%B6%E4%BC%9A%E5%8F%98%E6%85%A2/</link><pubDate>Thu, 04 Jun 2026 17:14:35 +0000</pubDate><guid>https://iamxurulin.github.io/p/prompt-engineering%E5%92%8Ccontext-engineering%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%E4%B8%BA%E4%BB%80%E4%B9%88transformer%E6%9E%B6%E6%9E%84%E5%9C%A8%E5%A4%84%E7%90%86%E8%B6%85%E9%95%BF%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%B6%E4%BC%9A%E5%8F%98%E6%85%A2/</guid><description>&lt;h2 id="prompt-engineering和context-engineering有什么区别"&gt;Prompt Engineering和context engineering有什么区别?
 &lt;/h2&gt;&lt;p&gt;Prompt是指导大模型怎么思考的机制，解决的是how的问题，怎么推理，怎么组织答案。&lt;/p&gt;
 &lt;p&gt;Context是为大模型提供信息的机制，解决的是what的问题，给模型什么知识，什么数据。&lt;/p&gt;
 &lt;p&gt;Prompt的核心技术包括CoT、few shot、角色扮演等，用来激发模型内部已有的知识；&lt;/p&gt;
@@ -22,7 +7,7 @@
 &lt;p&gt;在实际工程中，Prompt面临脆弱性和幻觉问题，我们用自动优化和Self-Consistency来解决；&lt;/p&gt;
 &lt;p&gt;Context面临中间迷失和噪声问题，我们用重排策略和自反思来优化。&lt;/p&gt;
 &lt;p&gt;未来的发展方向是Agent，让系统动态地生成和管理这两者，实现真正的智能协作。&lt;/p&gt;
-&lt;h2 id=&#34;为什么transformer架构在处理超长上下文时会变慢它的瓶颈在哪里我们该如何解决&#34;&gt;为什么Transformer架构在处理超长上下文时会变慢？它的瓶颈在哪里？我们该如何解决？
+&lt;h2 id="为什么transformer架构在处理超长上下文时会变慢它的瓶颈在哪里我们该如何解决"&gt;为什么Transformer架构在处理超长上下文时会变慢？它的瓶颈在哪里？我们该如何解决？
 &lt;/h2&gt;&lt;p&gt;在Transformer的自注意力机制中，模型主要做的事情是让每一个Token都要去和整个序列里其他所有的Token进行交互，计算他们之间的相关度。&lt;/p&gt;
 &lt;p&gt;假设输入序列长度从n变成2n，计算量和显存占用不是简单的翻一倍，而是直接飙升4倍。这就是所谓的二次方爆炸，长度双倍增长，代价是4倍的计算量。&lt;/p&gt;
 &lt;p&gt;除了计算的瓶颈，还有一个关键的瓶颈是显存瓶颈，也就是常说的显存墙现象。&lt;/p&gt;
@@ -33,9 +18,4 @@
 &lt;p&gt;首先，用Flash Attention在算子层面做融合和优化，直接解决IO的瓶颈；&lt;/p&gt;
 &lt;p&gt;其次，用GQA和MQA在架构层面做参数共享，显著压缩KV cache的体积；&lt;/p&gt;
 &lt;p&gt;同时，借助PagedAttention，在内存管理上做创新，消灭显存碎片；&lt;/p&gt;
-&lt;p&gt;最后，通过位置编码的数学手段，比如RoPE Scaling让模型具备外推能力。&lt;/p&gt;
-</description>
-        </item>
-        
-    </channel>
-</rss>
+&lt;p&gt;最后，通过位置编码的数学手段，比如RoPE Scaling让模型具备外推能力。&lt;/p&gt;</description></item></channel></rss>

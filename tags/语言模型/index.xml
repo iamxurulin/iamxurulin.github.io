@@ -1,25 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-    <channel>
-        <title>语言模型 on Coder_Studio</title>
-        <link>https://iamxurulin.github.io/tags/%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/</link>
-        <description>Recent content in 语言模型 on Coder_Studio</description>
-        <generator>Hugo -- gohugo.io</generator>
-        <language>zh-cn</language>
-        <copyright>iamxurulin</copyright>
-        <lastBuildDate>Tue, 16 Jun 2026 05:16:10 +0000</lastBuildDate><atom:link href="https://iamxurulin.github.io/tags/%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>为什么 temperature=0，模型输出依然不完全一致？</title>
-        <link>https://iamxurulin.github.io/p/%E4%B8%BA%E4%BB%80%E4%B9%88-temperature0%E6%A8%A1%E5%9E%8B%E8%BE%93%E5%87%BA%E4%BE%9D%E7%84%B6%E4%B8%8D%E5%AE%8C%E5%85%A8%E4%B8%80%E8%87%B4/</link>
-        <pubDate>Sat, 06 Jun 2026 17:50:42 +0000</pubDate>
-        
-        <guid>https://iamxurulin.github.io/p/%E4%B8%BA%E4%BB%80%E4%B9%88-temperature0%E6%A8%A1%E5%9E%8B%E8%BE%93%E5%87%BA%E4%BE%9D%E7%84%B6%E4%B8%8D%E5%AE%8C%E5%85%A8%E4%B8%80%E8%87%B4/</guid>
-        <description>&lt;p&gt;&lt;img src=&#34;https://iamxurulin.github.io/images/edc340ae5dc3b370c4af5b1dac3caadb-8a2a9afe.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>语言模型 on Coder_Studio</title><link>https://iamxurulin.github.io/tags/%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/</link><description>Recent content in 语言模型 on Coder_Studio</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>iamxurulin</copyright><lastBuildDate>Tue, 16 Jun 2026 05:48:35 +0000</lastBuildDate><atom:link href="https://iamxurulin.github.io/tags/%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/index.xml" rel="self" type="application/rss+xml"/><item><title>为什么 temperature=0，模型输出依然不完全一致？</title><link>https://iamxurulin.github.io/p/%E4%B8%BA%E4%BB%80%E4%B9%88-temperature0%E6%A8%A1%E5%9E%8B%E8%BE%93%E5%87%BA%E4%BE%9D%E7%84%B6%E4%B8%8D%E5%AE%8C%E5%85%A8%E4%B8%80%E8%87%B4/</link><pubDate>Sat, 06 Jun 2026 17:50:42 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E4%B8%BA%E4%BB%80%E4%B9%88-temperature0%E6%A8%A1%E5%9E%8B%E8%BE%93%E5%87%BA%E4%BE%9D%E7%84%B6%E4%B8%8D%E5%AE%8C%E5%85%A8%E4%B8%80%E8%87%B4/</guid><description>&lt;p&gt;&lt;img src="https://iamxurulin.github.io/images/edc340ae5dc3b370c4af5b1dac3caadb-8a2a9afe.png"
+loading="lazy"
 &gt;&lt;/p&gt;
 &lt;p&gt;很多人会觉得：&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;temperature 设成 0，结果应该绝对稳定才对。&lt;/strong&gt;&lt;/p&gt;
@@ -30,13 +10,8 @@
 &lt;p&gt;既然最大值是确定的，那么输出自然也应该是固定的。&lt;/p&gt;
 &lt;p&gt;但问题在于：&lt;/p&gt;
 &lt;p&gt;数学世界是理想化的，而模型推理发生在真实硬件上。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://iamxurulin.github.io/images/e21e14e6eae762e6f56258e4a7c52b15-2d08812d.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
+&lt;p&gt;&lt;img src="https://iamxurulin.github.io/images/e21e14e6eae762e6f56258e4a7c52b15-2d08812d.png"
+loading="lazy"
 &gt;&lt;/p&gt;
 &lt;p&gt;大模型真正运行时，底层依赖的是 GPU 的并行计算架构，而不是一台计算器按顺序一步一步算。&lt;/p&gt;
 &lt;p&gt;GPU 为了追求吞吐量，会把大量运算同时展开。&lt;/p&gt;
@@ -48,34 +23,24 @@
 &lt;p&gt;因为模型最后预测 token 时，会得到一整个词表的 logits 分数。&lt;/p&gt;
 &lt;p&gt;而词表规模往往有几万甚至几十万个 token。&lt;/p&gt;
 &lt;p&gt;很多情况下，Top-1 和 Top-2 的分数差距极其接近。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://iamxurulin.github.io/images/a53c3662ce191a5c3dce0ae5459cbd5d-02f3692e.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
+&lt;p&gt;&lt;img src="https://iamxurulin.github.io/images/a53c3662ce191a5c3dce0ae5459cbd5d-02f3692e.png"
+loading="lazy"
 &gt;&lt;/p&gt;
 &lt;p&gt;例如：Token A=10.55555，Token B=10.55554。&lt;/p&gt;
 &lt;p&gt;正常情况下，A 排第一。&lt;/p&gt;
 &lt;p&gt;但如果因为 GPU 并行计算、低精度累积误差，导致某一步出现微小抖动，使得Token A=10.55553，Token B=10.55556，那么排名就可能直接翻转。&lt;/p&gt;
 &lt;p&gt;虽然变化微乎其微，但对于自回归模型来说，第一个 token 一旦不同，后续生成路径就会迅速分叉。&lt;/p&gt;
 &lt;p&gt;于是你看到的现象就是temperature 已经设为 0，输出仍然偶尔不一致。&lt;/p&gt;
-&lt;h2 id=&#34;那该怎么提高稳定性&#34;&gt;那该怎么提高稳定性？
-&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;https://iamxurulin.github.io/images/b82e181bae00dd5b5bd414199c83310f-170ee786.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
+&lt;h2 id="那该怎么提高稳定性"&gt;那该怎么提高稳定性？
+&lt;/h2&gt;&lt;p&gt;&lt;img src="https://iamxurulin.github.io/images/b82e181bae00dd5b5bd414199c83310f-170ee786.png"
+loading="lazy"
 &gt;&lt;/p&gt;
-&lt;h3 id=&#34;1-直接使用-argmax&#34;&gt;1. 直接使用 Argmax
+&lt;h3 id="1-直接使用-argmax"&gt;1. 直接使用 Argmax
 &lt;/h3&gt;&lt;p&gt;这是最直接、也最有效的方法。&lt;/p&gt;
 &lt;p&gt;如果 temperature=0，就不要再经过 sampling 逻辑，而是直接取 logits 最大值。&lt;/p&gt;
 &lt;p&gt;也就是跳过随机采样，强制选择 Top-1。&lt;/p&gt;
 &lt;p&gt;这样可以减少一部分实现层面的不确定性。&lt;/p&gt;
-&lt;h3 id=&#34;2-固定随机种子&#34;&gt;2. 固定随机种子
+&lt;h3 id="2-固定随机种子"&gt;2. 固定随机种子
 &lt;/h3&gt;&lt;p&gt;一些推理框架内部，可能仍然存在随机逻辑。&lt;/p&gt;
 &lt;p&gt;例如：&lt;/p&gt;
 &lt;ul&gt;
@@ -86,17 +51,12 @@
 &lt;p&gt;因此固定 seed，可以显著提高复现能力。&lt;/p&gt;
 &lt;p&gt;但需要注意，固定 seed ≠ 绝对确定。&lt;/p&gt;
 &lt;p&gt;因为硬件层面的非确定性依然可能存在。&lt;/p&gt;
-&lt;h3 id=&#34;3-开启确定性模式deterministic-mode&#34;&gt;3. 开启确定性模式（Deterministic Mode）
+&lt;h3 id="3-开启确定性模式deterministic-mode"&gt;3. 开启确定性模式（Deterministic Mode）
 &lt;/h3&gt;&lt;p&gt;主流框架通常会提供 deterministic 模式。&lt;/p&gt;
 &lt;p&gt;本质上就是牺牲一部分性能，换取更稳定的结果。&lt;/p&gt;
 &lt;p&gt;它会尽量避免某些并行乱序计算方式，优先使用可复现的计算路径。&lt;/p&gt;
 &lt;p&gt;代价是推理速度可能下降。&lt;/p&gt;
 &lt;p&gt;所以是否开启，需要看业务更重视性能还是稳定性。&lt;/p&gt;
-&lt;h3 id=&#34;4-提高计算精度&#34;&gt;4. 提高计算精度
+&lt;h3 id="4-提高计算精度"&gt;4. 提高计算精度
 &lt;/h3&gt;&lt;p&gt;既然误差来自低精度计算，那么一种思路就是&lt;strong&gt;在关键计算阶段提高精度。&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;例如，中间过程使用 FP16/BF16，最后一层 logits 计算切换到 FP32，这样能减少数值误差带来的排序抖动。&lt;/p&gt;
-</description>
-        </item>
-        
-    </channel>
-</rss>
+&lt;p&gt;例如，中间过程使用 FP16/BF16，最后一层 logits 计算切换到 FP32，这样能减少数值误差带来的排序抖动。&lt;/p&gt;</description></item></channel></rss>
