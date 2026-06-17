@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>计算机网络 on Coder_Studio</title><link>https://iamxurulin.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</link><description>Recent content in 计算机网络 on Coder_Studio</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>iamxurulin</copyright><lastBuildDate>Tue, 16 Jun 2026 06:16:25 +0000</lastBuildDate><atom:link href="https://iamxurulin.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/index.xml" rel="self" type="application/rss+xml"/><item><title>【面试真题拆解】被问懵的计算机网络7层_5层_4层模型</title><link>https://iamxurulin.github.io/p/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98%E6%8B%86%E8%A7%A3%E8%A2%AB%E9%97%AE%E6%87%B5%E7%9A%84%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C7%E5%B1%82_5%E5%B1%82_4%E5%B1%82%E6%A8%A1%E5%9E%8B/</link><pubDate>Sat, 21 Mar 2026 09:04:13 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98%E6%8B%86%E8%A7%A3%E8%A2%AB%E9%97%AE%E6%87%B5%E7%9A%84%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C7%E5%B1%82_5%E5%B1%82_4%E5%B1%82%E6%A8%A1%E5%9E%8B/</guid><description>&lt;p&gt;好几次面试都被问了计算机网络模型，一次是让我讲讲7层模型，还有让我讲讲5层模型，4层模型的。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>计算机网络 on Coder_Studio</title><link>https://iamxurulin.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</link><description>Recent content in 计算机网络 on Coder_Studio</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>iamxurulin</copyright><lastBuildDate>Wed, 17 Jun 2026 06:03:30 +0000</lastBuildDate><atom:link href="https://iamxurulin.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/index.xml" rel="self" type="application/rss+xml"/><item><title>【面试真题拆解】被问懵的计算机网络7层_5层_4层模型</title><link>https://iamxurulin.github.io/p/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98%E6%8B%86%E8%A7%A3%E8%A2%AB%E9%97%AE%E6%87%B5%E7%9A%84%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C7%E5%B1%82_5%E5%B1%82_4%E5%B1%82%E6%A8%A1%E5%9E%8B/</link><pubDate>Sat, 21 Mar 2026 09:04:13 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98%E6%8B%86%E8%A7%A3%E8%A2%AB%E9%97%AE%E6%87%B5%E7%9A%84%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C7%E5%B1%82_5%E5%B1%82_4%E5%B1%82%E6%A8%A1%E5%9E%8B/</guid><description>&lt;p&gt;好几次面试都被问了计算机网络模型，一次是让我讲讲7层模型，还有让我讲讲5层模型，4层模型的。&lt;/p&gt;
 &lt;p&gt;这群面试官完全不按套路出牌，昨天刚问完 7 层模型，今天就换成了 4 层模型。&lt;/p&gt;
 &lt;p&gt;我当场脑子一片空白，支支吾吾说不清楚，直接就凉了。&lt;/p&gt;
 &lt;p&gt;首先，为什么会有三个版本？&lt;/p&gt;
@@ -172,36 +172,4 @@ MAC地址、以太网协议、交换机转发，都在这一层。&lt;/p&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;&lt;strong&gt;小贴士：&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;ARP 协议逻辑上属于网络层（核心为 IP 协议提供地址解析服务，是 TCP/IP 网际层的核心配套协议），仅从报文封装形式来看，它被直接封装在以太网帧中，因此也有观点认为它属于数据链路层。&lt;/p&gt;</description></item><item><title>TCP的核心参数-MTU、MSS、RTT、RTO、cwnd、ssthresh</title><link>https://iamxurulin.github.io/p/tcp%E7%9A%84%E6%A0%B8%E5%BF%83%E5%8F%82%E6%95%B0-mtumssrttrtocwndssthresh/</link><pubDate>Sun, 15 Mar 2026 11:36:23 +0000</pubDate><guid>https://iamxurulin.github.io/p/tcp%E7%9A%84%E6%A0%B8%E5%BF%83%E5%8F%82%E6%95%B0-mtumssrttrtocwndssthresh/</guid><description>&lt;p&gt;MTU和MSS，管【单个TCP包到底发多大最合适】，是整个传输的基础；&lt;/p&gt;
-&lt;p&gt;RTT和RTO，管【包发出去之后，怎么保证对方一定收到，丢包了怎么办】，是TCP可靠传输的核心；&lt;/p&gt;
-&lt;p&gt;cwnd和ssthresh，管【一次能连续发多少个包，怎么既跑满带宽，又不把网络堵死】，是TCP拥塞控制的核心。&lt;/p&gt;
-&lt;h3 id="mtu--mss"&gt;MTU &amp;amp; MSS
-&lt;/h3&gt;&lt;h4 id="mtu最大传输单元maximum-transmission-unit"&gt;&lt;strong&gt;MTU（最大传输单元，Maximum Transmission Unit）&lt;/strong&gt;
-&lt;/h4&gt;&lt;p&gt;平时用的以太网、WiFi，硬件层面就规定了一个完整的IP数据包，最大不能超过1500字节，这个上限就是MTU。&lt;br&gt;
-如果IP包超过MTU，就会被拆成好几个小分片传输，只要有一个分片丢了，整个包就得全量重传，特别影响效率，还可能被防火墙拦截。&lt;/p&gt;
-&lt;h4 id="mss最大报文段长度maximum-segment-size"&gt;&lt;strong&gt;MSS（最大报文段长度，Maximum Segment Size）&lt;/strong&gt;
-&lt;/h4&gt;&lt;p&gt;这是基于MTU算出来的、TCP包里真正能装的&lt;strong&gt;业务数据的最大长度&lt;/strong&gt;——要把IP头、TCP头的空间提前扣掉。&lt;br&gt;
-以太网默认MTU1500字节，标准IP头和TCP头各占20字节，所以默认MSS就是1460字节。&lt;/p&gt;
-&lt;p&gt;它是TCP三次握手的时候，客户端和服务端协商出来的，最终取两边的最小值，目的就是从源头避免IP拆包。&lt;/p&gt;
-&lt;h3 id="rtt--rto"&gt;RTT &amp;amp; RTO
-&lt;/h3&gt;&lt;h4 id="rtt往返时延round-trip-time"&gt;&lt;strong&gt;RTT（往返时延，Round-Trip Time）&lt;/strong&gt;
-&lt;/h4&gt;&lt;p&gt;我发一个TCP包出去，到我收到对方回的【我收到了】的ACK确认包，这一来一回花的时间，就是RTT。&lt;br&gt;
-它是网络环境决定的客观值，网络越拥堵、跨的路由越多，RTT就越长，会实时波动，是算RTO的唯一基础。&lt;/p&gt;
-&lt;h4 id="rto重传超时时间retransmission-timeout"&gt;&lt;strong&gt;RTO（重传超时时间，Retransmission TimeOut）&lt;/strong&gt;
-&lt;/h4&gt;&lt;p&gt;我发出去一个包，会设一个定时器，要是超过这个时间还没收到ACK，我就认为这个包丢了，马上重发一个，这个定时器的时间就是RTO。&lt;br&gt;
-RTO完全是基于RTT算出来的，不是固定死的。&lt;/p&gt;
-&lt;p&gt;它必须比RTT大一点。&lt;/p&gt;
-&lt;p&gt;如果太小了，ACK还在路上就瞎重传，浪费带宽；&lt;/p&gt;
-&lt;p&gt;但太大了，真丢包了半天不重传，传输变慢。&lt;/p&gt;
-&lt;p&gt;所以，网络波动RTT变了，RTO也会跟着实时调整。&lt;/p&gt;
-&lt;h3 id="cwnd--ssthresh"&gt;cwnd &amp;amp; ssthresh
-&lt;/h3&gt;&lt;p&gt;这两个参数是TCP拥塞控制的核心，TCP刚建连的时候，根本不知道当前网络能扛住多大流量，发少了浪费带宽，发多了直接把网络堵死，所以用这两个参数控制发送节奏。&lt;/p&gt;
-&lt;h4 id="cwnd拥塞窗口congestion-window"&gt;&lt;strong&gt;cwnd（拥塞窗口，Congestion Window）&lt;/strong&gt;
-&lt;/h4&gt;&lt;p&gt;TCP发送端自己维护的【油门】，单位是MSS。这个参数决定了在没收到对方ACK之前，我最多能连续发多少个包。&lt;/p&gt;
-&lt;p&gt;比如cwnd=10，就是最多连续发10个MSS大小的包，不用等ACK。&lt;br&gt;
-需注意的是，cwnd不是固定的，网络越好、丢包越少，cwnd就越大，发送速度就越快；一旦丢包，就会马上降下来。&lt;/p&gt;
-&lt;h4 id="ssthresh慢启动阈值slow-start-threshold"&gt;&lt;strong&gt;ssthresh（慢启动阈值，Slow Start Threshold）&lt;/strong&gt;
-&lt;/h4&gt;&lt;p&gt;cwnd的【换挡开关】，用来划分两个发送阶段，单位也是MSS。&lt;br&gt;
-当cwnd ＜ ssthresh时，进入&lt;strong&gt;慢启动阶段&lt;/strong&gt;，cwnd每过一个RTT就直接翻倍，指数级快速涨速，尽快把带宽跑满；&lt;/p&gt;
-&lt;p&gt;当cwnd ≥ ssthresh时，进入&lt;strong&gt;拥塞避免阶段&lt;/strong&gt;，cwnd每过一个RTT才加1，线性慢慢涨，避免冲太猛把网络堵死。&lt;br&gt;
-一旦检测到网络拥堵丢包，ssthresh会立刻降到当前cwnd的一半，再根据丢包的严重程度调整cwnd，重新控制发送节奏。&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;ARP 协议逻辑上属于网络层（核心为 IP 协议提供地址解析服务，是 TCP/IP 网际层的核心配套协议），仅从报文封装形式来看，它被直接封装在以太网帧中，因此也有观点认为它属于数据链路层。&lt;/p&gt;</description></item></channel></rss>

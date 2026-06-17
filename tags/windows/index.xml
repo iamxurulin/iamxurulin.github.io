@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Windows on Coder_Studio</title><link>https://iamxurulin.github.io/tags/windows/</link><description>Recent content in Windows on Coder_Studio</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>iamxurulin</copyright><lastBuildDate>Tue, 16 Jun 2026 06:16:25 +0000</lastBuildDate><atom:link href="https://iamxurulin.github.io/tags/windows/index.xml" rel="self" type="application/rss+xml"/><item><title>机器人Java后端算法笔试题解析</title><link>https://iamxurulin.github.io/p/%E6%9C%BA%E5%99%A8%E4%BA%BAjava%E5%90%8E%E7%AB%AF%E7%AE%97%E6%B3%95%E7%AC%94%E8%AF%95%E9%A2%98%E8%A7%A3%E6%9E%90/</link><pubDate>Fri, 22 May 2026 23:01:24 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E6%9C%BA%E5%99%A8%E4%BA%BAjava%E5%90%8E%E7%AB%AF%E7%AE%97%E6%B3%95%E7%AC%94%E8%AF%95%E9%A2%98%E8%A7%A3%E6%9E%90/</guid><description>&lt;ol&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Windows on Coder_Studio</title><link>https://iamxurulin.github.io/tags/windows/</link><description>Recent content in Windows on Coder_Studio</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>iamxurulin</copyright><lastBuildDate>Wed, 17 Jun 2026 06:03:30 +0000</lastBuildDate><atom:link href="https://iamxurulin.github.io/tags/windows/index.xml" rel="self" type="application/rss+xml"/><item><title>机器人Java后端算法笔试题解析</title><link>https://iamxurulin.github.io/p/%E6%9C%BA%E5%99%A8%E4%BA%BAjava%E5%90%8E%E7%AB%AF%E7%AE%97%E6%B3%95%E7%AC%94%E8%AF%95%E9%A2%98%E8%A7%A3%E6%9E%90/</link><pubDate>Fri, 22 May 2026 23:01:24 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E6%9C%BA%E5%99%A8%E4%BA%BAjava%E5%90%8E%E7%AB%AF%E7%AE%97%E6%B3%95%E7%AC%94%E8%AF%95%E9%A2%98%E8%A7%A3%E6%9E%90/</guid><description>&lt;ol&gt;
 &lt;li&gt;如何判断一个字符串变量a为空，包括null、空字符串、一个或多个空格、一个或多个whitespace?&lt;/li&gt;
 &lt;/ol&gt;
 &lt;blockquote&gt;
@@ -397,40 +397,4 @@ maxPostSize=&amp;ldquo;10485760&amp;rdquo;&lt;br&gt;
 &lt;li&gt;&lt;strong&gt;禁止可逆加密&lt;/strong&gt;：密码应单向加密，不可被还原。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;某些高安全场景还会增加 pepper（系统级密钥），保存在服务端配置或密钥系统中，而不是数据库。&lt;/p&gt;
-&lt;/blockquote&gt;</description></item><item><title>解决 Windows 虚拟内存迁移失败的全过程实录</title><link>https://iamxurulin.github.io/p/%E8%A7%A3%E5%86%B3-windows-%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E8%BF%81%E7%A7%BB%E5%A4%B1%E8%B4%A5%E7%9A%84%E5%85%A8%E8%BF%87%E7%A8%8B%E5%AE%9E%E5%BD%95/</link><pubDate>Wed, 29 Apr 2026 23:49:57 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E8%A7%A3%E5%86%B3-windows-%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E8%BF%81%E7%A7%BB%E5%A4%B1%E8%B4%A5%E7%9A%84%E5%85%A8%E8%BF%87%E7%A8%8B%E5%AE%9E%E5%BD%95/</guid><description>&lt;p&gt;最近发现C 盘空间告急，看了一下，有一个十几GB的虚拟内存（&lt;code&gt;pagefile.sys&lt;/code&gt;）文件，于是，我打算把它搬到D盘去，给C盘腾出点空间来。&lt;/p&gt;
-&lt;p&gt;但是呢，我在【系统属性】里设置了N次，每次重启后都是弹出那句令人崩溃的：“&lt;strong&gt;由于启动计算机时出现了页面文件配置问题，Windows 在你的计算机上创建了一个临时页面文件&amp;hellip;&lt;/strong&gt;”&lt;/p&gt;
-&lt;p&gt;&lt;img src="https://iamxurulin.github.io/images/c68cafd12441ab09e618353daeefde98-17c15ec4.png"
-loading="lazy"
-&gt;&lt;/p&gt;
-&lt;p&gt;本文，主要是为了复盘一下这次的排坑经历，从底层彻底解决这个顽疾。&lt;/p&gt;
-&lt;h3 id="为什么常规迁移会失败"&gt;为什么常规迁移会失败？
-&lt;/h3&gt;&lt;p&gt;通常我们通过【高级系统设置】➡️【性能】➡️【虚拟内存】来修改，但系统依然反复跳回 C 盘。
-&lt;img src="https://iamxurulin.github.io/images/3b72e86e6da77140ddca8813576cf03a-82872650.png"
-loading="lazy"
-&gt;
-其中的原因往往不在于你没点那个【设置】按钮：
-&lt;img src="https://iamxurulin.github.io/images/2fff6d2759b25e78a5d7a657748b0d29-76312f9a.png"
-loading="lazy"
-&gt;&lt;/p&gt;
-&lt;p&gt;而在于以下两点底层逻辑：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;注册表强制开启了“仅在系统盘创建分页文件”的开关。&lt;/li&gt;
-&lt;li&gt;Windows 启动早期需要一个微小的空间记录崩溃日志，如果 C 盘完全消失，系统会感到“不安全”而强制回滚。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id="解决方案"&gt;解决方案
-&lt;/h3&gt;&lt;p&gt;如果你发现常规设置无效，请执行以下步骤：&lt;/p&gt;
-&lt;p&gt;1.按 &lt;code&gt;Win + R&lt;/code&gt; 输入 &lt;code&gt;regedit&lt;/code&gt;，定位到：&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;在右侧找到并修改以下三项：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;TempPageFile&lt;/code&gt;：数值改为 &lt;code&gt;0&lt;/code&gt;（防止系统自作主张创建临时文件）。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;PagefileOnOsVolume&lt;/code&gt;：数值改为 &lt;code&gt;0&lt;/code&gt;（解锁“必须在系统盘”的限制）。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;PagingFiles&lt;/code&gt;：检查数值，确保路径指向你的目标盘，例如 &lt;code&gt;D:\pagefile.sys 16384 16384&lt;/code&gt;。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;2.不要让 C 盘完全没有分页文件。&lt;/p&gt;
-&lt;p&gt;给C 盘手动设为自定义大小，初始 800MB，最大 800MB。&lt;/p&gt;
-&lt;p&gt;给D 盘手动设为你的目标大小，比如 16384MB。&lt;/p&gt;
-&lt;p&gt;这一步主要是给 C 盘留 800MB 作为“诱饵”，满足系统记录内核日志的刚需，系统就不会因为“无处落脚”而把整个 16GB 的大文件重新塞回 C 盘。&lt;/p&gt;
-&lt;p&gt;之后，我再重启电脑就没再出现那个烦人的页面了。&lt;/p&gt;
-&lt;h3 id="小贴士"&gt;小贴士
-&lt;/h3&gt;&lt;p&gt;有时候，如果你反复通过UI 界面的设置都解决不了的问题，可能就要考虑一下注册表中的设置了。&lt;/p&gt;</description></item></channel></rss>
+&lt;/blockquote&gt;</description></item></channel></rss>
