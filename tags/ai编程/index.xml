@@ -1,8 +1,146 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>AI编程 on Coder_Studio</title><link>https://iamxurulin.github.io/tags/ai%E7%BC%96%E7%A8%8B/</link><description>Recent content in AI编程 on Coder_Studio</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>iamxurulin</copyright><lastBuildDate>Wed, 17 Jun 2026 13:01:06 +0000</lastBuildDate><atom:link href="https://iamxurulin.github.io/tags/ai%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml"/><item><title>让 AI Agent 跨会话接住工作：一场对照实验</title><link>https://iamxurulin.github.io/p/%E8%AE%A9-ai-agent-%E8%B7%A8%E4%BC%9A%E8%AF%9D%E6%8E%A5%E4%BD%8F%E5%B7%A5%E4%BD%9C%E4%B8%80%E5%9C%BA%E5%AF%B9%E7%85%A7%E5%AE%9E%E9%AA%8C/</link><pubDate>Sun, 07 Jun 2026 14:38:00 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E8%AE%A9-ai-agent-%E8%B7%A8%E4%BC%9A%E8%AF%9D%E6%8E%A5%E4%BD%8F%E5%B7%A5%E4%BD%9C%E4%B8%80%E5%9C%BA%E5%AF%B9%E7%85%A7%E5%AE%9E%E9%AA%8C/</guid><description>&lt;blockquote&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>AI编程 on Coder_Studio</title>
+        <link>https://iamxurulin.github.io/tags/ai%E7%BC%96%E7%A8%8B/</link>
+        <description>Recent content in AI编程 on Coder_Studio</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>iamxurulin</copyright>
+        <lastBuildDate>Sun, 21 Jun 2026 18:19:43 +0000</lastBuildDate><atom:link href="https://iamxurulin.github.io/tags/ai%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Claude Code 免费接入讯飞星辰 Qwen3.6-35B-A3B 模型，白嫖攻略来了！</title>
+        <link>https://iamxurulin.github.io/p/claude-code-%E5%85%8D%E8%B4%B9%E6%8E%A5%E5%85%A5%E8%AE%AF%E9%A3%9E%E6%98%9F%E8%BE%B0-qwen3.6-35b-a3b-%E6%A8%A1%E5%9E%8B%E7%99%BD%E5%AB%96%E6%94%BB%E7%95%A5%E6%9D%A5%E4%BA%86/</link>
+        <pubDate>Tue, 09 Jun 2026 00:55:09 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/claude-code-%E5%85%8D%E8%B4%B9%E6%8E%A5%E5%85%A5%E8%AE%AF%E9%A3%9E%E6%98%9F%E8%BE%B0-qwen3.6-35b-a3b-%E6%A8%A1%E5%9E%8B%E7%99%BD%E5%AB%96%E6%94%BB%E7%95%A5%E6%9D%A5%E4%BA%86/</guid>
+        <description>&lt;blockquote&gt;
+&lt;p&gt;限时免费到6月30日，手慢无！&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;最近讯飞星辰 MaaS 平台可以免费领取Qwen3.6-35B-A3B、Qwen3.5-35B-A3B两个 Qwen 系列模型的调用权益，这意味着你可以&lt;strong&gt;零成本&lt;/strong&gt;把这个强大的模型接入到 Claude Code 中，享受免费的高质量代码生成和智能编程体验。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://iamxurulin.github.io/images/2880eb7ae777ea1e797d08877755c2a8-c039eadf.jpeg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;本文就来手把手教你，如何把Qwen3.6-35B-A3B模型接入 Claude Code。&lt;/p&gt;
+&lt;h2 id=&#34;接入流程&#34;&gt;接入流程
+&lt;/h2&gt;&lt;h3 id=&#34;1在讯飞星辰平台找到模型&#34;&gt;1.在讯飞星辰平台找到模型
+&lt;/h3&gt;&lt;p&gt;登录讯飞星辰 MaaS 平台，进入【模型集市】，找到 Qwen3.6-35B-A3B 模型卡片，点击【API调用】按钮。
+&lt;img src=&#34;https://iamxurulin.github.io/images/8117181adacd01c23c793b61b781aee2-07c14427.jpeg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;2创建-api-服务&#34;&gt;2.创建 API 服务
+&lt;/h3&gt;&lt;p&gt;在 API 调用页面，填写模型服务 API 名称（例如 &lt;code&gt;Chatxunfei&lt;/code&gt;），选择要授权的应用。&lt;/p&gt;
+&lt;p&gt;重点来了——&lt;strong&gt;计费方式显示输入和输出费用均为 0 元/百万 tokens&lt;/strong&gt;，免费有效期到 &lt;strong&gt;6月30日&lt;/strong&gt;，7月1日10点后转为后付费。&lt;/p&gt;
+&lt;p&gt;所以趁现在赶紧用起来！
+&lt;img src=&#34;https://iamxurulin.github.io/images/cee1b73c4bac21c63e47b70c0f1acd78-a08c1ad8.jpeg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;3创建应用如尚未创建&#34;&gt;3.创建应用（如尚未创建）
+&lt;/h3&gt;&lt;p&gt;如果你还没有应用，需要先前往讯飞开放平台创建一个应用。&lt;/p&gt;
+&lt;p&gt;填写应用名称、分类和功能描述，提交即可。
+&lt;img src=&#34;https://iamxurulin.github.io/images/aa72c783675436d9a1e6d072dc030e1d-0db867f7.jpeg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;4获取modelid和apikey&#34;&gt;4.获取modelId和APIKey
+&lt;/h3&gt;&lt;p&gt;创建完成后，在&lt;strong&gt;推理服务&lt;/strong&gt;页面可以看到你部署的服务信息，包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;modelId&lt;/strong&gt;：&lt;code&gt;xopqwen36v35b&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;APIKey&lt;/strong&gt;：用于身份认证&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://iamxurulin.github.io/images/35b0430a85e3b772e1d90a501592bcfc-f4004e3b.jpeg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;5在cc-switch-中配置模型&#34;&gt;5.在CC Switch 中配置模型
+&lt;/h3&gt;&lt;p&gt;先进入CC Switch的网址：
+&lt;a class=&#34;link&#34; href=&#34;https://github.com/farion1231/cc-switch/releases/tag/v3.16.0&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/farion1231/cc-switch/releases/tag/v3.16.0&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;下载好CC Switch。
+&lt;img src=&#34;https://iamxurulin.github.io/images/9dbd77dc040f827b4b4d23135e9aa3ad-afc42003.jpeg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;如果访问Github有困难，也可以通过以下方式下载&lt;/p&gt;
+&lt;p&gt;链接：&lt;a class=&#34;link&#34; href=&#34;https://pan.quark.cn/s/46e3a4a215bd&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.quark.cn/s/46e3a4a215bd&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;打开 CC Switch，添加新供应商：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://iamxurulin.github.io/images/00600569868d8312157ccc8476fb4c56-e77edd85.jpeg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;参数填写可参考：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://iamxurulin.github.io/images/f8ca4f1ada4b88a5a8769ef3d8b5ffd3-2c1ebe9b.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://iamxurulin.github.io/images/a1f61700206b9ed96f7b324758ea7646-723338e5.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;配置完成后，CC Switch 会自动将 Claude Code 的请求路由到讯飞星辰的 API 端点。&lt;/p&gt;
+&lt;h3 id=&#34;6在-claude-code-中测试&#34;&gt;6.在 Claude Code 中测试
+&lt;/h3&gt;&lt;p&gt;配置完成后，打开 Claude Code，测试一下：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://iamxurulin.github.io/images/5b485435e62ec246ac46b9c7876d0c70-2862aa12.jpeg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;如上图所示模型显示为：&lt;code&gt;xopqwen36v35b&lt;/code&gt;，而且正常返回了结果，说明接入成功。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>让 AI Agent 跨会话接住工作：一场对照实验</title>
+        <link>https://iamxurulin.github.io/p/%E8%AE%A9-ai-agent-%E8%B7%A8%E4%BC%9A%E8%AF%9D%E6%8E%A5%E4%BD%8F%E5%B7%A5%E4%BD%9C%E4%B8%80%E5%9C%BA%E5%AF%B9%E7%85%A7%E5%AE%9E%E9%AA%8C/</link>
+        <pubDate>Sun, 07 Jun 2026 14:38:00 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E8%AE%A9-ai-agent-%E8%B7%A8%E4%BC%9A%E8%AF%9D%E6%8E%A5%E4%BD%8F%E5%B7%A5%E4%BD%9C%E4%B8%80%E5%9C%BA%E5%AF%B9%E7%85%A7%E5%AE%9E%E9%AA%8C/</guid>
+        <description>&lt;blockquote&gt;
 &lt;p&gt;当 AI 编程助手越来越强大，一个关键问题浮出水面：&lt;strong&gt;它能接住别人（或昨天的自己）没干完的活吗？&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;hr&gt;
-&lt;h2 id="问题的起源"&gt;问题的起源
+&lt;h2 id=&#34;问题的起源&#34;&gt;问题的起源
 &lt;/h2&gt;&lt;p&gt;真实开发不是一次会话就干完的。
 你昨天写了一半，今天开新会话，agent 需要从仓库状态里搞清楚：&lt;/p&gt;
 &lt;ul&gt;
@@ -15,393 +153,407 @@
 &lt;p&gt;如果 agent 要靠&amp;quot;猜&amp;quot;来回答这些问题，那它本质上是在&lt;strong&gt;重新发现&lt;/strong&gt;已经存在的信息。
 这既浪费时间，又容易出错。&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id="实验设计"&gt;实验设计
+&lt;h2 id=&#34;实验设计&#34;&gt;实验设计
 &lt;/h2&gt;&lt;p&gt;我们在同一个 Electron 知识库应用上做了两组对照实验，任务完全一致——实现三个功能：&lt;/p&gt;
 &lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;功能&lt;/th&gt;
-&lt;th&gt;描述&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;kb-005 文档导入&lt;/td&gt;
-&lt;td&gt;从本地导入 .txt/.md 文件&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;kb-006 文档详情视图&lt;/td&gt;
-&lt;td&gt;点击文档查看完整内容&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;kb-007 文档持久化&lt;/td&gt;
-&lt;td&gt;重启后文档仍在&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;功能&lt;/th&gt;
+					&lt;th&gt;描述&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;kb-005 文档导入&lt;/td&gt;
+					&lt;td&gt;从本地导入 .txt/.md 文件&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;kb-006 文档详情视图&lt;/td&gt;
+					&lt;td&gt;点击文档查看完整内容&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;kb-007 文档持久化&lt;/td&gt;
+					&lt;td&gt;重启后文档仍在&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;两组实验的区别只在于：&lt;strong&gt;仓库里有没有&amp;quot;可读的上下文&amp;quot;&lt;/strong&gt;。&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id="实验组-a弱-harnessbaseline"&gt;实验组 A：弱 Harness（Baseline）
-&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
-&lt;/span&gt;&lt;span class="lnt"&gt; 2
-&lt;/span&gt;&lt;span class="lnt"&gt; 3
-&lt;/span&gt;&lt;span class="lnt"&gt; 4
-&lt;/span&gt;&lt;span class="lnt"&gt; 5
-&lt;/span&gt;&lt;span class="lnt"&gt; 6
-&lt;/span&gt;&lt;span class="lnt"&gt; 7
-&lt;/span&gt;&lt;span class="lnt"&gt; 8
-&lt;/span&gt;&lt;span class="lnt"&gt; 9
-&lt;/span&gt;&lt;span class="lnt"&gt;10
-&lt;/span&gt;&lt;span class="lnt"&gt;11
-&lt;/span&gt;&lt;span class="lnt"&gt;12
-&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;h2 id=&#34;实验组-a弱-harnessbaseline&#34;&gt;实验组 A：弱 Harness（Baseline）
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-gdscript3" data-lang="gdscript3"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;仓库里有什么？&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;js&lt;/span&gt; &lt;span class="c1"&gt;# 代码&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="nb"&gt;preload&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;js&lt;/span&gt; &lt;span class="c1"&gt;# 代码&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt; &lt;span class="c1"&gt;# 代码&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;renderer&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;js&lt;/span&gt; &lt;span class="c1"&gt;# 代码&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;package&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;json&lt;/span&gt; &lt;span class="c1"&gt;# 依赖&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;task&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;prompt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;md&lt;/span&gt; &lt;span class="c1"&gt;# 任务描述&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;仓库里没有什么？&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;✗&lt;/span&gt; &lt;span class="n"&gt;ARCHITECTURE&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;md&lt;/span&gt; &lt;span class="err"&gt;—&lt;/span&gt; &lt;span class="err"&gt;没有架构文档&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;✗&lt;/span&gt; &lt;span class="n"&gt;PRODUCT&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;md&lt;/span&gt; &lt;span class="err"&gt;—&lt;/span&gt; &lt;span class="err"&gt;没有产品文档&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;✗&lt;/span&gt; &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;handoff&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;md&lt;/span&gt; &lt;span class="err"&gt;—&lt;/span&gt; &lt;span class="err"&gt;没有交接文件&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;✗&lt;/span&gt; &lt;span class="n"&gt;feature_list&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;json&lt;/span&gt; &lt;span class="err"&gt;—&lt;/span&gt; &lt;span class="err"&gt;有，但&lt;/span&gt; &lt;span class="n"&gt;agent&lt;/span&gt; &lt;span class="err"&gt;不知道要先读&lt;/span&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-gdscript3&#34; data-lang=&#34;gdscript3&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;仓库里有什么？&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;├──&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;js&lt;/span&gt;          &lt;span class=&#34;c1&#34;&gt;# 代码&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;├──&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;preload&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;js&lt;/span&gt;       &lt;span class=&#34;c1&#34;&gt;# 代码&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;├──&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;index&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;html&lt;/span&gt;       &lt;span class=&#34;c1&#34;&gt;# 代码&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;├──&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;renderer&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;js&lt;/span&gt;      &lt;span class=&#34;c1&#34;&gt;# 代码&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;├──&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;package&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;json&lt;/span&gt;     &lt;span class=&#34;c1&#34;&gt;# 依赖&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;└──&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;task&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;prompt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;md&lt;/span&gt;   &lt;span class=&#34;c1&#34;&gt;# 任务描述&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;仓库里没有什么？&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;✗&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ARCHITECTURE&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;md&lt;/span&gt;    &lt;span class=&#34;err&#34;&gt;—&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;没有架构文档&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;✗&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;PRODUCT&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;md&lt;/span&gt;         &lt;span class=&#34;err&#34;&gt;—&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;没有产品文档&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;✗&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;session&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;handoff&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;md&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;—&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;没有交接文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;✗&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;feature_list&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;json&lt;/span&gt;  &lt;span class=&#34;err&#34;&gt;—&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;有，但&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;agent&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;不知道要先读&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&lt;strong&gt;会话 A&lt;/strong&gt;：agent 完成了文档导入（kb-005），然后被中断。没有写任何交接文件。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;会话 B&lt;/strong&gt;：开全新会话，只说了一句：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;继续开发。
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;继续开发。
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="发生了什么"&gt;发生了什么？
-&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
-&lt;/span&gt;&lt;span class="lnt"&gt; 2
-&lt;/span&gt;&lt;span class="lnt"&gt; 3
-&lt;/span&gt;&lt;span class="lnt"&gt; 4
-&lt;/span&gt;&lt;span class="lnt"&gt; 5
-&lt;/span&gt;&lt;span class="lnt"&gt; 6
-&lt;/span&gt;&lt;span class="lnt"&gt; 7
-&lt;/span&gt;&lt;span class="lnt"&gt; 8
-&lt;/span&gt;&lt;span class="lnt"&gt; 9
-&lt;/span&gt;&lt;span class="lnt"&gt;10
-&lt;/span&gt;&lt;span class="lnt"&gt;11
-&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/div&gt;&lt;h3 id=&#34;发生了什么&#34;&gt;发生了什么？
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-gdscript3" data-lang="gdscript3"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;┌─────────────────────────────────────────────────────────┐&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;会话&lt;/span&gt; &lt;span class="n"&gt;B&lt;/span&gt; &lt;span class="err"&gt;的探索过程&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="n"&gt;Step&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="err"&gt;读&lt;/span&gt; &lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;js&lt;/span&gt; &lt;span class="err"&gt;→&lt;/span&gt; &lt;span class="err"&gt;哦，这是&lt;/span&gt; &lt;span class="n"&gt;Electron&lt;/span&gt; &lt;span class="err"&gt;应用&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="n"&gt;Step&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="err"&gt;读&lt;/span&gt; &lt;span class="n"&gt;package&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;json&lt;/span&gt; &lt;span class="err"&gt;→&lt;/span&gt; &lt;span class="err"&gt;启动命令是&lt;/span&gt; &lt;span class="n"&gt;npm&lt;/span&gt; &lt;span class="n"&gt;start&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="n"&gt;Step&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="err"&gt;读&lt;/span&gt; &lt;span class="nb"&gt;preload&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;js&lt;/span&gt; &lt;span class="err"&gt;→&lt;/span&gt; &lt;span class="err"&gt;用&lt;/span&gt; &lt;span class="n"&gt;contextBridge&lt;/span&gt; &lt;span class="err"&gt;暴露&lt;/span&gt; &lt;span class="n"&gt;API&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="n"&gt;Step&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="err"&gt;读&lt;/span&gt; &lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt; &lt;span class="err"&gt;→&lt;/span&gt; &lt;span class="err"&gt;这是&lt;/span&gt; &lt;span class="n"&gt;UI&lt;/span&gt; &lt;span class="err"&gt;布局&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="n"&gt;Step&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="err"&gt;读&lt;/span&gt; &lt;span class="n"&gt;renderer&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;js&lt;/span&gt; &lt;span class="err"&gt;→&lt;/span&gt; &lt;span class="err"&gt;哦，已经有一个导入按钮了&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="n"&gt;Step&lt;/span&gt; &lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="err"&gt;读&lt;/span&gt; &lt;span class="n"&gt;feature_list&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;json&lt;/span&gt; &lt;span class="err"&gt;→&lt;/span&gt; &lt;span class="n"&gt;kb&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;001&lt;/span&gt;&lt;span class="o"&gt;~&lt;/span&gt;&lt;span class="mi"&gt;004&lt;/span&gt; &lt;span class="err"&gt;已完成&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="n"&gt;Step&lt;/span&gt; &lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="err"&gt;对比代码差异&lt;/span&gt; &lt;span class="err"&gt;→&lt;/span&gt; &lt;span class="err"&gt;所以&lt;/span&gt; &lt;span class="n"&gt;kb&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;005&lt;/span&gt; &lt;span class="err"&gt;做完了？&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="n"&gt;Step&lt;/span&gt; &lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="err"&gt;终于开始写代码&lt;/span&gt;&lt;span class="o"&gt;...&lt;/span&gt; &lt;span class="err"&gt;→&lt;/span&gt; &lt;span class="err"&gt;但已经过去很久了&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;└─────────────────────────────────────────────────────────┘&lt;/span&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-gdscript3&#34; data-lang=&#34;gdscript3&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;┌─────────────────────────────────────────────────────────┐&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;  &lt;span class=&#34;err&#34;&gt;会话&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;B&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;的探索过程&lt;/span&gt;                                       &lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;                                                         &lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;  &lt;span class=&#34;n&#34;&gt;Step&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;读&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;js&lt;/span&gt;          &lt;span class=&#34;err&#34;&gt;→&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;哦，这是&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Electron&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;应用&lt;/span&gt;    &lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;  &lt;span class=&#34;n&#34;&gt;Step&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;读&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;package&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;json&lt;/span&gt;     &lt;span class=&#34;err&#34;&gt;→&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;启动命令是&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;npm&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;start&lt;/span&gt;      &lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;  &lt;span class=&#34;n&#34;&gt;Step&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;读&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;preload&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;js&lt;/span&gt;       &lt;span class=&#34;err&#34;&gt;→&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;用&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;contextBridge&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;暴露&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;API&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;  &lt;span class=&#34;n&#34;&gt;Step&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;读&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;index&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;html&lt;/span&gt;       &lt;span class=&#34;err&#34;&gt;→&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;这是&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;UI&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;布局&lt;/span&gt;              &lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;  &lt;span class=&#34;n&#34;&gt;Step&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;读&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;renderer&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;js&lt;/span&gt;      &lt;span class=&#34;err&#34;&gt;→&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;哦，已经有一个导入按钮了&lt;/span&gt;   &lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;  &lt;span class=&#34;n&#34;&gt;Step&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;读&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;feature_list&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;json&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;→&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;kb&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;001&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;004&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;已完成&lt;/span&gt;         &lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;  &lt;span class=&#34;n&#34;&gt;Step&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;对比代码差异&lt;/span&gt;        &lt;span class=&#34;err&#34;&gt;→&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;所以&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;kb&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;005&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;做完了？&lt;/span&gt;       &lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;  &lt;span class=&#34;n&#34;&gt;Step&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;终于开始写代码&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;...&lt;/span&gt;    &lt;span class=&#34;err&#34;&gt;→&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;但已经过去很久了&lt;/span&gt;          &lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;└─────────────────────────────────────────────────────────┘&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&lt;strong&gt;核心问题&lt;/strong&gt;：
 agent 花了大量时间在&lt;strong&gt;重新发现&lt;/strong&gt;——项目结构、启动方式、数据流、已完成的功能。
 这些都是会话 A 已经知道的信息。&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id="实验组-b强-harnessimproved"&gt;实验组 B：强 Harness（Improved）
-&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
-&lt;/span&gt;&lt;span class="lnt"&gt; 2
-&lt;/span&gt;&lt;span class="lnt"&gt; 3
-&lt;/span&gt;&lt;span class="lnt"&gt; 4
-&lt;/span&gt;&lt;span class="lnt"&gt; 5
-&lt;/span&gt;&lt;span class="lnt"&gt; 6
-&lt;/span&gt;&lt;span class="lnt"&gt; 7
-&lt;/span&gt;&lt;span class="lnt"&gt; 8
-&lt;/span&gt;&lt;span class="lnt"&gt; 9
-&lt;/span&gt;&lt;span class="lnt"&gt;10
-&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;h2 id=&#34;实验组-b强-harnessimproved&#34;&gt;实验组 B：强 Harness（Improved）
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-gdscript3" data-lang="gdscript3"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;仓库里有什么？&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;ARCHITECTURE&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;md&lt;/span&gt; &lt;span class="c1"&gt;# 项目架构、数据流、IPC 接口清单&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;PRODUCT&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;md&lt;/span&gt; &lt;span class="c1"&gt;# 产品功能范围和当前阶段目标&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;AGENTS&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;md&lt;/span&gt; &lt;span class="c1"&gt;# 启动命令、工作规则&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;feature_list&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;json&lt;/span&gt; &lt;span class="c1"&gt;# 功能状态（已更新）&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;handoff&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;md&lt;/span&gt; &lt;span class="c1"&gt;# 本轮做了什么、没做什么、下一步&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;js&lt;/span&gt; &lt;span class="c1"&gt;# 代码&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="nb"&gt;preload&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;js&lt;/span&gt; &lt;span class="c1"&gt;# 代码&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt; &lt;span class="c1"&gt;# 代码&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;renderer&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;js&lt;/span&gt; &lt;span class="c1"&gt;# 代码&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;task&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;prompt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;md&lt;/span&gt; &lt;span class="c1"&gt;# 任务描述&lt;/span&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-gdscript3&#34; data-lang=&#34;gdscript3&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;仓库里有什么？&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;├──&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ARCHITECTURE&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;md&lt;/span&gt;    &lt;span class=&#34;c1&#34;&gt;# 项目架构、数据流、IPC 接口清单&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;├──&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;PRODUCT&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;md&lt;/span&gt;         &lt;span class=&#34;c1&#34;&gt;# 产品功能范围和当前阶段目标&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;├──&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;AGENTS&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;md&lt;/span&gt;          &lt;span class=&#34;c1&#34;&gt;# 启动命令、工作规则&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;├──&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;feature_list&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;json&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# 功能状态（已更新）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;├──&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;session&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;handoff&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;md&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# 本轮做了什么、没做什么、下一步&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;├──&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;js&lt;/span&gt;            &lt;span class=&#34;c1&#34;&gt;# 代码&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;├──&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;preload&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;js&lt;/span&gt;         &lt;span class=&#34;c1&#34;&gt;# 代码&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;├──&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;index&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;html&lt;/span&gt;         &lt;span class=&#34;c1&#34;&gt;# 代码&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;├──&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;renderer&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;js&lt;/span&gt;        &lt;span class=&#34;c1&#34;&gt;# 代码&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;└──&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;task&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;prompt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;md&lt;/span&gt;     &lt;span class=&#34;c1&#34;&gt;# 任务描述&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&lt;strong&gt;会话 A&lt;/strong&gt;：
 同样完成了文档导入（kb-005），中断前更新了 &lt;code&gt;session-handoff.md&lt;/code&gt; 和 &lt;code&gt;feature_list.json&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;会话 B 的 session-handoff.md&lt;/strong&gt;：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
-&lt;/span&gt;&lt;span class="lnt"&gt; 2
-&lt;/span&gt;&lt;span class="lnt"&gt; 3
-&lt;/span&gt;&lt;span class="lnt"&gt; 4
-&lt;/span&gt;&lt;span class="lnt"&gt; 5
-&lt;/span&gt;&lt;span class="lnt"&gt; 6
-&lt;/span&gt;&lt;span class="lnt"&gt; 7
-&lt;/span&gt;&lt;span class="lnt"&gt; 8
-&lt;/span&gt;&lt;span class="lnt"&gt; 9
-&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-markdown" data-lang="markdown"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gu"&gt;## 本轮会话做了什么
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;-&lt;/span&gt; kb-005 文档导入：已完成并验证通过
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gu"&gt;## 没做什么（遗留功能）
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;-&lt;/span&gt; kb-006 文档详情视图：未开始
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;-&lt;/span&gt; kb-007 文档持久化：未开始
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gu"&gt;## 下一步
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;1.&lt;/span&gt; 实现 kb-006：文档详情视图
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;2.&lt;/span&gt; 实现 kb-007：文档持久化
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;gu&#34;&gt;## 本轮会话做了什么
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;-&lt;/span&gt; kb-005 文档导入：已完成并验证通过
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;gu&#34;&gt;## 没做什么（遗留功能）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;-&lt;/span&gt; kb-006 文档详情视图：未开始
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;-&lt;/span&gt; kb-007 文档持久化：未开始
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;gu&#34;&gt;## 下一步
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;1.&lt;/span&gt; 实现 kb-006：文档详情视图
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;2.&lt;/span&gt; 实现 kb-007：文档持久化
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&lt;strong&gt;会话 B&lt;/strong&gt;：开全新会话，发送：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;请先阅读 session-handoff.md、feature_list.json、ARCHITECTURE.md、PRODUCT.md，
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;然后继续开发未完成的功能。
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;请先阅读 session-handoff.md、feature_list.json、ARCHITECTURE.md、PRODUCT.md，
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;然后继续开发未完成的功能。
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="发生了什么-1"&gt;发生了什么？
-&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
-&lt;/span&gt;&lt;span class="lnt"&gt;3
-&lt;/span&gt;&lt;span class="lnt"&gt;4
-&lt;/span&gt;&lt;span class="lnt"&gt;5
-&lt;/span&gt;&lt;span class="lnt"&gt;6
-&lt;/span&gt;&lt;span class="lnt"&gt;7
-&lt;/span&gt;&lt;span class="lnt"&gt;8
-&lt;/span&gt;&lt;span class="lnt"&gt;9
+&lt;/div&gt;&lt;h3 id=&#34;发生了什么-1&#34;&gt;发生了什么？
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;9
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;┌─────────────────────────────────────────────────────────┐
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ 会话 B 的探索过程 │
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ │
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ Step 1: 读 session-handoff.md → 知道了！kb-005 已完成 │
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ 下一步是 kb-006 │
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ Step 2: 读 feature_list.json → 确认功能状态 │
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ Step 3: 读 ARCHITECTURE.md → 确认项目结构 │
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ Step 4: 直接开始写代码！ → 零浪费 │
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;└─────────────────────────────────────────────────────────┘
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;hr&gt;
-&lt;h2 id="数据对比"&gt;数据对比
-&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
-&lt;/span&gt;&lt;span class="lnt"&gt;3
-&lt;/span&gt;&lt;span class="lnt"&gt;4
-&lt;/span&gt;&lt;span class="lnt"&gt;5
-&lt;/span&gt;&lt;span class="lnt"&gt;6
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; 弱 Harness 强 Harness
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; ───────── ─────────
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;接手所需文件数 ████████ 6-8 ██ 2-3
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;重新发现次数 ██████ 6+ ░ 0~1
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;重复工作比例 ██████ ~30% ░ ~5%
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;上下文理解准确度 可能有偏差 准确无误
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;┌─────────────────────────────────────────────────────────┐
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│  会话 B 的探索过程                                       │
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│                                                         │
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│  Step 1: 读 session-handoff.md  → 知道了！kb-005 已完成  │
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│                                   下一步是 kb-006        │
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│  Step 2: 读 feature_list.json   → 确认功能状态           │
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│  Step 3: 读 ARCHITECTURE.md     → 确认项目结构           │
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│  Step 4: 直接开始写代码！        → 零浪费                  │
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;└─────────────────────────────────────────────────────────┘
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;hr&gt;
-&lt;h2 id="关键洞察"&gt;关键洞察
-&lt;/h2&gt;&lt;h3 id="1-代码不是文档"&gt;1. 代码不是文档
+&lt;h2 id=&#34;数据对比&#34;&gt;数据对比
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                    弱 Harness          强 Harness
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                    ─────────          ─────────
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;接手所需文件数      ████████ 6-8       ██ 2-3
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;重新发现次数        ██████ 6+          ░ 0~1
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;重复工作比例        ██████ ~30%        ░ ~5%
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;上下文理解准确度    可能有偏差          准确无误
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id=&#34;关键洞察&#34;&gt;关键洞察
+&lt;/h2&gt;&lt;h3 id=&#34;1-代码不是文档&#34;&gt;1. 代码不是文档
 &lt;/h3&gt;&lt;p&gt;代码能告诉你&amp;quot;怎么做&amp;quot;，但很难告诉你&amp;quot;做了什么、为什么没做、下一步做什么&amp;quot;。
 一个 500 行的 &lt;code&gt;main.js&lt;/code&gt; 不会告诉你 kb-006 还没开始——agent 必须自己推断，而推断经常出错。&lt;/p&gt;
-&lt;h3 id="2-交接文件是会话的-checkpoint"&gt;2. 交接文件是&amp;quot;会话的 checkpoint&amp;quot;
+&lt;h3 id=&#34;2-交接文件是会话的-checkpoint&#34;&gt;2. 交接文件是&amp;quot;会话的 checkpoint&amp;quot;
 &lt;/h3&gt;&lt;p&gt;&lt;code&gt;session-handoff.md&lt;/code&gt; 就像一个游戏存档。
 没有它，每次新会话都相当于从第一关重打。
 有了它，agent 可以直接从上次中断的地方继续。&lt;/p&gt;
-&lt;h3 id="3-最重要的三行信息"&gt;3. 最重要的三行信息
-&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
-&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;h3 id=&#34;3-最重要的三行信息&#34;&gt;3. 最重要的三行信息
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;做了什么：kb-005 文档导入 ✓
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;没做什么：kb-006 文档详情、kb-007 文档持久化
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;下一步：从 kb-006 开始
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;做了什么：kb-005 文档导入 ✓
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;没做什么：kb-006 文档详情、kb-007 文档持久化
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;下一步：从 kb-006 开始
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;就这三行，节省了 agent 6+ 步探索。&lt;/p&gt;
-&lt;h3 id="4-一份大指令文件不够"&gt;4. 一份大指令文件不够
+&lt;h3 id=&#34;4-一份大指令文件不够&#34;&gt;4. 一份大指令文件不够
 &lt;/h3&gt;&lt;p&gt;如果把所有规则塞进一个巨大的 system prompt，agent 会&amp;quot;迷失在细节里&amp;quot;。
 仓库中的多个小文件（ARCHITECTURE.md、PRODUCT.md、session-handoff.md）各司其职，按需读取，效果更好。&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id="结论"&gt;结论
+&lt;h2 id=&#34;结论&#34;&gt;结论
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;仓库必须是唯一的事实来源。&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;不是某个 agent 的记忆，不是聊天记录，不是某个巨大的指令文件——而是仓库里的结构化文档。&lt;/p&gt;
-&lt;p&gt;当你的 agent 能在一分钟内搞清&amp;quot;这是哪、到哪了、下一步去哪&amp;quot;，你就有了一个真正可交接的 AI 工作流。&lt;/p&gt;</description></item><item><title>只写提示词让 agent 做，和定好规则再让它做，差多少</title><link>https://iamxurulin.github.io/p/%E5%8F%AA%E5%86%99%E6%8F%90%E7%A4%BA%E8%AF%8D%E8%AE%A9-agent-%E5%81%9A%E5%92%8C%E5%AE%9A%E5%A5%BD%E8%A7%84%E5%88%99%E5%86%8D%E8%AE%A9%E5%AE%83%E5%81%9A%E5%B7%AE%E5%A4%9A%E5%B0%91/</link><pubDate>Sun, 07 Jun 2026 08:21:47 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E5%8F%AA%E5%86%99%E6%8F%90%E7%A4%BA%E8%AF%8D%E8%AE%A9-agent-%E5%81%9A%E5%92%8C%E5%AE%9A%E5%A5%BD%E8%A7%84%E5%88%99%E5%86%8D%E8%AE%A9%E5%AE%83%E5%81%9A%E5%B7%AE%E5%A4%9A%E5%B0%91/</guid><description>&lt;h2 id="实验背景"&gt;实验背景
+&lt;p&gt;当你的 agent 能在一分钟内搞清&amp;quot;这是哪、到哪了、下一步去哪&amp;quot;，你就有了一个真正可交接的 AI 工作流。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>只写提示词让 agent 做，和定好规则再让它做，差多少</title>
+        <link>https://iamxurulin.github.io/p/%E5%8F%AA%E5%86%99%E6%8F%90%E7%A4%BA%E8%AF%8D%E8%AE%A9-agent-%E5%81%9A%E5%92%8C%E5%AE%9A%E5%A5%BD%E8%A7%84%E5%88%99%E5%86%8D%E8%AE%A9%E5%AE%83%E5%81%9A%E5%B7%AE%E5%A4%9A%E5%B0%91/</link>
+        <pubDate>Sun, 07 Jun 2026 08:21:47 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E5%8F%AA%E5%86%99%E6%8F%90%E7%A4%BA%E8%AF%8D%E8%AE%A9-agent-%E5%81%9A%E5%92%8C%E5%AE%9A%E5%A5%BD%E8%A7%84%E5%88%99%E5%86%8D%E8%AE%A9%E5%AE%83%E5%81%9A%E5%B7%AE%E5%A4%9A%E5%B0%91/</guid>
+        <description>&lt;h2 id=&#34;实验背景&#34;&gt;实验背景
 &lt;/h2&gt;&lt;p&gt;AI Agent 写代码越来越强，但&amp;quot;强&amp;quot;不等于&amp;quot;可靠&amp;quot;。同样的模型、同样的提示词，为什么有时候一次就过，有时候反复翻车？答案往往不在模型本身，而在&lt;strong&gt;你给它的规则和约束&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;这个实验用 Electron 搭建一个知识库应用壳子，跑两次：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;弱 Harness&lt;/strong&gt;：只给一段提示词，什么都不准备&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;强 Harness&lt;/strong&gt;：提前准备好 AGENTS.md、feature_list.json、claude-progress.md，用结构化方式告诉 Agent 该干什么、怎么验证、什么时候算做完&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id="任务定义"&gt;任务定义
+&lt;h2 id=&#34;任务定义&#34;&gt;任务定义
 &lt;/h2&gt;&lt;p&gt;用 Electron 做一个知识库应用，包含四个核心功能：&lt;/p&gt;
 &lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;编号&lt;/th&gt;
-&lt;th&gt;功能&lt;/th&gt;
-&lt;th&gt;要求&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;kb-001&lt;/td&gt;
-&lt;td&gt;窗口启动&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;npm start&lt;/code&gt; 后 Electron 窗口正常打开&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;kb-002&lt;/td&gt;
-&lt;td&gt;左侧文档列表&lt;/td&gt;
-&lt;td&gt;左侧面板显示文档列表区域&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;kb-003&lt;/td&gt;
-&lt;td&gt;右侧问答面板&lt;/td&gt;
-&lt;td&gt;右侧面板包含输入框和对话区域&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;kb-004&lt;/td&gt;
-&lt;td&gt;本地数据目录&lt;/td&gt;
-&lt;td&gt;应用启动时创建数据目录，包含 documents/、qa/ 子目录&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;编号&lt;/th&gt;
+					&lt;th&gt;功能&lt;/th&gt;
+					&lt;th&gt;要求&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;kb-001&lt;/td&gt;
+					&lt;td&gt;窗口启动&lt;/td&gt;
+					&lt;td&gt;&lt;code&gt;npm start&lt;/code&gt; 后 Electron 窗口正常打开&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;kb-002&lt;/td&gt;
+					&lt;td&gt;左侧文档列表&lt;/td&gt;
+					&lt;td&gt;左侧面板显示文档列表区域&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;kb-003&lt;/td&gt;
+					&lt;td&gt;右侧问答面板&lt;/td&gt;
+					&lt;td&gt;右侧面板包含输入框和对话区域&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;kb-004&lt;/td&gt;
+					&lt;td&gt;本地数据目录&lt;/td&gt;
+					&lt;td&gt;应用启动时创建数据目录，包含 documents/、qa/ 子目录&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id="harness-是什么"&gt;Harness 是什么
+&lt;h2 id=&#34;harness-是什么&#34;&gt;Harness 是什么
 &lt;/h2&gt;&lt;p&gt;Harness 不是代码，是一套&lt;strong&gt;告诉 Agent 怎么干活、怎么验证、什么时候算做完&lt;/strong&gt;的规则文件。这个实验用的 Harness 核心包含三个文件，实际仓库中还会配合 init.sh 等辅助脚本：&lt;/p&gt;
-&lt;h3 id="agentsmd"&gt;AGENTS.md
+&lt;h3 id=&#34;agentsmd&#34;&gt;AGENTS.md
 &lt;/h3&gt;&lt;p&gt;定义 Agent 的核心行为规则：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
-&lt;/span&gt;&lt;span class="lnt"&gt;3
-&lt;/span&gt;&lt;span class="lnt"&gt;4
-&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;- 一次只做一个功能
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;- 实现后必须运行 npm start 验证
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;- 不要因为&amp;#34;代码已经写了&amp;#34;就把功能标记为完成
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;- 验证证据记录在 feature_list.json 或 claude-progress.md
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;- 一个功能只有在目标行为已实现、npm start 成功、证据已记录才算完成
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;- 一次只做一个功能
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;- 实现后必须运行 npm start 验证
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;- 不要因为&amp;#34;代码已经写了&amp;#34;就把功能标记为完成
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;- 验证证据记录在 feature_list.json 或 claude-progress.md
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;- 一个功能只有在目标行为已实现、npm start 成功、证据已记录才算完成
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="feature_listjson"&gt;feature_list.json
+&lt;/div&gt;&lt;h3 id=&#34;feature_listjson&#34;&gt;feature_list.json
 &lt;/h3&gt;&lt;p&gt;每个功能的唯一事实来源，包含验收标准、证据槽位：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
-&lt;/span&gt;&lt;span class="lnt"&gt; 2
-&lt;/span&gt;&lt;span class="lnt"&gt; 3
-&lt;/span&gt;&lt;span class="lnt"&gt; 4
-&lt;/span&gt;&lt;span class="lnt"&gt; 5
-&lt;/span&gt;&lt;span class="lnt"&gt; 6
-&lt;/span&gt;&lt;span class="lnt"&gt; 7
-&lt;/span&gt;&lt;span class="lnt"&gt; 8
-&lt;/span&gt;&lt;span class="lnt"&gt; 9
-&lt;/span&gt;&lt;span class="lnt"&gt;10
-&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;id&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;kb-001&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;title&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;窗口启动&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;status&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;not_started&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;verification&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s2"&gt;&amp;#34;运行 npm start&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s2"&gt;&amp;#34;确认 Electron 窗口成功打开&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s2"&gt;&amp;#34;确认窗口标题显示应用名称&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;],&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;evidence&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;#34;id&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;kb-001&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;#34;title&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;窗口启动&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;#34;status&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;not_started&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;#34;verification&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s2&#34;&gt;&amp;#34;运行 npm start&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s2&#34;&gt;&amp;#34;确认 Electron 窗口成功打开&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s2&#34;&gt;&amp;#34;确认窗口标题显示应用名称&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;#34;evidence&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="claude-progressmd"&gt;claude-progress.md
+&lt;/div&gt;&lt;h3 id=&#34;claude-progressmd&#34;&gt;claude-progress.md
 &lt;/h3&gt;&lt;p&gt;会话进度日志，记录当前状态、已完成功能、已知风险、下一步动作。&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id="第一次实验弱-harness"&gt;第一次实验：弱 Harness
+&lt;h2 id=&#34;第一次实验弱-harness&#34;&gt;第一次实验：弱 Harness
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;分支&lt;/strong&gt;：&lt;code&gt;p01-baseline&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;提示词&lt;/strong&gt;：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;用 Electron 做一个知识库应用，窗口左边是文档列表区域，右边是问答面板区域，应用需要创建并使用本地数据目录。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;&lt;strong&gt;仓库状态&lt;/strong&gt;：空的 package.json，没有 AGENTS.md，没有 feature_list.json&lt;/p&gt;
-&lt;h3 id="过程"&gt;过程
+&lt;h3 id=&#34;过程&#34;&gt;过程
 &lt;/h3&gt;&lt;p&gt;Agent 自由发挥，一次性完成了所有四个功能。代码质量很好，UI 布局清晰，IPC 通信正确。&lt;/p&gt;
-&lt;h3 id="结果"&gt;结果
+&lt;h3 id=&#34;结果&#34;&gt;结果
 &lt;/h3&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;功能&lt;/th&gt;
-&lt;th&gt;状态&lt;/th&gt;
-&lt;th&gt;备注&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;kb-001 窗口启动&lt;/td&gt;
-&lt;td&gt;✅ 完成&lt;/td&gt;
-&lt;td&gt;一次通过&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;kb-002 文档列表&lt;/td&gt;
-&lt;td&gt;✅ 完成&lt;/td&gt;
-&lt;td&gt;左侧 300px 面板&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;kb-003 问答面板&lt;/td&gt;
-&lt;td&gt;✅ 完成&lt;/td&gt;
-&lt;td&gt;右侧 flex 面板&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;kb-004 数据目录&lt;/td&gt;
-&lt;td&gt;✅ 完成&lt;/td&gt;
-&lt;td&gt;目录结构正确&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;功能&lt;/th&gt;
+					&lt;th&gt;状态&lt;/th&gt;
+					&lt;th&gt;备注&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;kb-001 窗口启动&lt;/td&gt;
+					&lt;td&gt;✅ 完成&lt;/td&gt;
+					&lt;td&gt;一次通过&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;kb-002 文档列表&lt;/td&gt;
+					&lt;td&gt;✅ 完成&lt;/td&gt;
+					&lt;td&gt;左侧 300px 面板&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;kb-003 问答面板&lt;/td&gt;
+					&lt;td&gt;✅ 完成&lt;/td&gt;
+					&lt;td&gt;右侧 flex 面板&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;kb-004 数据目录&lt;/td&gt;
+					&lt;td&gt;✅ 完成&lt;/td&gt;
+					&lt;td&gt;目录结构正确&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h3 id="应用截图"&gt;应用截图
-&lt;/h3&gt;&lt;p&gt;&lt;img src="https://iamxurulin.github.io/images/611af7b17e7175ab76abb5ea3e88ccb1-1874a76c.png"
-loading="lazy"
+&lt;h3 id=&#34;应用截图&#34;&gt;应用截图
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://iamxurulin.github.io/images/611af7b17e7175ab76abb5ea3e88ccb1-1874a76c.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
 &gt;&lt;/p&gt;
-&lt;h3 id="弱-harness-的问题"&gt;弱 Harness 的问题
+&lt;h3 id=&#34;弱-harness-的问题&#34;&gt;弱 Harness 的问题
 &lt;/h3&gt;&lt;p&gt;虽然任务完成了，但存在以下问题：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;没有验证证据&lt;/strong&gt;：功能完成了，但没有记录&amp;quot;怎么验证的&amp;quot;、&amp;ldquo;验证结果是什么&amp;rdquo;&lt;/li&gt;
@@ -410,11 +562,11 @@ loading="lazy"
 &lt;li&gt;&lt;strong&gt;没有完成定义&lt;/strong&gt;：Agent 不知道&amp;quot;什么时候算做完&amp;quot;，全靠自己判断&lt;/li&gt;
 &lt;/ol&gt;
 &lt;hr&gt;
-&lt;h2 id="第二次实验强-harness"&gt;第二次实验：强 Harness
+&lt;h2 id=&#34;第二次实验强-harness&#34;&gt;第二次实验：强 Harness
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;分支&lt;/strong&gt;：&lt;code&gt;p01-improved&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;提示词&lt;/strong&gt;：完全相同&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;仓库状态&lt;/strong&gt;：AGENTS.md、CLAUDE.md、init.sh、feature_list.json、claude-progress.md 已就位&lt;/p&gt;
-&lt;h3 id="过程-1"&gt;过程
+&lt;h3 id=&#34;过程-1&#34;&gt;过程
 &lt;/h3&gt;&lt;p&gt;Agent 严格按照 AGENTS.md 的流程执行：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;读取 claude-progress.md&lt;/strong&gt; → 确认 kb-001 为最高优先级&lt;/li&gt;
@@ -424,140 +576,145 @@ loading="lazy"
 &lt;li&gt;&lt;strong&gt;遇到 Blocker&lt;/strong&gt; → Windows EPERM 阻止在 userData 目录创建子目录，按规则在窄范围修复&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;更新 Harness 文件&lt;/strong&gt; → 所有功能标记为 passing，记录风险&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h3 id="强-harness-的行为差异"&gt;强 Harness 的行为差异
+&lt;h3 id=&#34;强-harness-的行为差异&#34;&gt;强 Harness 的行为差异
 &lt;/h3&gt;&lt;p&gt;以下是 Agent 在关键决策点上的行为重构示意（非原始逐字日志）：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
-&lt;/span&gt;&lt;span class="lnt"&gt; 2
-&lt;/span&gt;&lt;span class="lnt"&gt; 3
-&lt;/span&gt;&lt;span class="lnt"&gt; 4
-&lt;/span&gt;&lt;span class="lnt"&gt; 5
-&lt;/span&gt;&lt;span class="lnt"&gt; 6
-&lt;/span&gt;&lt;span class="lnt"&gt; 7
-&lt;/span&gt;&lt;span class="lnt"&gt; 8
-&lt;/span&gt;&lt;span class="lnt"&gt; 9
-&lt;/span&gt;&lt;span class="lnt"&gt;10
-&lt;/span&gt;&lt;span class="lnt"&gt;11
-&lt;/span&gt;&lt;span class="lnt"&gt;12
-&lt;/span&gt;&lt;span class="lnt"&gt;13
-&lt;/span&gt;&lt;span class="lnt"&gt;14
-&lt;/span&gt;&lt;span class="lnt"&gt;15
-&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# Agent 读到的不一致状态时的反应：
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&amp;#34;feature_list.json 中所有功能标为 passing，但 main.js 不存在。
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; 这违反了 AGENTS.md 规则。先修复基础状态。&amp;#34;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# 遇到 Blocker 时的反应：
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&amp;#34;EPERM 权限错误。
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; AGENTS.md 规则：窄范围修复，不扩大到其他功能。
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; 将数据目录路径改为项目根目录，功能行为不变。&amp;#34;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# 完成后的动作：
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&amp;#34;更新 feature_list.json：
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; - status → passing
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; - evidence 字段填入验证证据
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; 更新 claude-progress.md：
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; - 记录风险（EPERM）
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; - 记录下一步动作&amp;#34;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# Agent 读到的不一致状态时的反应：
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;#34;feature_list.json 中所有功能标为 passing，但 main.js 不存在。
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; 这违反了 AGENTS.md 规则。先修复基础状态。&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# 遇到 Blocker 时的反应：
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;#34;EPERM 权限错误。
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; AGENTS.md 规则：窄范围修复，不扩大到其他功能。
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; 将数据目录路径改为项目根目录，功能行为不变。&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# 完成后的动作：
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;#34;更新 feature_list.json：
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  - status → passing
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  - evidence 字段填入验证证据
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; 更新 claude-progress.md：
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  - 记录风险（EPERM）
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  - 记录下一步动作&amp;#34;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="结果-1"&gt;结果
+&lt;/div&gt;&lt;h3 id=&#34;结果-1&#34;&gt;结果
 &lt;/h3&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;功能&lt;/th&gt;
-&lt;th&gt;状态&lt;/th&gt;
-&lt;th&gt;证据&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;kb-001 窗口启动&lt;/td&gt;
-&lt;td&gt;✅ passing&lt;/td&gt;
-&lt;td&gt;BrowserWindow 创建，index.html 加载&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;kb-002 文档列表&lt;/td&gt;
-&lt;td&gt;✅ passing&lt;/td&gt;
-&lt;td&gt;#left-panel 300px，border-right 边界&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;kb-003 问答面板&lt;/td&gt;
-&lt;td&gt;✅ passing&lt;/td&gt;
-&lt;td&gt;#right-panel flex:1，含输入交互&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;kb-004 数据目录&lt;/td&gt;
-&lt;td&gt;✅ passing&lt;/td&gt;
-&lt;td&gt;data/documents/ + data/qa/ 已创建&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;功能&lt;/th&gt;
+					&lt;th&gt;状态&lt;/th&gt;
+					&lt;th&gt;证据&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;kb-001 窗口启动&lt;/td&gt;
+					&lt;td&gt;✅ passing&lt;/td&gt;
+					&lt;td&gt;BrowserWindow 创建，index.html 加载&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;kb-002 文档列表&lt;/td&gt;
+					&lt;td&gt;✅ passing&lt;/td&gt;
+					&lt;td&gt;#left-panel 300px，border-right 边界&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;kb-003 问答面板&lt;/td&gt;
+					&lt;td&gt;✅ passing&lt;/td&gt;
+					&lt;td&gt;#right-panel flex:1，含输入交互&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;kb-004 数据目录&lt;/td&gt;
+					&lt;td&gt;✅ passing&lt;/td&gt;
+					&lt;td&gt;data/documents/ + data/qa/ 已创建&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h3 id="应用截图-1"&gt;应用截图
-&lt;/h3&gt;&lt;p&gt;&lt;img src="https://iamxurulin.github.io/images/58b1c4ac684bf0b1a3fb18e4e3318ed0-50d1b639.png"
-loading="lazy"
+&lt;h3 id=&#34;应用截图-1&#34;&gt;应用截图
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://iamxurulin.github.io/images/58b1c4ac684bf0b1a3fb18e4e3318ed0-50d1b639.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
 &gt;&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id="对比分析"&gt;对比分析
-&lt;/h2&gt;&lt;h3 id="核心指标"&gt;核心指标
+&lt;h2 id=&#34;对比分析&#34;&gt;对比分析
+&lt;/h2&gt;&lt;h3 id=&#34;核心指标&#34;&gt;核心指标
 &lt;/h3&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;指标&lt;/th&gt;
-&lt;th&gt;弱 Harness&lt;/th&gt;
-&lt;th&gt;强 Harness&lt;/th&gt;
-&lt;th&gt;备注&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;首次成功启动&lt;/td&gt;
-&lt;td&gt;一次通过&lt;/td&gt;
-&lt;td&gt;三次&lt;/td&gt;
-&lt;td&gt;强 Harness 因主动发现并修复 EPERM 权限问题而多次重启，非代码质量问题&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;遗漏项&lt;/td&gt;
-&lt;td&gt;无&lt;/td&gt;
-&lt;td&gt;无&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;过早停止&lt;/td&gt;
-&lt;td&gt;否&lt;/td&gt;
-&lt;td&gt;否&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;验证证据&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;无&lt;/td&gt;
-&lt;td&gt;feature_list.json 结构化证据&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;风险记录&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;无&lt;/td&gt;
-&lt;td&gt;claude-progress.md 记录 EPERM&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;可接续性&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;需重新理解代码&lt;/td&gt;
-&lt;td&gt;读 claude-progress.md 即可&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;状态一致性检查&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;无&lt;/td&gt;
-&lt;td&gt;主动发现并修复不一致&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;指标&lt;/th&gt;
+					&lt;th&gt;弱 Harness&lt;/th&gt;
+					&lt;th&gt;强 Harness&lt;/th&gt;
+					&lt;th&gt;备注&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;首次成功启动&lt;/td&gt;
+					&lt;td&gt;一次通过&lt;/td&gt;
+					&lt;td&gt;三次&lt;/td&gt;
+					&lt;td&gt;强 Harness 因主动发现并修复 EPERM 权限问题而多次重启，非代码质量问题&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;遗漏项&lt;/td&gt;
+					&lt;td&gt;无&lt;/td&gt;
+					&lt;td&gt;无&lt;/td&gt;
+					&lt;td&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;过早停止&lt;/td&gt;
+					&lt;td&gt;否&lt;/td&gt;
+					&lt;td&gt;否&lt;/td&gt;
+					&lt;td&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;验证证据&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;无&lt;/td&gt;
+					&lt;td&gt;feature_list.json 结构化证据&lt;/td&gt;
+					&lt;td&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;风险记录&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;无&lt;/td&gt;
+					&lt;td&gt;claude-progress.md 记录 EPERM&lt;/td&gt;
+					&lt;td&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;可接续性&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;需重新理解代码&lt;/td&gt;
+					&lt;td&gt;读 claude-progress.md 即可&lt;/td&gt;
+					&lt;td&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;状态一致性检查&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;无&lt;/td&gt;
+					&lt;td&gt;主动发现并修复不一致&lt;/td&gt;
+					&lt;td&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h3 id="深层差异"&gt;深层差异
+&lt;h3 id=&#34;深层差异&#34;&gt;深层差异
 &lt;/h3&gt;&lt;p&gt;这个实验里，两个版本最终都完成了任务，UI 效果完全一样。但这不代表 Harness 没用——恰恰相反，&lt;strong&gt;简单的任务看不出 Harness 的价值，复杂的任务看不出 Harness 的边界&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;真正体现差异的地方：&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;1. 状态一致性检查&lt;/strong&gt;&lt;/p&gt;
@@ -569,12 +726,17 @@ loading="lazy"
 &lt;p&gt;&lt;strong&gt;4. 完成定义&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;强 Harness 有明确的完成定义：目标行为实现 + npm start 成功 + 证据记录在案。弱 Harness 下，Agent 自己判断&amp;quot;差不多完成了&amp;quot;，没有外部验证标准。&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id="关键结论"&gt;关键结论
-&lt;/h2&gt;&lt;h3 id="1-简单任务中harness-的价值是防御性的"&gt;1. 简单任务中，Harness 的价值是&amp;quot;防御性&amp;quot;的
+&lt;h2 id=&#34;关键结论&#34;&gt;关键结论
+&lt;/h2&gt;&lt;h3 id=&#34;1-简单任务中harness-的价值是防御性的&#34;&gt;1. 简单任务中，Harness 的价值是&amp;quot;防御性&amp;quot;的
 &lt;/h3&gt;&lt;p&gt;这次实验任务简单，两个版本都完成了。但 Harness 的价值在于&lt;strong&gt;防止意外&lt;/strong&gt;——状态不一致、权限错误、风险遗漏，这些在简单任务中可能不致命，但在复杂任务中会累积成灾难。&lt;/p&gt;
-&lt;h3 id="2-harness-解决的是接续问题不是完成问题"&gt;2. Harness 解决的是&amp;quot;接续&amp;quot;问题，不是&amp;quot;完成&amp;quot;问题
+&lt;h3 id=&#34;2-harness-解决的是接续问题不是完成问题&#34;&gt;2. Harness 解决的是&amp;quot;接续&amp;quot;问题，不是&amp;quot;完成&amp;quot;问题
 &lt;/h3&gt;&lt;p&gt;Agent 的单次执行能力很强，但多轮会话之间的接续是短板。Harness 通过 feature_list.json（状态）和 claude-progress.md（上下文）让下一轮会话能无缝接续。&lt;/p&gt;
-&lt;h3 id="3-规则的价值在于约束行为不在于提升质量"&gt;3. 规则的价值在于&amp;quot;约束行为&amp;quot;，不在于&amp;quot;提升质量&amp;quot;
+&lt;h3 id=&#34;3-规则的价值在于约束行为不在于提升质量&#34;&gt;3. 规则的价值在于&amp;quot;约束行为&amp;quot;，不在于&amp;quot;提升质量&amp;quot;
 &lt;/h3&gt;&lt;p&gt;Harness 不会让 Agent 写出更好的代码，但会让 Agent 的行为更可预测、更规范。feature_list.json 的验收标准不是为了让代码更好，而是为了让&amp;quot;完成&amp;quot;有一个客观的判断标准。&lt;/p&gt;
-&lt;h3 id="4-好的-harness-是最小可行约束"&gt;4. 好的 Harness 是&amp;quot;最小可行约束&amp;quot;
-&lt;/h3&gt;&lt;p&gt;Harness 不是越多越好。AGENTS.md 的核心规则只有几条：一次一个功能、必须验证、证据必须记录。过多的规则会让 Agent 过度遵循流程，反而降低效率。&lt;/p&gt;</description></item></channel></rss>
+&lt;h3 id=&#34;4-好的-harness-是最小可行约束&#34;&gt;4. 好的 Harness 是&amp;quot;最小可行约束&amp;quot;
+&lt;/h3&gt;&lt;p&gt;Harness 不是越多越好。AGENTS.md 的核心规则只有几条：一次一个功能、必须验证、证据必须记录。过多的规则会让 Agent 过度遵循流程，反而降低效率。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

@@ -1,1 +1,313 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>JVM on Coder_Studio</title><link>https://iamxurulin.github.io/tags/jvm/</link><description>Recent content in JVM on Coder_Studio</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>iamxurulin</copyright><lastBuildDate/><atom:link href="https://iamxurulin.github.io/tags/jvm/index.xml" rel="self" type="application/rss+xml"/></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>JVM on Coder_Studio</title>
+        <link>https://iamxurulin.github.io/tags/jvm/</link>
+        <description>Recent content in JVM on Coder_Studio</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>iamxurulin</copyright>
+        <lastBuildDate>Sun, 21 Jun 2026 18:19:43 +0000</lastBuildDate><atom:link href="https://iamxurulin.github.io/tags/jvm/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>【面试真题拆解】你知道ThreadLocal是什么吗</title>
+        <link>https://iamxurulin.github.io/p/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98%E6%8B%86%E8%A7%A3%E4%BD%A0%E7%9F%A5%E9%81%93threadlocal%E6%98%AF%E4%BB%80%E4%B9%88%E5%90%97/</link>
+        <pubDate>Sat, 21 Mar 2026 17:34:29 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98%E6%8B%86%E8%A7%A3%E4%BD%A0%E7%9F%A5%E9%81%93threadlocal%E6%98%AF%E4%BB%80%E4%B9%88%E5%90%97/</guid>
+        <description>&lt;p&gt;ThreadLocal 是线程专属的&lt;strong&gt;本地变量&lt;/strong&gt;，它的设计是给每个线程创建一份独立的变量副本，线程之间完全不共享数据，天然实现线程隔离，全程无锁竞争，性能远高于加锁保证线程安全的方案。&lt;/p&gt;
+&lt;p&gt;每个 &lt;code&gt;Thread&lt;/code&gt; 内部都有一个专属的成员变量 &lt;code&gt;ThreadLocalMap&lt;/code&gt;（不是 &lt;code&gt;ThreadLocal&lt;/code&gt; 的！），&lt;code&gt;Key&lt;/code&gt; 是 &lt;code&gt;ThreadLocal&lt;/code&gt; 实例本身（弱引用），&lt;code&gt;Value&lt;/code&gt; 是存的变量（强引用）。&lt;/p&gt;
+&lt;p&gt;官话太多，直接上例子。&lt;/p&gt;
+&lt;h2 id=&#34;以用户上下文传递举个例子&#34;&gt;以用户上下文传递举个例子
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/**
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt; * 用户上下文工具类
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt; * 用ThreadLocal存当前登录用户的ID，避免层层传参
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt; */&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;UserContextHolder&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 定义ThreadLocal，存用户ID&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;private&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;static&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;final&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ThreadLocal&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Long&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;USER_ID_THREAD_LOCAL&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;new&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ThreadLocal&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;cm&#34;&gt;/**
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;     * 设置用户ID
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;     */&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;static&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;setUserId&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Long&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;userId&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;USER_ID_THREAD_LOCAL&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;set&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;userId&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;cm&#34;&gt;/**
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;     * 获取用户ID
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;     */&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;static&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Long&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;getUserId&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;return&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;USER_ID_THREAD_LOCAL&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;get&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;cm&#34;&gt;/**
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;     * 必须手动调用！清理ThreadLocal，防止内存泄漏
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;     */&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;static&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;clear&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;USER_ID_THREAD_LOCAL&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;remove&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;和加锁保证线程安全的区别&#34;&gt;和加锁保证线程安全的区别
+&lt;/h2&gt;&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;对比项&lt;/th&gt;
+					&lt;th&gt;加锁&lt;/th&gt;
+					&lt;th&gt;ThreadLocal&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;思想&lt;/td&gt;
+					&lt;td&gt;多线程排队用同一个变量，保证同一时间只有一个线程能访问&lt;/td&gt;
+					&lt;td&gt;每个线程用自己的专属变量，完全不共享&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;性能&lt;/td&gt;
+					&lt;td&gt;有锁竞争，高并发下性能差&lt;/td&gt;
+					&lt;td&gt;无锁竞争，性能高&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;适用场景&lt;/td&gt;
+					&lt;td&gt;多线程必须共享同一个变量的场景（比如共享计数器、共享资源修改）&lt;/td&gt;
+					&lt;td&gt;每个线程需要独立变量副本的场景（比如用户上下文、SimpleDateFormat 线程安全）&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;小贴士&#34;&gt;小贴士
+&lt;/h3&gt;&lt;p&gt;很多人以为ThreadLocalMap的Key是“线程ID”，其实Key是&lt;strong&gt;ThreadLocal&lt;/strong&gt;实例本身，而不是线程ID。&lt;/p&gt;
+&lt;p&gt;一个线程可以有多个ThreadLocal实例，每个实例对应一个Value，存到同一个ThreadLocalMap里，Key不同，互不干扰。&lt;/p&gt;
+&lt;h2 id=&#34;threadlocal内存泄漏问题&#34;&gt;ThreadLocal内存泄漏问题
+&lt;/h2&gt;&lt;h3 id=&#34;java中的4种引用强度&#34;&gt;Java中的4种引用强度
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;强引用&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;我们平时写的 &lt;code&gt;Object obj = new Object()&lt;/code&gt; 就是强引用，只要强引用还在，GC就不会回收这个对象。&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;软引用&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;用 &lt;code&gt;SoftReference&lt;/code&gt; 包装的引用，只有当内存不够用的时候，GC 才会回收这个对象。&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;弱引用&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;用 &lt;code&gt;WeakReference&lt;/code&gt; 包装的引用，只要GC一运行，不管内存够不够，都会回收这个对象。&lt;/p&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;虚引用&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;用 &lt;code&gt;PhantomReference&lt;/code&gt; 包装的引用，完全不影响对象的生命周期，只是用来在对象被 GC 回收前收到一个通知，做一些收尾工作。&lt;/p&gt;
+&lt;h3 id=&#34;threadlocalmap的entry结构&#34;&gt;ThreadLocalMap的Entry结构
+&lt;/h3&gt;&lt;p&gt;ThreadLocalMap的Entry是继承自WeakReference的，结构如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;static&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Entry&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;extends&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;WeakReference&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ThreadLocal&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;?&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Object&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;value&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Entry&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ThreadLocal&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;?&amp;gt;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;k&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Object&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;v&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;super&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;k&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// Key是弱引用&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;value&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;v&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// Value是强引用&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;假设创建了一个 &lt;code&gt;ThreadLocal&lt;/code&gt; 实例，有外部强引用指向它，同时把它作为 Key 存到了线程的 &lt;code&gt;ThreadLocalMap&lt;/code&gt; 里；&lt;/p&gt;
+&lt;p&gt;当用完 &lt;code&gt;ThreadLocal&lt;/code&gt; 后，没有手动 &lt;code&gt;remove&lt;/code&gt;，而且外部的强引用也没了（比如 &lt;code&gt;threadLocal = null&lt;/code&gt;），因为 &lt;code&gt;Key&lt;/code&gt; 是弱引用，GC 一运行，&lt;code&gt;Key&lt;/code&gt; 就被回收了，变成了 &lt;code&gt;null&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;但是， &lt;code&gt;Value&lt;/code&gt; 是强引用，只要线程还活着，&lt;code&gt;Value&lt;/code&gt; 就不会被 GC 回收，这就导致了内存泄漏。&lt;/p&gt;
+&lt;p&gt;更严重的还有，如果用了线程池，线程会被长期复用，不仅内存泄漏，还会导致用户信息串号、数据错误等严重的业务问题。&lt;/p&gt;
+&lt;h3 id=&#34;怎么避免内存泄漏&#34;&gt;怎么避免内存泄漏
+&lt;/h3&gt;&lt;p&gt;使用完ThreadLocal后，手动调用 &lt;code&gt;remove()&lt;/code&gt; 方法。&lt;/p&gt;
+&lt;p&gt;举个例子，在Spring Boot的拦截器里：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@Component&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;UserInterceptor&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;implements&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;HandlerInterceptor&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nd&#34;&gt;@Override&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;boolean&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;preHandle&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;HttpServletRequest&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;request&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;HttpServletResponse&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;response&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Object&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;handler&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 从Token里解析出用户ID，存到ThreadLocal&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Long&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;userId&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;parseUserIdFromToken&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;request&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getHeader&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Authorization&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;));&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;UserContextHolder&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;setUserId&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;userId&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;return&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nd&#34;&gt;@Override&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;afterCompletion&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;HttpServletRequest&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;request&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;HttpServletResponse&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;response&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Object&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;handler&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Exception&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ex&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 在这里清理，不管请求成功失败，都要清理。&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;UserContextHolder&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;clear&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;&#34;&gt;
+&lt;/h3&gt;</description>
+        </item>
+        <item>
+        <title>【面试真题】讲讲JVM的垃圾回收机制？</title>
+        <link>https://iamxurulin.github.io/p/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98%E8%AE%B2%E8%AE%B2jvm%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/</link>
+        <pubDate>Sat, 14 Mar 2026 19:26:46 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98%E8%AE%B2%E8%AE%B2jvm%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/</guid>
+        <description>&lt;h2 id=&#34;为什么需要垃圾回收&#34;&gt;为什么需要垃圾回收？
+&lt;/h2&gt;&lt;p&gt;首先得说清楚，JVM的垃圾回收（GC）到底是干嘛的。&lt;/p&gt;
+&lt;p&gt;其实就像租房子住，时间长了会产生垃圾，要是不打扫，房子就没法住了。&lt;/p&gt;
+&lt;p&gt;在Java里，我们写代码会创建很多对象（比如&lt;code&gt;new Person()&lt;/code&gt;、&lt;code&gt;new ArrayList()&lt;/code&gt;），这些对象都存在&lt;strong&gt;堆内存&lt;/strong&gt;里。&lt;/p&gt;
+&lt;p&gt;但是，堆内存是有限的，要是对象用完了不清理，内存就会被占满，最后报&lt;code&gt;OutOfMemoryError&lt;/code&gt;（OOM），程序就挂了。&lt;/p&gt;
+&lt;p&gt;所以GC的作用就是：&lt;strong&gt;自动找到堆里那些“没人用的垃圾对象”，把它们清理掉，腾出内存空间&lt;/strong&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;堆内存划分&#34;&gt;堆内存划分
+&lt;/h2&gt;&lt;p&gt;JVM把堆分成了新生代和老年代两大块：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;新生代&lt;/strong&gt;：刚创建的对象优先放在这里。就像“幼儿园”，大部分对象“朝生夕死”（比如方法里的临时变量，方法执行完就没用了）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;老年代&lt;/strong&gt;：在新生代里“熬过好几次GC”的对象，会被放到这里。就像“养老院”，这里的对象大多活得比较久（比如Spring容器里的单例Bean）。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;那为什么要这么划分呢？&lt;/p&gt;
+&lt;p&gt;主要还是因为不同生命周期的对象，用不同的回收算法，效率会更高一点。&lt;/p&gt;
+&lt;h3 id=&#34;各代用什么垃圾回收算法&#34;&gt;各代用什么垃圾回收算法？
+&lt;/h3&gt;&lt;p&gt;我当时面试的时候突然懵了，说的不知道， 裂开。。。&lt;/p&gt;
+&lt;p&gt;对新生代来说，它的特点是：&lt;strong&gt;垃圾多，存活对象少&lt;/strong&gt;（比如100个对象里，可能只有2个活着）。&lt;/p&gt;
+&lt;p&gt;采用的是&lt;strong&gt;复制算法。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;JVM把新生代分成三块：&lt;/p&gt;
+&lt;p&gt;1个Eden区（占80%）和2个Survivor区（From和To，各占10%）。&lt;/p&gt;
+&lt;p&gt;平时只用Eden区和其中一个Survivor区（比如From）。&lt;/p&gt;
+&lt;p&gt;新对象先在Eden区分配，当Eden区满了，触发Minor GC（新生代GC），把Eden和From区里活着的对象，复制到To区，然后直接清空Eden和From区，From和To交换角色（下次用Eden和新的From区）。&lt;/p&gt;
+&lt;p&gt;对老年代来说，它的特点是：&lt;strong&gt;存活对象多，垃圾少&lt;/strong&gt;，而且没有额外的大空间做复制担保，所以不用复制算法，采用的是**标记-清除 **或 &lt;strong&gt;标记-整理算法。&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&#34;标记-清除算法mark-sweep&#34;&gt;标记-清除算法（Mark-Sweep）
+&lt;/h4&gt;&lt;p&gt;这种算法的实现逻辑是，从“GC Roots”（比如主线程、静态变量这些“根”）出发，找到所有活着的对象，做上标记，然后遍历堆内存，把没标记的对象（垃圾）清理掉。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;优点&lt;/strong&gt;是实现简单，但是会产生内存碎片（比如清理后剩下很多小空间，大对象可能放不下）。&lt;/p&gt;
+&lt;h4 id=&#34;标记-整理算法mark-compact&#34;&gt;标记-整理算法（Mark-Compact）
+&lt;/h4&gt;&lt;p&gt;为了解决内存碎片问题，在“标记-清除”基础上加了个“整理”步骤。&lt;/p&gt;
+&lt;p&gt;实现逻辑和标记清除算法一样，先标记存活对象，把所有存活对象往内存的一端移动，按顺序排好，最后，直接清空边界以外的内存。&lt;/p&gt;
+&lt;p&gt;这种算法的优点&lt;strong&gt;是&lt;/strong&gt;没有内存碎片，但缺点是需要移动对象，效率比“标记-清除”低。&lt;/p&gt;
+&lt;h2 id=&#34;常见的垃圾回收器&#34;&gt;常见的垃圾回收器
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Serial&lt;/strong&gt;：单线程回收，适合客户端应用（比如桌面软件）；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ParNew&lt;/strong&gt;：Serial的多线程版，常和CMS配合用；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CMS（Concurrent Mark Sweep）&lt;/strong&gt;：主打&lt;strong&gt;低延迟&lt;/strong&gt;（垃圾回收时尽量不让程序停顿太久），适合互联网应用（比如电商后台），用的是“标记-清除”算法；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;G1（Garbage-First）&lt;/strong&gt;：把堆分成很多小区域，优先回收垃圾多的区域，平衡了吞吐量和延迟。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>JIT编译后的代码存在哪</title>
+        <link>https://iamxurulin.github.io/p/jit%E7%BC%96%E8%AF%91%E5%90%8E%E7%9A%84%E4%BB%A3%E7%A0%81%E5%AD%98%E5%9C%A8%E5%93%AA/</link>
+        <pubDate>Sun, 11 Jan 2026 16:04:17 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/jit%E7%BC%96%E8%AF%91%E5%90%8E%E7%9A%84%E4%BB%A3%E7%A0%81%E5%AD%98%E5%9C%A8%E5%93%AA/</guid>
+        <description>&lt;p&gt;JIT（Just-In-Time）编译后的代码通常存放在代码缓存区（Code Cache）中。&lt;/p&gt;
+&lt;p&gt;JVM提供了如下参数用于调整Code Cache的大小和行为：&lt;/p&gt;
+&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;-XX:InitialCodeCacheSize&lt;/th&gt;
+					&lt;th&gt;初始大小&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;-XX:ReservedCodeCacheSize&lt;/td&gt;
+					&lt;td&gt;最大大小&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;-XX:+PrintCodeCache&lt;/td&gt;
+					&lt;td&gt;打印Code Cache信息&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Code Cache的默认大小依赖于JVM的版本和运行环境，通常有一个最大值。&lt;/p&gt;
+&lt;p&gt;Code Cache分为多个区域，分别存储不同级别的编译代码：&lt;/p&gt;
+&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;非方法代码&lt;/th&gt;
+					&lt;th&gt;存储运行时的JVM调试代码或者模板代码&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;方法代码&lt;/td&gt;
+					&lt;td&gt;存储普通JIT编译的代码&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;轮廓代码&lt;/td&gt;
+					&lt;td&gt;存储优化级别更高的代码&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+        </item>
+        <item>
+        <title>说说编译执行和解释执行的区别</title>
+        <link>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4%E7%BC%96%E8%AF%91%E6%89%A7%E8%A1%8C%E5%92%8C%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
+        <pubDate>Thu, 01 Jan 2026 17:35:59 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4%E7%BC%96%E8%AF%91%E6%89%A7%E8%A1%8C%E5%92%8C%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
+        <description>&lt;p&gt;编译执行是程序在执行之前，先通过编译器将源代码编译为机器代码，然后直接在CPU上运行；&lt;/p&gt;
+&lt;p&gt;解释执行是源代码在不经过编译器编译的前提下，直接在运行的时候通过解释器逐行翻译并执行。&lt;/p&gt;
+&lt;p&gt;常见的编译性语言有C和C++，而常见的解释性语言有Python。&lt;/p&gt;
+&lt;p&gt;编译执行的语言因为编译后的程序不需要在运行的时候再进行翻译，所以运行速度快。&lt;/p&gt;
+&lt;p&gt;但是，程序需要针对每个平台重新编译，跨平台性会更差一点。&lt;/p&gt;
+&lt;p&gt;而解释执行的语言在每个平台上都是通过相应平台的解释器来运行的，跨平台性好。但是每次执行的时候都需要进行动态的翻译和解释，所以运行速度更慢。&lt;/p&gt;
+&lt;p&gt;严格来说，JVM是结合了编译执行和解释执行的。&lt;/p&gt;
+&lt;p&gt;正常情况下JVM是解释执行的，不过，如果JVM发现某段逻辑执行的特别频繁，那么它就会通过JIT（Just In Time）即时编译将其编译成机器码，这样就是编译执行了。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

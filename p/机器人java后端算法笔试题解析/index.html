@@ -1,103 +1,1895 @@
-<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content=" 如何判断一个字符串变量a为空，包括null、空字符串、一个或多个空格、一个或多个whitespace? if (a == null || a.isBlank()) {\n}\nJava新版本为什么要添加Instant? Java 8 引入 Instant 主要是为了修复旧版日期时间类（如 java.util.Date）的设计缺陷，\n"><title>机器人Java后端算法笔试题解析</title><link rel=canonical href=https://iamxurulin.github.io/p/%E6%9C%BA%E5%99%A8%E4%BA%BAjava%E5%90%8E%E7%AB%AF%E7%AE%97%E6%B3%95%E7%AC%94%E8%AF%95%E9%A2%98%E8%A7%A3%E6%9E%90/><link rel=stylesheet href=/scss/style.min.6e9c513e2b18fb90ba80ef8f1310b1122153a8397e5271e51b034f6a1f7377f5.css><meta property='og:title' content="机器人Java后端算法笔试题解析"><meta property='og:description' content=" 如何判断一个字符串变量a为空，包括null、空字符串、一个或多个空格、一个或多个whitespace? if (a == null || a.isBlank()) {\n}\nJava新版本为什么要添加Instant? Java 8 引入 Instant 主要是为了修复旧版日期时间类（如 java.util.Date）的设计缺陷，\n"><meta property='og:url' content='https://iamxurulin.github.io/p/%E6%9C%BA%E5%99%A8%E4%BA%BAjava%E5%90%8E%E7%AB%AF%E7%AE%97%E6%B3%95%E7%AC%94%E8%AF%95%E9%A2%98%E8%A7%A3%E6%9E%90/'><meta property='og:site_name' content='Coder_Studio'><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='java'><meta property='article:tag' content='算法'><meta property='article:tag' content='windows'><meta property='article:published_time' content='2026-05-22T23:01:24+00:00'><meta property='article:modified_time' content='2026-06-17T13:01:06+00:00'><meta name=twitter:title content="机器人Java后端算法笔试题解析"><meta name=twitter:description content=" 如何判断一个字符串变量a为空，包括null、空字符串、一个或多个空格、一个或多个whitespace? if (a == null || a.isBlank()) {\n}\nJava新版本为什么要添加Instant? Java 8 引入 Instant 主要是为了修复旧版日期时间类（如 java.util.Date）的设计缺陷，\n"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5123323391207523" crossorigin=anonymous></script><link rel="shortcut icon" href=/favicon.ico><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preconnect href=https://cdn.jsdelivr.net><link rel=dns-prefetch href=https://cdn.jsdelivr.net><div class=loading><div class=liquid-loader><div class=loading-text>Loading<span class=dot>.</span><span class=dot>.</span><span class=dot>.</span></div><div class=loader-track><div class=liquid-fill></div></div></div></div><style>.loading{position:fixed;display:none;justify-content:center;align-items:center;top:0;left:0;width:100%;height:100%;z-index:9999;background-color:#f5f5fa;transition:all .3s ease}.liquid-loader{display:flex;flex-direction:column;align-items:center;gap:15px;padding:20px;font-family:system-ui,sans-serif}.loader-track{position:relative;width:180px;height:32px;background:linear-gradient(135deg,#2a2a2a,#1a1a1a);border-radius:16px;overflow:hidden;box-shadow:inset 0 2px 4px rgba(0,0,0,.6),0 1px 3px rgba(255,255,255,.1)}.liquid-fill{position:absolute;top:2px;left:2px;height:calc(100% - 4px);background:linear-gradient(90deg,#4f46e5,#7c3aed,#ec4899,#f59e0b);border-radius:14px;animation:fillProgress 4s ease-out infinite,colorShift 3s linear infinite;box-shadow:0 0 12px rgba(124,58,237,.4),inset 0 1px 2px rgba(255,255,255,.2)}.animated-stop{animation-play-state:paused!important;-webkit-animation-play-state:paused!important}.loading-text{color:#fff;font-size:18px;font-weight:600;letter-spacing:1px;animation:textGlow 1s ease-in-out infinite}.dot{margin-left:3px;animation:blink 1.5s infinite}.dot:nth-of-type(1){animation-delay:0s}.dot:nth-of-type(2){animation-delay:.3s}.dot:nth-of-type(3){animation-delay:.6s}@keyframes fillProgress{0%{width:4px}25%{width:25%}50%{width:50%}75%{width:75%}100%{width:calc(100% - 4px)}}@keyframes colorShift{0%{filter:hue-rotate(0)brightness(1)}33%{filter:hue-rotate(120deg)brightness(1.1)}66%{filter:hue-rotate(240deg)brightness(.9)}100%{filter:hue-rotate(360deg)brightness(1)}}@keyframes textGlow{0%,100%{opacity:.7;text-shadow:0 0 8px rgba(139,92,246,.3)}50%{opacity:1;text-shadow:0 0 16px rgba(139,92,246,.6)}}@keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}@keyframes scaleAndFadeout{0%{transform:scale(1);opacity:1}100%{transform:scale(1.2);opacity:0}}.scaleAndFadeout{animation:scaleAndFadeout 1.5s ease-out forwards!important}.article-view{display:flex}.article-list .article-view{display:none!important}</style><script>function initLoading(){const e=!sessionStorage.getItem("visited");if(e){const e=document.querySelector(".loading"),t=document.querySelector(".liquid-fill");e.style.display="flex",setTimeout(()=>{loadFinish(e,t),setTimeout(()=>{e.style.display="none"},1500),sessionStorage.setItem("visited","true")},4e3)}}function loadFinish(e,t){t.classList.add("animated-stop"),e.classList.add("scaleAndFadeout")}initLoading()</script></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
-<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hu_5b4689d2dc4cdce3.png width=300 height=300 class=site-logo loading=lazy alt=Avatar>
-</a><span class=emoji>💦</span></figure><div class=site-meta><h1 class=site-name><a href=/>Coder_Studio</a></h1><h2 class=site-description>专注后端开发、算法与 AI 的技术博客</h2></div></header><ol class=menu-social><li><a href=https://blog.csdn.net/qq_44678890 target=_blank title=CSDN rel=me><svg width="500" height="500" viewBox="0 0 500 500" fill="none"><path d="M82 199.474 173.5 73 345 81.4833 417.103 199.474v101.5L345 427.718H173.5L82 327.474v-128z" fill="#84C253"/><path d="M282.182 284.936 347.636 288.867C344.56 317.464 333.964 339.396 315.849 354.663c-18.002 15.267-40.161 22.9-66.48 22.9-31.673.0-57.251-10.482-76.733-31.445-19.483-20.964-29.224-49.903-29.224-86.817.0-36.572 9.22899999999999-66.08 27.686-88.525 18.457-22.445 44.205-33.667 77.246-33.667 30.875.0 54.573 8.54499999999999 71.094 25.635 16.634 17.089 26.033 39.762 28.198 68.017l-66.822 3.589C280.814 218.741 277.795 207.462 271.757 200.512 265.832 193.562 258.826 190.087 250.736 190.087c-22.558.0-33.838 22.673-33.838 68.018C216.898 283.512 219.804 300.773 225.614 309.887 231.539 319.002 239.799 323.559 250.395 323.559c18.912.0 29.508-12.874 31.787-38.6230000000001z" fill="#fff"/></svg></a></li><li><a href=https://github.com/iamxurulin/ target=_blank title=GitHub rel=me><svg class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
-<span>主页</span></a></li><li><a href=/search/><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
-<span>搜索</span></a></li><li><a href=/categories/><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg>
-<span>分类</span></a></li><li><a href=/tags/><svg class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11 3l9 9a1.5 1.5.0 010 2l-6 6a1.5 1.5.0 01-2 0L3 11V7a4 4 0 014-4h4"/><circle cx="9" cy="9" r="2"/></svg>
-<span>标签</span></a></li><li><a href=/archives/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
-<span>归档</span></a></li><li><a href=/%E5%85%B3%E4%BA%8E/><svg class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
-<span>关于</span></a></li><li><a href=/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/><svg class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
-<span>友情链接</span></a></li><li><a href=/%E9%9A%90%E7%A7%81%E6%94%BF%E7%AD%96/><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
-<span>隐私政策</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
-<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
-<span>暗色模式</span></li></ol></li></ol></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category><a href=/categories/%E7%AE%97%E6%B3%95/>算法</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/%E6%9C%BA%E5%99%A8%E4%BA%BAjava%E5%90%8E%E7%AB%AF%E7%AE%97%E6%B3%95%E7%AC%94%E8%AF%95%E9%A2%98%E8%A7%A3%E6%9E%90/>机器人Java后端算法笔试题解析</a></h2></div><footer class=article-time><div style=display:flex;flex-direction:column;gap:4px;font-size:14px><div class=article-date style=display:flex;align-items:center><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
-<span style=margin-left:5px>发布于: </span><time class=article-time--published datetime=2026-05-22T23:01:24Z style=margin-left:5px>2026-05-22 23:01:24</time></div></div><div class=article-view style=align-items:center;gap:5px;margin-left:auto;font-size:14px><svg class="icon icon-tabler icon-tabler-eye" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="12" cy="12" r="2"/><path d="M22 12c-2.667 4.667-6 7-10 7s-7.333-2.333-10-7c2.667-4.667 6-7 10-7s10 2.333 10 7"/></svg>
-<span id=vercount_container_page_pv>阅读
-<span id=vercount_value_page_pv>...</span> 次</span></div></footer></div></header><section class=article-content><ol><li>如何判断一个字符串变量a为空，包括null、空字符串、一个或多个空格、一个或多个whitespace?</li></ol><blockquote><p>if (a == null || a.isBlank()) {</p><p>}</p></blockquote><ol start=2><li>Java新版本为什么要添加Instant?</li></ol><blockquote><p>Java 8 引入 <code>Instant</code> 主要是为了修复旧版日期时间类（如 <code>java.util.Date</code>）的设计缺陷，</p><p>原因如下：</p><ol><li><strong>不可变性与线程安全</strong>：</li></ol><p><code>Instant</code> 是不可变的（Immutable），天然线程安全；</p><p>而 <code>Date</code> 是可变的，在多线程环境下容易产生并发问题。</p><ol start=2><li><strong>更高精度</strong>：</li></ol><p><code>Instant</code> 支持<strong>纳秒级</strong>（$ 10^{-9} $ 秒）精度；</p><p>而 <code>Date</code> 只能精确到毫秒。</p><ol start=3><li><strong>语义清晰（机器时间）</strong>：</li></ol><p>Instant 明确表示 UTC 时间线上的瞬时点（timestamp），语义清晰，适合机器时间处理（日志、分布式时间戳、事件时间）；</p><p>而 Date API 设计混乱，日期计算与格式化常依赖 Calendar、TimeZone 等类，易产生时区问题。</p></blockquote><ol start=3><li>如何判断两个double类型的变量是否相等?例如<code>doublea=1.2;doubleb=1.1 +0.1; </code>比较a和b是否相等。</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
-</span><span class=lnt>8
-</span><span class=lnt>9
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span><span class=w> </span><span class=kd>static</span><span class=w> </span><span class=kt>boolean</span><span class=w> </span><span class=nf>nearlyEqual</span><span class=p>(</span><span class=kt>double</span><span class=w> </span><span class=n>a</span><span class=p>,</span><span class=w> </span><span class=kt>double</span><span class=w> </span><span class=n>b</span><span class=p>,</span><span class=w> </span><span class=kt>double</span><span class=w> </span><span class=n>epsilon</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=n>Math</span><span class=p>.</span><span class=na>abs</span><span class=p>(</span><span class=n>a</span><span class=w> </span><span class=o>-</span><span class=w> </span><span class=n>b</span><span class=p>)</span><span class=w> </span><span class=o>&lt;</span><span class=w> </span><span class=n>epsilon</span><span class=p>;</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=p>}</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>
-</span></span></span><span class=line><span class=cl><span class=c1>// 使用</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=kt>double</span><span class=w> </span><span class=n>a</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>1</span><span class=p>.</span><span class=na>2</span><span class=p>;</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=kt>double</span><span class=w> </span><span class=n>b</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>1</span><span class=p>.</span><span class=na>1</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=n>0</span><span class=p>.</span><span class=na>1</span><span class=p>;</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=kt>boolean</span><span class=w> </span><span class=n>equal</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>nearlyEqual</span><span class=p>(</span><span class=n>a</span><span class=p>,</span><span class=w> </span><span class=n>b</span><span class=p>,</span><span class=w> </span><span class=n>1e</span><span class=o>-</span><span class=n>9</span><span class=p>);</span><span class=w>  </span><span class=c1>// true</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=c1>//epsilon 的取值取决于业务精度要求，常见取 1e-9 到 1e-6。</span><span class=w>
-</span></span></span></code></pre></td></tr></table></div></div><ol start=4><li>下面三条语句是否是合法的,如果不是原因是什么?</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=n>List</span><span class=o>&lt;</span><span class=n>String</span><span class=o>&gt;</span><span class=w> </span><span class=n>a</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>new</span><span class=w> </span><span class=n>ArrayList</span><span class=o>&lt;</span><span class=n>String</span><span class=o>&gt;</span><span class=p>();</span><span class=c1>//1</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=n>List</span><span class=o>&lt;</span><span class=n>Object</span><span class=o>&gt;</span><span class=w> </span><span class=n>a</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>new</span><span class=w> </span><span class=n>ArrayList</span><span class=o>&lt;</span><span class=n>String</span><span class=o>&gt;</span><span class=p>();</span><span class=c1>//2</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=n>List</span><span class=o>&lt;?&gt;</span><span class=w> </span><span class=n>a</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>new</span><span class=w> </span><span class=n>ArrayList</span><span class=o>&lt;</span><span class=n>String</span><span class=o>&gt;</span><span class=p>();</span><span class=c1>//3</span><span class=w>
-</span></span></span></code></pre></td></tr></table></div></div><blockquote><p>1.合法：左右类型完全匹配。</p><p>2.不合法：Java 泛型具有不变性，List<string> 与 List<object> 不存在父子关系。</p><p>若允许赋值，可通过 List<object> 写入非 String 类型，破坏类型安全。</p><p>3.合法：? 是无界通配符，代表未知类型，ArrayList<string> 是 List 的子类型。</p><p>但由于类型未知，只能读取不能写入（null 除外），因此编译器允许。</p></blockquote><ol start=5><li>一个字符串String,如何转换为字节数组。反过来呢?</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=c1>//1.String → byte[]</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=n>String</span><span class=w> </span><span class=n>str</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s>&#34;CodeEdge_Xu&#34;</span><span class=p>;</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>
-</span></span></span><span class=line><span class=cl><span class=c1>// 显式指定编码（避免平台差异）</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=kt>byte</span><span class=o>[]</span><span class=w> </span><span class=n>bytes</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>str</span><span class=p>.</span><span class=na>getBytes</span><span class=p>(</span><span class=n>StandardCharsets</span><span class=p>.</span><span class=na>UTF_8</span><span class=p>);</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>
-</span></span></span><span class=line><span class=cl><span class=c1>//2.byte[] → String</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=kt>byte</span><span class=o>[]</span><span class=w> </span><span class=n>bytes</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=p>...;</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>
-</span></span></span><span class=line><span class=cl><span class=c1>// 与编码时保持一致</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=n>String</span><span class=w> </span><span class=n>str</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>new</span><span class=w> </span><span class=n>String</span><span class=p>(</span><span class=n>bytes</span><span class=p>,</span><span class=w> </span><span class=n>StandardCharsets</span><span class=p>.</span><span class=na>UTF_8</span><span class=p>);</span><span class=w>
-</span></span></span></code></pre></td></tr></table></div></div><ol start=6><li>Java中,如果对象有循环引用,能否被GC。比如Path类里面有个字段reversedPath反向字段。两个Path对象因为这个字段相互引用。如果不能被GC,怎么解决。</li></ol><blockquote><p><strong>能。</strong></p><p>Java 主流 GC（G1、ZGC、CMS）用的是<strong>可达性分析</strong>，不是引用计数。</p><p>只要这两个 Path 对象整体从 GC Roots 不可达，循环引用不影响回收。</p><p><strong>真正导致不能 GC 的是外部强引用</strong>，比如：静态字段持有，ThreadLocal 未 remove，未注销的监听器。</p><p><strong>解决办法</strong>：</p><p>一般不需要特殊处理。</p><p>只要外部强引用断开，对象整体从 GC Roots 不可达即可回收。</p><p>真正的问题是被静态变量、线程、缓存、监听器等长期持有。</p></blockquote><ol start=7><li>写正则表达式,从类似"10,12;A1@12|12:23|p=1|f=2"字符串中抽出变量:"{x},{y};{name}@{index}|{timeStart}|{timeEnd}p={id}"。其中,除了name外其余均是数字,name中有数字、字母、中划线、下划线。</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=n>Pattern</span><span class=w> </span><span class=n>pattern</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>Pattern</span><span class=p>.</span><span class=na>compile</span><span class=p>(</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=s>&#34;^(\\d+),(\\d+);([A-Za-z0-9_-]+)@(\\d+)\\|(\\d+:\\d+)(?:\\|(\\d+:\\d+))?\\|p=(\\d+)\\|f=(\\d+)$&#34;</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=p>);</span><span class=w>
-</span></span></span></code></pre></td></tr></table></div></div><ol start=8><li>什么是大端(Big-endian),什么小端(Little-endian)?网络传输一般是大端还是小端?</li></ol><blockquote><p><strong>大端</strong>：高位字节放前面，低位放后面。</p><p><strong>小端</strong>：低位字节放前面，高位放后面。</p><p><strong>网络传输一般是大端</strong>。</p><p>TCP/IP 协议规定数据包中的多字节整数必须按大端传输。</p></blockquote><ol start=9><li>一个整数变量,如果只有一个线程修改它,但有多个线程读取它,有线程安全问题吗?</li></ol><blockquote><p>有线程安全问题，主要是可见性问题。</p><p>写线程修改后的值，其他线程不一定能立刻看到，可能一直读取旧值，因此通常需要使用 volatile 或同步机制保证可见性。</p><p>对于 long/double，早期 JVM 还存在非原子读写问题（现代 JVM 通常已解决）。</p></blockquote><p>10 . Java的线程能被强制杀死吗？</p><blockquote><p>不能安全地强制杀死。</p><p>Thread.stop() 可以强制终止，但已废弃（deprecated），因为会立即释放锁，导致对象状态损坏、资源泄漏。</p></blockquote><p>11 . 如果想要一个线程安全的List,可以用List的哪些实现，或通过什么手段实现。</p><div class=table-wrapper><table><thead><tr><th>方式</th><th>特点</th></tr></thead><tbody><tr><td><code>Vector</code></td><td>古老类，所有方法 <code>synchronized</code>，已不推荐</td></tr><tr><td><code>Collections.synchronizedList(new ArrayList&lt;>())</code></td><td>包装器，全表锁，读也串行</td></tr><tr><td><code>CopyOnWriteArrayList</code></td><td><strong>读多写少首选</strong>，写时复制新数组，读无锁</td></tr><tr><td><strong>手动加锁</strong></td><td><code>synchronized</code> 或 <code>ReentrantReadWriteLock</code>，灵活但代码重</td></tr></tbody></table></div><p>12 . 有一个List，其中的元素是监听器对象。在多线程环境下，需要对这个List进行添加、删除和遍历三个操作，如何线程安全地进行?除了对添加、删除和遍历加锁或同步的方式——因为如果对遍历加同步，可能会阻塞很长时间，因为遍历一遍可能要很久，会阻塞添加、删除等操作，也会阻塞其他线程的遍历操作。</p><blockquote><p><strong>用 <strong><code>CopyOnWriteArrayList</code></strong>。</strong></p><p>它内部写操作（add/remove）时复制一份新数组，修改完后替换引用；</p><p>读/遍历直接读当前数组快照，<strong>完全不加锁</strong>。</p><p>所以遍历不会阻塞添加、删除，也不会阻塞其他线程遍历。</p><p>迭代器基于快照，不会抛 <code>ConcurrentModificationException</code>。</p></blockquote><p>13 . Java核心库中创建线程池的方法是?通过核心库的线程池实现并发，比new Thread有哪些好处?</p><blockquote><p><strong>工具类工厂方法</strong>：</p><p>使用 <code>java.util.concurrent.Executors</code> 提供的静态方法（如 <code>newFixedThreadPool</code>、<code>newCachedThreadPool</code>、<code>newSingleThreadExecutor</code> 等）。</p><p><strong>直接构造对象</strong>：</p><p>通过 <code>new ThreadPoolExecutor(...)</code> 手动创建。</p><p>推荐直接使用 ThreadPoolExecutor 手动指定核心线程数、最大线程数、队列长度和拒绝策略，而不是直接使用 Executors 工厂方法，因为部分默认实现可能导致 OOM。</p></blockquote><blockquote><p><strong>比 <strong><code>new Thread</code></strong> 的好处</strong>：</p><ul><li><strong>降低资源消耗</strong>：通过<strong>复用</strong>已创建的线程，减少频繁创建和销毁线程的 CPU 和内存开销。</li><li><strong>提高响应速度</strong>：任务到达时，无需等待线程创建即可立即执行。</li><li><strong>提高线程可管理性</strong>：能统一分配、调优和监控线程，防止无限制创建线程导致系统资源耗尽（如 OOM）。</li></ul></blockquote><p>14 . MySQL中，varchar(100)的列，能存多少个英文字母?多少个汉字?使用utf8mb4字符集。</p><blockquote><p><strong>100 个英文字母，100 个汉字。</strong></p><p>MySQL 的 <code>varchar(100)</code> 中 <strong>100 是字符数，不是字节数</strong>。</p><p>utf8mb4 下英文字母通常 1 字节，中文常见汉字一般 3 字节，部分扩展字符可能占 4 字节，但 varchar(100) 限制的是字符数，因此最多依然存 100 个字符。</p></blockquote><p>15 . MySQL中，datetime和timestamp有何不同，精度分别是毫秒还是秒，是否有时区?</p><blockquote><p>datetime：</p><ul><li>范围大（1000~9999 年）</li><li>不涉及时区</li><li>默认精度到秒</li><li>支持小数秒 datetime(fsp)，最多微秒（6位）</li></ul><p>timestamp：</p><ul><li>范围小（1970~2038 年）</li><li>有时区语义（存 UTC，读时按 session timezone 转换）</li><li>默认精度到秒</li><li>支持 timestamp(fsp)，最多微秒（6位）</li></ul></blockquote><p>16 . 写SQL：</p><p>订单表wms_order，单行表wms_order_line，一对多关系。</p><p>wms_order表有列id(单号)、create_on(创建时间)等字段，</p><p>wms_order_line有id、order_id(所属订单)、line_no(行号)、product_id (商品 ID)。</p><p>如何查询2021年12月内发生的含有A、B、C三个商品的订单。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=line><span class=cl><span class=k>SELECT</span><span class=w> </span><span class=n>o</span><span class=p>.</span><span class=n>id</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>order_id</span><span class=p>,</span><span class=w> </span><span class=n>o</span><span class=p>.</span><span class=n>create_on</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=k>FROM</span><span class=w> </span><span class=n>wms_order</span><span class=w> </span><span class=n>o</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=k>INNER</span><span class=w> </span><span class=k>JOIN</span><span class=w> </span><span class=n>wms_order_line</span><span class=w> </span><span class=n>ol</span><span class=w> </span><span class=k>ON</span><span class=w> </span><span class=n>o</span><span class=p>.</span><span class=n>id</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>ol</span><span class=p>.</span><span class=n>order_id</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=k>WHERE</span><span class=w> 
-</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c1>-- 筛选2021年12月的订单
-</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=n>o</span><span class=p>.</span><span class=n>create_on</span><span class=w> </span><span class=o>&gt;=</span><span class=w> </span><span class=s1>&#39;2021-12-01&#39;</span><span class=w> 
-</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=k>AND</span><span class=w> </span><span class=n>o</span><span class=p>.</span><span class=n>create_on</span><span class=w> </span><span class=o>&lt;</span><span class=w> </span><span class=s1>&#39;2022-01-01&#39;</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c1>-- 筛选包含A、B、C任意一个商品的行
-</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=k>AND</span><span class=w> </span><span class=n>ol</span><span class=p>.</span><span class=n>product_id</span><span class=w> </span><span class=k>IN</span><span class=w> </span><span class=p>(</span><span class=s1>&#39;A&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;B&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;C&#39;</span><span class=p>)</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=k>GROUP</span><span class=w> </span><span class=k>BY</span><span class=w> </span><span class=n>o</span><span class=p>.</span><span class=n>id</span><span class=p>,</span><span class=w> </span><span class=n>o</span><span class=p>.</span><span class=n>create_on</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=c1>-- 确保订单同时包含这3个不同的商品
-</span></span></span><span class=line><span class=cl><span class=k>HAVING</span><span class=w> </span><span class=k>COUNT</span><span class=p>(</span><span class=k>DISTINCT</span><span class=w> </span><span class=n>ol</span><span class=p>.</span><span class=n>product_id</span><span class=p>)</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>3</span><span class=p>;</span><span class=w>
-</span></span></span></code></pre></td></tr></table></div></div><p>17 . 如果有一张订单表,查询量最大的查询条件有两种:</p><ul><li>根据某个创建人和创建时间(范围)查询。</li><li>根据某个类型和创建时间(范围)查询。</li></ul><p>建议如何建立索引?</p><blockquote><p>建立两个<strong>联合索引</strong>，并遵循“等值查询字段在前，范围查询字段在后”的原则：</p><ol><li><strong>索引一</strong>：<code>(创建人, 创建时间)</code></li><li><strong>索引二</strong>：<code>(类型, 创建时间)</code></li></ol><p><strong>理由</strong>：</p><ul><li><strong>最左匹配原则</strong>：将等值条件（创建人/类型）放在首位，范围条件（时间）放在末位，可以使索引效率最高。</li><li><strong>覆盖查询</strong>：联合索引可提高过滤效率；若查询字段被索引完全覆盖，还可减少回表。</li></ul></blockquote><p>18 . <code>@Resource</code>、<code>@Autowired</code>、<code>@Inject</code>的区别?</p><div class=table-wrapper><table><thead><tr><th style=text-align:left>特性</th><th style=text-align:left>@Autowired</th><th style=text-align:left>@Resource</th><th style=text-align:left>@Inject</th></tr></thead><tbody><tr><td style=text-align:left><strong>来源</strong></td><td style=text-align:left>Spring 框架专用</td><td style=text-align:left>JSR-250</td><td style=text-align:left>JSR-330</td></tr><tr><td style=text-align:left><strong>默认匹配方式</strong></td><td style=text-align:left><strong>按类型 (byType)</strong></td><td style=text-align:left><strong>先 byName，再 byType</strong></td><td style=text-align:left><strong>按类型 (byType)</strong></td></tr><tr><td style=text-align:left><strong>找不到对应 Bean</strong></td><td style=text-align:left>报错（可设置 <code>required=false</code>）</td><td style=text-align:left>报错</td><td style=text-align:left>报错</td></tr><tr><td style=text-align:left><strong>指定特定名称</strong></td><td style=text-align:left>配合 <code>@Qualifier</code></td><td style=text-align:left>使用 <code>name</code> 属性</td><td style=text-align:left>配合 <code>@Named</code></td></tr><tr><td style=text-align:left><strong>注入位置</strong></td><td style=text-align:left>构造器、字段、Setter、方法</td><td style=text-align:left>字段、Setter</td><td style=text-align:left>构造器、字段、Setter</td></tr></tbody></table></div><p>19 . <code>@Transactional</code>可以用于private方法吗，为什么?</p><blockquote><p>private 方法不能生效，因为 Spring AOP 无法代理 private 方法；</p><p>其不能被子类覆盖，因此代理对象无法拦截。</p><p>同类内部 this.xxx() 调用也会绕过代理，因此事务同样不生效。</p></blockquote><p>20 . 支付宝等接口，要求请求中对字段做签名，目的是什么?常见的签名算法有哪些?</p><p><strong>目的</strong>：</p><p>保证请求数据<strong>不被篡改</strong>，并<strong>证明请求方身份</strong>（只有持有密钥的一方才能生成有效签名）。</p><p><strong>常见签名算法</strong>：</p><div class=table-wrapper><table><thead><tr><th>算法</th><th>说明</th></tr></thead><tbody><tr><td><strong>RSA2</strong> / <code>SHA256withRSA</code></td><td>主流，支付宝等常用，私钥签名、公钥验签</td></tr><tr><td><strong>RSA</strong> / <code>SHA1withRSA</code></td><td>旧版兼容，安全性弱于 RSA2</td></tr><tr><td><strong>HMAC-SHA256</strong></td><td>双方共享密钥，常用于微信支付等</td></tr><tr><td><strong>MD5</strong></td><td>早期接口（如旧版支付宝），已不推荐，不安全</td></tr><tr><td><strong>SM2</strong></td><td>国密算法，政务/金融国产化场景</td></tr></tbody></table></div><p>21 . 一种常见的攻击手段是huge body，比如请求报文是JSON，但构造一个很大的JSON字符串，几百M甚至几个G，解析JSON会把CPU干爆，甚至把内存用光。在Java体系下(Java Servlet、使用Spriing或不使用)，在哪一层怎么解决这个问题。</p><blockquote><p>huge body 应采用分层治理，越靠前拦截越好：</p><ol><li>网关 / Nginx 层（优先级最高）<br>限制请求体大小，例如：<br>client_max_body_size 10m;<br>超限直接返回 413，避免请求进入 Java 应用。</li><li>容器层（Tomcat/Jetty/Undertow）<br>限制 HTTP 请求体大小，例如 Tomcat：<br>maxPostSize=&ldquo;10485760&rdquo;<br>防止超大 body 被 Servlet 容器接收。</li><li>应用层（Spring / Servlet）<br>避免 @RequestBody 直接全量反序列化大 JSON。<br>可先检查 Content-Length，<br>或使用 Jackson JsonParser 流式解析（Streaming API），边读边处理，避免一次性占用大量内存。</li><li>安全治理<br>结合限流、超时、熔断，防止 DoS 攻击持续消耗 CPU 与内存。</li></ol></blockquote><p>22 . 把用户的密码明文存储到数据库里是不好的，那么如何存储比较好?</p><blockquote><p>采用 <strong>加盐哈希 (Salted Hashing)</strong> 存储，具体做法如下：</p><ol><li><strong>使用强散列算法</strong>：不要使用 MD5 或 SHA-1（易破解），推荐使用 <strong>Argon2</strong>、<strong>BCrypt</strong> 或 <strong>SCrypt</strong>。</li><li><strong>添加随机盐值 (Salt)</strong>：为每个用户生成一个唯一的、随机的“盐”，与密码拼接后再哈希。防止彩虹表攻击。</li><li><strong>增加工作因子 (Work Factor)</strong>：通过调整迭代次数增加计算耗时，抵御暴力破解。</li><li><strong>禁止可逆加密</strong>：密码应单向加密，不可被还原。</li></ol><p>某些高安全场景还会增加 pepper（系统级密钥），保存在服务端配置或密钥系统中，而不是数据库。</p></blockquote></section><footer class=article-footer><section class=article-tags><a href=/tags/java/>Java</a>
-<a href=/tags/%E7%AE%97%E6%B3%95/>算法</a>
-<a href=/tags/windows/>Windows</a></section><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
-<span>本文由 <a class=link href=https://iamxurulin.blog.csdn.net/ target=_blank rel=noopener>iamxurulin</a> 原创发布，转载请保留原文链接。</span></section><section class=article-lastmod><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
-<span>最后更新于 2026-06-17 13:01:06</span></section><section class=article-original-declaration><div class=declaration-icon><svg class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg></div><div class=declaration-content><strong>关于作者与文章</strong><p>本文为 <a href=https://github.com/iamxurulin target=_blank rel=noopener>iamxurulin</a> 原创技术文章，同步发布于 <a href=https://iamxurulin.blog.csdn.net/ target=_blank rel=noopener>CSDN 博客</a> 与本站。两处内容完全一致，均由作者本人维护更新。如对内容有疑问或建议，欢迎在评论区交流讨论。</p></div></section></footer><style>.article-original-declaration{margin-top:2rem;padding:1.2rem 1.5rem;background:var(--card-background);border:1px solid var(--card-border-color);border-radius:var(--card-border-radius);display:flex;gap:.8rem;font-size:.9rem;line-height:1.7;color:var(--card-text-color-secondary)}.article-original-declaration .declaration-icon{flex-shrink:0;width:20px;height:20px;margin-top:2px;color:var(--accent-color)}.article-original-declaration .declaration-content{flex:1}.article-original-declaration strong{display:block;margin-bottom:.3rem;color:var(--card-text-color-main);font-size:.95rem}.article-original-declaration p{margin:.3rem 0}.article-original-declaration a{color:var(--accent-color);text-decoration:none}.article-original-declaration a:hover{text-decoration:underline}</style><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css integrity=sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js integrity=sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8 crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js integrity=sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05 crossorigin=anonymous defer></script><script>window.addEventListener("DOMContentLoaded",()=>{const e=[".main-article",".widget--toc"];e.forEach(e=>{const t=document.querySelector(e);t&&renderMathInElement(t,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}],ignoredClasses:["gist"]})})})</script></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/p/slkj%E7%AC%94%E8%AF%95%E9%A2%98%E8%A7%A3%E6%9E%90/><div class=article-details><h2 class=article-title>SLKJ笔试题解析</h2></div></a></article><article><a href=/p/%E9%87%8F%E5%8C%96c-%E7%AC%94%E8%AF%95%E9%A2%98/><div class=article-details><h2 class=article-title>量化C++笔试题</h2></div></a></article><article><a href=/p/%E9%87%8F%E5%8C%96python%E7%AC%94%E8%AF%95%E9%A2%98/><div class=article-details><h2 class=article-title>量化Python笔试题</h2></div></a></article><article><a href=/p/%E9%9D%A2%E8%AF%95%E5%AE%98-%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E5%85%A8o1%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%BD%A0%E4%BC%9A%E5%90%97/><div class=article-details><h2 class=article-title>面试官-设计一个全O(1)的数据结构,你会吗</h2></div></a></article><article><a href=/p/leetcode-381-o1-%E6%97%B6%E9%97%B4%E6%8F%92%E5%85%A5%E5%88%A0%E9%99%A4%E5%92%8C%E8%8E%B7%E5%8F%96%E9%9A%8F%E6%9C%BA%E5%85%83%E7%B4%A0-%E5%85%81%E8%AE%B8%E9%87%8D%E5%A4%8D/><div class=article-details><h2 class=article-title>LeetCode-381-O(1)-时间插入、删除和获取随机元素-允许重复</h2></div></a></article></div></div></aside><div id=giscus-container class=giscus-container></div><script>(function(){function e(){const t=document.getElementById("giscus-container");if(!t)return;t.innerHTML="";const e=document.createElement("script");e.src="https://giscus.app/client.js",e.setAttribute("data-repo","iamxurulin/iamxurulin.github.io"),e.setAttribute("data-repo-id","R_kgDOQ4sEwg"),e.setAttribute("data-category","Announcements"),e.setAttribute("data-category-id","DIC_kwDOQ4sEws4C1Yw9"),e.setAttribute("data-mapping","title"),e.setAttribute("data-strict","0"),e.setAttribute("data-reactions-enabled","1"),e.setAttribute("data-emit-metadata","0"),e.setAttribute("data-input-position","top"),e.setAttribute("data-lang","zh-CN"),e.setAttribute("crossorigin","anonymous"),e.async=!0,e.setAttribute("data-theme","transparent_dark"),t.appendChild(e)}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",e):e(),window._giscusPjaxBound||(window._giscusPjaxBound=!0,document.addEventListener("pjax:complete",function(){setTimeout(e,50)}))})()</script><style>#giscus-container{min-height:150px;width:100%;margin-top:2rem;background:rgba(30,30,30,.8)!important;border-radius:15px;padding:20px;box-sizing:border-box;border:1px solid rgba(255,255,255,.1);box-shadow:0 4px 15px rgba(0,0,0,.2)}</style><footer class=site-footer><section class=copyright>&copy;
-2025 -
-2026 iamxurulin</section><section class=powerby>Coder_Studio - 记录后端开发、算法与 AI 的成长之路<br></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-<button class="pswp__button pswp__button--share" title=Share></button>
-<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-</button>
-<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.b4654cd74006fe7475d7723cd7373672b5ea2035ab23404eb9ff511cb27b581c.js defer></script><script type=text/javascript src=/ts/custom.d06f31744de6062060249fb2de5a784912bfa25d124b9b3d97c1f1281811a258.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script><div id=aplayer></div><script>window._aplayerInit=function(){const e=document.createElement("script");e.src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js",e.onload=function(){const e=new APlayer({container:document.getElementById("aplayer"),fixed:!0,lrcType:3,audio:[{name:"远行",artist:"大青山",url:"/music/大青山-远行.mp3",cover:"/music/cover.jpg",lrc:"/music/大青山-远行-歌词.lrc"}]});window.onbeforeunload=()=>{const t={index:e.list.index,currentTime:e.audio.currentTime,paused:e.paused};localStorage.setItem("playInfo",JSON.stringify(t))};const t=JSON.parse(localStorage.getItem("playInfo"));t&&(e.list.switch(t.index),setTimeout(()=>{e.seek(t.currentTime),t.paused||e.play()},500))},document.head.appendChild(e)},window.requestIdleCallback?requestIdleCallback(window._aplayerInit,{timeout:3e3}):setTimeout(window._aplayerInit,2e3)</script><script>(function(){var e,t="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js",i="https://unpkg.com/pjax/pjax.min.js",n="https://iamxurulin.github.io/js/topbar.min.js";function s(e,t){return new Promise(function(n,s){var r,a=!1,o=document.createElement("script");o.src=e,o.async=!0;function i(e){if(a)return;a=!0,o.onload=o.onerror=null,clearTimeout(r),e?s(e):n()}o.onload=function(){i(null)},o.onerror=function(){i(new Error("HTTP error: "+e))},r=t?setTimeout(function(){i(new Error("Timeout: "+e))},t):null,document.head.appendChild(o)})}function o(e){return s(e,1e4).catch(function(){if(e===t)return o(i);throw new Error("All PJAX CDNs failed")})}e=[o(t)],n&&e.push(s(n,8e3)),Promise.all(e).then(function(){var e=new Pjax({selectors:[".main-container"]});e._handleResponse=e.handleResponse,e.handleResponse=function(t,n,s,o){if(n.responseText.match("<html")&&t){var i,a=(new DOMParser).parseFromString(t,"text/html");document.body.setAttribute("class",a.body.className),i=a.title,i&&(document.title=i)}e._handleResponse(t,n,s,o)},typeof topbar!="undefined"&&topbar.config({barColors:{0:"rgba(255,255,255,1)",1.0:"rgba(0,149,234,1)"}}),document.addEventListener("pjax:send",function(){typeof topbar!="undefined"&&topbar.show()}),document.addEventListener("pjax:complete",function(){window.Stack&&window.Stack.init(),typeof topbar!="undefined"&&topbar.hide()})}).catch(function(e){console.warn("PJAX 未加载，使用普通导航:",e.message)})})()</script><link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap" rel=stylesheet><style>:root{--base-font-family:'Fira Code', monospace;--code-font-family:'Fira Code', monospace}</style><style>#TableOfContents>ul,ol{ul, ol{display:none}.open{display:block}}</style><script>function initTocHide(){let e=document.querySelector(".widget--toc");if(!e)return;window.addEventListener("scroll",function(){let n=document.querySelectorAll(".open");n.length>0&&n.forEach(e=>{e.classList.remove("open")});let t=document.querySelector(".active-class");if(!t)return;t.children.length>1&&t.children[1].classList.add("open");let e=t.parentElement;do e.classList.add("open"),e=e.parentElement.parentElement;while(e!==0[0]&&(e.localName==="ul"||e.localName==="ol"))})}initTocHide()</script><style>#backTopBtn{display:none;position:fixed;bottom:20px;z-index:99;cursor:pointer;width:20px;height:20px;background-image:url(https://iamxurulin.github.io/icons/backTop.svg)}</style><script>function initScrollTop(){let t=document.querySelector(".right-sidebar");if(!t)return;let e=document.createElement("div");e.id="backTopBtn",e.onclick=backToTop,t.appendChild(e),window.addEventListener("scroll",function(){document.body.scrollTop>20||document.documentElement.scrollTop>20?e.style.display="block":e.style.display="none"},{passive:!0})}function backToTop(){window.scrollTo({top:0,behavior:"smooth"})}initScrollTop()</script><style>.highlight{max-height:400px;overflow:hidden}.code-show{max-height:none!important}.code-more-box{width:100%;padding-top:78px;background-image:-webkit-gradient(linear,left top,left bottom,from(rgba(255,255,255,0)),to(#fff));position:absolute;left:0;right:0;bottom:0;z-index:1}.code-more-btn{display:block;margin:auto;width:44px;height:22px;background:#f0f0f5;border-top-left-radius:8px;border-top-right-radius:8px;padding-top:6px;cursor:pointer}.code-more-img{cursor:pointer!important;display:block;margin:auto;width:22px;height:16px}</style><style>.highlight{max-height:400px;overflow:hidden;position:relative}.code-show{max-height:none!important}.code-more-box{width:100%;padding-top:78px;background-image:-webkit-gradient(linear,left top,left bottom,from(rgba(255,255,255,0)),to(#fff));background-image:linear-gradient(to bottom,rgba(255,255,255,0),#fff);position:absolute;left:0;right:0;bottom:0;z-index:1;pointer-events:none}.code-more-btn{pointer-events:auto;display:block;margin:auto;width:44px;height:22px;background:var(--card-background);border-top-left-radius:8px;border-top-right-radius:8px;padding-top:6px;cursor:pointer;box-shadow:0 -2px 10px rgba(0,0,0,.1)}.code-more-img{display:block;margin:auto;width:22px;height:16px}[data-scheme=dark] .code-more-box{background-image:linear-gradient(to bottom,rgba(30,30,40,0),#1e1e28)}[data-scheme=dark] .code-more-btn{background:var(--card-background)}</style><script>function initCodeMoreBox(){const e=document.querySelectorAll(".highlight:not(.code-inited)");e.forEach(e=>{if(e.classList.add("code-inited"),e.scrollHeight<=e.clientHeight+5)return;const t=document.createElement("div");t.classList.add("code-more-box");const n=document.createElement("span");n.classList.add("code-more-btn"),n.addEventListener("click",n=>{n.stopPropagation(),e.classList.add("code-show"),t.style.display="none",window.dispatchEvent(new Event("resize"))});const s=document.createElement("img");s.classList.add("code-more-img"),s.src="https://iamxurulin.github.io/icons/codeMore.png",s.alt="展开代码",n.appendChild(s),t.appendChild(n),e.appendChild(t)})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",initCodeMoreBox):initCodeMoreBox(),document.addEventListener("pjax:complete",initCodeMoreBox),document.addEventListener("swup:contentReplaced",initCodeMoreBox),window.addEventListener("popstate",initCodeMoreBox);const observer=new MutationObserver(e=>{let t=!1;e.forEach(e=>{e.addedNodes.length&&(t=!0)}),t&&setTimeout(initCodeMoreBox,100)});observer.observe(document.body,{childList:!0,subtree:!0})</script><style>body{background:url(https://iamxurulin.github.io/background/wallhaven-qr27rq.jpg)no-repeat 50% 0;background-size:cover;background-attachment:fixed}</style><script>window._sakuraInit=function(){const e=document.createElement("script");e.src="https://iamxurulin.github.io/background/sakura.js",document.body.appendChild(e)},window.requestIdleCallback?requestIdleCallback(window._sakuraInit,{timeout:4e3}):setTimeout(window._sakuraInit,2e3)</script><div id=particles-js></div><script>window._particlesInit=function(){const e=document.createElement("script");e.src="https://iamxurulin.github.io/background/particles.min.js",e.onload=function(){window.particlesJS&&particlesJS.load("particles-js","https://iamxurulin.github.io/background/particlesjs-config.json",function(){console.log("particles.js loaded")})},document.body.appendChild(e)},window.requestIdleCallback?requestIdleCallback(window._particlesInit,{timeout:5e3}):setTimeout(window._particlesInit,3e3)</script><style>#particles-js{position:fixed;top:0;left:0;width:100%;z-index:-1}</style><script>window._live2dInit=function(){const t="https://cdn.jsdelivr.net/gh/iamxurulin/live2d-widget-v3@v1.0.2",e={path:{homePath:"/",modelPath:t+"/Resources/",tipsJsPath:"https://iamxurulin.github.io/waifu/waifu-tips.js",live2dCorePath:t+"/Core/live2dcubismcore.js",live2dSdkPath:t+"/live2d-sdk.js",cssPath:"https://iamxurulin.github.io/waifu/waifu.css",tipsJsonPath:"https://iamxurulin.github.io/waifu/waifu-tips.json"},tools:["hitokoto","asteroids","express","photo","info","quit"],drag:{enable:!0,direction:["x","y"]}},n=document.createElement("link");n.rel="stylesheet",n.href=e.path.cssPath,document.head.appendChild(n);function s(e){return new Promise((t,n)=>{const s=document.createElement("script");s.src=e,s.async=!0,s.onload=()=>t(e),s.onerror=()=>n(new Error("Failed to load "+e)),document.head.appendChild(s)})}s(e.path.live2dCorePath).then(()=>s(e.path.live2dSdkPath)).then(()=>s(e.path.tipsJsPath)).then(()=>{localStorage.setItem("modelId","0"),localStorage.setItem("modelTexturesId","0"),initWidget({waifuPath:e.path.tipsJsonPath,cdnPath:e.path.modelPath,tools:e.tools,dragEnable:e.drag.enable,dragDirection:e.drag.direction})}).catch(e=>console.warn("Live2D load failed:",e))},screen.width>=768&&(window.requestIdleCallback?requestIdleCallback(window._live2dInit,{timeout:6e3}):setTimeout(window._live2dInit,4e3))</script><script>(function(){var t="https://cn.vercount.one/js";function e(){for(var e,s=document.querySelectorAll("script[data-vercount-loader]"),n=0;n<s.length;n++)s[n].remove();e=document.createElement("script"),e.src=t,e.setAttribute("data-vercount-loader","true"),e.async=!0,document.head.appendChild(e)}e(),window._vercountPjaxBound||(window._vercountPjaxBound=!0,document.addEventListener("pjax:complete",function(){setTimeout(e,300)}))})()</script></body></html>
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" 如何判断一个字符串变量a为空，包括null、空字符串、一个或多个空格、一个或多个whitespace? if (a == null || a.isBlank()) {\n}\nJava新版本为什么要添加Instant? Java 8 引入 Instant 主要是为了修复旧版日期时间类（如 java.util.Date）的设计缺陷，\n">
+<title>机器人Java后端算法笔试题解析</title>
+
+<link rel='canonical' href='https://iamxurulin.github.io/p/%E6%9C%BA%E5%99%A8%E4%BA%BAjava%E5%90%8E%E7%AB%AF%E7%AE%97%E6%B3%95%E7%AC%94%E8%AF%95%E9%A2%98%E8%A7%A3%E6%9E%90/'>
+
+<link rel="stylesheet" href="/scss/style.min.6e9c513e2b18fb90ba80ef8f1310b1122153a8397e5271e51b034f6a1f7377f5.css"><meta property='og:title' content="机器人Java后端算法笔试题解析">
+<meta property='og:description' content=" 如何判断一个字符串变量a为空，包括null、空字符串、一个或多个空格、一个或多个whitespace? if (a == null || a.isBlank()) {\n}\nJava新版本为什么要添加Instant? Java 8 引入 Instant 主要是为了修复旧版日期时间类（如 java.util.Date）的设计缺陷，\n">
+<meta property='og:url' content='https://iamxurulin.github.io/p/%E6%9C%BA%E5%99%A8%E4%BA%BAjava%E5%90%8E%E7%AB%AF%E7%AE%97%E6%B3%95%E7%AC%94%E8%AF%95%E9%A2%98%E8%A7%A3%E6%9E%90/'>
+<meta property='og:site_name' content='Coder_Studio'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='java' /><meta property='article:tag' content='算法' /><meta property='article:tag' content='windows' /><meta property='article:published_time' content='2026-05-22T23:01:24&#43;00:00'/><meta property='article:modified_time' content='2026-06-21T18:19:43&#43;00:00'/>
+<meta name="twitter:title" content="机器人Java后端算法笔试题解析">
+<meta name="twitter:description" content=" 如何判断一个字符串变量a为空，包括null、空字符串、一个或多个空格、一个或多个whitespace? if (a == null || a.isBlank()) {\n}\nJava新版本为什么要添加Instant? Java 8 引入 Instant 主要是为了修复旧版日期时间类（如 java.util.Date）的设计缺陷，\n"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5123323391207523"
+     crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+
+<div class="loading">
+ 
+<div class="liquid-loader">
+  <div class="loading-text">
+    Loading<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span>
+  </div>
+  <div class="loader-track">
+    <div class="liquid-fill"></div>
+  </div>
+</div>
+</div>
+
+<style>
+    .loading {
+        position: fixed;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;  
+        background-color: #f5f5fa;
+         
+        transition: all 0.3s ease;
+    }
+	
+  
+.liquid-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;  
+  padding: 20px;
+  font-family: system-ui, sans-serif;
+}
+
+.loader-track {
+  position: relative;
+  width: 180px;
+  height: 32px;
+  background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.6),0 1px 3px rgba(255, 255, 255, 0.1);
+}
+
+.liquid-fill {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  height: calc(100% - 4px);
+  background: linear-gradient(90deg, #4f46e5, #7c3aed, #ec4899, #f59e0b);
+  border-radius: 14px;
+  animation: fillProgress 4s ease-out infinite, colorShift 3s linear infinite;
+  box-shadow:0 0 12px rgba(124, 58, 237, 0.4),inset 0 1px 2px rgba(255, 255, 255, 0.2);
+}
+
+ 
+.animated-stop {
+  animation-play-state: paused !important;
+  -webkit-animation-play-state: paused !important;
+}
+
+.loading-text {
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  animation: textGlow 1s ease-in-out infinite;
+}
+
+.dot {
+  margin-left: 3px;
+  animation: blink 1.5s infinite;
+}
+.dot:nth-of-type(1) { animation-delay: 0s; }
+.dot:nth-of-type(2) { animation-delay: 0.3s; }
+.dot:nth-of-type(3) { animation-delay: 0.6s; }
+
+@keyframes fillProgress {
+  0% { width: 4px; }
+  25% { width: 25%; }
+  50% { width: 50%; }
+  75% { width: 75%; }
+  100% { width: calc(100% - 4px); }
+}
+@keyframes colorShift {
+  0% { filter: hue-rotate(0deg) brightness(1); }
+  33% { filter: hue-rotate(120deg) brightness(1.1); }
+  66% { filter: hue-rotate(240deg) brightness(0.9); }
+  100% { filter: hue-rotate(360deg) brightness(1); }
+}
+@keyframes textGlow {
+  0%,100% { opacity: 0.7;text-shadow: 0 0 8px rgba(139, 92, 246, 0.3); }
+  50% { opacity: 1;text-shadow: 0 0 16px rgba(139, 92, 246, 0.6); }
+}
+@keyframes blink {
+  0%,50% { opacity: 1; }
+  51%,100% { opacity: 0; }
+}
+
+ 
+@keyframes scaleAndFadeout {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.2);  
+    opacity: 0;
+  }
+}
+.scaleAndFadeout {
+  animation: scaleAndFadeout 1.5s ease-out forwards !important;
+}
+
+ 
+.article-view {
+    display: flex;
+}
+
+ 
+ 
+.article-list .article-view {
+    display: none !important;
+}
+ 
+</style>
+
+<script>	
+    function initLoading() {
+        const isFirstVisit = !sessionStorage.getItem('visited');
+        if (isFirstVisit) {
+            const loading = document.querySelector(".loading");
+            const liquidFill = document.querySelector(".liquid-fill"); 
+            loading.style.display = "flex";
+            
+            
+            setTimeout(() => {
+                loadFinish(loading, liquidFill);
+                
+                setTimeout(() => {
+                    loading.style.display = "none";
+                }, 1500);
+                
+                sessionStorage.setItem('visited', 'true');
+            }, 4000); 
+        }
+    }
+	
+    function loadFinish(loading, liquidFill) {
+        
+        liquidFill.classList.add("animated-stop");
+        
+        loading.classList.add("scaleAndFadeout");
+    }
+	
+    
+    initLoading();
+</script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_5b4689d2dc4cdce3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">💦</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coder_Studio</a></h1>
+            <h2 class="site-description">专注后端开发、算法与 AI 的技术博客</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://blog.csdn.net/qq_44678890'
+                        target="_blank"
+                        title="CSDN"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" ?><svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500" fill="none"><path d="M82 199.474L173.5 73L345 81.4833L417.103 199.474V300.974L345 427.718H173.5L82 327.474V199.474Z" fill="#84C253"/><path d="M282.182 284.936L347.636 288.867C344.56 317.464 333.964 339.396 315.849 354.663C297.847 369.93 275.688 377.563 249.369 377.563C217.696 377.563 192.118 367.081 172.636 346.118C153.153 325.154 143.412 296.215 143.412 259.301C143.412 222.729 152.641 193.221 171.098 170.776C189.555 148.331 215.303 137.109 248.344 137.109C279.219 137.109 302.917 145.654 319.438 162.744C336.072 179.833 345.471 202.506 347.636 230.761L280.814 234.35C280.814 218.741 277.795 207.462 271.757 200.512C265.832 193.562 258.826 190.087 250.736 190.087C228.178 190.087 216.898 212.76 216.898 258.105C216.898 283.512 219.804 300.773 225.614 309.887C231.539 319.002 239.799 323.559 250.395 323.559C269.307 323.559 279.903 310.685 282.182 284.936Z" fill="white"/></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/iamxurulin/'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                
+                <span>分类</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/tags/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11 3L20 12a1.5 1.5 0 0 1 0 2L14 20a1.5 1.5 0 0 1 -2 0L3 11v-4a4 4 0 0 1 4 -4h4" />
+  <circle cx="9" cy="9" r="2" />
+</svg>
+
+
+
+                
+                <span>标签</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友情链接</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E9%9A%90%E7%A7%81%E6%94%BF%E7%AD%96/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+                
+                <span>隐私政策</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+  
+  <header class="article-category">
+    
+    <a
+      href="/categories/%E7%AE%97%E6%B3%95/"
+      
+    >
+      算法
+    </a>
+    
+  </header>
+  
+
+  <div class="article-title-wrapper">
+    <h2 class="article-title">
+      <a href="/p/%E6%9C%BA%E5%99%A8%E4%BA%BAjava%E5%90%8E%E7%AB%AF%E7%AE%97%E6%B3%95%E7%AC%94%E8%AF%95%E9%A2%98%E8%A7%A3%E6%9E%90/">机器人Java后端算法笔试题解析</a>
+    </h2>
+
+    
+  </div>
+
+     
+  <footer class="article-time">
+    
+    <div style="display: flex; flex-direction: column; gap: 4px;font-size: 14px;">
+      
+      <div class="article-date" style="display: flex; align-items: center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+        <span style="margin-left: 5px">发布于: </span>
+        <time
+          class="article-time--published"
+          datetime='2026-05-22T23:01:24Z'
+          style="margin-left: 5px"
+        >2026-05-22 23:01:24</time>
+      </div>
+
+      
+      
+    </div>
+
+    
+    <div
+      class="article-view"
+      style="align-items: center; gap: 5px; margin-left: auto; font-size: 14px;"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="icon icon-tabler icon-tabler-eye"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <circle cx="12" cy="12" r="2"></circle>
+        <path
+          d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s10 2.333 10 7"
+        ></path>
+      </svg>
+      <span id="vercount_container_page_pv">阅读
+        <span id="vercount_value_page_pv">...</span> 次
+      </span>
+    </div>
+  </footer>
+   
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <ol>
+<li>如何判断一个字符串变量a为空，包括null、空字符串、一个或多个空格、一个或多个whitespace?</li>
+</ol>
+<blockquote>
+<p>if (a == null || a.isBlank()) {</p>
+<p>}</p>
+</blockquote>
+<ol start="2">
+<li>Java新版本为什么要添加Instant?</li>
+</ol>
+<blockquote>
+<p>Java 8 引入 <code>Instant</code> 主要是为了修复旧版日期时间类（如 <code>java.util.Date</code>）的设计缺陷，</p>
+<p>原因如下：</p>
+<ol>
+<li><strong>不可变性与线程安全</strong>：</li>
+</ol>
+<p><code>Instant</code> 是不可变的（Immutable），天然线程安全；</p>
+<p>而 <code>Date</code> 是可变的，在多线程环境下容易产生并发问题。</p>
+<ol start="2">
+<li><strong>更高精度</strong>：</li>
+</ol>
+<p><code>Instant</code> 支持<strong>纳秒级</strong>（$ 10^{-9} $ 秒）精度；</p>
+<p>而 <code>Date</code> 只能精确到毫秒。</p>
+<ol start="3">
+<li><strong>语义清晰（机器时间）</strong>：</li>
+</ol>
+<p>Instant 明确表示 UTC 时间线上的瞬时点（timestamp），语义清晰，适合机器时间处理（日志、分布式时间戳、事件时间）；</p>
+<p>而 Date API 设计混乱，日期计算与格式化常依赖 Calendar、TimeZone 等类，易产生时区问题。</p>
+</blockquote>
+<ol start="3">
+<li>如何判断两个double类型的变量是否相等?例如<code>doublea=1.2;doubleb=1.1 +0.1; </code>比较a和b是否相等。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">nearlyEqual</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">epsilon</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="na">abs</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">epsilon</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 使用</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kt">double</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">1</span><span class="p">.</span><span class="na">2</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kt">double</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">1</span><span class="p">.</span><span class="na">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">0</span><span class="p">.</span><span class="na">1</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kt">boolean</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nearlyEqual</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">1e</span><span class="o">-</span><span class="n">9</span><span class="p">);</span><span class="w">  </span><span class="c1">// true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">//epsilon 的取值取决于业务精度要求，常见取 1e-9 到 1e-6。</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li>下面三条语句是否是合法的,如果不是原因是什么?</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">();</span><span class="c1">//1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">List</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">();</span><span class="c1">//2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">List</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">();</span><span class="c1">//3</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>1.合法：左右类型完全匹配。</p>
+<p>2.不合法：Java 泛型具有不变性，List<String> 与 List<Object> 不存在父子关系。</p>
+<p>若允许赋值，可通过 List<Object> 写入非 String 类型，破坏类型安全。</p>
+<p>3.合法：? 是无界通配符，代表未知类型，ArrayList<String> 是 List<?> 的子类型。</p>
+<p>但由于类型未知，只能读取不能写入（null 除外），因此编译器允许。</p>
+</blockquote>
+<ol start="5">
+<li>一个字符串String,如何转换为字节数组。反过来呢?</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">//1.String → byte[]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">String</span><span class="w"> </span><span class="n">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;CodeEdge_Xu&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 显式指定编码（避免平台差异）</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">bytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">str</span><span class="p">.</span><span class="na">getBytes</span><span class="p">(</span><span class="n">StandardCharsets</span><span class="p">.</span><span class="na">UTF_8</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">//2.byte[] → String</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">bytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 与编码时保持一致</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">String</span><span class="w"> </span><span class="n">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">String</span><span class="p">(</span><span class="n">bytes</span><span class="p">,</span><span class="w"> </span><span class="n">StandardCharsets</span><span class="p">.</span><span class="na">UTF_8</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="6">
+<li>Java中,如果对象有循环引用,能否被GC。比如Path类里面有个字段reversedPath反向字段。两个Path对象因为这个字段相互引用。如果不能被GC,怎么解决。</li>
+</ol>
+<blockquote>
+<p><strong>能。</strong></p>
+<p>Java 主流 GC（G1、ZGC、CMS）用的是<strong>可达性分析</strong>，不是引用计数。</p>
+<p>只要这两个 Path 对象整体从 GC Roots 不可达，循环引用不影响回收。</p>
+<p><strong>真正导致不能 GC 的是外部强引用</strong>，比如：静态字段持有，ThreadLocal 未 remove，未注销的监听器。</p>
+<p><strong>解决办法</strong>：</p>
+<p>一般不需要特殊处理。</p>
+<p>只要外部强引用断开，对象整体从 GC Roots 不可达即可回收。</p>
+<p>真正的问题是被静态变量、线程、缓存、监听器等长期持有。</p>
+</blockquote>
+<ol start="7">
+<li>写正则表达式,从类似&quot;10,12;A1@12|12:23|p=1|f=2&quot;字符串中抽出变量:&quot;{x},{y};{name}@{index}|{timeStart}|{timeEnd}p={id}&quot;。其中,除了name外其余均是数字,name中有数字、字母、中划线、下划线。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Pattern</span><span class="w"> </span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Pattern</span><span class="p">.</span><span class="na">compile</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="s">&#34;^(\\d+),(\\d+);([A-Za-z0-9_-]+)@(\\d+)\\|(\\d+:\\d+)(?:\\|(\\d+:\\d+))?\\|p=(\\d+)\\|f=(\\d+)$&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="8">
+<li>什么是大端(Big-endian),什么小端(Little-endian)?网络传输一般是大端还是小端?</li>
+</ol>
+<blockquote>
+<p><strong>大端</strong>：高位字节放前面，低位放后面。</p>
+<p><strong>小端</strong>：低位字节放前面，高位放后面。</p>
+<p><strong>网络传输一般是大端</strong>。</p>
+<p>TCP/IP 协议规定数据包中的多字节整数必须按大端传输。</p>
+</blockquote>
+<ol start="9">
+<li>一个整数变量,如果只有一个线程修改它,但有多个线程读取它,有线程安全问题吗?</li>
+</ol>
+<blockquote>
+<p>有线程安全问题，主要是可见性问题。</p>
+<p>写线程修改后的值，其他线程不一定能立刻看到，可能一直读取旧值，因此通常需要使用 volatile 或同步机制保证可见性。</p>
+<p>对于 long/double，早期 JVM 还存在非原子读写问题（现代 JVM 通常已解决）。</p>
+</blockquote>
+<p>10 .  Java的线程能被强制杀死吗？</p>
+<blockquote>
+<p>不能安全地强制杀死。</p>
+<p>Thread.stop() 可以强制终止，但已废弃（deprecated），因为会立即释放锁，导致对象状态损坏、资源泄漏。</p>
+</blockquote>
+<p>11 .  如果想要一个线程安全的List,可以用List的哪些实现，或通过什么手段实现。</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>方式</th>
+					<th>特点</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>Vector</code></td>
+					<td>古老类，所有方法 <code>synchronized</code>，已不推荐</td>
+			</tr>
+			<tr>
+					<td><code>Collections.synchronizedList(new ArrayList&lt;&gt;())</code></td>
+					<td>包装器，全表锁，读也串行</td>
+			</tr>
+			<tr>
+					<td><code>CopyOnWriteArrayList</code></td>
+					<td><strong>读多写少首选</strong>，写时复制新数组，读无锁</td>
+			</tr>
+			<tr>
+					<td><strong>手动加锁</strong></td>
+					<td><code>synchronized</code> 或 <code>ReentrantReadWriteLock</code>，灵活但代码重</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>12 .  有一个List，其中的元素是监听器对象。在多线程环境下，需要对这个List进行添加、删除和遍历三个操作，如何线程安全地进行?除了对添加、删除和遍历加锁或同步的方式——因为如果对遍历加同步，可能会阻塞很长时间，因为遍历一遍可能要很久，会阻塞添加、删除等操作，也会阻塞其他线程的遍历操作。</p>
+<blockquote>
+<p><strong>用 <strong><code>CopyOnWriteArrayList</code></strong>。</strong></p>
+<p>它内部写操作（add/remove）时复制一份新数组，修改完后替换引用；</p>
+<p>读/遍历直接读当前数组快照，<strong>完全不加锁</strong>。</p>
+<p>所以遍历不会阻塞添加、删除，也不会阻塞其他线程遍历。</p>
+<p>迭代器基于快照，不会抛 <code>ConcurrentModificationException</code>。</p>
+</blockquote>
+<p>13 . Java核心库中创建线程池的方法是?通过核心库的线程池实现并发，比new Thread有哪些好处?</p>
+<blockquote>
+<p><strong>工具类工厂方法</strong>：</p>
+<p>使用 <code>java.util.concurrent.Executors</code> 提供的静态方法（如 <code>newFixedThreadPool</code>、<code>newCachedThreadPool</code>、<code>newSingleThreadExecutor</code> 等）。</p>
+<p><strong>直接构造对象</strong>：</p>
+<p>通过 <code>new ThreadPoolExecutor(...)</code> 手动创建。</p>
+<p>推荐直接使用 ThreadPoolExecutor 手动指定核心线程数、最大线程数、队列长度和拒绝策略，而不是直接使用 Executors 工厂方法，因为部分默认实现可能导致 OOM。</p>
+</blockquote>
+<blockquote>
+<p><strong>比 <strong><code>new Thread</code></strong> 的好处</strong>：</p>
+<ul>
+<li><strong>降低资源消耗</strong>：通过<strong>复用</strong>已创建的线程，减少频繁创建和销毁线程的 CPU 和内存开销。</li>
+<li><strong>提高响应速度</strong>：任务到达时，无需等待线程创建即可立即执行。</li>
+<li><strong>提高线程可管理性</strong>：能统一分配、调优和监控线程，防止无限制创建线程导致系统资源耗尽（如 OOM）。</li>
+</ul>
+</blockquote>
+<p>14 .  MySQL中，varchar(100)的列，能存多少个英文字母?多少个汉字?使用utf8mb4字符集。</p>
+<blockquote>
+<p><strong>100 个英文字母，100 个汉字。</strong></p>
+<p>MySQL 的 <code>varchar(100)</code> 中 <strong>100 是字符数，不是字节数</strong>。</p>
+<p>utf8mb4 下英文字母通常 1 字节，中文常见汉字一般 3 字节，部分扩展字符可能占 4 字节，但 varchar(100) 限制的是字符数，因此最多依然存 100 个字符。</p>
+</blockquote>
+<p>15 .  MySQL中，datetime和timestamp有何不同，精度分别是毫秒还是秒，是否有时区?</p>
+<blockquote>
+<p>datetime：</p>
+<ul>
+<li>范围大（1000~9999 年）</li>
+<li>不涉及时区</li>
+<li>默认精度到秒</li>
+<li>支持小数秒 datetime(fsp)，最多微秒（6位）</li>
+</ul>
+<p>timestamp：</p>
+<ul>
+<li>范围小（1970~2038 年）</li>
+<li>有时区语义（存 UTC，读时按 session timezone 转换）</li>
+<li>默认精度到秒</li>
+<li>支持 timestamp(fsp)，最多微秒（6位）</li>
+</ul>
+</blockquote>
+<p>16 . 写SQL：</p>
+<p>订单表wms_order，单行表wms_order_line，一对多关系。</p>
+<p>wms_order表有列id(单号)、create_on(创建时间)等字段，</p>
+<p>wms_order_line有id、order_id(所属订单)、line_no(行号)、product_id (商品 ID)。</p>
+<p>如何查询2021年12月内发生的含有A、B、C三个商品的订单。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">order_id</span><span class="p">,</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">create_on</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">FROM</span><span class="w"> </span><span class="n">wms_order</span><span class="w"> </span><span class="n">o</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">wms_order_line</span><span class="w"> </span><span class="n">ol</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ol</span><span class="p">.</span><span class="n">order_id</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">WHERE</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1">-- 筛选2021年12月的订单
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">o</span><span class="p">.</span><span class="n">create_on</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="s1">&#39;2021-12-01&#39;</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">create_on</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="s1">&#39;2022-01-01&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1">-- 筛选包含A、B、C任意一个商品的行
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">ol</span><span class="p">.</span><span class="n">product_id</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;B&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;C&#39;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">create_on</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">-- 确保订单同时包含这3个不同的商品
+</span></span></span><span class="line"><span class="cl"><span class="k">HAVING</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="k">DISTINCT</span><span class="w"> </span><span class="n">ol</span><span class="p">.</span><span class="n">product_id</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>17 .  如果有一张订单表,查询量最大的查询条件有两种:</p>
+<ul>
+<li>根据某个创建人和创建时间(范围)查询。</li>
+<li>根据某个类型和创建时间(范围)查询。</li>
+</ul>
+<p>建议如何建立索引?</p>
+<blockquote>
+<p>建立两个<strong>联合索引</strong>，并遵循“等值查询字段在前，范围查询字段在后”的原则：</p>
+<ol>
+<li><strong>索引一</strong>：<code>(创建人, 创建时间)</code></li>
+<li><strong>索引二</strong>：<code>(类型, 创建时间)</code></li>
+</ol>
+<p><strong>理由</strong>：</p>
+<ul>
+<li><strong>最左匹配原则</strong>：将等值条件（创建人/类型）放在首位，范围条件（时间）放在末位，可以使索引效率最高。</li>
+<li><strong>覆盖查询</strong>：联合索引可提高过滤效率；若查询字段被索引完全覆盖，还可减少回表。</li>
+</ul>
+</blockquote>
+<p>18 .  <code>@Resource</code>、<code>@Autowired</code>、<code>@Inject</code>的区别?</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th style="text-align: left">特性</th>
+					<th style="text-align: left">@Autowired</th>
+					<th style="text-align: left">@Resource</th>
+					<th style="text-align: left">@Inject</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: left"><strong>来源</strong></td>
+					<td style="text-align: left">Spring 框架专用</td>
+					<td style="text-align: left">JSR-250</td>
+					<td style="text-align: left">JSR-330</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>默认匹配方式</strong></td>
+					<td style="text-align: left"><strong>按类型 (byType)</strong></td>
+					<td style="text-align: left"><strong>先 byName，再 byType</strong></td>
+					<td style="text-align: left"><strong>按类型 (byType)</strong></td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>找不到对应 Bean</strong></td>
+					<td style="text-align: left">报错（可设置 <code>required=false</code>）</td>
+					<td style="text-align: left">报错</td>
+					<td style="text-align: left">报错</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>指定特定名称</strong></td>
+					<td style="text-align: left">配合 <code>@Qualifier</code></td>
+					<td style="text-align: left">使用 <code>name</code> 属性</td>
+					<td style="text-align: left">配合 <code>@Named</code></td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>注入位置</strong></td>
+					<td style="text-align: left">构造器、字段、Setter、方法</td>
+					<td style="text-align: left">字段、Setter</td>
+					<td style="text-align: left">构造器、字段、Setter</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>19 .  <code>@Transactional</code>可以用于private方法吗，为什么?</p>
+<blockquote>
+<p>private 方法不能生效，因为 Spring AOP 无法代理 private 方法；</p>
+<p>其不能被子类覆盖，因此代理对象无法拦截。</p>
+<p>同类内部 this.xxx() 调用也会绕过代理，因此事务同样不生效。</p>
+</blockquote>
+<p>20 .  支付宝等接口，要求请求中对字段做签名，目的是什么?常见的签名算法有哪些?</p>
+<p><strong>目的</strong>：</p>
+<p>保证请求数据<strong>不被篡改</strong>，并<strong>证明请求方身份</strong>（只有持有密钥的一方才能生成有效签名）。</p>
+<p><strong>常见签名算法</strong>：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>算法</th>
+					<th>说明</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>RSA2</strong> / <code>SHA256withRSA</code></td>
+					<td>主流，支付宝等常用，私钥签名、公钥验签</td>
+			</tr>
+			<tr>
+					<td><strong>RSA</strong> / <code>SHA1withRSA</code></td>
+					<td>旧版兼容，安全性弱于 RSA2</td>
+			</tr>
+			<tr>
+					<td><strong>HMAC-SHA256</strong></td>
+					<td>双方共享密钥，常用于微信支付等</td>
+			</tr>
+			<tr>
+					<td><strong>MD5</strong></td>
+					<td>早期接口（如旧版支付宝），已不推荐，不安全</td>
+			</tr>
+			<tr>
+					<td><strong>SM2</strong></td>
+					<td>国密算法，政务/金融国产化场景</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>21 . 一种常见的攻击手段是huge body，比如请求报文是JSON，但构造一个很大的JSON字符串，几百M甚至几个G，解析JSON会把CPU干爆，甚至把内存用光。在Java体系下(Java Servlet、使用Spriing或不使用)，在哪一层怎么解决这个问题。</p>
+<blockquote>
+<p>huge body 应采用分层治理，越靠前拦截越好：</p>
+<ol>
+<li>网关 / Nginx 层（优先级最高）<br>
+限制请求体大小，例如：<br>
+client_max_body_size 10m;<br>
+超限直接返回 413，避免请求进入 Java 应用。</li>
+<li>容器层（Tomcat/Jetty/Undertow）<br>
+限制 HTTP 请求体大小，例如 Tomcat：<br>
+maxPostSize=&ldquo;10485760&rdquo;<br>
+防止超大 body 被 Servlet 容器接收。</li>
+<li>应用层（Spring / Servlet）<br>
+避免 @RequestBody 直接全量反序列化大 JSON。<br>
+可先检查 Content-Length，<br>
+或使用 Jackson JsonParser 流式解析（Streaming API），边读边处理，避免一次性占用大量内存。</li>
+<li>安全治理<br>
+结合限流、超时、熔断，防止 DoS 攻击持续消耗 CPU 与内存。</li>
+</ol>
+</blockquote>
+<p>22 .  把用户的密码明文存储到数据库里是不好的，那么如何存储比较好?</p>
+<blockquote>
+<p>采用 <strong>加盐哈希 (Salted Hashing)</strong> 存储，具体做法如下：</p>
+<ol>
+<li><strong>使用强散列算法</strong>：不要使用 MD5 或 SHA-1（易破解），推荐使用 <strong>Argon2</strong>、<strong>BCrypt</strong> 或 <strong>SCrypt</strong>。</li>
+<li><strong>添加随机盐值 (Salt)</strong>：为每个用户生成一个唯一的、随机的“盐”，与密码拼接后再哈希。防止彩虹表攻击。</li>
+<li><strong>增加工作因子 (Work Factor)</strong>：通过调整迭代次数增加计算耗时，抵御暴力破解。</li>
+<li><strong>禁止可逆加密</strong>：密码应单向加密，不可被还原。</li>
+</ol>
+<p>某些高安全场景还会增加 pepper（系统级密钥），保存在服务端配置或密钥系统中，而不是数据库。</p>
+</blockquote>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/java/">Java</a>
+        
+            <a href="/tags/%E7%AE%97%E6%B3%95/">算法</a>
+        
+            <a href="/tags/windows/">Windows</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>本文由 <a class="link" href="https://iamxurulin.blog.csdn.net/"  target="_blank" rel="noopener"
+    >iamxurulin</a> 原创发布，转载请保留原文链接。</span>
+    </section>
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            最后更新于 2026-06-21 18:19:43
+        </span>
+    </section><section class="article-original-declaration">
+        <div class="declaration-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+</div>
+        <div class="declaration-content">
+            <strong>关于作者与文章</strong>
+            <p>本文为 <a href="https://github.com/iamxurulin" target="_blank" rel="noopener">iamxurulin</a> 原创技术文章，同步发布于 <a href="https://iamxurulin.blog.csdn.net/" target="_blank" rel="noopener">CSDN 博客</a> 与本站。两处内容完全一致，均由作者本人维护更新。如对内容有疑问或建议，欢迎在评论区交流讨论。</p>
+        </div>
+    </section>
+</footer>
+
+<style>
+.article-original-declaration {
+    margin-top: 2rem;
+    padding: 1.2rem 1.5rem;
+    background: var(--card-background);
+    border: 1px solid var(--card-border-color);
+    border-radius: var(--card-border-radius);
+    display: flex;
+    gap: 0.8rem;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--card-text-color-secondary);
+}
+.article-original-declaration .declaration-icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    margin-top: 2px;
+    color: var(--accent-color);
+}
+.article-original-declaration .declaration-content {
+    flex: 1;
+}
+.article-original-declaration strong {
+    display: block;
+    margin-bottom: 0.3rem;
+    color: var(--card-text-color-main);
+    font-size: 0.95rem;
+}
+.article-original-declaration p {
+    margin: 0.3rem 0;
+}
+.article-original-declaration a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+.article-original-declaration a:hover {
+    text-decoration: underline;
+}
+</style>
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        const elementsToRender = [".main-article", ".widget--toc"];
+
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/%E4%BD%A0%E7%9A%84rag%E7%B3%BB%E7%BB%9F%E6%98%AF%E6%80%8E%E4%B9%88%E8%BF%9B%E8%A1%8Cquery%E6%94%B9%E5%86%99%E7%9A%84/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">你的RAG系统是怎么进行Query改写的？</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/slkj%E7%AC%94%E8%AF%95%E9%A2%98%E8%A7%A3%E6%9E%90/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">SLKJ笔试题解析</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/%E8%A7%A3%E5%86%B3-windows-%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E8%BF%81%E7%A7%BB%E5%A4%B1%E8%B4%A5%E7%9A%84%E5%85%A8%E8%BF%87%E7%A8%8B%E5%AE%9E%E5%BD%95/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">解决 Windows 虚拟内存迁移失败的全过程实录</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/%E9%9D%A2%E8%AF%95%E5%AE%98springboot%E9%87%8C%E9%9D%A2%E4%BC%9A%E6%9C%89%E4%B8%80%E4%BA%9B%E6%B3%A8%E8%A7%A3%E6%AF%94%E5%A6%82@controller%E8%BF%99%E4%B8%AA%E6%98%AF%E4%BD%9C%E4%BB%80%E4%B9%88%E7%94%A8%E7%9A%84@service%E5%91%A2/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">面试官：SpringBoot里面会有一些注解，比如@Controller，这个是作什么用的？@Service呢？</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/%E9%87%8F%E5%8C%96c-%E7%AC%94%E8%AF%95%E9%A2%98/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">量化C&#43;&#43;笔试题</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+<div id="giscus-container" class="giscus-container"></div>
+
+<script>
+(function() {
+    function reloadGiscus() {
+        const container = document.getElementById('giscus-container');
+        if (!container) return;
+
+        container.innerHTML = '';
+
+        const script = document.createElement('script');
+        script.src = "https://giscus.app/client.js";
+
+        script.setAttribute("data-repo", "iamxurulin/iamxurulin.github.io");
+        script.setAttribute("data-repo-id", "R_kgDOQ4sEwg");
+        script.setAttribute("data-category", "Announcements");
+        script.setAttribute("data-category-id", "DIC_kwDOQ4sEws4C1Yw9");
+        script.setAttribute("data-mapping", "title");
+        script.setAttribute("data-strict", "0");
+        script.setAttribute("data-reactions-enabled", "1");
+        script.setAttribute("data-emit-metadata", "0");
+        script.setAttribute("data-input-position", "top");
+        script.setAttribute("data-lang", "zh-CN");
+        script.setAttribute("crossorigin", "anonymous");
+        script.async = true;
+        script.setAttribute("data-theme", "transparent_dark");
+
+        container.appendChild(script);
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', reloadGiscus);
+    } else {
+        reloadGiscus();
+    }
+
+    
+    if (!window._giscusPjaxBound) {
+        window._giscusPjaxBound = true;
+        document.addEventListener('pjax:complete', function() {
+            setTimeout(reloadGiscus, 50);
+        });
+    }
+})();
+</script>
+
+<style>
+     
+    #giscus-container {
+        min-height: 150px;
+        width: 100%;
+        margin-top: 2rem;
+        
+         
+        background: rgba(30, 30, 30, 0.8) !important;
+        
+         
+         
+        
+         
+        border-radius: 15px;
+        padding: 20px;
+        box-sizing: border-box;
+        
+         
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 4px 15px rgba(0,0,0, 0.2);
+    }
+</style>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2025 - 
+        
+        2026 iamxurulin
+    </section>
+    
+    <section class="powerby">
+        
+            Coder_Studio - 记录后端开发、算法与 AI 的成长之路 <br/>
+        
+
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+    
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.b4654cd74006fe7475d7723cd7373672b5ea2035ab23404eb9ff511cb27b581c.js" defer></script><script type="text/javascript" src="/ts/custom.d06f31744de6062060249fb2de5a784912bfa25d124b9b3d97c1f1281811a258.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<div id="aplayer"></div>
+<script>
+window._aplayerInit = function() {
+    const apScript = document.createElement('script');
+    apScript.src = 'https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js';
+    apScript.onload = function() {
+        const ap = new APlayer({
+            container: document.getElementById('aplayer'),
+            fixed: true,
+            lrcType: 3,
+            audio: [
+                
+                {
+                    name: '远行',
+                    artist: '大青山',
+                    url: '\/music\/大青山-远行.mp3',
+                    cover: '\/music\/cover.jpg',
+                    lrc: '\/music\/大青山-远行-歌词.lrc'
+                }
+                
+            ]
+        });
+
+        window.onbeforeunload = () => {
+            const playInfo = {
+                index: ap.list.index,
+                currentTime: ap.audio.currentTime,
+                paused: ap.paused
+            };
+            localStorage.setItem("playInfo", JSON.stringify(playInfo));
+        };
+
+        const playInfo = JSON.parse(localStorage.getItem("playInfo"));
+        if (playInfo) {
+            ap.list.switch(playInfo.index);
+            setTimeout(() => {
+                ap.seek(playInfo.currentTime);
+                if (!playInfo.paused) ap.play();
+            }, 500);
+        }
+    };
+    document.head.appendChild(apScript);
+};
+
+if (window.requestIdleCallback) {
+    requestIdleCallback(window._aplayerInit, { timeout: 3000 });
+} else {
+    setTimeout(window._aplayerInit, 2000);
+}
+</script>
+<script>
+(function() {
+    var PJAX_CDN = 'https://cdn.jsdelivr.net/npm/pjax/pjax.min.js';
+    var PJAX_FALLBACK = 'https://unpkg.com/pjax/pjax.min.js';
+    
+    var TOPBAR_URL = 'https:\/\/iamxurulin.github.io\/js\/topbar.min.js';
+    
+
+    function loadJs(url, timeout) {
+        return new Promise(function(resolve, reject) {
+            var done = false;
+            var s = document.createElement('script');
+            s.src = url;
+            s.async = true;
+            function finish(err) {
+                if (done) return;
+                done = true;
+                s.onload = s.onerror = null;
+                clearTimeout(timer);
+                if (err) reject(err); else resolve();
+            }
+            s.onload = function() { finish(null); };
+            s.onerror = function() { finish(new Error('HTTP error: ' + url)); };
+            var timer = timeout ? setTimeout(function() { finish(new Error('Timeout: ' + url)); }, timeout) : null;
+            document.head.appendChild(s);
+        });
+    }
+
+    function loadPjax(cdnUrl) {
+        return loadJs(cdnUrl, 10000).catch(function() {
+            
+            if (cdnUrl === PJAX_CDN) return loadPjax(PJAX_FALLBACK);
+            throw new Error('All PJAX CDNs failed');
+        });
+    }
+
+    var scripts = [loadPjax(PJAX_CDN)];
+    if (TOPBAR_URL) scripts.push(loadJs(TOPBAR_URL, 8000));
+
+    Promise.all(scripts).then(function() {
+        var pjax = new Pjax({ selectors: ['.main-container'] });
+
+        pjax._handleResponse = pjax.handleResponse;
+        pjax.handleResponse = function(responseText, request, href, options) {
+            if (request.responseText.match('<html')) {
+                if (responseText) {
+                    var newDom = new DOMParser().parseFromString(responseText, 'text/html');
+                    document.body.setAttribute('class', newDom.body.className);
+                    var t = newDom.title;
+                    if (t) document.title = t;
+                }
+            }
+            pjax._handleResponse(responseText, request, href, options);
+        };
+
+        if (typeof topbar !== 'undefined') {
+            topbar.config({ barColors: { '0': 'rgba(255,255,255,1)', '1.0': 'rgba(0,149,234,1)' } });
+        }
+
+        document.addEventListener('pjax:send', function() {
+            if (typeof topbar !== 'undefined') topbar.show();
+        });
+        document.addEventListener('pjax:complete', function() {
+            window.Stack && window.Stack.init();
+            if (typeof topbar !== 'undefined') topbar.hide();
+        });
+    }).catch(function(err) {
+        console.warn('PJAX 未加载，使用普通导航:', err.message);
+    });
+})();
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --base-font-family: 'Fira Code', monospace;
+    --code-font-family: 'Fira Code', monospace;
+  }
+</style>
+<style>
+    #TableOfContents > ul, ol {
+        ul, ol {
+            display: none;
+        }
+        .open {
+            display: block;
+        }
+    }
+</style>
+
+<script>
+    function initTocHide() {
+        
+        let toc = document.querySelector(".widget--toc");
+        if (!toc) {
+            return;
+        }
+        
+        window.addEventListener('scroll', function() {
+            
+            let openUl = document.querySelectorAll(".open");
+            if (openUl.length > 0) {
+              openUl.forEach((ul) => {
+                ul.classList.remove("open")
+              })
+            }
+            
+            let currentLi = document.querySelector(".active-class");
+            if (!currentLi) {
+                return
+            }
+            
+            if (currentLi.children.length > 1) {
+                currentLi.children[1].classList.add("open")
+            }
+            
+            let ul = currentLi.parentElement;
+            do {
+                ul.classList.add("open");
+                ul = ul.parentElement.parentElement
+            } while (ul !== undefined && (ul.localName === 'ul' || ul.localName === 'ol'))
+        });
+    }
+    initTocHide()
+</script>
+
+<style>
+    #backTopBtn {
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        z-index: 99;
+        cursor: pointer;
+        width: 20px;
+        height: 20px;
+        background-image: url(https://iamxurulin.github.io/icons/backTop.svg);
+    }
+</style>
+
+<script>
+    
+
+    function initScrollTop() {
+        let rightSideBar = document.querySelector(".right-sidebar");
+        if (!rightSideBar) {
+            return;
+        }
+        
+        let btn = document.createElement("div");
+        btn.id = "backTopBtn";
+        btn.onclick = backToTop
+        rightSideBar.appendChild(btn)
+        
+        window.addEventListener('scroll', function() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        }, { passive: true });
+    }
+
+    
+
+    function backToTop(){
+        window.scrollTo({ top: 0, behavior: "smooth" })
+    }
+
+    initScrollTop();
+</script>
+
+<style>
+    .highlight {
+         
+        max-height: 400px;
+        overflow: hidden;
+    }
+
+    .code-show {
+        max-height: none !important;
+    }
+
+    .code-more-box {
+        width: 100%;
+        padding-top: 78px;
+        background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0)), to(#fff));
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+    }
+
+    .code-more-btn {
+        display: block;
+        margin: auto;
+        width: 44px;
+        height: 22px;
+        background: #f0f0f5;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        padding-top: 6px;
+        cursor: pointer;
+    }
+
+    .code-more-img {
+        cursor: pointer !important;
+        display: block;
+        margin: auto;
+        width: 22px;
+        height: 16px;
+    }
+</style>
+
+<style>
+    .highlight {
+        max-height: 400px;
+        overflow: hidden;
+        position: relative;  
+    }
+
+    .code-show {
+        max-height: none !important;
+    }
+
+    .code-more-box {
+        width: 100%;
+        padding-top: 78px;
+        background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0)), to(#fff));
+        background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+        pointer-events: none;  
+    }
+
+    .code-more-btn {
+        pointer-events: auto;  
+        display: block;
+        margin: auto;
+        width: 44px;
+        height: 22px;
+        background: var(--card-background);
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        padding-top: 6px;
+        cursor: pointer;
+        box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    }
+
+    .code-more-img {
+        display: block;
+        margin: auto;
+        width: 22px;
+        height: 16px;
+    }
+
+     
+    [data-scheme="dark"] .code-more-box {
+        background-image: linear-gradient(to bottom, rgba(30,30,40,0), #1e1e28);
+    }
+    [data-scheme="dark"] .code-more-btn {
+        background: var(--card-background);
+    }
+</style>
+
+<script>
+  function initCodeMoreBox() {
+    const codeBlocks = document.querySelectorAll(".highlight:not(.code-inited)");
+    
+    codeBlocks.forEach(codeBlock => {
+      
+      codeBlock.classList.add("code-inited");
+
+      
+      if (codeBlock.scrollHeight <= codeBlock.clientHeight + 5) { 
+        return;
+      }
+
+      
+      const codeMoreBox = document.createElement('div');
+      codeMoreBox.classList.add('code-more-box');
+
+      const codeMoreBtn = document.createElement('span');
+      codeMoreBtn.classList.add('code-more-btn');
+      codeMoreBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        codeBlock.classList.add('code-show');
+        codeMoreBox.style.display = 'none';
+        
+        window.dispatchEvent(new Event('resize'));
+      });
+
+      const img = document.createElement('img');
+      img.classList.add('code-more-img');
+      img.src = "https://iamxurulin.github.io/icons/codeMore.png";
+      img.alt = "展开代码";
+
+      codeMoreBtn.appendChild(img);
+      codeMoreBox.appendChild(codeMoreBtn);
+      codeBlock.appendChild(codeMoreBox);
+    });
+  }
+
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCodeMoreBox);
+  } else {
+    initCodeMoreBox();
+  }
+
+  
+  document.addEventListener('pjax:complete', initCodeMoreBox);
+  document.addEventListener('swup:contentReplaced', initCodeMoreBox); 
+  window.addEventListener('popstate', initCodeMoreBox); 
+
+  
+  const observer = new MutationObserver((mutations) => {
+    let shouldRun = false;
+    mutations.forEach(mutation => {
+      if (mutation.addedNodes.length) {
+        shouldRun = true;
+      }
+    });
+    if (shouldRun) {
+      
+      setTimeout(initCodeMoreBox, 100);
+    }
+  });
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+</script>
+<style>
+  body {
+    background: url(https://iamxurulin.github.io/background/wallhaven-qr27rq.jpg) no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+</style>
+
+
+<script>
+window._sakuraInit = function() {
+    const s = document.createElement('script');
+    s.src = 'https:\/\/iamxurulin.github.io\/background\/sakura.js';
+    document.body.appendChild(s);
+};
+if (window.requestIdleCallback) {
+    requestIdleCallback(window._sakuraInit, { timeout: 4000 });
+} else {
+    setTimeout(window._sakuraInit, 2000);
+}
+</script>
+
+<div id="particles-js"></div>
+<script>
+window._particlesInit = function() {
+    const s = document.createElement('script');
+    s.src = 'https:\/\/iamxurulin.github.io\/background\/particles.min.js';
+    s.onload = function() {
+        if (window.particlesJS) {
+            particlesJS.load('particles-js', 'https:\/\/iamxurulin.github.io\/background\/particlesjs-config.json',
+                function() { console.log('particles.js loaded'); }
+            );
+        }
+    };
+    document.body.appendChild(s);
+};
+if (window.requestIdleCallback) {
+    requestIdleCallback(window._particlesInit, { timeout: 5000 });
+} else {
+    setTimeout(window._particlesInit, 3000);
+}
+</script>
+<style>
+#particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: -1;
+}
+</style>
+<script>
+
+window._live2dInit = function() {
+    const cdnPath = "https://cdn.jsdelivr.net/gh/iamxurulin/live2d-widget-v3@v1.0.2";
+    const config = {
+        path: {
+            homePath: "/",
+            modelPath: cdnPath + "/Resources/",
+            tipsJsPath: "https://iamxurulin.github.io/waifu/waifu-tips.js",
+            live2dCorePath: cdnPath + "/Core/live2dcubismcore.js",
+            live2dSdkPath: cdnPath + "/live2d-sdk.js",
+            cssPath: "https://iamxurulin.github.io/waifu/waifu.css",
+            tipsJsonPath: "https://iamxurulin.github.io/waifu/waifu-tips.json"
+        },
+        tools: ["hitokoto", "asteroids", "express", "photo", "info", "quit"],
+        drag: { enable: true, direction: ["x", "y"] }
+    };
+
+    const css = document.createElement('link');
+    css.rel = 'stylesheet';
+    css.href = config.path.cssPath;
+    document.head.appendChild(css);
+
+    function loadScript(url) {
+        return new Promise((resolve, reject) => {
+            const s = document.createElement('script');
+            s.src = url;
+            s.async = true;
+            s.onload = () => resolve(url);
+            s.onerror = () => reject(new Error('Failed to load ' + url));
+            document.head.appendChild(s);
+        });
+    }
+
+    loadScript(config.path.live2dCorePath)
+        .then(() => loadScript(config.path.live2dSdkPath))
+        .then(() => loadScript(config.path.tipsJsPath))
+        .then(() => {
+            localStorage.setItem("modelId", "0");
+            localStorage.setItem("modelTexturesId", "0");
+            initWidget({
+                waifuPath: config.path.tipsJsonPath,
+                cdnPath: config.path.modelPath,
+                tools: config.tools,
+                dragEnable: config.drag.enable,
+                dragDirection: config.drag.direction,
+            });
+        })
+        .catch(e => console.warn('Live2D load failed:', e));
+};
+
+if (screen.width >= 768) {
+    if (window.requestIdleCallback) {
+        requestIdleCallback(window._live2dInit, { timeout: 6000 });
+    } else {
+        setTimeout(window._live2dInit, 4000);
+    }
+}
+</script>
+<script>
+
+(function() {
+    var VERCOUNT_JS = 'https://cn.vercount.one/js';
+
+    function injectVercount() {
+        
+        var old = document.querySelectorAll('script[data-vercount-loader]');
+        for (var i = 0; i < old.length; i++) {
+            old[i].remove();
+        }
+
+        var s = document.createElement('script');
+        s.src = VERCOUNT_JS;
+        s.setAttribute('data-vercount-loader', 'true');
+        s.async = true;
+        document.head.appendChild(s);
+    }
+
+    
+    injectVercount();
+
+    
+    if (!window._vercountPjaxBound) {
+        window._vercountPjaxBound = true;
+        document.addEventListener('pjax:complete', function() {
+            
+            setTimeout(injectVercount, 300);
+        });
+    }
+})();
+</script>
+
+
+    </body>
+</html>

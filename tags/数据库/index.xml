@@ -1,170 +1,185 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>数据库 on Coder_Studio</title><link>https://iamxurulin.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</link><description>Recent content in 数据库 on Coder_Studio</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>iamxurulin</copyright><lastBuildDate>Wed, 17 Jun 2026 13:01:06 +0000</lastBuildDate><atom:link href="https://iamxurulin.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/index.xml" rel="self" type="application/rss+xml"/><item><title>【面试真题拆解】Spring中的注解</title><link>https://iamxurulin.github.io/p/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98%E6%8B%86%E8%A7%A3spring%E4%B8%AD%E7%9A%84%E6%B3%A8%E8%A7%A3/</link><pubDate>Wed, 18 Mar 2026 08:53:48 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98%E6%8B%86%E8%A7%A3spring%E4%B8%AD%E7%9A%84%E6%B3%A8%E8%A7%A3/</guid><description>&lt;p&gt;面试官没有直接问我“@Autowired和@Resource的区别”这种题，而是：&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>数据库 on Coder_Studio</title>
+        <link>https://iamxurulin.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+        <description>Recent content in 数据库 on Coder_Studio</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>iamxurulin</copyright>
+        <lastBuildDate>Sun, 21 Jun 2026 18:19:43 +0000</lastBuildDate><atom:link href="https://iamxurulin.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>【面试真题拆解】Spring中的注解</title>
+        <link>https://iamxurulin.github.io/p/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98%E6%8B%86%E8%A7%A3spring%E4%B8%AD%E7%9A%84%E6%B3%A8%E8%A7%A3/</link>
+        <pubDate>Wed, 18 Mar 2026 08:53:48 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98%E6%8B%86%E8%A7%A3spring%E4%B8%AD%E7%9A%84%E6%B3%A8%E8%A7%A3/</guid>
+        <description>&lt;p&gt;面试官没有直接问我“@Autowired和@Resource的区别”这种题，而是：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;先让我举几个Spring注解的例子，再问“Spring注解定义为什么都挺短，不会有大量代码”，直接考察你对注解本质和Spring AOP/IOC底层的理解。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2 id="举几个spring注解的例子"&gt;举几个Spring注解的例子
-&lt;/h2&gt;&lt;h3 id="1-ioc依赖注入类注解"&gt;1. IOC依赖注入类注解
+&lt;h2 id=&#34;举几个spring注解的例子&#34;&gt;举几个Spring注解的例子
+&lt;/h2&gt;&lt;h3 id=&#34;1-ioc依赖注入类注解&#34;&gt;1. IOC依赖注入类注解
 &lt;/h3&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;注解&lt;/th&gt;
-&lt;th&gt;作用&lt;/th&gt;
-&lt;th&gt;区别&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;@Autowired&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;Spring原生注解，按&lt;strong&gt;类型（byType）&lt;/strong&gt; 自动注入依赖&lt;/td&gt;
-&lt;td&gt;优先byType，找不到唯一Bean时，会尝试按&lt;strong&gt;变量名（byName）&lt;/strong&gt; 匹配；可以配合 &lt;code&gt;@Qualifier&lt;/code&gt; 指定Bean名称；可以用 &lt;code&gt;required=false&lt;/code&gt; 允许依赖为空&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;@Qualifier&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;配合 &lt;code&gt;@Autowired&lt;/code&gt; 使用，&lt;strong&gt;强制按名称（byName）&lt;/strong&gt; 注入依赖&lt;/td&gt;
-&lt;td&gt;当容器中有多个同类型Bean时，必须用它指定具体用哪个&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;@Resource&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;按&lt;strong&gt;名称（byName）&lt;/strong&gt; 优先注入，找不到再按&lt;strong&gt;类型（byType）&lt;/strong&gt; 匹配&lt;/td&gt;
-&lt;td&gt;JSR-250标准，跨框架兼容性好；可以用 &lt;code&gt;name&lt;/code&gt; 属性显式指定Bean名称&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;注解&lt;/th&gt;
+					&lt;th&gt;作用&lt;/th&gt;
+					&lt;th&gt;区别&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;@Autowired&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;Spring原生注解，按&lt;strong&gt;类型（byType）&lt;/strong&gt; 自动注入依赖&lt;/td&gt;
+					&lt;td&gt;优先byType，找不到唯一Bean时，会尝试按&lt;strong&gt;变量名（byName）&lt;/strong&gt; 匹配；可以配合 &lt;code&gt;@Qualifier&lt;/code&gt; 指定Bean名称；可以用 &lt;code&gt;required=false&lt;/code&gt; 允许依赖为空&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;@Qualifier&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;配合 &lt;code&gt;@Autowired&lt;/code&gt; 使用，&lt;strong&gt;强制按名称（byName）&lt;/strong&gt; 注入依赖&lt;/td&gt;
+					&lt;td&gt;当容器中有多个同类型Bean时，必须用它指定具体用哪个&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;@Resource&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;按&lt;strong&gt;名称（byName）&lt;/strong&gt; 优先注入，找不到再按&lt;strong&gt;类型（byType）&lt;/strong&gt; 匹配&lt;/td&gt;
+					&lt;td&gt;JSR-250标准，跨框架兼容性好；可以用 &lt;code&gt;name&lt;/code&gt; 属性显式指定Bean名称&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h3 id="2-ioc组件注册类注解"&gt;2. IOC组件注册类注解
+&lt;h3 id=&#34;2-ioc组件注册类注解&#34;&gt;2. IOC组件注册类注解
 &lt;/h3&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;注解&lt;/th&gt;
-&lt;th&gt;作用&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;@Component&lt;/td&gt;
-&lt;td&gt;通用组件注册注解，把任意类标记为Spring容器的Bean&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;@Controller&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;@Component&lt;/code&gt; 的子类，专门标记&lt;strong&gt;Web控制器层&lt;/strong&gt;的Bean&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;@Service&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;@Component&lt;/code&gt; 的子类，专门标记&lt;strong&gt;业务逻辑层&lt;/strong&gt;的Bean&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;@Configuration&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;@Component&lt;/code&gt; 的子类，专门标记&lt;strong&gt;Java配置类&lt;/strong&gt;，替代XML配置文件&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;@Repository&lt;/td&gt;
-&lt;td&gt;@Component 的子类，专门标记数据访问层的 Bean；还能把数据库的异常（如 SQLException）转换成 Spring 的 DataAccessException（非受检异常）&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;注解&lt;/th&gt;
+					&lt;th&gt;作用&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;@Component&lt;/td&gt;
+					&lt;td&gt;通用组件注册注解，把任意类标记为Spring容器的Bean&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;@Controller&lt;/td&gt;
+					&lt;td&gt;&lt;code&gt;@Component&lt;/code&gt; 的子类，专门标记&lt;strong&gt;Web控制器层&lt;/strong&gt;的Bean&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;@Service&lt;/td&gt;
+					&lt;td&gt;&lt;code&gt;@Component&lt;/code&gt; 的子类，专门标记&lt;strong&gt;业务逻辑层&lt;/strong&gt;的Bean&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;@Configuration&lt;/td&gt;
+					&lt;td&gt;&lt;code&gt;@Component&lt;/code&gt; 的子类，专门标记&lt;strong&gt;Java配置类&lt;/strong&gt;，替代XML配置文件&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;@Repository&lt;/td&gt;
+					&lt;td&gt;@Component 的子类，专门标记数据访问层的 Bean；还能把数据库的异常（如 SQLException）转换成 Spring 的 DataAccessException（非受检异常）&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h3 id="3-aop切面类注解"&gt;3. AOP切面类注解
+&lt;h3 id=&#34;3-aop切面类注解&#34;&gt;3. AOP切面类注解
 &lt;/h3&gt;&lt;p&gt;横切关注点就是“和业务逻辑无关，但很多地方都要用的功能”，比如日志、事务、权限校验、性能监控这些。&lt;/p&gt;
 &lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;注解&lt;/th&gt;
-&lt;th&gt;作用&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;@Aspect&lt;/td&gt;
-&lt;td&gt;把类标记为&lt;strong&gt;切面类&lt;/strong&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;@Pointcut&lt;/td&gt;
-&lt;td&gt;定义&lt;strong&gt;切入点表达式&lt;/strong&gt;，告诉Spring“哪些方法需要被增强”&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;@Before&lt;/td&gt;
-&lt;td&gt;&lt;strong&gt;前置通知&lt;/strong&gt;：在目标方法执行&lt;strong&gt;之前&lt;/strong&gt;执行增强逻辑&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;@After&lt;/td&gt;
-&lt;td&gt;&lt;strong&gt;后置通知&lt;/strong&gt;：在目标方法执行&lt;strong&gt;之后&lt;/strong&gt;（不管有没有异常）执行增强逻辑&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;@AfterReturning&lt;/td&gt;
-&lt;td&gt;&lt;strong&gt;返回通知&lt;/strong&gt;：在目标方法&lt;strong&gt;正常返回&lt;/strong&gt;之后执行增强逻辑&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;@AfterThrowing&lt;/td&gt;
-&lt;td&gt;&lt;strong&gt;异常通知&lt;/strong&gt;：在目标方法&lt;strong&gt;抛出异常&lt;/strong&gt;之后执行增强逻辑&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;@Around&lt;/td&gt;
-&lt;td&gt;&lt;strong&gt;环绕通知&lt;/strong&gt;：最强大的通知，可以&lt;strong&gt;完全控制目标方法的执行&lt;/strong&gt;（比如不执行目标方法、修改参数、修改返回值）&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;注解&lt;/th&gt;
+					&lt;th&gt;作用&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;@Aspect&lt;/td&gt;
+					&lt;td&gt;把类标记为&lt;strong&gt;切面类&lt;/strong&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;@Pointcut&lt;/td&gt;
+					&lt;td&gt;定义&lt;strong&gt;切入点表达式&lt;/strong&gt;，告诉Spring“哪些方法需要被增强”&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;@Before&lt;/td&gt;
+					&lt;td&gt;&lt;strong&gt;前置通知&lt;/strong&gt;：在目标方法执行&lt;strong&gt;之前&lt;/strong&gt;执行增强逻辑&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;@After&lt;/td&gt;
+					&lt;td&gt;&lt;strong&gt;后置通知&lt;/strong&gt;：在目标方法执行&lt;strong&gt;之后&lt;/strong&gt;（不管有没有异常）执行增强逻辑&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;@AfterReturning&lt;/td&gt;
+					&lt;td&gt;&lt;strong&gt;返回通知&lt;/strong&gt;：在目标方法&lt;strong&gt;正常返回&lt;/strong&gt;之后执行增强逻辑&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;@AfterThrowing&lt;/td&gt;
+					&lt;td&gt;&lt;strong&gt;异常通知&lt;/strong&gt;：在目标方法&lt;strong&gt;抛出异常&lt;/strong&gt;之后执行增强逻辑&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;@Around&lt;/td&gt;
+					&lt;td&gt;&lt;strong&gt;环绕通知&lt;/strong&gt;：最强大的通知，可以&lt;strong&gt;完全控制目标方法的执行&lt;/strong&gt;（比如不执行目标方法、修改参数、修改返回值）&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h3 id="lombok的常用注解"&gt;Lombok的常用注解
+&lt;h3 id=&#34;lombok的常用注解&#34;&gt;Lombok的常用注解
 &lt;/h3&gt;&lt;p&gt;Lombok是一种代码简化工具，通过注解自动生成代码。&lt;/p&gt;
 &lt;p&gt;虽然不是Spring原生注解，但Lombok的注解是Java开发中经常会用到的。&lt;/p&gt;
 &lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;注解&lt;/th&gt;
-&lt;th&gt;作用&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;@Slf4j&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;自动生成 &lt;strong&gt;SLF4J日志对象&lt;/strong&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;@Data&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;自动生成 &lt;strong&gt;getter/setter、toString、equals、hashCode、无参构造器&lt;/strong&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;@NoArgsConstructor&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;自动生成 &lt;strong&gt;无参构造器&lt;/strong&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;@AllArgsConstructor&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;自动生成 &lt;strong&gt;全参构造器&lt;/strong&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;注解&lt;/th&gt;
+					&lt;th&gt;作用&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;@Slf4j&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;自动生成 &lt;strong&gt;SLF4J日志对象&lt;/strong&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;@Data&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;自动生成 &lt;strong&gt;getter/setter、toString、equals、hashCode、无参构造器&lt;/strong&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;@NoArgsConstructor&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;自动生成 &lt;strong&gt;无参构造器&lt;/strong&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;@AllArgsConstructor&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;自动生成 &lt;strong&gt;全参构造器&lt;/strong&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id="spring-注解定义为什么通常都挺短不会有大量代码"&gt;Spring 注解定义为什么通常都挺短，不会有大量代码？
+&lt;h2 id=&#34;spring-注解定义为什么通常都挺短不会有大量代码&#34;&gt;Spring 注解定义为什么通常都挺短，不会有大量代码？
 &lt;/h2&gt;&lt;p&gt;面试官这么问主要是想考察你对注解本质和Spring容器底层的理解。&lt;/p&gt;
 &lt;p&gt;先明确一下&lt;strong&gt;元数据&lt;/strong&gt;（Metadata） 的定义，元数据就是“描述数据的数据”，本身不是数据的内容，只是给数据打标签、加属性。&lt;/p&gt;
 &lt;p&gt;根本原因在于注解只是&lt;strong&gt;元数据标记&lt;/strong&gt;，本身不包含任何逻辑。&lt;/p&gt;
 &lt;p&gt;举个Spring注解的例子，比如 &lt;code&gt;@Transactional&lt;/code&gt;：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
-&lt;/span&gt;&lt;span class="lnt"&gt; 2
-&lt;/span&gt;&lt;span class="lnt"&gt; 3
-&lt;/span&gt;&lt;span class="lnt"&gt; 4
-&lt;/span&gt;&lt;span class="lnt"&gt; 5
-&lt;/span&gt;&lt;span class="lnt"&gt; 6
-&lt;/span&gt;&lt;span class="lnt"&gt; 7
-&lt;/span&gt;&lt;span class="lnt"&gt; 8
-&lt;/span&gt;&lt;span class="lnt"&gt; 9
-&lt;/span&gt;&lt;span class="lnt"&gt;10
-&lt;/span&gt;&lt;span class="lnt"&gt;11
-&lt;/span&gt;&lt;span class="lnt"&gt;12
-&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-java" data-lang="java"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// @Transactional的核心定义（简化版，去掉了很多元注解和属性）&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nd"&gt;@Target&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="n"&gt;ElementType&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;METHOD&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;ElementType&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;TYPE&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;// 元注解：标记这个注解能用在方法/类上&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nd"&gt;@Retention&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;RetentionPolicy&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;RUNTIME&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;// 元注解：标记这个注解保留到运行时&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nd"&gt;@Inherited&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;// 元注解：标记这个注解可以被子类继承&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nd"&gt;@Documented&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;// 元注解：标记这个注解会被生成到JavaDoc里&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kd"&gt;public&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nd"&gt;@interface&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Transactional&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;// 只有属性，没有任何方法/逻辑！&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;value&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;default&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;// 事务管理器的名称&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Propagation&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;propagation&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;default&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Propagation&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;REQUIRED&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;// 传播行为&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Isolation&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;isolation&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;default&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Isolation&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;DEFAULT&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;// 隔离级别&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;timeout&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;default&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;// 超时时间&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kt"&gt;boolean&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;readOnly&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;default&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;// 是否只读&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// @Transactional的核心定义（简化版，去掉了很多元注解和属性）&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@Target&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;({&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ElementType&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;METHOD&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ElementType&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;TYPE&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;})&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 元注解：标记这个注解能用在方法/类上&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@Retention&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;RetentionPolicy&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;RUNTIME&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 元注解：标记这个注解保留到运行时&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@Inherited&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 元注解：标记这个注解可以被子类继承&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@Documented&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 元注解：标记这个注解会被生成到JavaDoc里&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nd&#34;&gt;@interface&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Transactional&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 只有属性，没有任何方法/逻辑！&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;value&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;default&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 事务管理器的名称&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Propagation&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;propagation&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;default&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Propagation&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;REQUIRED&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 传播行为&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Isolation&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;isolation&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;default&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Isolation&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;DEFAULT&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 隔离级别&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;timeout&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;default&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 超时时间&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;boolean&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;readOnly&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;default&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;false&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 是否只读&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;可以看到&lt;code&gt;@Transactional&lt;/code&gt; 的定义里只有属性，没有任何一行业务逻辑或容器逻辑。&lt;/p&gt;
@@ -173,358 +188,422 @@
 &lt;p&gt;那什么是元注解呢？&lt;/p&gt;
 &lt;p&gt;元注解就是“标记注解的注解”，可以复用已有注解的功能，不用重复写代码。&lt;/p&gt;
 &lt;p&gt;比如上面的 &lt;code&gt;@Transactional&lt;/code&gt;，它上面有&lt;code&gt;@Target&lt;/code&gt;、&lt;code&gt;@Retention&lt;/code&gt;、&lt;code&gt;@Inherited&lt;/code&gt;、&lt;code&gt;@Documented&lt;/code&gt;这4个元注解。&lt;/p&gt;
-&lt;h2 id="怎么自定义一个spring注解"&gt;怎么自定义一个Spring注解？
+&lt;h2 id=&#34;怎么自定义一个spring注解&#34;&gt;怎么自定义一个Spring注解？
 &lt;/h2&gt;&lt;p&gt;简单来说有以下3步：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;定义注解&lt;/strong&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;用 &lt;code&gt;@interface&lt;/code&gt; 定义，加上JDK原生元注解（至少需要 &lt;code&gt;@Target&lt;/code&gt; 和 &lt;code&gt;@Retention(RUNTIME)&lt;/code&gt;）；&lt;/p&gt;
-&lt;ol start="2"&gt;
+&lt;ol start=&#34;2&#34;&gt;
 &lt;li&gt;&lt;strong&gt;编写后置处理器&lt;/strong&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;实现 &lt;code&gt;BeanPostProcessor&lt;/code&gt; 或 &lt;code&gt;BeanFactoryPostProcessor&lt;/code&gt; 接口，或者用 AOP 切面（更适合方法级别的拦截，比如权限校验、记录执行时间），处理自定义注解的逻辑；&lt;/p&gt;
-&lt;ol start="3"&gt;
+&lt;ol start=&#34;3&#34;&gt;
 &lt;li&gt;&lt;strong&gt;注册后置处理器&lt;/strong&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;把自定义后置处理器交给Spring容器管理（比如用 &lt;code&gt;@Component&lt;/code&gt; 标记）。&lt;/p&gt;
 &lt;p&gt;举个例子@AuthCheck：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
-&lt;/span&gt;&lt;span class="lnt"&gt; 2
-&lt;/span&gt;&lt;span class="lnt"&gt; 3
-&lt;/span&gt;&lt;span class="lnt"&gt; 4
-&lt;/span&gt;&lt;span class="lnt"&gt; 5
-&lt;/span&gt;&lt;span class="lnt"&gt; 6
-&lt;/span&gt;&lt;span class="lnt"&gt; 7
-&lt;/span&gt;&lt;span class="lnt"&gt; 8
-&lt;/span&gt;&lt;span class="lnt"&gt; 9
-&lt;/span&gt;&lt;span class="lnt"&gt;10
-&lt;/span&gt;&lt;span class="lnt"&gt;11
-&lt;/span&gt;&lt;span class="lnt"&gt;12
-&lt;/span&gt;&lt;span class="lnt"&gt;13
-&lt;/span&gt;&lt;span class="lnt"&gt;14
-&lt;/span&gt;&lt;span class="lnt"&gt;15
-&lt;/span&gt;&lt;span class="lnt"&gt;16
-&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-java" data-lang="java"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nd"&gt;@Target&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ElementType&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;METHOD&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;//规定这个标签能贴在哪里,ElementType.METHOD 意思是“只能贴在方法上面”。&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nd"&gt;@Retention&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;RetentionPolicy&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;RUNTIME&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;//规定这个标签的有效期,RUNTIME的意思是“程序运行的时候，这个标签依然存在”&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kd"&gt;public&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nd"&gt;@interface&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;AuthCheck&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="cm"&gt;/**
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt; * @interface 不是接口（interface），而是专门用来定义注解的语法。
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt; * String mustRole()：表示用这个标签时，
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt; * 你可以写上一个角色名，比如 @AuthCheck(mustRole = &amp;#34;admin&amp;#34;)。
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt; * default &amp;#34;&amp;#34;：如果你只写了 @AuthCheck
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt; * 而没填角色，那默认值就是一个空字符串 &amp;#34;&amp;#34;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt; * （表示不需要特定角色，只要登录就行，具体看你怎么实现业务逻辑）。
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt; *
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt; */&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;mustRole&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;default&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@Target&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ElementType&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;METHOD&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;//规定这个标签能贴在哪里,ElementType.METHOD 意思是“只能贴在方法上面”。&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@Retention&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;RetentionPolicy&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;RUNTIME&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;//规定这个标签的有效期,RUNTIME的意思是“程序运行的时候，这个标签依然存在”&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nd&#34;&gt;@interface&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;AuthCheck&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;cm&#34;&gt;/**
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;     * @interface 不是接口（interface），而是专门用来定义注解的语法。
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;     * String mustRole()：表示用这个标签时，
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;     * 你可以写上一个角色名，比如 @AuthCheck(mustRole = &amp;#34;admin&amp;#34;)。
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;     * default &amp;#34;&amp;#34;：如果你只写了 @AuthCheck
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;     * 而没填角色，那默认值就是一个空字符串 &amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;     * （表示不需要特定角色，只要登录就行，具体看你怎么实现业务逻辑）。
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;     *
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;     */&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;mustRole&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;default&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>【面试真题】能讲讲MySQL的锁机制吗</title><link>https://iamxurulin.github.io/p/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98%E8%83%BD%E8%AE%B2%E8%AE%B2mysql%E7%9A%84%E9%94%81%E6%9C%BA%E5%88%B6%E5%90%97/</link><pubDate>Sun, 15 Mar 2026 16:44:46 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98%E8%83%BD%E8%AE%B2%E8%AE%B2mysql%E7%9A%84%E9%94%81%E6%9C%BA%E5%88%B6%E5%90%97/</guid><description>&lt;p&gt;MySQL的锁按两个维度分，刚好对应开发中最常遇到的问题：&lt;/p&gt;
+&lt;/div&gt;</description>
+        </item>
+        <item>
+        <title>MySQL的三层B&#43;树能存多少数据？</title>
+        <link>https://iamxurulin.github.io/p/mysql%E7%9A%84%E4%B8%89%E5%B1%82b-%E6%A0%91%E8%83%BD%E5%AD%98%E5%A4%9A%E5%B0%91%E6%95%B0%E6%8D%AE/</link>
+        <pubDate>Mon, 16 Mar 2026 13:09:19 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/mysql%E7%9A%84%E4%B8%89%E5%B1%82b-%E6%A0%91%E8%83%BD%E5%AD%98%E5%A4%9A%E5%B0%91%E6%95%B0%E6%8D%AE/</guid>
+        <description>&lt;p&gt;InnoDB读写磁盘的最小单位是&lt;strong&gt;页（Page）&lt;/strong&gt;，默认大小&lt;strong&gt;16KB&lt;/strong&gt;。&lt;br&gt;
+而MySQL的主键索引B+树，每一个树节点（不管是根节点、中间节点、叶子节点），&lt;strong&gt;本质上就是一个16KB的页&lt;/strong&gt;。&lt;br&gt;
+所有计算，都是围绕【1个16KB的页，能存多少东西】展开的。&lt;/p&gt;
+&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;节点类型&lt;/th&gt;
+					&lt;th&gt;存的内容&lt;/th&gt;
+					&lt;th&gt;特点&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;非叶子节点（根节点、中间层节点）&lt;/td&gt;
+					&lt;td&gt;只存主键值 + 指向下一层页的指针&lt;/td&gt;
+					&lt;td&gt;不存完整用户数据，体积极小，一个页能存上千个&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;叶子节点（最底层节点）&lt;/td&gt;
+					&lt;td&gt;存用户的完整一行行数据&lt;/td&gt;
+					&lt;td&gt;存真实业务数据，体积大，一个页能存的行数有限&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;1先算1个非叶子节点能存多少个索引项&#34;&gt;1.先算1个非叶子节点，能存多少个索引项
+&lt;/h3&gt;&lt;p&gt;非叶子节点存的是「主键值 + 指针」，我们先算单个索引项的大小：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;主键大小&lt;/strong&gt;：假设主键是&lt;code&gt;bigint&lt;/code&gt;类型，MySQL里&lt;code&gt;bigint&lt;/code&gt;固定占&lt;strong&gt;8字节&lt;/strong&gt;；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;指针大小&lt;/strong&gt;：InnoDB里指向页的指针，固定占&lt;strong&gt;6字节&lt;/strong&gt;；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;单个索引项总大小&lt;/strong&gt;：8字节（主键） + 6字节（指针） = &lt;strong&gt;14字节&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;一个页是16KB，换算成字节是 &lt;code&gt;16 × 1024 = 16384字节&lt;/code&gt;。&lt;br&gt;
+所以一个非叶子页能存的索引项数量：&lt;br&gt;
+&lt;code&gt;16384 ÷ 14 ≈ 1170个&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;2再算1个叶子节点能存多少行数据&#34;&gt;2.再算1个叶子节点，能存多少行数据
+&lt;/h3&gt;&lt;p&gt;叶子节点存的是用户的完整一行行数据，&lt;strong&gt;假设&lt;/strong&gt;一行业务数据占1KB（比如一张表有id、name、age、create_time等字段，加起来差不多1KB）。&lt;/p&gt;
+&lt;p&gt;一个页是16KB，所以一个叶子页能存的行数：&lt;br&gt;
+&lt;code&gt;16KB ÷ 1KB/行 = 16行&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;3最后算三层b树的总数据量&#34;&gt;3.最后算三层B+树的总数据量
+&lt;/h3&gt;&lt;p&gt;顺着三层结构，从根节点往下算：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;第一层（根节点）&lt;/strong&gt;：1个非叶子页，能存1170个索引项 → 能指向1170个第二层的页；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;第二层（中间非叶子节点）&lt;/strong&gt;：1170个非叶子页，每个页又能存1170个索引项 → 能指向 &lt;code&gt;1170 × 1170 = 1368900&lt;/code&gt; 个第三层的叶子页；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;第三层（叶子节点）&lt;/strong&gt;：每个叶子页能存16行数据。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;最终总数据量 = 叶子页总数 × 每个叶子页的行数：&lt;br&gt;
+&lt;code&gt;1170 × 1170 × 16 ≈ 2190万条&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;所以，三层B+树大约能存2000万条记录。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>【面试真题】能讲讲MySQL的锁机制吗</title>
+        <link>https://iamxurulin.github.io/p/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98%E8%83%BD%E8%AE%B2%E8%AE%B2mysql%E7%9A%84%E9%94%81%E6%9C%BA%E5%88%B6%E5%90%97/</link>
+        <pubDate>Sun, 15 Mar 2026 16:44:46 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98%E8%83%BD%E8%AE%B2%E8%AE%B2mysql%E7%9A%84%E9%94%81%E6%9C%BA%E5%88%B6%E5%90%97/</guid>
+        <description>&lt;p&gt;MySQL的锁按两个维度分，刚好对应开发中最常遇到的问题：&lt;/p&gt;
 &lt;p&gt;按&lt;strong&gt;解决并发冲突&lt;/strong&gt;的思路分，是悲观锁和乐观锁——这俩决定了“你是先占坑再干活，还是先干活最后再检查”；&lt;/p&gt;
 &lt;p&gt;按&lt;strong&gt;锁的范围大小&lt;/strong&gt;分，是表锁、行锁，还有 InnoDB 特有的间隙锁 + 临键锁 —— 这三类锁决定了 “你是锁整个仓库（表锁）、只锁你要的那一件商品（行锁），还是锁仓库里的某个货架区间（间隙锁 + 临键锁）”。&lt;/p&gt;
 &lt;p&gt;先建一张最简单的电商商品表 &lt;code&gt;product&lt;/code&gt;，插几条测试数据，等会更好理解举的例子：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
-&lt;/span&gt;&lt;span class="lnt"&gt; 2
-&lt;/span&gt;&lt;span class="lnt"&gt; 3
-&lt;/span&gt;&lt;span class="lnt"&gt; 4
-&lt;/span&gt;&lt;span class="lnt"&gt; 5
-&lt;/span&gt;&lt;span class="lnt"&gt; 6
-&lt;/span&gt;&lt;span class="lnt"&gt; 7
-&lt;/span&gt;&lt;span class="lnt"&gt; 8
-&lt;/span&gt;&lt;span class="lnt"&gt; 9
-&lt;/span&gt;&lt;span class="lnt"&gt;10
-&lt;/span&gt;&lt;span class="lnt"&gt;11
-&lt;/span&gt;&lt;span class="lnt"&gt;12
-&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;CREATE&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;TABLE&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="n"&gt;product&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;11&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;NOT&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;NULL&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;AUTO_INCREMENT&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;COMMENT&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;主键ID&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;varchar&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;NOT&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;NULL&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;COMMENT&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;商品名称&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="n"&gt;stock&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;11&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;NOT&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;NULL&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;DEFAULT&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;0&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;COMMENT&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;库存&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="k"&gt;version&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;11&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;NOT&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;NULL&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;DEFAULT&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;0&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;COMMENT&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;乐观锁版本号&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;PRIMARY&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;KEY&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;ENGINE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;InnoDB&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;DEFAULT&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;CHARSET&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;utf8mb4&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;COMMENT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;商品表&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;-- 插入测试数据：id=1是iPhone，库存100；id=3是华为，库存200；id=5是小米，库存150
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;INSERT&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;INTO&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="n"&gt;product&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="n"&gt;stock&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="k"&gt;version&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;VALUES&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;iPhone 17&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Mate 70&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;200&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Xiaomi 15&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;150&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="w"&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;CREATE&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;TABLE&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;product&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;id&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;11&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;NOT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;NULL&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;AUTO_INCREMENT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;COMMENT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;主键ID&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;varchar&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;100&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;NOT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;NULL&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;COMMENT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;商品名称&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;stock&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;11&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;NOT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;NULL&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;DEFAULT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;0&amp;#39;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;COMMENT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;库存&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;version&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;11&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;NOT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;NULL&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;DEFAULT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;0&amp;#39;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;COMMENT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;乐观锁版本号&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;PRIMARY&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;KEY&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;id&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ENGINE&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;InnoDB&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;DEFAULT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CHARSET&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;utf8mb4&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;COMMENT&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;商品表&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;-- 插入测试数据：id=1是iPhone，库存100；id=3是华为，库存200；id=5是小米，库存150
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;INSERT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;INTO&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;product&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;id&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;stock&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;version&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;VALUES&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;iPhone 17&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;100&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;Mate 70&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;200&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;Xiaomi 15&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;150&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="悲观锁"&gt;悲观锁
+&lt;/div&gt;&lt;h2 id=&#34;悲观锁&#34;&gt;悲观锁
 &lt;/h2&gt;&lt;p&gt;举个&lt;strong&gt;电商秒杀扣库存&lt;/strong&gt;的真实例子，也是悲观锁最典型的应用：&lt;/p&gt;
 &lt;p&gt;比如有两个用户同时秒杀iPhone 17，库存100。&lt;/p&gt;
 &lt;p&gt;如果不用锁，俩人同时查出来库存100，都扣减1，就超卖了。&lt;br&gt;
 用悲观锁的话，就是在查库存的时候用 &lt;code&gt;SELECT ... FOR UPDATE&lt;/code&gt; 显式加排他锁——&lt;/p&gt;
 &lt;p&gt;第一个用户的事务先把这行数据锁住，第二个用户的查询就会阻塞，等第一个用户扣减完库存、提交事务释放锁，第二个用户才能拿到最新的库存，这样就保证了不超卖。&lt;/p&gt;
-&lt;h2 id="乐观锁"&gt;乐观锁
+&lt;h2 id=&#34;乐观锁&#34;&gt;乐观锁
 &lt;/h2&gt;&lt;p&gt;这也是开发中很常见的场景：&lt;strong&gt;两个运营同时修改同一件商品的标题&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;这种场景并发冲突概率很低（因为很少会有两个人同时改同一个商品的标题），如果用悲观锁，每次修改都要加锁，太影响性能了，所以用&lt;strong&gt;乐观锁&lt;/strong&gt;更合适。&lt;/p&gt;
 &lt;p&gt;乐观锁的意思就是：我&lt;strong&gt;假设没人跟我抢&lt;/strong&gt;，所以我先直接修改，最后提交的时候再检查一下：&lt;/p&gt;
 &lt;p&gt;在我修改的这段时间里，有没有别人也改过这条数据？&lt;/p&gt;
 &lt;p&gt;如果没有，就修改成功；&lt;/p&gt;
 &lt;p&gt;如果有，就提示用户“数据已被修改，请刷新后重试”。&lt;/p&gt;
-&lt;h3 id="举个具体的sql操作实例"&gt;举个具体的SQL操作实例
+&lt;h3 id=&#34;举个具体的sql操作实例&#34;&gt;举个具体的SQL操作实例
 &lt;/h3&gt;&lt;p&gt;我们打开两个命令行窗口，分表代表两个会话。&lt;/p&gt;
-&lt;h4 id="1会话a运营a先查商品"&gt;1.会话A（运营A先查商品）
-&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;h4 id=&#34;1会话a运营a先查商品&#34;&gt;1.会话A（运营A先查商品）
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;-- 1. 运营A查出来iPhone的信息，此时 version = 0
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;FROM&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;product&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;WHERE&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;-- 1. 运营A查出来iPhone的信息，此时 version = 0
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;FROM&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;product&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;WHERE&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;id&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h4 id="2会话b运营b同时查商品"&gt;2.会话B（运营B同时查商品）
-&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/div&gt;&lt;h4 id=&#34;2会话b运营b同时查商品&#34;&gt;2.会话B（运营B同时查商品）
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;-- 1. 运营B也查出来iPhone的信息，此时 version 也是 0
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;FROM&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;product&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;WHERE&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;-- 1. 运营B也查出来iPhone的信息，此时 version 也是 0
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;FROM&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;product&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;WHERE&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;id&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h4 id="3会话a运营a先提交修改"&gt;3.会话A（运营A先提交修改）
-&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
-&lt;/span&gt;&lt;span class="lnt"&gt;3
-&lt;/span&gt;&lt;span class="lnt"&gt;4
-&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/div&gt;&lt;h4 id=&#34;3会话a运营a先提交修改&#34;&gt;3.会话A（运营A先提交修改）
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;-- 1. 运营A把标题改成“iPhone 17 Pro Max”，WHERE条件带上 version = 0
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;UPDATE&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;product&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;SET&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;iPhone 17 Pro Max&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;version&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;version&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;WHERE&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;AND&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;version&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;-- 现象：返回更新行数为 1，修改成功！此时数据库里的 version 变成了 1
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;-- 1. 运营A把标题改成“iPhone 17 Pro Max”，WHERE条件带上 version = 0
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;UPDATE&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;product&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;SET&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;iPhone 17 Pro Max&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;version&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;version&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;WHERE&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;id&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;AND&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;version&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;-- 现象：返回更新行数为 1，修改成功！此时数据库里的 version 变成了 1
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h4 id="4会话b运营b后提交修改"&gt;4.会话B（运营B后提交修改）
-&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
-&lt;/span&gt;&lt;span class="lnt"&gt;3
-&lt;/span&gt;&lt;span class="lnt"&gt;4
-&lt;/span&gt;&lt;span class="lnt"&gt;5
-&lt;/span&gt;&lt;span class="lnt"&gt;6
-&lt;/span&gt;&lt;span class="lnt"&gt;7
+&lt;/div&gt;&lt;h4 id=&#34;4会话b运营b后提交修改&#34;&gt;4.会话B（运营B后提交修改）
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;-- 1. 运营B把标题改成“iPhone 17 特价版”，WHERE条件也带上 version = 0
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;UPDATE&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;product&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;SET&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;iPhone 17 特价版&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;version&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;version&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;WHERE&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;AND&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;version&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;-- 现象：返回更新行数为 0，修改失败！
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;-- 因为数据库里的 version 已经变成 1 了，找不到 id=1 AND version=0 的行
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;-- 此时业务代码就可以提示用户：“商品已被其他运营修改，请刷新页面后重试”
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;-- 1. 运营B把标题改成“iPhone 17 特价版”，WHERE条件也带上 version = 0
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;UPDATE&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;product&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;SET&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;iPhone 17 特价版&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;version&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;version&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;WHERE&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;id&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;AND&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;version&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;-- 现象：返回更新行数为 0，修改失败！
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;-- 因为数据库里的 version 已经变成 1 了，找不到 id=1 AND version=0 的行
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;-- 此时业务代码就可以提示用户：“商品已被其他运营修改，请刷新页面后重试”
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="表锁"&gt;表锁
+&lt;/div&gt;&lt;h2 id=&#34;表锁&#34;&gt;表锁
 &lt;/h2&gt;&lt;p&gt;直接锁&lt;strong&gt;整张表&lt;/strong&gt;，其他会话对这张表的任何读写（不管是查哪一行、改哪一行）都会被阻塞。&lt;/p&gt;
-&lt;h4 id="举个例子"&gt;举个例子
-&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
-&lt;/span&gt;&lt;span class="lnt"&gt;3
-&lt;/span&gt;&lt;span class="lnt"&gt;4
-&lt;/span&gt;&lt;span class="lnt"&gt;5
-&lt;/span&gt;&lt;span class="lnt"&gt;6
-&lt;/span&gt;&lt;span class="lnt"&gt;7
-&lt;/span&gt;&lt;span class="lnt"&gt;8
-&lt;/span&gt;&lt;span class="lnt"&gt;9
+&lt;h4 id=&#34;举个例子&#34;&gt;举个例子
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;9
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;-- 会话A：给全表商品库存+10，显式加表锁
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;LOCK&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;TABLES&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;product&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;WRITE&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;UPDATE&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;product&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;SET&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;stock&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;stock&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;-- 此时会话B想查id=1的商品，会直接阻塞！
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;FROM&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;product&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;WHERE&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;-- 会话A提交事务并释放表锁后，会话B才能执行
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;UNLOCK&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;TABLES&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;-- 会话A：给全表商品库存+10，显式加表锁
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;LOCK&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TABLES&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;product&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;WRITE&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;UPDATE&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;product&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;SET&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;stock&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;stock&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;-- 此时会话B想查id=1的商品，会直接阻塞！
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;FROM&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;product&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;WHERE&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;id&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;-- 会话A提交事务并释放表锁后，会话B才能执行
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;UNLOCK&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TABLES&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;表锁的优点是加锁开销小、速度快，不会死锁，但缺点就是并发度极低，一锁全表，电商场景下用它会直接让网站卡死。&lt;/p&gt;
-&lt;h2 id="行锁"&gt;行锁
+&lt;h2 id=&#34;行锁&#34;&gt;行锁
 &lt;/h2&gt;&lt;p&gt;只锁&lt;strong&gt;具体的某一行数据&lt;/strong&gt;，其他行完全不受影响，是InnoDB支持高并发的核心。&lt;/p&gt;
 &lt;p&gt;需要注意的是行锁的&lt;strong&gt;前提&lt;/strong&gt;是【走索引】。&lt;/p&gt;
 &lt;p&gt;如果你的查询没走索引，InnoDB会&lt;strong&gt;退化成表锁&lt;/strong&gt;。&lt;/p&gt;
-&lt;h4 id="举两个例子对比一下"&gt;举两个例子对比一下
+&lt;h4 id=&#34;举两个例子对比一下&#34;&gt;举两个例子对比一下
 &lt;/h4&gt;&lt;p&gt;先看&lt;strong&gt;走索引的情况（行锁生效）&lt;/strong&gt;：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
-&lt;/span&gt;&lt;span class="lnt"&gt; 2
-&lt;/span&gt;&lt;span class="lnt"&gt; 3
-&lt;/span&gt;&lt;span class="lnt"&gt; 4
-&lt;/span&gt;&lt;span class="lnt"&gt; 5
-&lt;/span&gt;&lt;span class="lnt"&gt; 6
-&lt;/span&gt;&lt;span class="lnt"&gt; 7
-&lt;/span&gt;&lt;span class="lnt"&gt; 8
-&lt;/span&gt;&lt;span class="lnt"&gt; 9
-&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;-- 会话A：用主键id=1查，加排他锁（走主键索引，只锁id=1这行）
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;BEGIN&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;FROM&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;product&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;WHERE&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;FOR&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;UPDATE&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;-- 会话B：查id=3的商品，完全不阻塞！直接拿到锁
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;BEGIN&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;FROM&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;product&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;WHERE&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;FOR&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;UPDATE&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;-- 执行成功
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;-- 会话B：查id=1的商品，会阻塞！需要等会话A释放锁
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;FROM&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;product&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;WHERE&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;FOR&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;UPDATE&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;-- 阻塞
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;-- 会话A：用主键id=1查，加排他锁（走主键索引，只锁id=1这行）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;BEGIN&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;FROM&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;product&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;WHERE&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;id&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;FOR&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;UPDATE&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;-- 会话B：查id=3的商品，完全不阻塞！直接拿到锁
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;BEGIN&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;FROM&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;product&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;WHERE&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;id&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;FOR&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;UPDATE&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;-- 执行成功
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;-- 会话B：查id=1的商品，会阻塞！需要等会话A释放锁
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;FROM&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;product&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;WHERE&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;id&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;FOR&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;UPDATE&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;-- 阻塞
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;再看&lt;strong&gt;没走索引的情况（退化成表锁）&lt;/strong&gt;：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
-&lt;/span&gt;&lt;span class="lnt"&gt;3
-&lt;/span&gt;&lt;span class="lnt"&gt;4
-&lt;/span&gt;&lt;span class="lnt"&gt;5
-&lt;/span&gt;&lt;span class="lnt"&gt;6
-&lt;/span&gt;&lt;span class="lnt"&gt;7
-&lt;/span&gt;&lt;span class="lnt"&gt;8
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;-- 先确认name字段没加索引（前面建表的时候只给id加了主键）
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;-- 会话A：用name=&amp;#39;iPhone 17&amp;#39;查，加排他锁（没走索引，锁全表！）
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;BEGIN&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;FROM&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;product&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;WHERE&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;iPhone 17&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;FOR&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;UPDATE&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;-- 会话B：查id=3的商品，居然也阻塞了！因为锁了全表
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;BEGIN&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;FROM&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;product&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;WHERE&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;FOR&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;UPDATE&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;-- 阻塞
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;-- 先确认name字段没加索引（前面建表的时候只给id加了主键）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;-- 会话A：用name=&amp;#39;iPhone 17&amp;#39;查，加排他锁（没走索引，锁全表！）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;BEGIN&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;FROM&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;product&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;WHERE&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;iPhone 17&amp;#39;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;FOR&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;UPDATE&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;-- 会话B：查id=3的商品，居然也阻塞了！因为锁了全表
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;BEGIN&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;FROM&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;product&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;WHERE&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;id&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;FOR&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;UPDATE&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;-- 阻塞
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;行锁的优点是并发度极高，只锁需要的行，不影响其他操作；但缺点是加锁开销大、速度慢，&lt;strong&gt;可能产生死锁&lt;/strong&gt;。&lt;/p&gt;
-&lt;h2 id="间隙锁临键锁"&gt;间隙锁+临键锁
+&lt;h2 id=&#34;间隙锁临键锁&#34;&gt;间隙锁+临键锁
 &lt;/h2&gt;&lt;p&gt;这俩是InnoDB特有的，专门用来解决【幻读】问题的。&lt;/p&gt;
-&lt;h4 id="先举个电商场景的例子说明一下什么是幻读"&gt;先举个电商场景的例子说明一下什么是幻读？
-&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
-&lt;/span&gt;&lt;span class="lnt"&gt; 2
-&lt;/span&gt;&lt;span class="lnt"&gt; 3
-&lt;/span&gt;&lt;span class="lnt"&gt; 4
-&lt;/span&gt;&lt;span class="lnt"&gt; 5
-&lt;/span&gt;&lt;span class="lnt"&gt; 6
-&lt;/span&gt;&lt;span class="lnt"&gt; 7
-&lt;/span&gt;&lt;span class="lnt"&gt; 8
-&lt;/span&gt;&lt;span class="lnt"&gt; 9
-&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;h4 id=&#34;先举个电商场景的例子说明一下什么是幻读&#34;&gt;先举个电商场景的例子说明一下什么是幻读？
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;-- 会话A：查id&amp;gt;1的所有商品（此时表里只有id=1、3、5）
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;BEGIN&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;FROM&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;product&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;WHERE&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;FOR&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;UPDATE&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;-- 第一次查：查到id=3、5两条
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;-- 会话B：插了一条id=2的商品，提交事务
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;INSERT&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;INTO&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;product&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;stock&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;version&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;VALUES&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;OPPO Find X8&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;COMMIT&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;-- 会话A：再查id&amp;gt;1的商品，居然查到了id=2、3、5三条！
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;FROM&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;product&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;WHERE&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;FOR&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;UPDATE&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;-- 第二次查：多了一条，像产生了幻觉
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;-- 会话A：查id&amp;gt;1的所有商品（此时表里只有id=1、3、5）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;BEGIN&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;FROM&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;product&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;WHERE&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;id&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;FOR&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;UPDATE&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;-- 第一次查：查到id=3、5两条
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;-- 会话B：插了一条id=2的商品，提交事务
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;INSERT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;INTO&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;product&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;id&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;stock&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;version&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;VALUES&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;OPPO Find X8&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;100&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;COMMIT&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;-- 会话A：再查id&amp;gt;1的商品，居然查到了id=2、3、5三条！
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;FROM&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;product&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;WHERE&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;id&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;FOR&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;UPDATE&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;-- 第二次查：多了一条，像产生了幻觉
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;这就是&lt;strong&gt;幻读&lt;/strong&gt;：同一个事务里，两次相同的范围查询，结果却是不一样的。&lt;/p&gt;
-&lt;h4 id="间隙锁gap-lock"&gt;间隙锁（Gap Lock）
+&lt;h4 id=&#34;间隙锁gap-lock&#34;&gt;间隙锁（Gap Lock）
 &lt;/h4&gt;&lt;p&gt;间隙锁，间隙锁，顾名思义，它不锁具体的行，锁的是两个索引值之间的“间隙”，也就是只锁&lt;strong&gt;两个相邻索引值之间的空白区间&lt;/strong&gt;，以防止别人在这个区间里插数据。&lt;/p&gt;
 &lt;p&gt;以刚开始建的那个product表为例：&lt;/p&gt;
 &lt;p&gt;id=1、3、5，间隙就是：&lt;code&gt;(-∞,1)&lt;/code&gt;、&lt;code&gt;(1,3)&lt;/code&gt;、&lt;code&gt;(3,5)&lt;/code&gt;、&lt;code&gt;(5,+∞)&lt;/code&gt;。&lt;/p&gt;
-&lt;h4 id="临键锁next-key-lock"&gt;临键锁（Next-Key Lock）
+&lt;h4 id=&#34;临键锁next-key-lock&#34;&gt;临键锁（Next-Key Lock）
 &lt;/h4&gt;&lt;p&gt;临键锁其实是【行锁】+【间隙锁】的组合，锁的是&lt;strong&gt;左开右闭&lt;/strong&gt;的区间。&lt;/p&gt;
 &lt;p&gt;比如&lt;code&gt;(1,3]&lt;/code&gt;（锁id=3这一行，同时锁1到3之间的间隙）。&lt;/p&gt;
 &lt;p&gt;还是以刚开始建的那个product表为例，临键区间就是：&lt;code&gt;(-∞,1]&lt;/code&gt;、&lt;code&gt;(1,3]&lt;/code&gt;、&lt;code&gt;(3,5]&lt;/code&gt;、&lt;code&gt;(5,+∞)&lt;/code&gt;。&lt;/p&gt;
-&lt;h4 id="举个例子-1"&gt;举个例子
-&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
-&lt;/span&gt;&lt;span class="lnt"&gt;3
-&lt;/span&gt;&lt;span class="lnt"&gt;4
-&lt;/span&gt;&lt;span class="lnt"&gt;5
-&lt;/span&gt;&lt;span class="lnt"&gt;6
-&lt;/span&gt;&lt;span class="lnt"&gt;7
-&lt;/span&gt;&lt;span class="lnt"&gt;8
-&lt;/span&gt;&lt;span class="lnt"&gt;9
+&lt;h4 id=&#34;举个例子-1&#34;&gt;举个例子
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;9
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;-- 会话A：用id=3查，加排他锁（走主键索引，加临键锁(1,3]）
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;BEGIN&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;FROM&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;product&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;WHERE&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;FOR&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;UPDATE&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;-- 会话B：想插id=2的商品，直接阻塞！因为间隙(1,3)被锁了
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;INSERT&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;INTO&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;product&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;stock&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;version&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;VALUES&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;OPPO Find X8&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;-- 阻塞
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;-- 会话B：想插id=6的商品，不阻塞！因为(5,+∞)没被锁
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;INSERT&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;INTO&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;product&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;stock&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;version&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;VALUES&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Vivo X200&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;-- 执行成功
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;-- 会话A：用id=3查，加排他锁（走主键索引，加临键锁(1,3]）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;BEGIN&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;FROM&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;product&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;WHERE&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;id&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;FOR&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;UPDATE&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;-- 会话B：想插id=2的商品，直接阻塞！因为间隙(1,3)被锁了
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;INSERT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;INTO&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;product&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;id&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;stock&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;version&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;VALUES&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;OPPO Find X8&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;100&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;-- 阻塞
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;-- 会话B：想插id=6的商品，不阻塞！因为(5,+∞)没被锁
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;INSERT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;INTO&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;product&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;id&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;stock&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;version&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;VALUES&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;Vivo X200&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;100&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;-- 执行成功
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h4 id="小贴士"&gt;&lt;strong&gt;小贴士&lt;/strong&gt;
+&lt;/div&gt;&lt;h4 id=&#34;小贴士&#34;&gt;&lt;strong&gt;小贴士&lt;/strong&gt;
 &lt;/h4&gt;&lt;p&gt;间隙锁 + 临键锁只在 InnoDB 的默认隔离级别【可重复读（RR）】下生效。&lt;/p&gt;
 &lt;p&gt;如果是【读提交（RC）】隔离级别，会关闭间隙锁，只保留行锁。&lt;/p&gt;
-&lt;h2 id="夺命连环问什么是死锁又怎么避免呢"&gt;夺命连环问：什么是死锁？又怎么避免呢？
+&lt;h2 id=&#34;夺命连环问什么是死锁又怎么避免呢&#34;&gt;夺命连环问：什么是死锁？又怎么避免呢？
 &lt;/h2&gt;&lt;p&gt;两个或多个会话，&lt;strong&gt;互相持有对方需要的锁&lt;/strong&gt;，都在等待对方释放，导致谁都执行不下去，形成“死循环”，这就是死锁。&lt;/p&gt;
-&lt;h4 id="举个例子-2"&gt;举个例子
-&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
-&lt;/span&gt;&lt;span class="lnt"&gt; 2
-&lt;/span&gt;&lt;span class="lnt"&gt; 3
-&lt;/span&gt;&lt;span class="lnt"&gt; 4
-&lt;/span&gt;&lt;span class="lnt"&gt; 5
-&lt;/span&gt;&lt;span class="lnt"&gt; 6
-&lt;/span&gt;&lt;span class="lnt"&gt; 7
-&lt;/span&gt;&lt;span class="lnt"&gt; 8
-&lt;/span&gt;&lt;span class="lnt"&gt; 9
-&lt;/span&gt;&lt;span class="lnt"&gt;10
-&lt;/span&gt;&lt;span class="lnt"&gt;11
-&lt;/span&gt;&lt;span class="lnt"&gt;12
-&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;h4 id=&#34;举个例子-2&#34;&gt;举个例子
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;-- 会话A：先锁id=1，再想锁id=3
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;BEGIN&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;FROM&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;product&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;WHERE&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;FOR&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;UPDATE&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;-- 持有id=1的锁
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;-- 此时会话A想拿id=3的锁，但被会话B持有了，阻塞
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;FROM&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;product&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;WHERE&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;FOR&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;UPDATE&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;-- 阻塞
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;-- 会话B：先锁id=3，再想锁id=1
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;BEGIN&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;FROM&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;product&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;WHERE&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;FOR&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;UPDATE&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;-- 持有id=3的锁
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;-- 此时会话B想拿id=1的锁，但被会话A持有了，阻塞
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;FROM&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;product&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;WHERE&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;FOR&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;UPDATE&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;-- 阻塞
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;-- 结果：死锁！
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;-- 会话A：先锁id=1，再想锁id=3
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;BEGIN&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;FROM&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;product&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;WHERE&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;id&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;FOR&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;UPDATE&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;-- 持有id=1的锁
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;-- 此时会话A想拿id=3的锁，但被会话B持有了，阻塞
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;FROM&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;product&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;WHERE&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;id&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;FOR&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;UPDATE&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;-- 阻塞
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;-- 会话B：先锁id=3，再想锁id=1
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;BEGIN&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;FROM&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;product&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;WHERE&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;id&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;FOR&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;UPDATE&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;-- 持有id=3的锁
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;-- 此时会话B想拿id=1的锁，但被会话A持有了，阻塞
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;FROM&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;product&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;WHERE&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;id&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;FOR&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;UPDATE&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;-- 阻塞
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;-- 结果：死锁！
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h4 id="死锁的四个必要条件"&gt;死锁的四个必要条件
+&lt;/div&gt;&lt;h4 id=&#34;死锁的四个必要条件&#34;&gt;死锁的四个必要条件
 &lt;/h4&gt;&lt;p&gt;只要破坏其中任意一个，就能避免死锁：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;互斥条件&lt;/strong&gt;：一个锁只能被一个会话持有（行锁就是这样，没法破坏）；&lt;/li&gt;
@@ -532,13 +611,237 @@
 &lt;li&gt;&lt;strong&gt;不剥夺条件&lt;/strong&gt;：锁只能由持有者主动释放，不能被别人强行抢走；&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;循环等待条件&lt;/strong&gt;：会话之间形成循环等待链（A等B，B等A）。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h4 id="怎么避免死锁"&gt;怎么避免死锁？
-&lt;/h4&gt;&lt;h4 id="-按固定顺序加锁"&gt;① 按固定顺序加锁
+&lt;h4 id=&#34;怎么避免死锁&#34;&gt;怎么避免死锁？
+&lt;/h4&gt;&lt;h4 id=&#34;-按固定顺序加锁&#34;&gt;① 按固定顺序加锁
 &lt;/h4&gt;&lt;p&gt;所有会话都按&lt;strong&gt;相同的顺序&lt;/strong&gt;加锁，比如都先锁id小的，再锁id大的，这样就不会形成循环等待。&lt;/p&gt;
-&lt;h4 id="-减少锁的范围和持有时间"&gt;② 减少锁的范围和持有时间
+&lt;h4 id=&#34;-减少锁的范围和持有时间&#34;&gt;② 减少锁的范围和持有时间
 &lt;/h4&gt;&lt;p&gt;尽量用&lt;strong&gt;行锁&lt;/strong&gt;不用表锁；&lt;/p&gt;
 &lt;p&gt;事务尽量&lt;strong&gt;小&lt;/strong&gt;，不要在事务里做无关操作（比如不要在事务里调第三方接口、查无关表），锁持有时间越短，死锁概率越低。&lt;/p&gt;
-&lt;h4 id="-避免大事务"&gt;③ 避免大事务
+&lt;h4 id=&#34;-避免大事务&#34;&gt;③ 避免大事务
 &lt;/h4&gt;&lt;p&gt;大事务持有锁的时间长，涉及的行多，更容易死锁，把大事务拆成多个小事务。&lt;/p&gt;
-&lt;h4 id="小贴士-1"&gt;&lt;strong&gt;小贴士&lt;/strong&gt;
-&lt;/h4&gt;&lt;p&gt;InnoDB 有自动死锁检测机制，它会实时扫描锁等待链，一旦发现死锁，会自动回滚其中一个，一般是代价较小的那个事务，比如更新行数少的那个，让另一个事务继续执行，不会让系统无限期卡死。&lt;/p&gt;</description></item></channel></rss>
+&lt;h4 id=&#34;小贴士-1&#34;&gt;&lt;strong&gt;小贴士&lt;/strong&gt;
+&lt;/h4&gt;&lt;p&gt;InnoDB 有自动死锁检测机制，它会实时扫描锁等待链，一旦发现死锁，会自动回滚其中一个，一般是代价较小的那个事务，比如更新行数少的那个，让另一个事务继续执行，不会让系统无限期卡死。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>【面试真题】缓存和数据库的一致性问题如何保证？</title>
+        <link>https://iamxurulin.github.io/p/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98%E7%BC%93%E5%AD%98%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7%E9%97%AE%E9%A2%98%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81/</link>
+        <pubDate>Fri, 13 Mar 2026 14:14:10 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98%E7%BC%93%E5%AD%98%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7%E9%97%AE%E9%A2%98%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81/</guid>
+        <description>&lt;p&gt;坦白说，这个问题本质上不是个纯技术方案题，而是高并发场景下，平衡【性能、可用性、一致性强度】的工程题。&lt;/p&gt;
+&lt;p&gt;核心是先看业务的一致性容忍度，再选对应方案，而且必须做好异常兜底，不然线上一定会出永久脏数据。&lt;/p&gt;
+&lt;p&gt;在电商场景中，绝大多数情况下优先保证&lt;strong&gt;最终一致性&lt;/strong&gt;，只有金融级核心链路才会考虑&lt;strong&gt;强一致性&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;先说&lt;strong&gt;标准流程&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;读请求：先查缓存，命中直接返回；没命中就读数据库，把结果写回缓存再返回。&lt;/li&gt;
+&lt;li&gt;写请求：先更新数据库，再删除缓存。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;为什么是删除缓存而不是更新缓存&#34;&gt;为什么是【删除缓存】，而不是【更新缓存】？
+&lt;/h3&gt;&lt;p&gt;一是并发写场景下，更新缓存一定会有数据覆盖的风险；&lt;/p&gt;
+&lt;p&gt;二是电商场景很多缓存值是多表关联算出来的，更新缓存的成本极高，不如删除后懒加载；&lt;/p&gt;
+&lt;p&gt;三是写多读少的场景，频繁更新缓存全是无效操作，浪费性能。&lt;/p&gt;
+&lt;h3 id=&#34;为什么是先更库再删缓存不能反过来&#34;&gt;为什么是【先更库，再删缓存】，不能反过来？
+&lt;/h3&gt;&lt;p&gt;如果你刚把缓存删了，数据库还没更新完，这时候高并发的&lt;strong&gt;读请求&lt;/strong&gt;进来，缓存查不到，直接去数据库拉了旧数据，还写回了缓存。&lt;/p&gt;
+&lt;p&gt;等你数据库更新完，缓存里的旧数据就一直躺在那，除非缓存过期，不然用户一直看到的是错的数据。&lt;/p&gt;
+&lt;p&gt;但是，如果是&lt;strong&gt;先更库再删缓存&lt;/strong&gt;，只有极小概率会出问题，比如：&lt;/p&gt;
+&lt;p&gt;读请求缓存没命中，正在读数据库的瞬间，写请求更新了数据库并删了缓存，之后读请求把旧数据写回缓存。&lt;/p&gt;
+&lt;p&gt;但是，但是啊，这个场景发生的条件太苛刻了，因为写数据库的耗时远大于读数据库，基本卡不中这个时间窗口，线上出问题的概率几乎可以忽略。&lt;/p&gt;
+&lt;p&gt;就算真的撞上了，还有缓存 TTL 兜底，最多就是短时间不一致，绝对不会出永久脏数据。&lt;/p&gt;
+&lt;p&gt;其实，这个方案最大的风险，是第二步删缓存失败。&lt;/p&gt;
+&lt;p&gt;同步删缓存如果失败，立刻把这个key丢到&lt;strong&gt;消息队列&lt;/strong&gt;里做异步指数退避重试，设置最大重试次数，绝对不让缓存操作阻塞主流程。&lt;/p&gt;
+&lt;h3 id=&#34;高并发下的两个进阶方案&#34;&gt;高并发下的两个进阶方案
+&lt;/h3&gt;&lt;p&gt;第一个是延迟双删，解决基础方案的极端并发问题。&lt;br&gt;
+“针对商品详情、营销活动这种超高并发读的场景，用延迟双删做加固，流程是：&lt;/p&gt;
+&lt;p&gt;先删除缓存➡️更新数据库➡️延迟500ms-1s，二次删除缓存。&lt;br&gt;
+第二次延迟删除，刚好能覆盖掉【数据库更新过程中，读请求写回缓存的旧数据】，彻底解决极端并发的脏数据问题。&lt;br&gt;
+其中，延迟时间必须大于【业务读请求的最大耗时 + 数据库主从同步延迟】。&lt;/p&gt;
+&lt;p&gt;第二个是基于Binlog的异步缓存淘汰。&lt;br&gt;
+用Binlog异步淘汰缓存，完全解耦业务和缓存操作。&lt;/p&gt;
+&lt;p&gt;业务代码只做一件事：更新数据库，完全不碰缓存。&lt;/p&gt;
+&lt;p&gt;然后用Canal监听数据库的binlog增量日志，只有主库事务提交成功，才会拿到数据变更事件，再异步去删除对应的缓存key。如果删除失败，就丢进死信队列重试，超过阈值直接触发告警。&lt;/p&gt;
+&lt;h3 id=&#34;强一致性方案&#34;&gt;强一致性方案
+&lt;/h3&gt;&lt;p&gt;只有像支付账户余额、核心库存扣减这种，一分钱都不能错、零容错的场景，才会考虑强一致性方案，因为它的性能代价极大。&lt;br&gt;
+用Redisson的分布式读写锁，写请求加写锁，读请求加读锁，读写互斥，强制串行化，彻底避免并发问题。&lt;/p&gt;
+&lt;p&gt;但这个方案会严重降低系统吞吐量，高并发下很容易出现锁等待、超时问题，所以非核心场景，绝对不会用。&lt;/p&gt;
+&lt;h3 id=&#34;兜底机制&#34;&gt;兜底机制
+&lt;/h3&gt;&lt;p&gt;不管方案设计得多完美，线上一定会有意外，比如：&lt;/p&gt;
+&lt;p&gt;缓存集群炸了、消息队列挂了、binlog消费延迟了，没有兜底，就等着出线上事故。&lt;br&gt;
+可以采用以下兜底策略：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;TTL兜底&lt;/strong&gt;：所有缓存key必须设置合理的过期时间，哪怕所有机制都失效了，最多就是一段时间的不一致，缓存一过期，就自动拉取最新数据，绝对不会出现永久脏数据。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;失败重试机制&lt;/strong&gt;：所有缓存删除操作，必须有异步重试兜底，不能一次失败就放任脏数据存在。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;降级开关&lt;/strong&gt;：大促场景下，如果缓存集群扛不住了，直接开降级开关，所有请求切到读数据库，先保证用户能下单，别的都好说。&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>Redis、内存、缓存、MySQL、数据库，这些的区别到底是什么</title>
+        <link>https://iamxurulin.github.io/p/redis%E5%86%85%E5%AD%98%E7%BC%93%E5%AD%98mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%99%E4%BA%9B%E7%9A%84%E5%8C%BA%E5%88%AB%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88/</link>
+        <pubDate>Sun, 01 Feb 2026 13:02:50 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/redis%E5%86%85%E5%AD%98%E7%BC%93%E5%AD%98mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%99%E4%BA%9B%E7%9A%84%E5%8C%BA%E5%88%AB%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88/</guid>
+        <description>&lt;p&gt;这几个词经常一起出现，有次面试的时候被问到了，还是有点懵的，本文就来理清一下。&lt;/p&gt;
+&lt;h2 id=&#34;1-内存memory&#34;&gt;1. 内存（Memory）
+&lt;/h2&gt;&lt;p&gt;本质上是&lt;strong&gt;硬件&lt;/strong&gt;，比如电脑/服务器上的内存条，速度极快（纳秒级），缺点是断电会导致数据丢失。&lt;/p&gt;
+&lt;p&gt;需要注意：程序运行时必须把数据加载到&lt;strong&gt;内存&lt;/strong&gt;才能执行。&lt;/p&gt;
+&lt;h2 id=&#34;2-数据库database&#34;&gt;2. 数据库（Database）
+&lt;/h2&gt;&lt;p&gt;本质上是&lt;strong&gt;软件&lt;/strong&gt;，用来持久化存储数据（断电不丢失），提供查询、修改、事务等能力，数据存在硬盘。&lt;/p&gt;
+&lt;h2 id=&#34;3-mysql&#34;&gt;3. MySQL
+&lt;/h2&gt;&lt;p&gt;本质上是&lt;strong&gt;关系型数据库&lt;/strong&gt;（ Relational Database Management System, RDBMS），数据存在硬盘，支持 SQL、事务、索引、复杂查询，速度比内存慢很多（毫秒级）。&lt;/p&gt;
+&lt;p&gt;需要注意的是MySQL 是数据库的一种，但是&lt;strong&gt;数据库 ≠ MySQL&lt;/strong&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;4-缓存cache&#34;&gt;4. 缓存（Cache）
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;本质上其实是一种“加速思想或者机制”，不是软件也不是硬件，而是一种&lt;/strong&gt;设计模式，主要用于把热点数据放在更快的地方，减少查询压力。&lt;/p&gt;
+&lt;h2 id=&#34;5-redis&#34;&gt;5. Redis
+&lt;/h2&gt;&lt;p&gt;本质上是基于内存的 &lt;strong&gt;NoSQL 数据库，数据主要存在&lt;/strong&gt;内存，也可以持久化到&lt;strong&gt;硬盘&lt;/strong&gt;，常被当作&lt;strong&gt;分布式缓存&lt;/strong&gt;使用。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;需要注意的是：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Redis 是一个数据库，Redis ≠ 缓存，只是它常被用来做缓存，但它功能远不止缓存，比如也可以做&lt;strong&gt;排行榜&lt;/strong&gt;、&lt;strong&gt;限流&lt;/strong&gt;、&lt;strong&gt;分布式锁&lt;/strong&gt;等等。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>MySQL中有哪些日志类型？</title>
+        <link>https://iamxurulin.github.io/p/mysql%E4%B8%AD%E6%9C%89%E5%93%AA%E4%BA%9B%E6%97%A5%E5%BF%97%E7%B1%BB%E5%9E%8B/</link>
+        <pubDate>Sat, 24 Jan 2026 15:38:05 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/mysql%E4%B8%AD%E6%9C%89%E5%93%AA%E4%BA%9B%E6%97%A5%E5%BF%97%E7%B1%BB%E5%9E%8B/</guid>
+        <description>&lt;p&gt;MySQL有binlog、redo log和undo log三种日志，其中binlog 负责主从复制和数据恢复，redo log保证崩溃后数据不丢失，undo log支撑事务回滚和MVCC。&lt;/p&gt;
+&lt;h3 id=&#34;1binlog&#34;&gt;1.binlog
+&lt;/h3&gt;&lt;p&gt;binlog 是server层的日志，记录的是逻辑操作，也就是原始SQL或者行变更前后的值。&lt;/p&gt;
+&lt;p&gt;它的核心场景是主从同步，从库拉取主库到binlog重放一遍就能保持数据一致。&lt;/p&gt;
+&lt;p&gt;另外，做数据恢复的时候，也是靠binlog配合全量备份回放到指定时间点。&lt;/p&gt;
+&lt;h3 id=&#34;2redo-log是innodb引擎独有的记录的是物理变更具体就是某个数据页的某个偏移量改成了什么值&#34;&gt;2.redo log是InnoDB引擎独有的，记录的是物理变更，具体就是“某个数据页的某个偏移量改成了什么值”。
+&lt;/h3&gt;&lt;p&gt;它的作用是崩溃恢复（crash-safe），基于WAL（Write Ahead  Log）机制，MySQL挂了重启后，InnoDB会用redo log把没来得及刷盘的脏页恢复出来。&lt;/p&gt;
+&lt;p&gt;redo log是循环写的，空间固定，写满了就得等checkpoint推进才能继续。&lt;/p&gt;
+&lt;h3 id=&#34;3undo-log也是innodb引擎的逻辑日志记录的是数据修改前的旧值&#34;&gt;3.undo log也是InnoDB引擎的逻辑日志，记录的是数据修改前的旧值。
+&lt;/h3&gt;&lt;p&gt;事务回滚的时候，就靠undo log把数据改回去，另外MVCC的快照读也依赖它，别的事务要读历史版本，顺着undo log链往前找就行。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://iamxurulin.github.io/images/84b73cf3efe84a6a8996ec343e4cf107-b0b792ea.jpeg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>MySQL是怎么实现事务的？</title>
+        <link>https://iamxurulin.github.io/p/mysql%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E4%BA%8B%E5%8A%A1%E7%9A%84/</link>
+        <pubDate>Fri, 23 Jan 2026 15:59:01 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/mysql%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E4%BA%8B%E5%8A%A1%E7%9A%84/</guid>
+        <description>&lt;p&gt;MySQL实现事务靠的是4个核心组件：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Redo Log&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Undo Log&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;锁&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;MVCC&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这四个组件分别对应事务的ACID特性的不同方面，一致性是由原子性、隔离性、持久性共同作用实现的。&lt;/p&gt;
+&lt;p&gt;1.Redo Log保证持久性（D）&lt;/p&gt;
+&lt;p&gt;在事务提交时，基于WAL（预写日志）机制将修改先写到Redo Log再刷盘写磁盘数据页。&lt;/p&gt;
+&lt;p&gt;就算写数据页时宕机了，重启后通过重放redo log就能恢复数据，确保已提交的修改不会丢失。&lt;/p&gt;
+&lt;p&gt;2.Undo Log保证原子性（A）&lt;/p&gt;
+&lt;p&gt;每次修改数据前，先把原值以逻辑日志的形式存到undo log中。&lt;/p&gt;
+&lt;p&gt;事务回滚时，按undo log反向操作把数据恢复回去。&lt;/p&gt;
+&lt;p&gt;要么全做完，要么全撤销，不会出现改了一半的中间状态。&lt;/p&gt;
+&lt;p&gt;3.锁机制保证隔离性（I）的写-写并发&lt;/p&gt;
+&lt;p&gt;两个事务同时改同一行，必须一个等另一个释放锁，实现写-写互斥。&lt;/p&gt;
+&lt;p&gt;InnoDB的锁粒度精确到行级（基于索引实现），还有间隙锁防止幻读。&lt;/p&gt;
+&lt;p&gt;4.MVCC保证隔离性（I）的读-写并发&lt;/p&gt;
+&lt;p&gt;读操作不加锁，通过undo log构建的版本链找到自己应该看到的数据版本，主要适配InnoDB默认的可重复读隔离级别RR。&lt;/p&gt;
+&lt;p&gt;写的时候别人照样能读，读的时候别人照样能写，大幅度提升读写并发度。&lt;/p&gt;
+&lt;p&gt;一致性不是单独实现的，它是&lt;strong&gt;原子性&lt;/strong&gt;、&lt;strong&gt;隔离性&lt;/strong&gt;和&lt;strong&gt;持久性&lt;/strong&gt;共同作用的结果。&lt;/p&gt;
+&lt;p&gt;数据从一个正确状态转移到另一个正确状态，中间不会出现不一致的中间态，同时满足业务的约束规则。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://iamxurulin.github.io/images/a2edac8b93cc4d5080d8731e9958cee3-c33deecc.jpeg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>MyBatis Flex和MyBatis Plus的区别</title>
+        <link>https://iamxurulin.github.io/p/mybatis-flex%E5%92%8Cmybatis-plus%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
+        <pubDate>Thu, 22 Jan 2026 15:00:00 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/mybatis-flex%E5%92%8Cmybatis-plus%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
+        <description>&lt;p&gt;MyBatis Flex和MyBatis Plus都是对原生MyBatis 框架的增强工具，都能够&lt;strong&gt;简化数据库的操作&lt;/strong&gt;、&lt;strong&gt;提高开发效率。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;两者在设计理念和功能侧重点上有以下区别：&lt;/p&gt;
+&lt;p&gt;1.MyBatis Flex除了MyBatis自身，没有任何第三方依赖，极致轻量化；而MyBatis Plus整合的功能更多（如逻辑删除、乐观锁、代码生成等），依赖也更复杂。&lt;/p&gt;
+&lt;p&gt;2.MyBatis Flex从架构上进行了优化，在SQL执行的过程中没有SQL解析环节和MyBatis拦截器，通过 AST抽象语法树构建SQL，执行链路更短，可以带来更高的性能。而MyBatis Plus大量依赖MyBatis拦截器解析SQL，执行链路更长，有一定解析开销。&lt;/p&gt;
+&lt;p&gt;3.MyBatis Flex原生支持多表关联查询，无需手写SQL，适合处理复杂的业务场景；而MyBatis Plus在多表查询时需要依赖第三方插件或者手写SQL来实现。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>如何在MySQL中监控和优化慢SQL？</title>
+        <link>https://iamxurulin.github.io/p/%E5%A6%82%E4%BD%95%E5%9C%A8mysql%E4%B8%AD%E7%9B%91%E6%8E%A7%E5%92%8C%E4%BC%98%E5%8C%96%E6%85%A2sql/</link>
+        <pubDate>Tue, 20 Jan 2026 18:04:18 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E5%A6%82%E4%BD%95%E5%9C%A8mysql%E4%B8%AD%E7%9B%91%E6%8E%A7%E5%92%8C%E4%BC%98%E5%8C%96%E6%85%A2sql/</guid>
+        <description>&lt;p&gt;在MySQL中监控和优化慢SQL的核心是&lt;strong&gt;开启MySQL的慢查询日志&lt;/strong&gt;，慢查询日志会把执行时间&lt;strong&gt;超过设定阈值的SQL语句&lt;/strong&gt;自动记录下来，通过日志的分析与执行计划的校验实现SQL性能的精准优化。&lt;/p&gt;
+&lt;p&gt;主要步骤：&lt;/p&gt;
+&lt;p&gt;1.开启慢查询日志，设置合理的时间阈值，线上环境通常将阈值设定为1~2秒，确保执行耗时较长的慢SQL能够被精准捕获。&lt;/p&gt;
+&lt;p&gt;2.定期对慢查询日志进行分析，用MySQL自带的分析工具&lt;code&gt;mysqldumpslow&lt;/code&gt;或Percona
+Toolkit里的&lt;code&gt;pt-query-digest&lt;/code&gt;工具，对日志中的SQL进行汇总统计，定位高频出现的慢SQL。&lt;/p&gt;
+&lt;p&gt;3.对高频的慢SQL执行EXPLAIN命令分析其执行计划，检查是否走索引、扫描数据行数、是否存在文件排序等问题，再针对分析结果开展针对性优化。&lt;/p&gt;
+&lt;h3 id=&#34;几个常见的慢sql优化方向&#34;&gt;几个常见的慢SQL优化方向
+&lt;/h3&gt;&lt;p&gt;1.查看EXPLAIN 结果的type字段，如果值为ALL，说明当前SQL是全表扫描；如果key列为空，就说明该SQL未使用索引，需优化索引配置。&lt;/p&gt;
+&lt;p&gt;2.如果SELECT查询的字段没有包含在索引里，会触发回表查询，可以通过构建覆盖索引进行优化，把查询所需的字段都放进索引。&lt;/p&gt;
+&lt;p&gt;3.查看EXPLAIN结果的Extra字段，如果是Using filesort，说明数据库执行了手动排序；如果是Using temporary，说明用了临时表；这两种情况都可以通过为对应字段添加索引来避免。&lt;/p&gt;
+&lt;p&gt;4.避免用SELECT *查询所有字段，可以明确指定所需的字段；可以通过添加LIMIT子句控制单次查询返回的条数，从而减少数据处理压力。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>MySQL中如何进行SQL调优</title>
+        <link>https://iamxurulin.github.io/p/mysql%E4%B8%AD%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8Csql%E8%B0%83%E4%BC%98/</link>
+        <pubDate>Mon, 19 Jan 2026 17:23:03 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/mysql%E4%B8%AD%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8Csql%E8%B0%83%E4%BC%98/</guid>
+        <description>&lt;p&gt;SQL调优的核心思路是&lt;strong&gt;减少磁盘I/O&lt;/strong&gt;和&lt;strong&gt;避免无效计算&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;主要就是先通过MySQL的慢查询日志定位慢SQL，再利用EXPLAIN分析执行计划，最后再进行针对性优化。&lt;/p&gt;
+&lt;p&gt;优化的手段主要有这几大类，分别是&lt;strong&gt;索引层面的优化&lt;/strong&gt;，&lt;strong&gt;SQL写法层面的优化&lt;/strong&gt;以及&lt;strong&gt;架构层面的优化&lt;/strong&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;索引层面的优化&#34;&gt;索引层面的优化
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;合理设计联合索引，利用覆盖索引来避免回表。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;注意最左匹配原则。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;避免在索引列上做函数运算、隐式类型转换。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;及时删除荣誉索引和重复索引。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;sql写法层面的优化&#34;&gt;SQL写法层面的优化
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;为了减少网络传输和内存占用，只对必要字段进行查询，不使用&lt;code&gt;select *&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;为了避免全表扫描，避免&lt;code&gt;%LIKE&lt;/code&gt;这种前缀模糊查询&lt;/li&gt;
+&lt;li&gt;连表查询时检查&lt;strong&gt;关联字段&lt;/strong&gt;的字符集和排序规则是否一致，不一致会导致索引失效&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;架构层面的优化&#34;&gt;架构层面的优化
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;对于访问频率高但是变化少的数据使用Redis缓存&lt;/li&gt;
+&lt;li&gt;对单表数据量超过2000万行或物理文件超过2G的大表进行分库分表&lt;/li&gt;
+&lt;li&gt;搭建主从数据库集群，进行读写分离，让从库分担一些查询的压力&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>
