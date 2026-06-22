@@ -1,2251 +1,315 @@
-<!DOCTYPE html>
-<html lang="zh-cn" dir="ltr">
-    <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="设计模式其实就是前辈们写代码踩了无数坑，总结出来的代码编写最佳实践，专门用来解决特定场景下的代码复用、解耦、扩展性问题。\n可以分为创建型模式、结构型模式、行为型模式三类。\n">
-<title>23种设计模式，一次性讲明白</title>
-
-<link rel='canonical' href='https://iamxurulin.github.io/p/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%80%E6%AC%A1%E6%80%A7%E8%AE%B2%E6%98%8E%E7%99%BD/'>
-
-<link rel="stylesheet" href="/scss/style.min.6e9c513e2b18fb90ba80ef8f1310b1122153a8397e5271e51b034f6a1f7377f5.css"><meta property='og:title' content="23种设计模式，一次性讲明白">
-<meta property='og:description' content="设计模式其实就是前辈们写代码踩了无数坑，总结出来的代码编写最佳实践，专门用来解决特定场景下的代码复用、解耦、扩展性问题。\n可以分为创建型模式、结构型模式、行为型模式三类。\n">
-<meta property='og:url' content='https://iamxurulin.github.io/p/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%80%E6%AC%A1%E6%80%A7%E8%AE%B2%E6%98%8E%E7%99%BD/'>
-<meta property='og:site_name' content='Coder_Studio'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='设计模式' /><meta property='article:tag' content='java' /><meta property='article:tag' content='开发语言' /><meta property='article:published_time' content='2026-03-19T12:50:01&#43;00:00'/><meta property='article:modified_time' content='2026-06-21T18:19:43&#43;00:00'/>
-<meta name="twitter:title" content="23种设计模式，一次性讲明白">
-<meta name="twitter:description" content="设计模式其实就是前辈们写代码踩了无数坑，总结出来的代码编写最佳实践，专门用来解决特定场景下的代码复用、解耦、扩展性问题。\n可以分为创建型模式、结构型模式、行为型模式三类。\n"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5123323391207523"
-     crossorigin="anonymous"></script>
-    <link rel="shortcut icon" href="/favicon.ico" />
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://cdn.jsdelivr.net">
-<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
-
-<div class="loading">
- 
-<div class="liquid-loader">
-  <div class="loading-text">
-    Loading<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span>
-  </div>
-  <div class="loader-track">
-    <div class="liquid-fill"></div>
-  </div>
-</div>
-</div>
-
-<style>
-    .loading {
-        position: fixed;
-        display: none;
-        justify-content: center;
-        align-items: center;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 9999;  
-        background-color: #f5f5fa;
-         
-        transition: all 0.3s ease;
-    }
-	
-  
-.liquid-loader {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;  
-  padding: 20px;
-  font-family: system-ui, sans-serif;
-}
-
-.loader-track {
-  position: relative;
-  width: 180px;
-  height: 32px;
-  background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.6),0 1px 3px rgba(255, 255, 255, 0.1);
-}
-
-.liquid-fill {
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  height: calc(100% - 4px);
-  background: linear-gradient(90deg, #4f46e5, #7c3aed, #ec4899, #f59e0b);
-  border-radius: 14px;
-  animation: fillProgress 4s ease-out infinite, colorShift 3s linear infinite;
-  box-shadow:0 0 12px rgba(124, 58, 237, 0.4),inset 0 1px 2px rgba(255, 255, 255, 0.2);
-}
-
- 
-.animated-stop {
-  animation-play-state: paused !important;
-  -webkit-animation-play-state: paused !important;
-}
-
-.loading-text {
-  color: white;
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  animation: textGlow 1s ease-in-out infinite;
-}
-
-.dot {
-  margin-left: 3px;
-  animation: blink 1.5s infinite;
-}
-.dot:nth-of-type(1) { animation-delay: 0s; }
-.dot:nth-of-type(2) { animation-delay: 0.3s; }
-.dot:nth-of-type(3) { animation-delay: 0.6s; }
-
-@keyframes fillProgress {
-  0% { width: 4px; }
-  25% { width: 25%; }
-  50% { width: 50%; }
-  75% { width: 75%; }
-  100% { width: calc(100% - 4px); }
-}
-@keyframes colorShift {
-  0% { filter: hue-rotate(0deg) brightness(1); }
-  33% { filter: hue-rotate(120deg) brightness(1.1); }
-  66% { filter: hue-rotate(240deg) brightness(0.9); }
-  100% { filter: hue-rotate(360deg) brightness(1); }
-}
-@keyframes textGlow {
-  0%,100% { opacity: 0.7;text-shadow: 0 0 8px rgba(139, 92, 246, 0.3); }
-  50% { opacity: 1;text-shadow: 0 0 16px rgba(139, 92, 246, 0.6); }
-}
-@keyframes blink {
-  0%,50% { opacity: 1; }
-  51%,100% { opacity: 0; }
-}
-
- 
-@keyframes scaleAndFadeout {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1.2);  
-    opacity: 0;
-  }
-}
-.scaleAndFadeout {
-  animation: scaleAndFadeout 1.5s ease-out forwards !important;
-}
-
- 
-.article-view {
-    display: flex;
-}
-
- 
- 
-.article-list .article-view {
-    display: none !important;
-}
- 
-</style>
-
-<script>	
-    function initLoading() {
-        const isFirstVisit = !sessionStorage.getItem('visited');
-        if (isFirstVisit) {
-            const loading = document.querySelector(".loading");
-            const liquidFill = document.querySelector(".liquid-fill"); 
-            loading.style.display = "flex";
-            
-            
-            setTimeout(() => {
-                loadFinish(loading, liquidFill);
-                
-                setTimeout(() => {
-                    loading.style.display = "none";
-                }, 1500);
-                
-                sessionStorage.setItem('visited', 'true');
-            }, 4000); 
-        }
-    }
-	
-    function loadFinish(loading, liquidFill) {
-        
-        liquidFill.classList.add("animated-stop");
-        
-        loading.classList.add("scaleAndFadeout");
-    }
-	
-    
-    initLoading();
-</script>
-    </head>
-    <body class="
-    article-page
-    ">
-    <script>
-        (function() {
-            const colorSchemeKey = 'StackColorScheme';
-            if(!localStorage.getItem(colorSchemeKey)){
-                localStorage.setItem(colorSchemeKey, "auto");
-            }
-        })();
-    </script><script>
-    (function() {
-        const colorSchemeKey = 'StackColorScheme';
-        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
-        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
-
-        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
-            
-
-            document.documentElement.dataset.scheme = 'dark';
-        } else {
-            document.documentElement.dataset.scheme = 'light';
-        }
-    })();
-</script>
-<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
-    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
-        <span class="hamburger-box">
-            <span class="hamburger-inner"></span>
-        </span>
-    </button>
-
-    <header>
-        
-            
-            <figure class="site-avatar">
-                <a href="/">
-                
-                    
-                    
-                    
-                        
-                        <img src="/img/avatar_hu_5b4689d2dc4cdce3.png" width="300"
-                            height="300" class="site-logo" loading="lazy" alt="Avatar">
-                    
-                
-                </a>
-                
-                    <span class="emoji">💦</span>
-                
-            </figure>
-            
-        
-        
-        <div class="site-meta">
-            <h1 class="site-name"><a href="/">Coder_Studio</a></h1>
-            <h2 class="site-description">专注后端开发、算法与 AI 的技术博客</h2>
-        </div>
-    </header><ol class="menu-social">
-            
-                <li>
-                    <a 
-                        href='https://blog.csdn.net/qq_44678890'
-                        target="_blank"
-                        title="CSDN"
-                        rel="me"
-                    >
-                        
-                        
-                            <?xml version="1.0" ?><svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500" fill="none"><path d="M82 199.474L173.5 73L345 81.4833L417.103 199.474V300.974L345 427.718H173.5L82 327.474V199.474Z" fill="#84C253"/><path d="M282.182 284.936L347.636 288.867C344.56 317.464 333.964 339.396 315.849 354.663C297.847 369.93 275.688 377.563 249.369 377.563C217.696 377.563 192.118 367.081 172.636 346.118C153.153 325.154 143.412 296.215 143.412 259.301C143.412 222.729 152.641 193.221 171.098 170.776C189.555 148.331 215.303 137.109 248.344 137.109C279.219 137.109 302.917 145.654 319.438 162.744C336.072 179.833 345.471 202.506 347.636 230.761L280.814 234.35C280.814 218.741 277.795 207.462 271.757 200.512C265.832 193.562 258.826 190.087 250.736 190.087C228.178 190.087 216.898 212.76 216.898 258.105C216.898 283.512 219.804 300.773 225.614 309.887C231.539 319.002 239.799 323.559 250.395 323.559C269.307 323.559 279.903 310.685 282.182 284.936Z" fill="white"/></svg>
-                        
-                    </a>
-                </li>
-            
-                <li>
-                    <a 
-                        href='https://github.com/iamxurulin/'
-                        target="_blank"
-                        title="GitHub"
-                        rel="me"
-                    >
-                        
-                        
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
-</svg>
-
-
-
-                        
-                    </a>
-                </li>
-            
-        </ol><ol class="menu" id="main-menu">
-        
-        
-        
-        <li >
-            <a href='/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="5 12 3 12 12 3 21 12 19 12" />
-  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
-</svg>
-
-
-
-                
-                <span>主页</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/search/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="10" cy="10" r="7" />
-  <line x1="21" y1="21" x2="15" y2="15" />
-</svg>
-
-
-
-                
-                <span>搜索</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/categories/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-                
-                <span>分类</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/tags/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11 3L20 12a1.5 1.5 0 0 1 0 2L14 20a1.5 1.5 0 0 1 -2 0L3 11v-4a4 4 0 0 1 4 -4h4" />
-  <circle cx="9" cy="9" r="2" />
-</svg>
-
-
-
-                
-                <span>标签</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/archives/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <rect x="3" y="4" width="18" height="4" rx="2" />
-  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
-  <line x1="10" y1="12" x2="14" y2="12" />
-</svg>
-
-
-
-                
-                <span>归档</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/%E5%85%B3%E4%BA%8E/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="7" r="4" />
-  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-</svg>
-
-
-
-                
-                <span>关于</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
-  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
-</svg>
-
-
-
-                
-                <span>友情链接</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/%E9%9A%90%E7%A7%81%E6%94%BF%E7%AD%96/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="12" r="9" />
-  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
-</svg>
-
-
-
-                
-                <span>隐私政策</span>
-            </a>
-        </li>
-        
-        <li class="menu-bottom-section">
-            <ol class="menu">
-
-                
-                    <li id="dark-mode-toggle">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="8" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="16" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                        <span>暗色模式</span>
-                    </li>
-                
-            </ol>
-        </li>
-    </ol>
-</aside>
-
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <h2 class="widget-title section-title">目录</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
-  <ol>
-    <li><a href="#记忆口诀">记忆口诀</a>
-      <ol>
-        <li><a href="#创建型口诀5种"><strong>创建型口诀（5种）</strong></a></li>
-        <li><a href="#结构型口诀7种"><strong>结构型口诀（7种）</strong></a></li>
-        <li><a href="#行为型口诀11种"><strong>行为型口诀（11种）</strong></a></li>
-      </ol>
-    </li>
-    <li><a href="#创建型模式">创建型模式</a>
-      <ol>
-        <li><a href="#1-单例模式">1. 单例模式</a>
-          <ol>
-            <li><a href="#类比">类比</a></li>
-            <li><a href="#适用场景">适用场景</a></li>
-            <li><a href="#代码示例">代码示例</a></li>
-          </ol>
-        </li>
-        <li><a href="#2-工厂方法模式">2. 工厂方法模式</a>
-          <ol>
-            <li><a href="#类比-1">类比</a></li>
-            <li><a href="#适用场景-1">适用场景</a></li>
-            <li><a href="#代码示例-1">代码示例</a></li>
-          </ol>
-        </li>
-        <li><a href="#3-抽象工厂模式">3. 抽象工厂模式</a>
-          <ol>
-            <li><a href="#类比-2">类比</a></li>
-          </ol>
-        </li>
-        <li><a href="#4-建造者模式">4. 建造者模式</a>
-          <ol>
-            <li><a href="#类比-3">类比</a></li>
-            <li><a href="#适用场景-2">适用场景</a></li>
-            <li><a href="#代码示例-2">代码示例</a></li>
-          </ol>
-        </li>
-        <li><a href="#5-原型模式">5. 原型模式</a>
-          <ol>
-            <li><a href="#类比-4">类比</a></li>
-            <li><a href="#适用场景-3">适用场景</a></li>
-          </ol>
-        </li>
-      </ol>
-    </li>
-    <li><a href="#结构型模式">结构型模式</a>
-      <ol>
-        <li><a href="#1-适配器模式">1. 适配器模式</a>
-          <ol>
-            <li><a href="#类比-5">类比</a></li>
-            <li><a href="#适用场景-4">适用场景</a></li>
-          </ol>
-        </li>
-        <li><a href="#2-装饰器模式">2. 装饰器模式</a>
-          <ol>
-            <li><a href="#类比-6">类比</a></li>
-            <li><a href="#适用场景-5">适用场景</a></li>
-          </ol>
-        </li>
-        <li><a href="#3-代理模式">3. 代理模式</a>
-          <ol>
-            <li><a href="#类比-7">类比</a></li>
-            <li><a href="#适用场景-6">适用场景</a></li>
-          </ol>
-        </li>
-        <li><a href="#4-外观模式">4. 外观模式</a>
-          <ol>
-            <li><a href="#类比-8">类比</a></li>
-            <li><a href="#适用场景-7">适用场景</a></li>
-          </ol>
-        </li>
-        <li><a href="#5-桥接模式">5. 桥接模式</a>
-          <ol>
-            <li><a href="#类比-9">类比</a></li>
-          </ol>
-        </li>
-        <li><a href="#6-组合模式">6. 组合模式</a>
-          <ol>
-            <li><a href="#类比-10">类比</a></li>
-            <li><a href="#适用场景-8">适用场景</a></li>
-          </ol>
-        </li>
-        <li><a href="#7-享元模式">7. 享元模式</a>
-          <ol>
-            <li><a href="#类比-11">类比</a></li>
-            <li><a href="#适用场景-9">适用场景</a></li>
-          </ol>
-        </li>
-      </ol>
-    </li>
-    <li><a href="#行为型模式">行为型模式</a>
-      <ol>
-        <li><a href="#1-策略模式">1. 策略模式</a>
-          <ol>
-            <li><a href="#类比-12">类比</a></li>
-            <li><a href="#适用场景-10">适用场景</a></li>
-            <li><a href="#代码示例-3">代码示例</a></li>
-          </ol>
-        </li>
-        <li><a href="#2-观察者模式">2. 观察者模式</a>
-          <ol>
-            <li><a href="#类比-13">类比</a></li>
-            <li><a href="#适用场景-11">适用场景</a></li>
-          </ol>
-        </li>
-        <li><a href="#3-模板方法模式">3. 模板方法模式</a>
-          <ol>
-            <li><a href="#类比-14">类比</a></li>
-            <li><a href="#小贴士">小贴士</a></li>
-            <li><a href="#适用场景-12">适用场景</a></li>
-          </ol>
-        </li>
-        <li><a href="#4-责任链模式">4. 责任链模式</a>
-          <ol>
-            <li><a href="#类比-15">类比</a></li>
-            <li><a href="#适用场景-13">适用场景</a></li>
-          </ol>
-        </li>
-        <li><a href="#5-状态模式">5. 状态模式</a>
-          <ol>
-            <li><a href="#类比-16">类比</a></li>
-            <li><a href="#适用场景-14">适用场景</a></li>
-            <li><a href="#小贴士-1">小贴士</a></li>
-          </ol>
-        </li>
-        <li><a href="#6-命令模式">6. 命令模式</a>
-          <ol>
-            <li><a href="#类比-17">类比</a></li>
-            <li><a href="#适用场景-15">适用场景</a></li>
-          </ol>
-        </li>
-        <li><a href="#7-迭代器模式">7. 迭代器模式</a>
-          <ol>
-            <li><a href="#类比-18">类比</a></li>
-            <li><a href="#适用场景-16">适用场景</a></li>
-          </ol>
-        </li>
-        <li><a href="#8-中介者模式">8. 中介者模式</a>
-          <ol>
-            <li><a href="#类比-19">类比</a></li>
-            <li><a href="#适用场景-17">适用场景</a></li>
-          </ol>
-        </li>
-        <li><a href="#9-备忘录模式">9. 备忘录模式</a>
-          <ol>
-            <li><a href="#类比-20">类比</a></li>
-            <li><a href="#适用场景-18">适用场景</a></li>
-          </ol>
-        </li>
-        <li><a href="#10-访问者模式">10. 访问者模式</a>
-          <ol>
-            <li><a href="#类比-21">类比</a></li>
-          </ol>
-        </li>
-        <li><a href="#11-解释器模式">11. 解释器模式</a>
-          <ol>
-            <li><a href="#类比-22">类比</a></li>
-            <li><a href="#适用场景-19">适用场景</a></li>
-          </ol>
-        </li>
-      </ol>
-    </li>
-  </ol>
-</nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
-
-            <main class="main full-width">
-    <article class="main-article">
-    <header class="article-header">
-
-    <div class="article-details">
-  
-  <header class="article-category">
-    
-    <a
-      href="/categories/ai/"
-      
-    >
-      AI
-    </a>
-    
-  </header>
-  
-
-  <div class="article-title-wrapper">
-    <h2 class="article-title">
-      <a href="/p/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%80%E6%AC%A1%E6%80%A7%E8%AE%B2%E6%98%8E%E7%99%BD/">23种设计模式，一次性讲明白</a>
-    </h2>
-
-    
-  </div>
-
-     
-  <footer class="article-time">
-    
-    <div style="display: flex; flex-direction: column; gap: 4px;font-size: 14px;">
-      
-      <div class="article-date" style="display: flex; align-items: center">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-        <span style="margin-left: 5px">发布于: </span>
-        <time
-          class="article-time--published"
-          datetime='2026-03-19T12:50:01Z'
-          style="margin-left: 5px"
-        >2026-03-19 12:50:01</time>
-      </div>
-
-      
-      
-    </div>
-
-    
-    <div
-      class="article-view"
-      style="align-items: center; gap: 5px; margin-left: auto; font-size: 14px;"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="icon icon-tabler icon-tabler-eye"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        stroke-width="2"
-        stroke="currentColor"
-        fill="none"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-        <circle cx="12" cy="12" r="2"></circle>
-        <path
-          d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s10 2.333 10 7"
-        ></path>
-      </svg>
-      <span id="vercount_container_page_pv">阅读
-        <span id="vercount_value_page_pv">...</span> 次
-      </span>
-    </div>
-  </footer>
-   
-</div>
-
-</header>
-
-    <section class="article-content">
-    
-    
-    <p>设计模式其实就是前辈们写代码踩了无数坑，总结出来的代码编写最佳实践，专门用来解决特定场景下的代码复用、解耦、扩展性问题。</p>
-<p>可以分为创建型模式、结构型模式、行为型模式三类。</p>
-<div class="table-wrapper"><table>
-	<thead>
-			<tr>
-					<th>分类</th>
-					<th>核心作用</th>
-					<th>包含的设计模式</th>
-					<th>数量</th>
-			</tr>
-	</thead>
-	<tbody>
-			<tr>
-					<td>创建型模式</td>
-					<td>解决对象怎么创建的问题，解耦对象的创建和使用</td>
-					<td>单例、工厂方法、抽象工厂、建造者、原型</td>
-					<td>5种</td>
-			</tr>
-			<tr>
-					<td>结构型模式</td>
-					<td>解决类/对象怎么组合的问题，不修改原有代码实现功能扩展</td>
-					<td>适配器、桥接、组合、装饰、外观、享元、代理</td>
-					<td>7种</td>
-			</tr>
-			<tr>
-					<td>行为型模式</td>
-					<td>解决类/对象之间怎么交互、职责怎么分配的问题，实现灵活的通信和流程控制</td>
-					<td>模板方法、命令、迭代器、观察者、中介者、备忘录、解释器、状态、策略、职责链、访问者</td>
-					<td>11种</td>
-			</tr>
-	</tbody>
-</table></div>
-<h2 id="记忆口诀">记忆口诀
-</h2><h3 id="创建型口诀5种"><strong>创建型口诀（5种）</strong>
-</h3><p><strong>单身汉在工厂抽象建原型</strong>。</p>
-<p>一个单身汉，在工厂里用抽象方法，建造了一个原型。</p>
-<h3 id="结构型口诀7种"><strong>结构型口诀（7种）</strong>
-</h3><p><strong>桥上代理卖装饰，组合适配享外观</strong>。</p>
-<p>桥上的代理商在卖装饰品，把零件组合适配好，让你享受精美外观。</p>
-<h3 id="行为型口诀11种"><strong>行为型口诀（11种）</strong>
-</h3><p><strong>访客观察定策略，模板迭代改状态，备忘命令交中介，解释责任一条链。</strong></p>
-<p>访客观察后定下策略，按模板迭代改变状态，把备忘录和命令交给中介，出了问题沿责任链逐一解释。</p>
-<h2 id="创建型模式">创建型模式
-</h2><p>不让你自己new对象，把对象创建的逻辑封装起来，和业务代码解耦。</p>
-<h3 id="1-单例模式">1. 单例模式
-</h3><p>整个系统里，这个类<strong>有且只有一个实例对象</strong>，不管你在哪获取，拿到的都是同一个东西。</p>
-<h4 id="类比">类比
-</h4><p>就像公司里只有一个 CEO，不管哪个部门找，对接的都是同一个人。</p>
-<h4 id="适用场景">适用场景
-</h4><p>Spring容器里的单例Bean、全局配置类、日志对象</p>
-<h4 id="代码示例">代码示例
-</h4><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Singleton</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 1. 私有构造方法：禁止外部new对象</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="nf">Singleton</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 2. 私有静态实例，volatile禁止指令重排</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">volatile</span><span class="w"> </span><span class="n">Singleton</span><span class="w"> </span><span class="n">instance</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 3. 公共静态方法，获取唯一实例</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Singleton</span><span class="w"> </span><span class="nf">getInstance</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 第一次校验：实例已存在就直接返回，不用抢锁</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">instance</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">// 加锁，保证线程安全</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="kd">synchronized</span><span class="w"> </span><span class="p">(</span><span class="n">Singleton</span><span class="p">.</span><span class="na">class</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="c1">// 第二次校验：防止多线程同时进入第一个if，重复创建</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">instance</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="n">instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Singleton</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">instance</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="2-工厂方法模式">2. 工厂方法模式
-</h3><p>定义一个创建对象的工厂接口，让子类决定创建哪个对象，把对象的创建延迟到子类。</p>
-<h4 id="类比-1">类比
-</h4><p>就像奶茶店是工厂接口，蜜雪冰城、喜茶是子类工厂，你去哪个店，就喝哪个店的奶茶，不用管奶茶是怎么做的。</p>
-<h4 id="适用场景-1">适用场景
-</h4><ul>
-<li>不知道要创建的对象具体类型，交给子类决定</li>
-<li>把对象创建和业务代码解耦</li>
-<li>Spring的FactoryBean</li>
-</ul>
-<h4 id="代码示例-1">代码示例
-</h4><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 1. 产品接口：奶茶</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">MilkTea</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">make</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="c1">// 2. 具体产品：蜜雪冰城奶茶</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MixueMilkTea</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">MilkTea</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Override</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">make</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;蜜雪冰城奶茶做好了！&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="3-抽象工厂模式">3. 抽象工厂模式
-</h3><p>工厂方法的升级版，一个工厂可以创建一系列相关的产品，而不是只创建一个。</p>
-<p>和工厂方法的区别是：</p>
-<p>工厂方法是单个产品，而抽象工厂是一套相关产品。</p>
-<h4 id="类比-2">类比
-</h4><p>就像蜜雪冰城不仅能做奶茶，还能做冰淇淋、圣代，一个工厂搞定同品牌的一系列产品。</p>
-<p>适用于需要创建一系列相关联的产品，而不是单个产品的场景（比如同一品牌的奶茶 + 冰淇淋 + 圣代）。</p>
-<h3 id="4-建造者模式">4. 建造者模式
-</h3><p>把一个复杂对象的创建和表示分离，一步一步构建出复杂对象，不用管内部组装细节。</p>
-<h4 id="类比-3">类比
-</h4><p>就像组装电脑，你只需要告诉装机店你要什么 CPU、显卡、内存，装机店帮你一步步组装好，不用你自己焊主板。</p>
-<h4 id="适用场景-2">适用场景
-</h4><ul>
-<li>复杂对象的创建，参数特别多（比如超过4个参数）</li>
-<li>Lombok的@Builder注解</li>
-</ul>
-<h4 id="代码示例-2">代码示例
-</h4><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span><span class="lnt">47
-</span><span class="lnt">48
-</span><span class="lnt">49
-</span><span class="lnt">50
-</span><span class="lnt">51
-</span><span class="lnt">52
-</span><span class="lnt">53
-</span><span class="lnt">54
-</span><span class="lnt">55
-</span><span class="lnt">56
-</span><span class="lnt">57
-</span><span class="lnt">58
-</span><span class="lnt">59
-</span><span class="lnt">60
-</span><span class="lnt">61
-</span><span class="lnt">62
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 电脑类（复杂对象）</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Computer</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">cpu</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">gpu</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">memory</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">storage</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 私有构造方法，只能通过Builder创建</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="nf">Computer</span><span class="p">(</span><span class="n">Builder</span><span class="w"> </span><span class="n">builder</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">cpu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="p">.</span><span class="na">cpu</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">gpu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="p">.</span><span class="na">gpu</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="p">.</span><span class="na">memory</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">storage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="p">.</span><span class="na">storage</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 建造者静态内部类</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Builder</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">cpu</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">gpu</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">memory</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">storage</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 链式调用设置参数</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">Builder</span><span class="w"> </span><span class="nf">cpu</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">cpu</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">cpu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cpu</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">Builder</span><span class="w"> </span><span class="nf">gpu</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">gpu</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">gpu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gpu</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">Builder</span><span class="w"> </span><span class="nf">memory</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">memory</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">memory</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">Builder</span><span class="w"> </span><span class="nf">storage</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">storage</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">storage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">storage</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 构建最终对象</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">Computer</span><span class="w"> </span><span class="nf">build</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Computer</span><span class="p">(</span><span class="k">this</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="c1">// 测试</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Test</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 链式调用，一步一步构建对象</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Computer</span><span class="w"> </span><span class="n">computer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Computer</span><span class="p">.</span><span class="na">Builder</span><span class="p">()</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">cpu</span><span class="p">(</span><span class="s">&#34;i7-14700K&#34;</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">gpu</span><span class="p">(</span><span class="s">&#34;RTX4070&#34;</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">memory</span><span class="p">(</span><span class="n">32</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">storage</span><span class="p">(</span><span class="n">1024</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">build</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="5-原型模式">5. 原型模式
-</h3><p>基于一个已有的对象，克隆出一个一模一样的新对象，不用重新new和初始化。</p>
-<h4 id="类比-4">类比
-</h4><p>就像打印机复印文件，不用重新手写一遍，直接复印一份一模一样的。</p>
-<h4 id="适用场景-3">适用场景
-</h4><ul>
-<li>对象创建成本很高（比如初始化要查数据库、调接口）</li>
-<li>想要和原对象一模一样的新对象，又不想重新初始化</li>
-<li>Spring的Bean的原型作用域</li>
-</ul>
-<h2 id="结构型模式">结构型模式
-</h2><p>不修改原有代码，通过类/对象的组合，实现功能扩展和灵活组装。</p>
-<h3 id="1-适配器模式">1. 适配器模式
-</h3><p>把一个不兼容的接口，转换成你想要的兼容接口，让两个不搭边的类能一起工作。</p>
-<h4 id="类比-5">类比
-</h4><p>就像 Type-C 转 3.5mm 耳机转接头，手机只有 Type-C 口，耳机是 3.5mm 口，转接头让它们能一起用。</p>
-<h4 id="适用场景-4">适用场景
-</h4><ul>
-<li>老系统接口复用，适配新的业务</li>
-<li>Spring MVC的HandlerAdapter</li>
-</ul>
-<h3 id="2-装饰器模式">2. 装饰器模式
-</h3><p>在不修改原有类的基础上，动态给对象添加新功能，比继承更灵活。</p>
-<h4 id="类比-6">类比
-</h4><p>就像买奶茶，基础款是纯茶，你可以加珍珠、加椰果、加奶盖，一层一层加功能，不用重新做一杯新奶茶。</p>
-<h4 id="适用场景-5">适用场景
-</h4><ul>
-<li>动态给对象添加/撤销功能，不想用继承搞出一堆子类</li>
-<li>Java IO流（FileInputStream + BufferedInputStream）</li>
-<li>Spring的TransactionProxyFactoryBean</li>
-</ul>
-<h3 id="3-代理模式">3. 代理模式
-</h3><p>给目标对象创建一个代理对象，通过代理对象控制对目标对象的访问，还能在不修改目标对象的前提下加额外功能。</p>
-<h4 id="类比-7">类比
-</h4><p>就像租房找中介，你不用直接对接房东，中介帮你搞定看房、签合同，还能帮你做背景调查。</p>
-<h4 id="适用场景-6">适用场景
-</h4><ul>
-<li>远程代理：RPC调用</li>
-<li>权限控制、日志记录、事务管理</li>
-<li>Spring AOP的动态代理</li>
-</ul>
-<h3 id="4-外观模式">4. 外观模式
-</h3><p>给复杂的子系统提供一个统一的高层入口，隐藏子系统的复杂细节，调用方只需要和这个入口交互就行。</p>
-<h4 id="类比-8">类比
-</h4><p>就像酒店前台，你不用管酒店的保洁、维修、餐饮、安保各个部门，有任何事找前台就行，前台帮你对接所有部门。</p>
-<h4 id="适用场景-7">适用场景
-</h4><ul>
-<li>复杂系统简化调用，封装底层细节</li>
-<li>Spring Boot的starter就是外观模式的思想</li>
-</ul>
-<h3 id="5-桥接模式">5. 桥接模式
-</h3><p>把抽象和实现分离，让它们可以独立变化，解决多维度变化导致的类爆炸问题。</p>
-<h4 id="类比-9">类比
-</h4><p>就像手机和手机壳，手机有苹果、华为、小米，手机壳有透明、硅胶、卡通，两个维度独立变化，不用为每个手机做一套专属手机壳。</p>
-<p>适用于类有多个独立变化的维度，用继承会导致子类数量爆炸的场景。</p>
-<h3 id="6-组合模式">6. 组合模式
-</h3><p>把对象组合成树形结构，用来表示<strong>整体-部分</strong>的层级关系，让调用方对单个对象和组合对象的使用是一致的。</p>
-<h4 id="类比-10">类比
-</h4><p>就像公司组织架构，总公司下面有分公司，分公司下面有部门，部门下面有员工，不管是总公司、分公司、部门还是员工，都可以统一用<strong>组织节点</strong>来表示。</p>
-<h4 id="适用场景-8">适用场景
-</h4><ul>
-<li>树形结构的数据，比如菜单、部门组织、文件目录</li>
-<li>想要统一处理单个对象和组合对象，不用区分是整体还是部分</li>
-</ul>
-<h3 id="7-享元模式">7. 享元模式
-</h3><p>共享细粒度的对象，减少对象创建的数量，节省内存，核心是复用对象。</p>
-<h4 id="类比-11">类比
-</h4><p>就像共享单车，不是每个人都买一辆新自行车，而是大家共享一批单车，用完还回去，别人继续用。</p>
-<h4 id="适用场景-9">适用场景
-</h4><ul>
-<li>Java的字符串常量池、Integer缓存池</li>
-<li>连接池、线程池（享元模式 + 单例模式的结合体）</li>
-</ul>
-<h2 id="行为型模式">行为型模式
-</h2><p>解决类和对象之间的通信、职责分配问题，让对象之间协作更灵活、职责更清晰。</p>
-<h3 id="1-策略模式">1. 策略模式
-</h3><p>定义一系列算法，把每个算法封装起来，让它们可以互相替换，算法的变化不会影响使用算法的用户。</p>
-<h4 id="类比-12">类比
-</h4><p>就像出行，你可以选骑自行车、坐地铁、开车、坐飞机，这些都是不同的出行策略，你可以根据目的地、预算随便换，不用改变你要出门的目标。</p>
-<h4 id="适用场景-10">适用场景
-</h4><ul>
-<li>一个业务有多种实现方式，需要动态切换</li>
-<li>想要避免大量的if-else/switch分支</li>
-<li>Spring的Resource接口、BeanNameGenerator</li>
-</ul>
-<h4 id="代码示例-3">代码示例
-</h4><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span><span class="lnt">47
-</span><span class="lnt">48
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 1. 策略接口：出行方式</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">TravelStrategy</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">travel</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="c1">// 2. 具体策略：坐地铁</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SubwayStrategy</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">TravelStrategy</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Override</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">travel</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;坐地铁出行，便宜又快&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="c1">// 3. 具体策略：开车</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CarStrategy</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">TravelStrategy</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Override</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">travel</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;开车出行，自由方便&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="c1">// 4. 用户</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Traveler</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">TravelStrategy</span><span class="w"> </span><span class="n">strategy</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 动态设置策略</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setStrategy</span><span class="p">(</span><span class="n">TravelStrategy</span><span class="w"> </span><span class="n">strategy</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">strategy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strategy</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 执行出行</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">goTravel</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">strategy</span><span class="p">.</span><span class="na">travel</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="c1">// 测试</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Test</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Traveler</span><span class="w"> </span><span class="n">traveler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Traveler</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 今天坐地铁</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">traveler</span><span class="p">.</span><span class="na">setStrategy</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SubwayStrategy</span><span class="p">());</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">traveler</span><span class="p">.</span><span class="na">goTravel</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 明天开车</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">traveler</span><span class="p">.</span><span class="na">setStrategy</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">CarStrategy</span><span class="p">());</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">traveler</span><span class="p">.</span><span class="na">goTravel</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="2-观察者模式">2. 观察者模式
-</h3><p>定义了对象之间一对多的依赖关系，当一个对象的状态发生变化时，所有依赖它的对象都会收到通知并自动更新。</p>
-<h4 id="类比-13">类比
-</h4><p>就像你关注了一个CSDN博主，博主更新博客了，所有关注他的粉丝都会收到推送通知。</p>
-<h4 id="适用场景-11">适用场景
-</h4><ul>
-<li>事件驱动、消息通知、发布订阅</li>
-<li>Spring的ApplicationEvent事件机制</li>
-<li>Java的EventListener</li>
-</ul>
-<h3 id="3-模板方法模式">3. 模板方法模式
-</h3><p>定义一个操作的算法骨架，把其中一些步骤延迟到子类实现，子类可以不改变算法骨架，就可以重定义特定步骤。</p>
-<h4 id="类比-14">类比
-</h4><p>就像煮奶茶，固定骨架是煮茶➡️加奶➡️加料➡️装杯，不同的奶茶只是加料、煮茶时间不一样，骨架永远不变。</p>
-<h4 id="小贴士">小贴士
-</h4><p>煮奶茶是模板方法模式，关注的是怎么做奶茶，而开奶茶店造奶茶是工厂方法模式，关注的是造什么奶茶。</p>
-<h4 id="适用场景-12">适用场景
-</h4><ul>
-<li>多个子类有公共的流程，只有个别步骤不同</li>
-<li>Spring的JdbcTemplate、RedisTemplate</li>
-<li>Spring MVC的HttpServlet</li>
-</ul>
-<h3 id="4-责任链模式">4. 责任链模式
-</h3><p>把请求的发送者和接收者解耦，让多个对象都有机会处理这个请求，把这些对象连成一条链，请求沿着链传递，直到有对象处理它为止。</p>
-<h4 id="类比-15">类比
-</h4><p>就像公司请假审批，1天以内组长批，3天以内经理批，7天以内总监批，超过7天老板批，你的请假申请沿着这个审批链传递，直到有人处理。</p>
-<h4 id="适用场景-13">适用场景
-</h4><ul>
-<li>一个请求需要多个对象依次处理</li>
-<li>Spring MVC的HandlerInterceptor拦截器链</li>
-<li>Servlet的Filter过滤器链</li>
-</ul>
-<h3 id="5-状态模式">5. 状态模式
-</h3><p>当一个对象的内部状态发生变化时，改变它的行为，看起来就像这个对象换了一个类。</p>
-<h4 id="类比-16">类比
-</h4><p>就像电梯，开门状态下只能关门，不能上下行；运行状态下只能停梯，不能开门；不同的状态，电梯的行为完全不一样。</p>
-<h4 id="适用场景-14">适用场景
-</h4><ul>
-<li>对象的行为由状态决定，运行时状态变化会改变行为</li>
-<li>代码里有大量和状态相关的if-else/switch分支</li>
-</ul>
-<h4 id="小贴士-1">小贴士
-</h4><p>状态模式和策略模式容易混淆，不过两者的区别是：</p>
-<ol>
-<li>状态模式是状态决定行为，对象的行为由当前状态决定；而策略模式是算法可替换，封装一系列平级算法，想换哪个换哪个。</li>
-<li>状态模式有明确的状态流转图，状态之间不能随便跳，必须按规则流转；策略模式没有流转关系，策略之间是平级的，想换就换。</li>
-<li>状态模式关注的是对象状态的变化以及状态变化带来的行为变化；策略模式关注的是算法的选择和替换，不关心算法之间的关系。</li>
-</ol>
-<p>扯了那么多官话，好像没多大用，举个例子套一下大概就是：</p>
-<p>比如电梯是状态模式，开门、上下行、关门有明确的流转规则；</p>
-<p>而出行是策略模式，骑自行车、坐地铁、开车是平级的，想换就换。</p>
-<h3 id="6-命令模式">6. 命令模式
-</h3><p>把一个请求封装成一个命令对象，让你可以用不同的请求参数化对象，支持请求排队、撤销、重做。</p>
-<h4 id="类比-17">类比
-</h4><p>就像餐厅点餐，你点的菜就是一个命令，服务员把命令传给后厨，后厨执行，你不用管后厨是谁、怎么做的，还能随时加菜、退菜。</p>
-<h4 id="适用场景-15">适用场景
-</h4><ul>
-<li>Spring 的 JmsTemplate（JMS 消息队列）和 RabbitTemplate（RabbitMQ 消息队列）</li>
-</ul>
-<h3 id="7-迭代器模式">7. 迭代器模式
-</h3><p>提供一种统一的方式，遍历一个集合对象里的所有元素，不用暴露集合的内部结构。</p>
-<h4 id="类比-18">类比
-</h4><p>就像景区观光车，不管景区里的景点是怎么分布的，你坐观光车就能一个一个逛完所有景点，不用管景区内部的路线设计。</p>
-<h4 id="适用场景-16">适用场景
-</h4><ul>
-<li>Java的Iterator接口、增强for循环</li>
-<li>Spring的CompositeIterator</li>
-</ul>
-<h3 id="8-中介者模式">8. 中介者模式
-</h3><p>用一个中介对象封装一系列对象的交互，让对象之间不用直接互相引用，解耦对象之间的复杂依赖，只和中介者交互。</p>
-<h4 id="类比-19">类比
-</h4><p>就像机场塔台，所有飞机不用互相沟通，只需要和塔台沟通，塔台统一调度，避免撞机。</p>
-<h4 id="适用场景-17">适用场景
-</h4><ul>
-<li>想要解耦多个对象的交互，减少耦合</li>
-<li>Spring MVC的DispatcherServlet，就是前端控制器中介者</li>
-</ul>
-<h3 id="9-备忘录模式">9. 备忘录模式
-</h3><p>在不破坏封装的前提下，捕获一个对象的内部状态，并保存下来，之后可以恢复到这个状态。</p>
-<h4 id="类比-20">类比
-</h4><p>就像游戏存档，你打BOSS之前存个档，打输了可以读档回到存档时的状态，不用重新从头玩。</p>
-<h4 id="适用场景-18">适用场景
-</h4><ul>
-<li>撤销、回滚操作</li>
-<li>数据库的事务回滚</li>
-<li>IDE的撤销操作</li>
-</ul>
-<h3 id="10-访问者模式">10. 访问者模式
-</h3><p>在不修改数据结构的前提下，定义对数据结构中元素的新操作，把数据结构和操作分离。</p>
-<h4 id="类比-21">类比
-</h4><p>比如电商订单系统，数据结构是固定的订单和订单明细，操作是经常变化的计算总价、打印发票、生成物流单、发送短信通知。不用修改订单 / 订单明细的代码，只要新增一个访问者（比如生成电子发票），就能给订单增加新操作。</p>
-<p>适用于想要给数据结构里的元素增加新操作，又不想修改数据结构的场景。</p>
-<h3 id="11-解释器模式">11. 解释器模式
-</h3><p>给定一个语言，定义它的语法规则，然后定义一个解释器，用这个解释器来解释语言中的句子。</p>
-<h4 id="类比-22">类比
-</h4><p>就像翻译官，你说中文，翻译官根据中英文的语法规则，把你的话翻译成英文。</p>
-<h4 id="适用场景-19">适用场景
-</h4><ul>
-<li>SQL解析、正则表达式解析</li>
-<li>Spring的SpEL表达式</li>
-</ul>
-
-</section>
-
-
-    <footer class="article-footer">
-    
-    <section class="article-tags">
-        
-            <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
-        
-            <a href="/tags/java/">Java</a>
-        
-            <a href="/tags/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/">开发语言</a>
-        
-    </section>
-
-
-    
-    <section class="article-copyright">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="12" r="9" />
-  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
-</svg>
-
-
-
-        <span>本文由 <a class="link" href="https://iamxurulin.blog.csdn.net/"  target="_blank" rel="noopener"
-    >iamxurulin</a> 原创发布，转载请保留原文链接。</span>
-    </section>
-    <section class="article-lastmod">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="12" r="9" />
-  <polyline points="12 7 12 12 15 15" />
-</svg>
-
-
-
-        <span>
-            最后更新于 2026-06-21 18:19:43
-        </span>
-    </section><section class="article-original-declaration">
-        <div class="declaration-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
-  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
-</svg>
-
-
-</div>
-        <div class="declaration-content">
-            <strong>关于作者与文章</strong>
-            <p>本文为 <a href="https://github.com/iamxurulin" target="_blank" rel="noopener">iamxurulin</a> 原创技术文章，同步发布于 <a href="https://iamxurulin.blog.csdn.net/" target="_blank" rel="noopener">CSDN 博客</a> 与本站。两处内容完全一致，均由作者本人维护更新。如对内容有疑问或建议，欢迎在评论区交流讨论。</p>
-        </div>
-    </section>
-</footer>
-
-<style>
-.article-original-declaration {
-    margin-top: 2rem;
-    padding: 1.2rem 1.5rem;
-    background: var(--card-background);
-    border: 1px solid var(--card-border-color);
-    border-radius: var(--card-border-radius);
-    display: flex;
-    gap: 0.8rem;
-    font-size: 0.9rem;
-    line-height: 1.7;
-    color: var(--card-text-color-secondary);
-}
-.article-original-declaration .declaration-icon {
-    flex-shrink: 0;
-    width: 20px;
-    height: 20px;
-    margin-top: 2px;
-    color: var(--accent-color);
-}
-.article-original-declaration .declaration-content {
-    flex: 1;
-}
-.article-original-declaration strong {
-    display: block;
-    margin-bottom: 0.3rem;
-    color: var(--card-text-color-main);
-    font-size: 0.95rem;
-}
-.article-original-declaration p {
-    margin: 0.3rem 0;
-}
-.article-original-declaration a {
-    color: var(--accent-color);
-    text-decoration: none;
-}
-.article-original-declaration a:hover {
-    text-decoration: underline;
-}
-</style>
-
-    
-        <link 
-                rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
-            ><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
-                defer
-                >
-            </script><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
-                defer
-                >
-            </script><script>
-    window.addEventListener("DOMContentLoaded", () => {
-        const elementsToRender = [".main-article", ".widget--toc"];
-
-        elementsToRender.forEach(selector => {
-            const element = document.querySelector(selector);
-            if (element) {
-                renderMathInElement(element, {
-                    delimiters: [
-                        { left: "$$", right: "$$", display: true },
-                        { left: "$", right: "$", display: false },
-                        { left: "\\(", right: "\\)", display: false },
-                        { left: "\\[", right: "\\]", display: true }
-                    ],
-                    ignoredClasses: ["gist"]
-                });
-            }
-        });
-    });
-</script>
-    
-</article>
-
-    
-
-    
-
-<aside class="related-content--wrapper">
-    <h2 class="section-title">相关文章</h2>
-    <div class="related-content">
-        <div class="flex article-list--tile">
-            
-                
-<article class="">
-    <a href="/p/%E9%9D%A2%E8%AF%95%E5%AE%98string%E6%98%AF%E5%9F%BA%E7%A1%80%E7%B1%BB%E5%9E%8B%E5%90%97object%E6%9C%89%E5%93%AA%E4%BA%9B%E9%80%9A%E7%94%A8%E6%96%B9%E6%B3%95/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">面试官：String是基础类型吗？Object有哪些通用方法？</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/java%E7%BA%BF%E7%A8%8B%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">Java线程与操作系统线程的生命周期</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98%E6%8B%86%E8%A7%A3java%E9%94%81%E6%9C%BA%E5%88%B6synchronizedreentrantlock%E9%94%81%E5%8D%87%E7%BA%A7%E5%8F%AF%E9%87%8D%E5%85%A5%E9%94%81/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">【面试真题拆解】Java锁机制：synchronized、ReentrantLock、锁升级、可重入锁</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/%E4%B8%80%E7%AF%87%E6%90%9E%E6%87%82langchain4j%E7%BB%93%E6%9E%84%E5%8C%96%E8%BE%93%E5%87%BAtokenstreamssefluxreactor%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">一篇搞懂：LangChain4j结构化输出、TokenStream、SSE、Flux、Reactor到底是什么？</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98%E6%8B%86%E8%A7%A3java%E9%87%8C%E9%9D%A2%E7%9A%84%E7%BA%BF%E7%A8%8B%E6%B1%A0%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%E5%8F%82%E6%95%B0/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">【面试真题拆解】Java里面的线程池都有哪些参数？</h2>
-        </div>
-    </a>
-</article>
-
-            
-        </div>
-    </div>
-</aside>
-
-     
-    
-        
-    
-<div id="giscus-container" class="giscus-container"></div>
-
-<script>
-(function() {
-    function reloadGiscus() {
-        const container = document.getElementById('giscus-container');
-        if (!container) return;
-
-        container.innerHTML = '';
-
-        const script = document.createElement('script');
-        script.src = "https://giscus.app/client.js";
-
-        script.setAttribute("data-repo", "iamxurulin/iamxurulin.github.io");
-        script.setAttribute("data-repo-id", "R_kgDOQ4sEwg");
-        script.setAttribute("data-category", "Announcements");
-        script.setAttribute("data-category-id", "DIC_kwDOQ4sEws4C1Yw9");
-        script.setAttribute("data-mapping", "title");
-        script.setAttribute("data-strict", "0");
-        script.setAttribute("data-reactions-enabled", "1");
-        script.setAttribute("data-emit-metadata", "0");
-        script.setAttribute("data-input-position", "top");
-        script.setAttribute("data-lang", "zh-CN");
-        script.setAttribute("crossorigin", "anonymous");
-        script.async = true;
-        script.setAttribute("data-theme", "transparent_dark");
-
-        container.appendChild(script);
-    }
-
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', reloadGiscus);
-    } else {
-        reloadGiscus();
-    }
-
-    
-    if (!window._giscusPjaxBound) {
-        window._giscusPjaxBound = true;
-        document.addEventListener('pjax:complete', function() {
-            setTimeout(reloadGiscus, 50);
-        });
-    }
-})();
-</script>
-
-<style>
-     
-    #giscus-container {
-        min-height: 150px;
-        width: 100%;
-        margin-top: 2rem;
-        
-         
-        background: rgba(30, 30, 30, 0.8) !important;
-        
-         
-         
-        
-         
-        border-radius: 15px;
-        padding: 20px;
-        box-sizing: border-box;
-        
-         
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 4px 15px rgba(0,0,0, 0.2);
-    }
-</style>
-
-    
-
-    <footer class="site-footer">
-    <section class="copyright">
-        &copy; 
-        
-            2025 - 
-        
-        2026 iamxurulin
-    </section>
-    
-    <section class="powerby">
-        
-            Coder_Studio - 记录后端开发、算法与 AI 的成长之路 <br/>
-        
-
-    </section>
-</footer>
-
-
-    
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-
-    
-    <div class="pswp__bg"></div>
-
-    
-    <div class="pswp__scroll-wrap">
-
-        
-        <div class="pswp__container">
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-        </div>
-
-        
-        <div class="pswp__ui pswp__ui--hidden">
-
-            <div class="pswp__top-bar">
-
-                
-
-                <div class="pswp__counter"></div>
-
-                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-
-                <button class="pswp__button pswp__button--share" title="Share"></button>
-
-                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-
-                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-
-                
-                
-                <div class="pswp__preloader">
-                    <div class="pswp__preloader__icn">
-                        <div class="pswp__preloader__cut">
-                            <div class="pswp__preloader__donut"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                <div class="pswp__share-tooltip"></div>
-            </div>
-
-            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-            </button>
-
-            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-            </button>
-
-            <div class="pswp__caption">
-                <div class="pswp__caption__center"></div>
-            </div>
-
-        </div>
-
-    </div>
-
-</div><script 
-                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
-                defer
-                >
-            </script><script 
-                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
-                defer
-                >
-            </script><link 
-                rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
-            ><link 
-                rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
-            >
-    
-
-            </main>
-        </div>
-        <script 
-                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
-                
-                >
-            </script><script type="text/javascript" src="/ts/main.b4654cd74006fe7475d7723cd7373672b5ea2035ab23404eb9ff511cb27b581c.js" defer></script><script type="text/javascript" src="/ts/custom.d06f31744de6062060249fb2de5a784912bfa25d124b9b3d97c1f1281811a258.js" defer></script>
-<script>
-    (function () {
-        const customFont = document.createElement('link');
-        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
-
-        customFont.type = "text/css";
-        customFont.rel = "stylesheet";
-
-        document.head.appendChild(customFont);
-    }());
-</script>
-
-<div id="aplayer"></div>
-<script>
-window._aplayerInit = function() {
-    const apScript = document.createElement('script');
-    apScript.src = 'https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js';
-    apScript.onload = function() {
-        const ap = new APlayer({
-            container: document.getElementById('aplayer'),
-            fixed: true,
-            lrcType: 3,
-            audio: [
-                
-                {
-                    name: '远行',
-                    artist: '大青山',
-                    url: '\/music\/大青山-远行.mp3',
-                    cover: '\/music\/cover.jpg',
-                    lrc: '\/music\/大青山-远行-歌词.lrc'
-                }
-                
-            ]
-        });
-
-        window.onbeforeunload = () => {
-            const playInfo = {
-                index: ap.list.index,
-                currentTime: ap.audio.currentTime,
-                paused: ap.paused
-            };
-            localStorage.setItem("playInfo", JSON.stringify(playInfo));
-        };
-
-        const playInfo = JSON.parse(localStorage.getItem("playInfo"));
-        if (playInfo) {
-            ap.list.switch(playInfo.index);
-            setTimeout(() => {
-                ap.seek(playInfo.currentTime);
-                if (!playInfo.paused) ap.play();
-            }, 500);
-        }
-    };
-    document.head.appendChild(apScript);
-};
-
-if (window.requestIdleCallback) {
-    requestIdleCallback(window._aplayerInit, { timeout: 3000 });
-} else {
-    setTimeout(window._aplayerInit, 2000);
-}
-</script>
-<script>
-(function() {
-    var PJAX_CDN = 'https://cdn.jsdelivr.net/npm/pjax/pjax.min.js';
-    var PJAX_FALLBACK = 'https://unpkg.com/pjax/pjax.min.js';
-    
-    var TOPBAR_URL = 'https:\/\/iamxurulin.github.io\/js\/topbar.min.js';
-    
-
-    function loadJs(url, timeout) {
-        return new Promise(function(resolve, reject) {
-            var done = false;
-            var s = document.createElement('script');
-            s.src = url;
-            s.async = true;
-            function finish(err) {
-                if (done) return;
-                done = true;
-                s.onload = s.onerror = null;
-                clearTimeout(timer);
-                if (err) reject(err); else resolve();
-            }
-            s.onload = function() { finish(null); };
-            s.onerror = function() { finish(new Error('HTTP error: ' + url)); };
-            var timer = timeout ? setTimeout(function() { finish(new Error('Timeout: ' + url)); }, timeout) : null;
-            document.head.appendChild(s);
-        });
-    }
-
-    function loadPjax(cdnUrl) {
-        return loadJs(cdnUrl, 10000).catch(function() {
-            
-            if (cdnUrl === PJAX_CDN) return loadPjax(PJAX_FALLBACK);
-            throw new Error('All PJAX CDNs failed');
-        });
-    }
-
-    var scripts = [loadPjax(PJAX_CDN)];
-    if (TOPBAR_URL) scripts.push(loadJs(TOPBAR_URL, 8000));
-
-    Promise.all(scripts).then(function() {
-        var pjax = new Pjax({ selectors: ['.main-container'] });
-
-        pjax._handleResponse = pjax.handleResponse;
-        pjax.handleResponse = function(responseText, request, href, options) {
-            if (request.responseText.match('<html')) {
-                if (responseText) {
-                    var newDom = new DOMParser().parseFromString(responseText, 'text/html');
-                    document.body.setAttribute('class', newDom.body.className);
-                    var t = newDom.title;
-                    if (t) document.title = t;
-                }
-            }
-            pjax._handleResponse(responseText, request, href, options);
-        };
-
-        if (typeof topbar !== 'undefined') {
-            topbar.config({ barColors: { '0': 'rgba(255,255,255,1)', '1.0': 'rgba(0,149,234,1)' } });
-        }
-
-        document.addEventListener('pjax:send', function() {
-            if (typeof topbar !== 'undefined') topbar.show();
-        });
-        document.addEventListener('pjax:complete', function() {
-            window.Stack && window.Stack.init();
-            if (typeof topbar !== 'undefined') topbar.hide();
-        });
-    }).catch(function(err) {
-        console.warn('PJAX 未加载，使用普通导航:', err.message);
-    });
-})();
-</script>
-<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --base-font-family: 'Fira Code', monospace;
-    --code-font-family: 'Fira Code', monospace;
-  }
-</style>
-<style>
-    #TableOfContents > ul, ol {
-        ul, ol {
-            display: none;
-        }
-        .open {
-            display: block;
-        }
-    }
-</style>
-
-<script>
-    function initTocHide() {
-        
-        let toc = document.querySelector(".widget--toc");
-        if (!toc) {
-            return;
-        }
-        
-        window.addEventListener('scroll', function() {
-            
-            let openUl = document.querySelectorAll(".open");
-            if (openUl.length > 0) {
-              openUl.forEach((ul) => {
-                ul.classList.remove("open")
-              })
-            }
-            
-            let currentLi = document.querySelector(".active-class");
-            if (!currentLi) {
-                return
-            }
-            
-            if (currentLi.children.length > 1) {
-                currentLi.children[1].classList.add("open")
-            }
-            
-            let ul = currentLi.parentElement;
-            do {
-                ul.classList.add("open");
-                ul = ul.parentElement.parentElement
-            } while (ul !== undefined && (ul.localName === 'ul' || ul.localName === 'ol'))
-        });
-    }
-    initTocHide()
-</script>
-
-<style>
-    #backTopBtn {
-        display: none;
-        position: fixed;
-        bottom: 20px;
-        z-index: 99;
-        cursor: pointer;
-        width: 20px;
-        height: 20px;
-        background-image: url(https://iamxurulin.github.io/icons/backTop.svg);
-    }
-</style>
-
-<script>
-    
-
-    function initScrollTop() {
-        let rightSideBar = document.querySelector(".right-sidebar");
-        if (!rightSideBar) {
-            return;
-        }
-        
-        let btn = document.createElement("div");
-        btn.id = "backTopBtn";
-        btn.onclick = backToTop
-        rightSideBar.appendChild(btn)
-        
-        window.addEventListener('scroll', function() {
-            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-                btn.style.display = "block";
-            } else {
-                btn.style.display = "none";
-            }
-        }, { passive: true });
-    }
-
-    
-
-    function backToTop(){
-        window.scrollTo({ top: 0, behavior: "smooth" })
-    }
-
-    initScrollTop();
-</script>
-
-<style>
-    .highlight {
-         
-        max-height: 400px;
-        overflow: hidden;
-    }
-
-    .code-show {
-        max-height: none !important;
-    }
-
-    .code-more-box {
-        width: 100%;
-        padding-top: 78px;
-        background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0)), to(#fff));
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 1;
-    }
-
-    .code-more-btn {
-        display: block;
-        margin: auto;
-        width: 44px;
-        height: 22px;
-        background: #f0f0f5;
-        border-top-left-radius: 8px;
-        border-top-right-radius: 8px;
-        padding-top: 6px;
-        cursor: pointer;
-    }
-
-    .code-more-img {
-        cursor: pointer !important;
-        display: block;
-        margin: auto;
-        width: 22px;
-        height: 16px;
-    }
-</style>
-
-<style>
-    .highlight {
-        max-height: 400px;
-        overflow: hidden;
-        position: relative;  
-    }
-
-    .code-show {
-        max-height: none !important;
-    }
-
-    .code-more-box {
-        width: 100%;
-        padding-top: 78px;
-        background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0)), to(#fff));
-        background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 1;
-        pointer-events: none;  
-    }
-
-    .code-more-btn {
-        pointer-events: auto;  
-        display: block;
-        margin: auto;
-        width: 44px;
-        height: 22px;
-        background: var(--card-background);
-        border-top-left-radius: 8px;
-        border-top-right-radius: 8px;
-        padding-top: 6px;
-        cursor: pointer;
-        box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-    }
-
-    .code-more-img {
-        display: block;
-        margin: auto;
-        width: 22px;
-        height: 16px;
-    }
-
-     
-    [data-scheme="dark"] .code-more-box {
-        background-image: linear-gradient(to bottom, rgba(30,30,40,0), #1e1e28);
-    }
-    [data-scheme="dark"] .code-more-btn {
-        background: var(--card-background);
-    }
-</style>
-
-<script>
-  function initCodeMoreBox() {
-    const codeBlocks = document.querySelectorAll(".highlight:not(.code-inited)");
-    
-    codeBlocks.forEach(codeBlock => {
-      
-      codeBlock.classList.add("code-inited");
-
-      
-      if (codeBlock.scrollHeight <= codeBlock.clientHeight + 5) { 
-        return;
-      }
-
-      
-      const codeMoreBox = document.createElement('div');
-      codeMoreBox.classList.add('code-more-box');
-
-      const codeMoreBtn = document.createElement('span');
-      codeMoreBtn.classList.add('code-more-btn');
-      codeMoreBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        codeBlock.classList.add('code-show');
-        codeMoreBox.style.display = 'none';
-        
-        window.dispatchEvent(new Event('resize'));
-      });
-
-      const img = document.createElement('img');
-      img.classList.add('code-more-img');
-      img.src = "https://iamxurulin.github.io/icons/codeMore.png";
-      img.alt = "展开代码";
-
-      codeMoreBtn.appendChild(img);
-      codeMoreBox.appendChild(codeMoreBtn);
-      codeBlock.appendChild(codeMoreBox);
-    });
-  }
-
-  
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initCodeMoreBox);
-  } else {
-    initCodeMoreBox();
-  }
-
-  
-  document.addEventListener('pjax:complete', initCodeMoreBox);
-  document.addEventListener('swup:contentReplaced', initCodeMoreBox); 
-  window.addEventListener('popstate', initCodeMoreBox); 
-
-  
-  const observer = new MutationObserver((mutations) => {
-    let shouldRun = false;
-    mutations.forEach(mutation => {
-      if (mutation.addedNodes.length) {
-        shouldRun = true;
-      }
-    });
-    if (shouldRun) {
-      
-      setTimeout(initCodeMoreBox, 100);
-    }
-  });
-
-  observer.observe(document.body, {
-    childList: true,
-    subtree: true
-  });
-</script>
-<style>
-  body {
-    background: url(https://iamxurulin.github.io/background/wallhaven-qr27rq.jpg) no-repeat center top;
-    background-size: cover;
-    background-attachment: fixed;
-  }
-</style>
-
-
-<script>
-window._sakuraInit = function() {
-    const s = document.createElement('script');
-    s.src = 'https:\/\/iamxurulin.github.io\/background\/sakura.js';
-    document.body.appendChild(s);
-};
-if (window.requestIdleCallback) {
-    requestIdleCallback(window._sakuraInit, { timeout: 4000 });
-} else {
-    setTimeout(window._sakuraInit, 2000);
-}
-</script>
-
-<div id="particles-js"></div>
-<script>
-window._particlesInit = function() {
-    const s = document.createElement('script');
-    s.src = 'https:\/\/iamxurulin.github.io\/background\/particles.min.js';
-    s.onload = function() {
-        if (window.particlesJS) {
-            particlesJS.load('particles-js', 'https:\/\/iamxurulin.github.io\/background\/particlesjs-config.json',
-                function() { console.log('particles.js loaded'); }
-            );
-        }
-    };
-    document.body.appendChild(s);
-};
-if (window.requestIdleCallback) {
-    requestIdleCallback(window._particlesInit, { timeout: 5000 });
-} else {
-    setTimeout(window._particlesInit, 3000);
-}
-</script>
-<style>
-#particles-js {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: -1;
-}
-</style>
-<script>
-
-window._live2dInit = function() {
-    const cdnPath = "https://cdn.jsdelivr.net/gh/iamxurulin/live2d-widget-v3@v1.0.2";
-    const config = {
-        path: {
-            homePath: "/",
-            modelPath: cdnPath + "/Resources/",
-            tipsJsPath: "https://iamxurulin.github.io/waifu/waifu-tips.js",
-            live2dCorePath: cdnPath + "/Core/live2dcubismcore.js",
-            live2dSdkPath: cdnPath + "/live2d-sdk.js",
-            cssPath: "https://iamxurulin.github.io/waifu/waifu.css",
-            tipsJsonPath: "https://iamxurulin.github.io/waifu/waifu-tips.json"
-        },
-        tools: ["hitokoto", "asteroids", "express", "photo", "info", "quit"],
-        drag: { enable: true, direction: ["x", "y"] }
-    };
-
-    const css = document.createElement('link');
-    css.rel = 'stylesheet';
-    css.href = config.path.cssPath;
-    document.head.appendChild(css);
-
-    function loadScript(url) {
-        return new Promise((resolve, reject) => {
-            const s = document.createElement('script');
-            s.src = url;
-            s.async = true;
-            s.onload = () => resolve(url);
-            s.onerror = () => reject(new Error('Failed to load ' + url));
-            document.head.appendChild(s);
-        });
-    }
-
-    loadScript(config.path.live2dCorePath)
-        .then(() => loadScript(config.path.live2dSdkPath))
-        .then(() => loadScript(config.path.tipsJsPath))
-        .then(() => {
-            localStorage.setItem("modelId", "0");
-            localStorage.setItem("modelTexturesId", "0");
-            initWidget({
-                waifuPath: config.path.tipsJsonPath,
-                cdnPath: config.path.modelPath,
-                tools: config.tools,
-                dragEnable: config.drag.enable,
-                dragDirection: config.drag.direction,
-            });
-        })
-        .catch(e => console.warn('Live2D load failed:', e));
-};
-
-if (screen.width >= 768) {
-    if (window.requestIdleCallback) {
-        requestIdleCallback(window._live2dInit, { timeout: 6000 });
-    } else {
-        setTimeout(window._live2dInit, 4000);
-    }
-}
-</script>
-<script>
-
-(function() {
-    var VERCOUNT_JS = 'https://cn.vercount.one/js';
-
-    function injectVercount() {
-        
-        var old = document.querySelectorAll('script[data-vercount-loader]');
-        for (var i = 0; i < old.length; i++) {
-            old[i].remove();
-        }
-
-        var s = document.createElement('script');
-        s.src = VERCOUNT_JS;
-        s.setAttribute('data-vercount-loader', 'true');
-        s.async = true;
-        document.head.appendChild(s);
-    }
-
-    
-    injectVercount();
-
-    
-    if (!window._vercountPjaxBound) {
-        window._vercountPjaxBound = true;
-        document.addEventListener('pjax:complete', function() {
-            
-            setTimeout(injectVercount, 300);
-        });
-    }
-})();
-</script>
-
-
-    </body>
-</html>
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="设计模式其实就是前辈们写代码踩了无数坑，总结出来的代码编写最佳实践，专门用来解决特定场景下的代码复用、解耦、扩展性问题。\n可以分为创建型模式、结构型模式、行为型模式三类。\n"><title>23种设计模式，一次性讲明白</title><link rel=canonical href=https://iamxurulin.github.io/p/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%80%E6%AC%A1%E6%80%A7%E8%AE%B2%E6%98%8E%E7%99%BD/><link rel=stylesheet href=/scss/style.min.6e9c513e2b18fb90ba80ef8f1310b1122153a8397e5271e51b034f6a1f7377f5.css><meta property='og:title' content="23种设计模式，一次性讲明白"><meta property='og:description' content="设计模式其实就是前辈们写代码踩了无数坑，总结出来的代码编写最佳实践，专门用来解决特定场景下的代码复用、解耦、扩展性问题。\n可以分为创建型模式、结构型模式、行为型模式三类。\n"><meta property='og:url' content='https://iamxurulin.github.io/p/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%80%E6%AC%A1%E6%80%A7%E8%AE%B2%E6%98%8E%E7%99%BD/'><meta property='og:site_name' content='Coder_Studio'><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='设计模式'><meta property='article:tag' content='java'><meta property='article:tag' content='开发语言'><meta property='article:published_time' content='2026-03-19T12:50:01+00:00'><meta property='article:modified_time' content='2026-06-22T01:21:00+00:00'><meta name=twitter:title content="23种设计模式，一次性讲明白"><meta name=twitter:description content="设计模式其实就是前辈们写代码踩了无数坑，总结出来的代码编写最佳实践，专门用来解决特定场景下的代码复用、解耦、扩展性问题。\n可以分为创建型模式、结构型模式、行为型模式三类。\n"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5123323391207523" crossorigin=anonymous></script><link rel="shortcut icon" href=/favicon.ico><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preconnect href=https://cdn.jsdelivr.net><link rel=dns-prefetch href=https://cdn.jsdelivr.net><div class=loading><div class=liquid-loader><div class=loading-text>Loading<span class=dot>.</span><span class=dot>.</span><span class=dot>.</span></div><div class=loader-track><div class=liquid-fill></div></div></div></div><style>.loading{position:fixed;display:none;justify-content:center;align-items:center;top:0;left:0;width:100%;height:100%;z-index:9999;background-color:#f5f5fa;transition:all .3s ease}.liquid-loader{display:flex;flex-direction:column;align-items:center;gap:15px;padding:20px;font-family:system-ui,sans-serif}.loader-track{position:relative;width:180px;height:32px;background:linear-gradient(135deg,#2a2a2a,#1a1a1a);border-radius:16px;overflow:hidden;box-shadow:inset 0 2px 4px rgba(0,0,0,.6),0 1px 3px rgba(255,255,255,.1)}.liquid-fill{position:absolute;top:2px;left:2px;height:calc(100% - 4px);background:linear-gradient(90deg,#4f46e5,#7c3aed,#ec4899,#f59e0b);border-radius:14px;animation:fillProgress 4s ease-out infinite,colorShift 3s linear infinite;box-shadow:0 0 12px rgba(124,58,237,.4),inset 0 1px 2px rgba(255,255,255,.2)}.animated-stop{animation-play-state:paused!important;-webkit-animation-play-state:paused!important}.loading-text{color:#fff;font-size:18px;font-weight:600;letter-spacing:1px;animation:textGlow 1s ease-in-out infinite}.dot{margin-left:3px;animation:blink 1.5s infinite}.dot:nth-of-type(1){animation-delay:0s}.dot:nth-of-type(2){animation-delay:.3s}.dot:nth-of-type(3){animation-delay:.6s}@keyframes fillProgress{0%{width:4px}25%{width:25%}50%{width:50%}75%{width:75%}100%{width:calc(100% - 4px)}}@keyframes colorShift{0%{filter:hue-rotate(0)brightness(1)}33%{filter:hue-rotate(120deg)brightness(1.1)}66%{filter:hue-rotate(240deg)brightness(.9)}100%{filter:hue-rotate(360deg)brightness(1)}}@keyframes textGlow{0%,100%{opacity:.7;text-shadow:0 0 8px rgba(139,92,246,.3)}50%{opacity:1;text-shadow:0 0 16px rgba(139,92,246,.6)}}@keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}@keyframes scaleAndFadeout{0%{transform:scale(1);opacity:1}100%{transform:scale(1.2);opacity:0}}.scaleAndFadeout{animation:scaleAndFadeout 1.5s ease-out forwards!important}.article-view{display:flex}.article-list .article-view{display:none!important}</style><script>function initLoading(){const e=!sessionStorage.getItem("visited");if(e){const e=document.querySelector(".loading"),t=document.querySelector(".liquid-fill");e.style.display="flex",setTimeout(()=>{loadFinish(e,t),setTimeout(()=>{e.style.display="none"},1500),sessionStorage.setItem("visited","true")},4e3)}}function loadFinish(e,t){t.classList.add("animated-stop"),e.classList.add("scaleAndFadeout")}initLoading()</script></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hu_5b4689d2dc4cdce3.png width=300 height=300 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>💦</span></figure><div class=site-meta><h1 class=site-name><a href=/>Coder_Studio</a></h1><h2 class=site-description>专注后端开发、算法与 AI 的技术博客</h2></div></header><ol class=menu-social><li><a href=https://github.com/iamxurulin/ target=_blank title=GitHub rel=me><svg class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>主页</span></a></li><li><a href=/search/><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>搜索</span></a></li><li><a href=/categories/><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg>
+<span>分类</span></a></li><li><a href=/tags/><svg class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11 3l9 9a1.5 1.5.0 010 2l-6 6a1.5 1.5.0 01-2 0L3 11V7a4 4 0 014-4h4"/><circle cx="9" cy="9" r="2"/></svg>
+<span>标签</span></a></li><li><a href=/archives/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>归档</span></a></li><li><a href=/%E5%85%B3%E4%BA%8E/><svg class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
+<span>关于</span></a></li><li><a href=/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/><svg class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
+<span>友情链接</span></a></li><li><a href=/%E9%9A%90%E7%A7%81%E6%94%BF%E7%AD%96/><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>隐私政策</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>暗色模式</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#记忆口诀>记忆口诀</a><ol><li><a href=#创建型口诀5种><strong>创建型口诀（5种）</strong></a></li><li><a href=#结构型口诀7种><strong>结构型口诀（7种）</strong></a></li><li><a href=#行为型口诀11种><strong>行为型口诀（11种）</strong></a></li></ol></li><li><a href=#创建型模式>创建型模式</a><ol><li><a href=#1-单例模式>1. 单例模式</a><ol><li><a href=#类比>类比</a></li><li><a href=#适用场景>适用场景</a></li><li><a href=#代码示例>代码示例</a></li></ol></li><li><a href=#2-工厂方法模式>2. 工厂方法模式</a><ol><li><a href=#类比-1>类比</a></li><li><a href=#适用场景-1>适用场景</a></li><li><a href=#代码示例-1>代码示例</a></li></ol></li><li><a href=#3-抽象工厂模式>3. 抽象工厂模式</a><ol><li><a href=#类比-2>类比</a></li></ol></li><li><a href=#4-建造者模式>4. 建造者模式</a><ol><li><a href=#类比-3>类比</a></li><li><a href=#适用场景-2>适用场景</a></li><li><a href=#代码示例-2>代码示例</a></li></ol></li><li><a href=#5-原型模式>5. 原型模式</a><ol><li><a href=#类比-4>类比</a></li><li><a href=#适用场景-3>适用场景</a></li></ol></li></ol></li><li><a href=#结构型模式>结构型模式</a><ol><li><a href=#1-适配器模式>1. 适配器模式</a><ol><li><a href=#类比-5>类比</a></li><li><a href=#适用场景-4>适用场景</a></li></ol></li><li><a href=#2-装饰器模式>2. 装饰器模式</a><ol><li><a href=#类比-6>类比</a></li><li><a href=#适用场景-5>适用场景</a></li></ol></li><li><a href=#3-代理模式>3. 代理模式</a><ol><li><a href=#类比-7>类比</a></li><li><a href=#适用场景-6>适用场景</a></li></ol></li><li><a href=#4-外观模式>4. 外观模式</a><ol><li><a href=#类比-8>类比</a></li><li><a href=#适用场景-7>适用场景</a></li></ol></li><li><a href=#5-桥接模式>5. 桥接模式</a><ol><li><a href=#类比-9>类比</a></li></ol></li><li><a href=#6-组合模式>6. 组合模式</a><ol><li><a href=#类比-10>类比</a></li><li><a href=#适用场景-8>适用场景</a></li></ol></li><li><a href=#7-享元模式>7. 享元模式</a><ol><li><a href=#类比-11>类比</a></li><li><a href=#适用场景-9>适用场景</a></li></ol></li></ol></li><li><a href=#行为型模式>行为型模式</a><ol><li><a href=#1-策略模式>1. 策略模式</a><ol><li><a href=#类比-12>类比</a></li><li><a href=#适用场景-10>适用场景</a></li><li><a href=#代码示例-3>代码示例</a></li></ol></li><li><a href=#2-观察者模式>2. 观察者模式</a><ol><li><a href=#类比-13>类比</a></li><li><a href=#适用场景-11>适用场景</a></li></ol></li><li><a href=#3-模板方法模式>3. 模板方法模式</a><ol><li><a href=#类比-14>类比</a></li><li><a href=#小贴士>小贴士</a></li><li><a href=#适用场景-12>适用场景</a></li></ol></li><li><a href=#4-责任链模式>4. 责任链模式</a><ol><li><a href=#类比-15>类比</a></li><li><a href=#适用场景-13>适用场景</a></li></ol></li><li><a href=#5-状态模式>5. 状态模式</a><ol><li><a href=#类比-16>类比</a></li><li><a href=#适用场景-14>适用场景</a></li><li><a href=#小贴士-1>小贴士</a></li></ol></li><li><a href=#6-命令模式>6. 命令模式</a><ol><li><a href=#类比-17>类比</a></li><li><a href=#适用场景-15>适用场景</a></li></ol></li><li><a href=#7-迭代器模式>7. 迭代器模式</a><ol><li><a href=#类比-18>类比</a></li><li><a href=#适用场景-16>适用场景</a></li></ol></li><li><a href=#8-中介者模式>8. 中介者模式</a><ol><li><a href=#类比-19>类比</a></li><li><a href=#适用场景-17>适用场景</a></li></ol></li><li><a href=#9-备忘录模式>9. 备忘录模式</a><ol><li><a href=#类比-20>类比</a></li><li><a href=#适用场景-18>适用场景</a></li></ol></li><li><a href=#10-访问者模式>10. 访问者模式</a><ol><li><a href=#类比-21>类比</a></li></ol></li><li><a href=#11-解释器模式>11. 解释器模式</a><ol><li><a href=#类比-22>类比</a></li><li><a href=#适用场景-19>适用场景</a></li></ol></li></ol></li></ol></nav></div></section></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category><a href=/categories/ai/>AI</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%80%E6%AC%A1%E6%80%A7%E8%AE%B2%E6%98%8E%E7%99%BD/>23种设计模式，一次性讲明白</a></h2></div><footer class=article-time><div style=display:flex;flex-direction:column;gap:4px;font-size:14px><div class=article-date style=display:flex;align-items:center><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<span style=margin-left:5px>发布于: </span><time class=article-time--published datetime=2026-03-19T12:50:01Z style=margin-left:5px>2026-03-19 12:50:01</time></div></div><div class=article-view style=align-items:center;gap:5px;margin-left:auto;font-size:14px><svg class="icon icon-tabler icon-tabler-eye" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="12" cy="12" r="2"/><path d="M22 12c-2.667 4.667-6 7-10 7s-7.333-2.333-10-7c2.667-4.667 6-7 10-7s10 2.333 10 7"/></svg>
+<span id=vercount_container_page_pv>阅读
+<span id=vercount_value_page_pv>...</span> 次</span></div></footer></div></header><section class=article-content><p>设计模式其实就是前辈们写代码踩了无数坑，总结出来的代码编写最佳实践，专门用来解决特定场景下的代码复用、解耦、扩展性问题。</p><p>可以分为创建型模式、结构型模式、行为型模式三类。</p><div class=table-wrapper><table><thead><tr><th>分类</th><th>核心作用</th><th>包含的设计模式</th><th>数量</th></tr></thead><tbody><tr><td>创建型模式</td><td>解决对象怎么创建的问题，解耦对象的创建和使用</td><td>单例、工厂方法、抽象工厂、建造者、原型</td><td>5种</td></tr><tr><td>结构型模式</td><td>解决类/对象怎么组合的问题，不修改原有代码实现功能扩展</td><td>适配器、桥接、组合、装饰、外观、享元、代理</td><td>7种</td></tr><tr><td>行为型模式</td><td>解决类/对象之间怎么交互、职责怎么分配的问题，实现灵活的通信和流程控制</td><td>模板方法、命令、迭代器、观察者、中介者、备忘录、解释器、状态、策略、职责链、访问者</td><td>11种</td></tr></tbody></table></div><h2 id=记忆口诀>记忆口诀</h2><h3 id=创建型口诀5种><strong>创建型口诀（5种）</strong></h3><p><strong>单身汉在工厂抽象建原型</strong>。</p><p>一个单身汉，在工厂里用抽象方法，建造了一个原型。</p><h3 id=结构型口诀7种><strong>结构型口诀（7种）</strong></h3><p><strong>桥上代理卖装饰，组合适配享外观</strong>。</p><p>桥上的代理商在卖装饰品，把零件组合适配好，让你享受精美外观。</p><h3 id=行为型口诀11种><strong>行为型口诀（11种）</strong></h3><p><strong>访客观察定策略，模板迭代改状态，备忘命令交中介，解释责任一条链。</strong></p><p>访客观察后定下策略，按模板迭代改变状态，把备忘录和命令交给中介，出了问题沿责任链逐一解释。</p><h2 id=创建型模式>创建型模式</h2><p>不让你自己new对象，把对象创建的逻辑封装起来，和业务代码解耦。</p><h3 id=1-单例模式>1. 单例模式</h3><p>整个系统里，这个类<strong>有且只有一个实例对象</strong>，不管你在哪获取，拿到的都是同一个东西。</p><h4 id=类比>类比</h4><p>就像公司里只有一个 CEO，不管哪个部门找，对接的都是同一个人。</p><h4 id=适用场景>适用场景</h4><p>Spring容器里的单例Bean、全局配置类、日志对象</p><h4 id=代码示例>代码示例</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span><span class=w> </span><span class=kd>class</span> <span class=nc>Singleton</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=c1>// 1. 私有构造方法：禁止外部new对象</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>private</span><span class=w> </span><span class=nf>Singleton</span><span class=p>()</span><span class=w> </span><span class=p>{}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=c1>// 2. 私有静态实例，volatile禁止指令重排</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>private</span><span class=w> </span><span class=kd>static</span><span class=w> </span><span class=kd>volatile</span><span class=w> </span><span class=n>Singleton</span><span class=w> </span><span class=n>instance</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=c1>// 3. 公共静态方法，获取唯一实例</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=kd>static</span><span class=w> </span><span class=n>Singleton</span><span class=w> </span><span class=nf>getInstance</span><span class=p>()</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=c1>// 第一次校验：实例已存在就直接返回，不用抢锁</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=n>instance</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=kc>null</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=c1>// 加锁，保证线程安全</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=kd>synchronized</span><span class=w> </span><span class=p>(</span><span class=n>Singleton</span><span class=p>.</span><span class=na>class</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=c1>// 第二次校验：防止多线程同时进入第一个if，重复创建</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=n>instance</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=kc>null</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                    </span><span class=n>instance</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>new</span><span class=w> </span><span class=n>Singleton</span><span class=p>();</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=k>return</span><span class=w> </span><span class=n>instance</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=p>}</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><h3 id=2-工厂方法模式>2. 工厂方法模式</h3><p>定义一个创建对象的工厂接口，让子类决定创建哪个对象，把对象的创建延迟到子类。</p><h4 id=类比-1>类比</h4><p>就像奶茶店是工厂接口，蜜雪冰城、喜茶是子类工厂，你去哪个店，就喝哪个店的奶茶，不用管奶茶是怎么做的。</p><h4 id=适用场景-1>适用场景</h4><ul><li>不知道要创建的对象具体类型，交给子类决定</li><li>把对象创建和业务代码解耦</li><li>Spring的FactoryBean</li></ul><h4 id=代码示例-1>代码示例</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=c1>// 1. 产品接口：奶茶</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=kd>public</span><span class=w> </span><span class=kd>interface</span> <span class=nc>MilkTea</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kt>void</span><span class=w> </span><span class=nf>make</span><span class=p>();</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=c1>// 2. 具体产品：蜜雪冰城奶茶</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=kd>public</span><span class=w> </span><span class=kd>class</span> <span class=nc>MixueMilkTea</span><span class=w> </span><span class=kd>implements</span><span class=w> </span><span class=n>MilkTea</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nd>@Override</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=kt>void</span><span class=w> </span><span class=nf>make</span><span class=p>()</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=n>System</span><span class=p>.</span><span class=na>out</span><span class=p>.</span><span class=na>println</span><span class=p>(</span><span class=s>&#34;蜜雪冰城奶茶做好了！&#34;</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=p>}</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><h3 id=3-抽象工厂模式>3. 抽象工厂模式</h3><p>工厂方法的升级版，一个工厂可以创建一系列相关的产品，而不是只创建一个。</p><p>和工厂方法的区别是：</p><p>工厂方法是单个产品，而抽象工厂是一套相关产品。</p><h4 id=类比-2>类比</h4><p>就像蜜雪冰城不仅能做奶茶，还能做冰淇淋、圣代，一个工厂搞定同品牌的一系列产品。</p><p>适用于需要创建一系列相关联的产品，而不是单个产品的场景（比如同一品牌的奶茶 + 冰淇淋 + 圣代）。</p><h3 id=4-建造者模式>4. 建造者模式</h3><p>把一个复杂对象的创建和表示分离，一步一步构建出复杂对象，不用管内部组装细节。</p><h4 id=类比-3>类比</h4><p>就像组装电脑，你只需要告诉装机店你要什么 CPU、显卡、内存，装机店帮你一步步组装好，不用你自己焊主板。</p><h4 id=适用场景-2>适用场景</h4><ul><li>复杂对象的创建，参数特别多（比如超过4个参数）</li><li>Lombok的@Builder注解</li></ul><h4 id=代码示例-2>代码示例</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=c1>// 电脑类（复杂对象）</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=kd>public</span><span class=w> </span><span class=kd>class</span> <span class=nc>Computer</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>private</span><span class=w> </span><span class=n>String</span><span class=w> </span><span class=n>cpu</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>private</span><span class=w> </span><span class=n>String</span><span class=w> </span><span class=n>gpu</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>private</span><span class=w> </span><span class=kt>int</span><span class=w> </span><span class=n>memory</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>private</span><span class=w> </span><span class=kt>int</span><span class=w> </span><span class=n>storage</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=c1>// 私有构造方法，只能通过Builder创建</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>private</span><span class=w> </span><span class=nf>Computer</span><span class=p>(</span><span class=n>Builder</span><span class=w> </span><span class=n>builder</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=k>this</span><span class=p>.</span><span class=na>cpu</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>builder</span><span class=p>.</span><span class=na>cpu</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=k>this</span><span class=p>.</span><span class=na>gpu</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>builder</span><span class=p>.</span><span class=na>gpu</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=k>this</span><span class=p>.</span><span class=na>memory</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>builder</span><span class=p>.</span><span class=na>memory</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=k>this</span><span class=p>.</span><span class=na>storage</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>builder</span><span class=p>.</span><span class=na>storage</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=c1>// 建造者静态内部类</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=kd>static</span><span class=w> </span><span class=kd>class</span> <span class=nc>Builder</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=kd>private</span><span class=w> </span><span class=n>String</span><span class=w> </span><span class=n>cpu</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=kd>private</span><span class=w> </span><span class=n>String</span><span class=w> </span><span class=n>gpu</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=kd>private</span><span class=w> </span><span class=kt>int</span><span class=w> </span><span class=n>memory</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=kd>private</span><span class=w> </span><span class=kt>int</span><span class=w> </span><span class=n>storage</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=c1>// 链式调用设置参数</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=kd>public</span><span class=w> </span><span class=n>Builder</span><span class=w> </span><span class=nf>cpu</span><span class=p>(</span><span class=n>String</span><span class=w> </span><span class=n>cpu</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=k>this</span><span class=p>.</span><span class=na>cpu</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>cpu</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=k>return</span><span class=w> </span><span class=k>this</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=kd>public</span><span class=w> </span><span class=n>Builder</span><span class=w> </span><span class=nf>gpu</span><span class=p>(</span><span class=n>String</span><span class=w> </span><span class=n>gpu</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=k>this</span><span class=p>.</span><span class=na>gpu</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>gpu</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=k>return</span><span class=w> </span><span class=k>this</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=kd>public</span><span class=w> </span><span class=n>Builder</span><span class=w> </span><span class=nf>memory</span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>memory</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=k>this</span><span class=p>.</span><span class=na>memory</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>memory</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=k>return</span><span class=w> </span><span class=k>this</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=kd>public</span><span class=w> </span><span class=n>Builder</span><span class=w> </span><span class=nf>storage</span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>storage</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=k>this</span><span class=p>.</span><span class=na>storage</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>storage</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=k>return</span><span class=w> </span><span class=k>this</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=c1>// 构建最终对象</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=kd>public</span><span class=w> </span><span class=n>Computer</span><span class=w> </span><span class=nf>build</span><span class=p>()</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=k>return</span><span class=w> </span><span class=k>new</span><span class=w> </span><span class=n>Computer</span><span class=p>(</span><span class=k>this</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=c1>// 测试</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=kd>public</span><span class=w> </span><span class=kd>class</span> <span class=nc>Test</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=kd>static</span><span class=w> </span><span class=kt>void</span><span class=w> </span><span class=nf>main</span><span class=p>(</span><span class=n>String</span><span class=o>[]</span><span class=w> </span><span class=n>args</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=c1>// 链式调用，一步一步构建对象</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=n>Computer</span><span class=w> </span><span class=n>computer</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>new</span><span class=w> </span><span class=n>Computer</span><span class=p>.</span><span class=na>Builder</span><span class=p>()</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=p>.</span><span class=na>cpu</span><span class=p>(</span><span class=s>&#34;i7-14700K&#34;</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=p>.</span><span class=na>gpu</span><span class=p>(</span><span class=s>&#34;RTX4070&#34;</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=p>.</span><span class=na>memory</span><span class=p>(</span><span class=n>32</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=p>.</span><span class=na>storage</span><span class=p>(</span><span class=n>1024</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=p>.</span><span class=na>build</span><span class=p>();</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=p>}</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><h3 id=5-原型模式>5. 原型模式</h3><p>基于一个已有的对象，克隆出一个一模一样的新对象，不用重新new和初始化。</p><h4 id=类比-4>类比</h4><p>就像打印机复印文件，不用重新手写一遍，直接复印一份一模一样的。</p><h4 id=适用场景-3>适用场景</h4><ul><li>对象创建成本很高（比如初始化要查数据库、调接口）</li><li>想要和原对象一模一样的新对象，又不想重新初始化</li><li>Spring的Bean的原型作用域</li></ul><h2 id=结构型模式>结构型模式</h2><p>不修改原有代码，通过类/对象的组合，实现功能扩展和灵活组装。</p><h3 id=1-适配器模式>1. 适配器模式</h3><p>把一个不兼容的接口，转换成你想要的兼容接口，让两个不搭边的类能一起工作。</p><h4 id=类比-5>类比</h4><p>就像 Type-C 转 3.5mm 耳机转接头，手机只有 Type-C 口，耳机是 3.5mm 口，转接头让它们能一起用。</p><h4 id=适用场景-4>适用场景</h4><ul><li>老系统接口复用，适配新的业务</li><li>Spring MVC的HandlerAdapter</li></ul><h3 id=2-装饰器模式>2. 装饰器模式</h3><p>在不修改原有类的基础上，动态给对象添加新功能，比继承更灵活。</p><h4 id=类比-6>类比</h4><p>就像买奶茶，基础款是纯茶，你可以加珍珠、加椰果、加奶盖，一层一层加功能，不用重新做一杯新奶茶。</p><h4 id=适用场景-5>适用场景</h4><ul><li>动态给对象添加/撤销功能，不想用继承搞出一堆子类</li><li>Java IO流（FileInputStream + BufferedInputStream）</li><li>Spring的TransactionProxyFactoryBean</li></ul><h3 id=3-代理模式>3. 代理模式</h3><p>给目标对象创建一个代理对象，通过代理对象控制对目标对象的访问，还能在不修改目标对象的前提下加额外功能。</p><h4 id=类比-7>类比</h4><p>就像租房找中介，你不用直接对接房东，中介帮你搞定看房、签合同，还能帮你做背景调查。</p><h4 id=适用场景-6>适用场景</h4><ul><li>远程代理：RPC调用</li><li>权限控制、日志记录、事务管理</li><li>Spring AOP的动态代理</li></ul><h3 id=4-外观模式>4. 外观模式</h3><p>给复杂的子系统提供一个统一的高层入口，隐藏子系统的复杂细节，调用方只需要和这个入口交互就行。</p><h4 id=类比-8>类比</h4><p>就像酒店前台，你不用管酒店的保洁、维修、餐饮、安保各个部门，有任何事找前台就行，前台帮你对接所有部门。</p><h4 id=适用场景-7>适用场景</h4><ul><li>复杂系统简化调用，封装底层细节</li><li>Spring Boot的starter就是外观模式的思想</li></ul><h3 id=5-桥接模式>5. 桥接模式</h3><p>把抽象和实现分离，让它们可以独立变化，解决多维度变化导致的类爆炸问题。</p><h4 id=类比-9>类比</h4><p>就像手机和手机壳，手机有苹果、华为、小米，手机壳有透明、硅胶、卡通，两个维度独立变化，不用为每个手机做一套专属手机壳。</p><p>适用于类有多个独立变化的维度，用继承会导致子类数量爆炸的场景。</p><h3 id=6-组合模式>6. 组合模式</h3><p>把对象组合成树形结构，用来表示<strong>整体-部分</strong>的层级关系，让调用方对单个对象和组合对象的使用是一致的。</p><h4 id=类比-10>类比</h4><p>就像公司组织架构，总公司下面有分公司，分公司下面有部门，部门下面有员工，不管是总公司、分公司、部门还是员工，都可以统一用<strong>组织节点</strong>来表示。</p><h4 id=适用场景-8>适用场景</h4><ul><li>树形结构的数据，比如菜单、部门组织、文件目录</li><li>想要统一处理单个对象和组合对象，不用区分是整体还是部分</li></ul><h3 id=7-享元模式>7. 享元模式</h3><p>共享细粒度的对象，减少对象创建的数量，节省内存，核心是复用对象。</p><h4 id=类比-11>类比</h4><p>就像共享单车，不是每个人都买一辆新自行车，而是大家共享一批单车，用完还回去，别人继续用。</p><h4 id=适用场景-9>适用场景</h4><ul><li>Java的字符串常量池、Integer缓存池</li><li>连接池、线程池（享元模式 + 单例模式的结合体）</li></ul><h2 id=行为型模式>行为型模式</h2><p>解决类和对象之间的通信、职责分配问题，让对象之间协作更灵活、职责更清晰。</p><h3 id=1-策略模式>1. 策略模式</h3><p>定义一系列算法，把每个算法封装起来，让它们可以互相替换，算法的变化不会影响使用算法的用户。</p><h4 id=类比-12>类比</h4><p>就像出行，你可以选骑自行车、坐地铁、开车、坐飞机，这些都是不同的出行策略，你可以根据目的地、预算随便换，不用改变你要出门的目标。</p><h4 id=适用场景-10>适用场景</h4><ul><li>一个业务有多种实现方式，需要动态切换</li><li>想要避免大量的if-else/switch分支</li><li>Spring的Resource接口、BeanNameGenerator</li></ul><h4 id=代码示例-3>代码示例</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=c1>// 1. 策略接口：出行方式</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=kd>public</span><span class=w> </span><span class=kd>interface</span> <span class=nc>TravelStrategy</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kt>void</span><span class=w> </span><span class=nf>travel</span><span class=p>();</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=c1>// 2. 具体策略：坐地铁</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=kd>public</span><span class=w> </span><span class=kd>class</span> <span class=nc>SubwayStrategy</span><span class=w> </span><span class=kd>implements</span><span class=w> </span><span class=n>TravelStrategy</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nd>@Override</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=kt>void</span><span class=w> </span><span class=nf>travel</span><span class=p>()</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=n>System</span><span class=p>.</span><span class=na>out</span><span class=p>.</span><span class=na>println</span><span class=p>(</span><span class=s>&#34;坐地铁出行，便宜又快&#34;</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=c1>// 3. 具体策略：开车</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=kd>public</span><span class=w> </span><span class=kd>class</span> <span class=nc>CarStrategy</span><span class=w> </span><span class=kd>implements</span><span class=w> </span><span class=n>TravelStrategy</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nd>@Override</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=kt>void</span><span class=w> </span><span class=nf>travel</span><span class=p>()</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=n>System</span><span class=p>.</span><span class=na>out</span><span class=p>.</span><span class=na>println</span><span class=p>(</span><span class=s>&#34;开车出行，自由方便&#34;</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=c1>// 4. 用户</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=kd>public</span><span class=w> </span><span class=kd>class</span> <span class=nc>Traveler</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>private</span><span class=w> </span><span class=n>TravelStrategy</span><span class=w> </span><span class=n>strategy</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=c1>// 动态设置策略</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=kt>void</span><span class=w> </span><span class=nf>setStrategy</span><span class=p>(</span><span class=n>TravelStrategy</span><span class=w> </span><span class=n>strategy</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=k>this</span><span class=p>.</span><span class=na>strategy</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>strategy</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=c1>// 执行出行</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=kt>void</span><span class=w> </span><span class=nf>goTravel</span><span class=p>()</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=n>strategy</span><span class=p>.</span><span class=na>travel</span><span class=p>();</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=c1>// 测试</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=kd>public</span><span class=w> </span><span class=kd>class</span> <span class=nc>Test</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=kd>static</span><span class=w> </span><span class=kt>void</span><span class=w> </span><span class=nf>main</span><span class=p>(</span><span class=n>String</span><span class=o>[]</span><span class=w> </span><span class=n>args</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=n>Traveler</span><span class=w> </span><span class=n>traveler</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>new</span><span class=w> </span><span class=n>Traveler</span><span class=p>();</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=c1>// 今天坐地铁</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=n>traveler</span><span class=p>.</span><span class=na>setStrategy</span><span class=p>(</span><span class=k>new</span><span class=w> </span><span class=n>SubwayStrategy</span><span class=p>());</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=n>traveler</span><span class=p>.</span><span class=na>goTravel</span><span class=p>();</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=c1>// 明天开车</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=n>traveler</span><span class=p>.</span><span class=na>setStrategy</span><span class=p>(</span><span class=k>new</span><span class=w> </span><span class=n>CarStrategy</span><span class=p>());</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=n>traveler</span><span class=p>.</span><span class=na>goTravel</span><span class=p>();</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=p>}</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><h3 id=2-观察者模式>2. 观察者模式</h3><p>定义了对象之间一对多的依赖关系，当一个对象的状态发生变化时，所有依赖它的对象都会收到通知并自动更新。</p><h4 id=类比-13>类比</h4><p>就像你关注了一个技术博主，博主更新文章了，所有关注他的粉丝都会收到推送通知。</p><h4 id=适用场景-11>适用场景</h4><ul><li>事件驱动、消息通知、发布订阅</li><li>Spring的ApplicationEvent事件机制</li><li>Java的EventListener</li></ul><h3 id=3-模板方法模式>3. 模板方法模式</h3><p>定义一个操作的算法骨架，把其中一些步骤延迟到子类实现，子类可以不改变算法骨架，就可以重定义特定步骤。</p><h4 id=类比-14>类比</h4><p>就像煮奶茶，固定骨架是煮茶➡️加奶➡️加料➡️装杯，不同的奶茶只是加料、煮茶时间不一样，骨架永远不变。</p><h4 id=小贴士>小贴士</h4><p>煮奶茶是模板方法模式，关注的是怎么做奶茶，而开奶茶店造奶茶是工厂方法模式，关注的是造什么奶茶。</p><h4 id=适用场景-12>适用场景</h4><ul><li>多个子类有公共的流程，只有个别步骤不同</li><li>Spring的JdbcTemplate、RedisTemplate</li><li>Spring MVC的HttpServlet</li></ul><h3 id=4-责任链模式>4. 责任链模式</h3><p>把请求的发送者和接收者解耦，让多个对象都有机会处理这个请求，把这些对象连成一条链，请求沿着链传递，直到有对象处理它为止。</p><h4 id=类比-15>类比</h4><p>就像公司请假审批，1天以内组长批，3天以内经理批，7天以内总监批，超过7天老板批，你的请假申请沿着这个审批链传递，直到有人处理。</p><h4 id=适用场景-13>适用场景</h4><ul><li>一个请求需要多个对象依次处理</li><li>Spring MVC的HandlerInterceptor拦截器链</li><li>Servlet的Filter过滤器链</li></ul><h3 id=5-状态模式>5. 状态模式</h3><p>当一个对象的内部状态发生变化时，改变它的行为，看起来就像这个对象换了一个类。</p><h4 id=类比-16>类比</h4><p>就像电梯，开门状态下只能关门，不能上下行；运行状态下只能停梯，不能开门；不同的状态，电梯的行为完全不一样。</p><h4 id=适用场景-14>适用场景</h4><ul><li>对象的行为由状态决定，运行时状态变化会改变行为</li><li>代码里有大量和状态相关的if-else/switch分支</li></ul><h4 id=小贴士-1>小贴士</h4><p>状态模式和策略模式容易混淆，不过两者的区别是：</p><ol><li>状态模式是状态决定行为，对象的行为由当前状态决定；而策略模式是算法可替换，封装一系列平级算法，想换哪个换哪个。</li><li>状态模式有明确的状态流转图，状态之间不能随便跳，必须按规则流转；策略模式没有流转关系，策略之间是平级的，想换就换。</li><li>状态模式关注的是对象状态的变化以及状态变化带来的行为变化；策略模式关注的是算法的选择和替换，不关心算法之间的关系。</li></ol><p>扯了那么多官话，好像没多大用，举个例子套一下大概就是：</p><p>比如电梯是状态模式，开门、上下行、关门有明确的流转规则；</p><p>而出行是策略模式，骑自行车、坐地铁、开车是平级的，想换就换。</p><h3 id=6-命令模式>6. 命令模式</h3><p>把一个请求封装成一个命令对象，让你可以用不同的请求参数化对象，支持请求排队、撤销、重做。</p><h4 id=类比-17>类比</h4><p>就像餐厅点餐，你点的菜就是一个命令，服务员把命令传给后厨，后厨执行，你不用管后厨是谁、怎么做的，还能随时加菜、退菜。</p><h4 id=适用场景-15>适用场景</h4><ul><li>Spring 的 JmsTemplate（JMS 消息队列）和 RabbitTemplate（RabbitMQ 消息队列）</li></ul><h3 id=7-迭代器模式>7. 迭代器模式</h3><p>提供一种统一的方式，遍历一个集合对象里的所有元素，不用暴露集合的内部结构。</p><h4 id=类比-18>类比</h4><p>就像景区观光车，不管景区里的景点是怎么分布的，你坐观光车就能一个一个逛完所有景点，不用管景区内部的路线设计。</p><h4 id=适用场景-16>适用场景</h4><ul><li>Java的Iterator接口、增强for循环</li><li>Spring的CompositeIterator</li></ul><h3 id=8-中介者模式>8. 中介者模式</h3><p>用一个中介对象封装一系列对象的交互，让对象之间不用直接互相引用，解耦对象之间的复杂依赖，只和中介者交互。</p><h4 id=类比-19>类比</h4><p>就像机场塔台，所有飞机不用互相沟通，只需要和塔台沟通，塔台统一调度，避免撞机。</p><h4 id=适用场景-17>适用场景</h4><ul><li>想要解耦多个对象的交互，减少耦合</li><li>Spring MVC的DispatcherServlet，就是前端控制器中介者</li></ul><h3 id=9-备忘录模式>9. 备忘录模式</h3><p>在不破坏封装的前提下，捕获一个对象的内部状态，并保存下来，之后可以恢复到这个状态。</p><h4 id=类比-20>类比</h4><p>就像游戏存档，你打BOSS之前存个档，打输了可以读档回到存档时的状态，不用重新从头玩。</p><h4 id=适用场景-18>适用场景</h4><ul><li>撤销、回滚操作</li><li>数据库的事务回滚</li><li>IDE的撤销操作</li></ul><h3 id=10-访问者模式>10. 访问者模式</h3><p>在不修改数据结构的前提下，定义对数据结构中元素的新操作，把数据结构和操作分离。</p><h4 id=类比-21>类比</h4><p>比如电商订单系统，数据结构是固定的订单和订单明细，操作是经常变化的计算总价、打印发票、生成物流单、发送短信通知。不用修改订单 / 订单明细的代码，只要新增一个访问者（比如生成电子发票），就能给订单增加新操作。</p><p>适用于想要给数据结构里的元素增加新操作，又不想修改数据结构的场景。</p><h3 id=11-解释器模式>11. 解释器模式</h3><p>给定一个语言，定义它的语法规则，然后定义一个解释器，用这个解释器来解释语言中的句子。</p><h4 id=类比-22>类比</h4><p>就像翻译官，你说中文，翻译官根据中英文的语法规则，把你的话翻译成英文。</p><h4 id=适用场景-19>适用场景</h4><ul><li>SQL解析、正则表达式解析</li><li>Spring的SpEL表达式</li></ul></section><footer class=article-footer><section class=article-tags><a href=/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/>设计模式</a>
+<a href=/tags/java/>Java</a>
+<a href=/tags/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/>开发语言</a></section><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>本文由 iamxurulin 原创发布，转载请保留原文链接。</span></section><section class=article-lastmod><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<span>最后更新于 2026-06-22 01:21:00</span></section><section class=article-original-declaration><div class=declaration-icon><svg class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg></div><div class=declaration-content><strong>关于作者与文章</strong><p>本文为 <a href=https://github.com/iamxurulin target=_blank rel=noopener>iamxurulin</a> 原创技术文章，同步发布于 <a href=https://iamxurulin.blog.csdn.net/ target=_blank rel=noopener>CSDN 博客</a> 与本站。两处内容完全一致，均由作者本人维护更新。如对内容有疑问或建议，欢迎在评论区交流讨论。</p></div></section></footer><style>.article-original-declaration{margin-top:2rem;padding:1.2rem 1.5rem;background:var(--card-background);border:1px solid var(--card-border-color);border-radius:var(--card-border-radius);display:flex;gap:.8rem;font-size:.9rem;line-height:1.7;color:var(--card-text-color-secondary)}.article-original-declaration .declaration-icon{flex-shrink:0;width:20px;height:20px;margin-top:2px;color:var(--accent-color)}.article-original-declaration .declaration-content{flex:1}.article-original-declaration strong{display:block;margin-bottom:.3rem;color:var(--card-text-color-main);font-size:.95rem}.article-original-declaration p{margin:.3rem 0}.article-original-declaration a{color:var(--accent-color);text-decoration:none}.article-original-declaration a:hover{text-decoration:underline}</style><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css integrity=sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js integrity=sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8 crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js integrity=sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05 crossorigin=anonymous defer></script><script>window.addEventListener("DOMContentLoaded",()=>{const e=[".main-article",".widget--toc"];e.forEach(e=>{const t=document.querySelector(e);t&&renderMathInElement(t,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}],ignoredClasses:["gist"]})})})</script></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/p/%E9%9D%A2%E8%AF%95%E5%AE%98string%E6%98%AF%E5%9F%BA%E7%A1%80%E7%B1%BB%E5%9E%8B%E5%90%97object%E6%9C%89%E5%93%AA%E4%BA%9B%E9%80%9A%E7%94%A8%E6%96%B9%E6%B3%95/><div class=article-details><h2 class=article-title>面试官：String是基础类型吗？Object有哪些通用方法？</h2></div></a></article><article><a href=/p/java%E7%BA%BF%E7%A8%8B%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/><div class=article-details><h2 class=article-title>Java线程与操作系统线程的生命周期</h2></div></a></article><article><a href=/p/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98%E6%8B%86%E8%A7%A3java%E9%94%81%E6%9C%BA%E5%88%B6synchronizedreentrantlock%E9%94%81%E5%8D%87%E7%BA%A7%E5%8F%AF%E9%87%8D%E5%85%A5%E9%94%81/><div class=article-details><h2 class=article-title>【面试真题拆解】Java锁机制：synchronized、ReentrantLock、锁升级、可重入锁</h2></div></a></article><article><a href=/p/%E4%B8%80%E7%AF%87%E6%90%9E%E6%87%82langchain4j%E7%BB%93%E6%9E%84%E5%8C%96%E8%BE%93%E5%87%BAtokenstreamssefluxreactor%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88/><div class=article-details><h2 class=article-title>一篇搞懂：LangChain4j结构化输出、TokenStream、SSE、Flux、Reactor到底是什么？</h2></div></a></article><article><a href=/p/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98%E6%8B%86%E8%A7%A3java%E9%87%8C%E9%9D%A2%E7%9A%84%E7%BA%BF%E7%A8%8B%E6%B1%A0%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%E5%8F%82%E6%95%B0/><div class=article-details><h2 class=article-title>【面试真题拆解】Java里面的线程池都有哪些参数？</h2></div></a></article></div></div></aside><div id=giscus-container class=giscus-container></div><script>(function(){function e(){const t=document.getElementById("giscus-container");if(!t)return;t.innerHTML="";const e=document.createElement("script");e.src="https://giscus.app/client.js",e.setAttribute("data-repo","iamxurulin/iamxurulin.github.io"),e.setAttribute("data-repo-id","R_kgDOQ4sEwg"),e.setAttribute("data-category","Announcements"),e.setAttribute("data-category-id","DIC_kwDOQ4sEws4C1Yw9"),e.setAttribute("data-mapping","title"),e.setAttribute("data-strict","0"),e.setAttribute("data-reactions-enabled","1"),e.setAttribute("data-emit-metadata","0"),e.setAttribute("data-input-position","top"),e.setAttribute("data-lang","zh-CN"),e.setAttribute("crossorigin","anonymous"),e.async=!0,e.setAttribute("data-theme","transparent_dark"),t.appendChild(e)}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",e):e(),window._giscusPjaxBound||(window._giscusPjaxBound=!0,document.addEventListener("pjax:complete",function(){setTimeout(e,50)}))})()</script><style>#giscus-container{min-height:150px;width:100%;margin-top:2rem;background:rgba(30,30,30,.8)!important;border-radius:15px;padding:20px;box-sizing:border-box;border:1px solid rgba(255,255,255,.1);box-shadow:0 4px 15px rgba(0,0,0,.2)}</style><footer class=site-footer><section class=copyright>&copy;
+2025 -
+2026 iamxurulin</section><section class=powerby>Coder_Studio - 记录后端开发、算法与 AI 的成长之路<br></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.b4654cd74006fe7475d7723cd7373672b5ea2035ab23404eb9ff511cb27b581c.js defer></script><script type=text/javascript src=/ts/custom.d06f31744de6062060249fb2de5a784912bfa25d124b9b3d97c1f1281811a258.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script><div id=aplayer></div><script>window._aplayerInit=function(){const e=document.createElement("script");e.src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js",e.onload=function(){const e=new APlayer({container:document.getElementById("aplayer"),fixed:!0,lrcType:3,audio:[{name:"远行",artist:"大青山",url:"/music/大青山-远行.mp3",cover:"/music/cover.jpg",lrc:"/music/大青山-远行-歌词.lrc"}]});window.onbeforeunload=()=>{const t={index:e.list.index,currentTime:e.audio.currentTime,paused:e.paused};localStorage.setItem("playInfo",JSON.stringify(t))};const t=JSON.parse(localStorage.getItem("playInfo"));t&&(e.list.switch(t.index),setTimeout(()=>{e.seek(t.currentTime),t.paused||e.play()},500))},document.head.appendChild(e)},window.requestIdleCallback?requestIdleCallback(window._aplayerInit,{timeout:3e3}):setTimeout(window._aplayerInit,2e3)</script><script>(function(){var e,t="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js",i="https://unpkg.com/pjax/pjax.min.js",n="https://iamxurulin.github.io/js/topbar.min.js";function s(e,t){return new Promise(function(n,s){var r,a=!1,o=document.createElement("script");o.src=e,o.async=!0;function i(e){if(a)return;a=!0,o.onload=o.onerror=null,clearTimeout(r),e?s(e):n()}o.onload=function(){i(null)},o.onerror=function(){i(new Error("HTTP error: "+e))},r=t?setTimeout(function(){i(new Error("Timeout: "+e))},t):null,document.head.appendChild(o)})}function o(e){return s(e,1e4).catch(function(){if(e===t)return o(i);throw new Error("All PJAX CDNs failed")})}e=[o(t)],n&&e.push(s(n,8e3)),Promise.all(e).then(function(){var e=new Pjax({selectors:[".main-container"]});e._handleResponse=e.handleResponse,e.handleResponse=function(t,n,s,o){if(n.responseText.match("<html")&&t){var i,a=(new DOMParser).parseFromString(t,"text/html");document.body.setAttribute("class",a.body.className),i=a.title,i&&(document.title=i)}e._handleResponse(t,n,s,o)},typeof topbar!="undefined"&&topbar.config({barColors:{0:"rgba(255,255,255,1)",1.0:"rgba(0,149,234,1)"}}),document.addEventListener("pjax:send",function(){typeof topbar!="undefined"&&topbar.show()}),document.addEventListener("pjax:complete",function(){window.Stack&&window.Stack.init(),typeof topbar!="undefined"&&topbar.hide()})}).catch(function(e){console.warn("PJAX 未加载，使用普通导航:",e.message)})})()</script><link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap" rel=stylesheet><style>:root{--base-font-family:'Fira Code', monospace;--code-font-family:'Fira Code', monospace}</style><style>#TableOfContents>ul,ol{ul, ol{display:none}.open{display:block}}</style><script>function initTocHide(){let e=document.querySelector(".widget--toc");if(!e)return;window.addEventListener("scroll",function(){let n=document.querySelectorAll(".open");n.length>0&&n.forEach(e=>{e.classList.remove("open")});let t=document.querySelector(".active-class");if(!t)return;t.children.length>1&&t.children[1].classList.add("open");let e=t.parentElement;do e.classList.add("open"),e=e.parentElement.parentElement;while(e!==0[0]&&(e.localName==="ul"||e.localName==="ol"))})}initTocHide()</script><style>#backTopBtn{display:none;position:fixed;bottom:20px;z-index:99;cursor:pointer;width:20px;height:20px;background-image:url(https://iamxurulin.github.io/icons/backTop.svg)}</style><script>function initScrollTop(){let t=document.querySelector(".right-sidebar");if(!t)return;let e=document.createElement("div");e.id="backTopBtn",e.onclick=backToTop,t.appendChild(e),window.addEventListener("scroll",function(){document.body.scrollTop>20||document.documentElement.scrollTop>20?e.style.display="block":e.style.display="none"},{passive:!0})}function backToTop(){window.scrollTo({top:0,behavior:"smooth"})}initScrollTop()</script><style>.highlight{max-height:400px;overflow:hidden}.code-show{max-height:none!important}.code-more-box{width:100%;padding-top:78px;background-image:-webkit-gradient(linear,left top,left bottom,from(rgba(255,255,255,0)),to(#fff));position:absolute;left:0;right:0;bottom:0;z-index:1}.code-more-btn{display:block;margin:auto;width:44px;height:22px;background:#f0f0f5;border-top-left-radius:8px;border-top-right-radius:8px;padding-top:6px;cursor:pointer}.code-more-img{cursor:pointer!important;display:block;margin:auto;width:22px;height:16px}</style><style>.highlight{max-height:400px;overflow:hidden;position:relative}.code-show{max-height:none!important}.code-more-box{width:100%;padding-top:78px;background-image:-webkit-gradient(linear,left top,left bottom,from(rgba(255,255,255,0)),to(#fff));background-image:linear-gradient(to bottom,rgba(255,255,255,0),#fff);position:absolute;left:0;right:0;bottom:0;z-index:1;pointer-events:none}.code-more-btn{pointer-events:auto;display:block;margin:auto;width:44px;height:22px;background:var(--card-background);border-top-left-radius:8px;border-top-right-radius:8px;padding-top:6px;cursor:pointer;box-shadow:0 -2px 10px rgba(0,0,0,.1)}.code-more-img{display:block;margin:auto;width:22px;height:16px}[data-scheme=dark] .code-more-box{background-image:linear-gradient(to bottom,rgba(30,30,40,0),#1e1e28)}[data-scheme=dark] .code-more-btn{background:var(--card-background)}</style><script>function initCodeMoreBox(){const e=document.querySelectorAll(".highlight:not(.code-inited)");e.forEach(e=>{if(e.classList.add("code-inited"),e.scrollHeight<=e.clientHeight+5)return;const t=document.createElement("div");t.classList.add("code-more-box");const n=document.createElement("span");n.classList.add("code-more-btn"),n.addEventListener("click",n=>{n.stopPropagation(),e.classList.add("code-show"),t.style.display="none",window.dispatchEvent(new Event("resize"))});const s=document.createElement("img");s.classList.add("code-more-img"),s.src="https://iamxurulin.github.io/icons/codeMore.png",s.alt="展开代码",n.appendChild(s),t.appendChild(n),e.appendChild(t)})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",initCodeMoreBox):initCodeMoreBox(),document.addEventListener("pjax:complete",initCodeMoreBox),document.addEventListener("swup:contentReplaced",initCodeMoreBox),window.addEventListener("popstate",initCodeMoreBox);const observer=new MutationObserver(e=>{let t=!1;e.forEach(e=>{e.addedNodes.length&&(t=!0)}),t&&setTimeout(initCodeMoreBox,100)});observer.observe(document.body,{childList:!0,subtree:!0})</script><style>body{background:url(https://iamxurulin.github.io/background/wallhaven-qr27rq.jpg)no-repeat 50% 0;background-size:cover;background-attachment:fixed}</style><script>window._sakuraInit=function(){const e=document.createElement("script");e.src="https://iamxurulin.github.io/background/sakura.js",document.body.appendChild(e)},window.requestIdleCallback?requestIdleCallback(window._sakuraInit,{timeout:4e3}):setTimeout(window._sakuraInit,2e3)</script><div id=particles-js></div><script>window._particlesInit=function(){const e=document.createElement("script");e.src="https://iamxurulin.github.io/background/particles.min.js",e.onload=function(){window.particlesJS&&particlesJS.load("particles-js","https://iamxurulin.github.io/background/particlesjs-config.json",function(){console.log("particles.js loaded")})},document.body.appendChild(e)},window.requestIdleCallback?requestIdleCallback(window._particlesInit,{timeout:5e3}):setTimeout(window._particlesInit,3e3)</script><style>#particles-js{position:fixed;top:0;left:0;width:100%;z-index:-1}</style><script>window._live2dInit=function(){const t="https://cdn.jsdelivr.net/gh/iamxurulin/live2d-widget-v3@v1.0.2",e={path:{homePath:"/",modelPath:t+"/Resources/",tipsJsPath:"https://iamxurulin.github.io/waifu/waifu-tips.js",live2dCorePath:t+"/Core/live2dcubismcore.js",live2dSdkPath:t+"/live2d-sdk.js",cssPath:"https://iamxurulin.github.io/waifu/waifu.css",tipsJsonPath:"https://iamxurulin.github.io/waifu/waifu-tips.json"},tools:["hitokoto","asteroids","express","photo","info","quit"],drag:{enable:!0,direction:["x","y"]}},n=document.createElement("link");n.rel="stylesheet",n.href=e.path.cssPath,document.head.appendChild(n);function s(e){return new Promise((t,n)=>{const s=document.createElement("script");s.src=e,s.async=!0,s.onload=()=>t(e),s.onerror=()=>n(new Error("Failed to load "+e)),document.head.appendChild(s)})}s(e.path.live2dCorePath).then(()=>s(e.path.live2dSdkPath)).then(()=>s(e.path.tipsJsPath)).then(()=>{localStorage.setItem("modelId","0"),localStorage.setItem("modelTexturesId","0"),initWidget({waifuPath:e.path.tipsJsonPath,cdnPath:e.path.modelPath,tools:e.tools,dragEnable:e.drag.enable,dragDirection:e.drag.direction})}).catch(e=>console.warn("Live2D load failed:",e))},screen.width>=768&&(window.requestIdleCallback?requestIdleCallback(window._live2dInit,{timeout:6e3}):setTimeout(window._live2dInit,4e3))</script><script>(function(){var t="https://cn.vercount.one/js";function e(){for(var e,s=document.querySelectorAll("script[data-vercount-loader]"),n=0;n<s.length;n++)s[n].remove();e=document.createElement("script"),e.src=t,e.setAttribute("data-vercount-loader","true"),e.async=!0,document.head.appendChild(e)}e(),window._vercountPjaxBound||(window._vercountPjaxBound=!0,document.addEventListener("pjax:complete",function(){setTimeout(e,300)}))})()</script></body></html>
