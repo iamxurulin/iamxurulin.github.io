@@ -1,1 +1,44 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>分类 on Coder_Studio</title><link>https://iamxurulin.github.io/categories/</link><description>Recent content in 分类 on Coder_Studio</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>iamxurulin</copyright><lastBuildDate>Mon, 22 Jun 2026 02:21:27 +0000</lastBuildDate><atom:link href="https://iamxurulin.github.io/categories/index.xml" rel="self" type="application/rss+xml"/><item><title>AI</title><link>https://iamxurulin.github.io/categories/ai/</link><pubDate>Mon, 22 Jun 2026 02:21:27 +0000</pubDate><guid>https://iamxurulin.github.io/categories/ai/</guid><description>&lt;img src="https://iamxurulin.github.io/cover/chatgpt_logo_chatgpt_logo_square_green_gpt_ia_openai_icon_264976.png" alt="Featured image of post AI" /&gt;</description></item><item><title>八股</title><link>https://iamxurulin.github.io/categories/%E5%85%AB%E8%82%A1/</link><pubDate>Mon, 22 Jun 2026 02:21:27 +0000</pubDate><guid>https://iamxurulin.github.io/categories/%E5%85%AB%E8%82%A1/</guid><description>&lt;img src="https://iamxurulin.github.io/cover/helena-hertz-wWZzXlDpMog-unsplash.jpg" alt="Featured image of post 八股" /&gt;</description></item><item><title>算法</title><link>https://iamxurulin.github.io/categories/%E7%AE%97%E6%B3%95/</link><pubDate>Mon, 22 Jun 2026 02:21:27 +0000</pubDate><guid>https://iamxurulin.github.io/categories/%E7%AE%97%E6%B3%95/</guid><description>&lt;img src="https://iamxurulin.github.io/cover/luca-bravo-alS7ewQ41M8-unsplash.jpg" alt="Featured image of post 算法" /&gt;</description></item><item><title>项目</title><link>https://iamxurulin.github.io/categories/%E9%A1%B9%E7%9B%AE/</link><pubDate>Mon, 22 Jun 2026 02:21:27 +0000</pubDate><guid>https://iamxurulin.github.io/categories/%E9%A1%B9%E7%9B%AE/</guid><description>&lt;img src="https://iamxurulin.github.io/cover/the-creative-exchange-d2zvqp3fpro-unsplash.jpg" alt="Featured image of post 项目" /&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>分类 on Coder_Studio</title>
+        <link>https://iamxurulin.github.io/categories/</link>
+        <description>Recent content in 分类 on Coder_Studio</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>iamxurulin</copyright>
+        <lastBuildDate>Mon, 22 Jun 2026 02:28:13 +0000</lastBuildDate><atom:link href="https://iamxurulin.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>AI</title>
+        <link>https://iamxurulin.github.io/categories/ai/</link>
+        <pubDate>Mon, 22 Jun 2026 02:28:13 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/categories/ai/</guid>
+        <description>&lt;img src="https://iamxurulin.github.io/cover/chatgpt_logo_chatgpt_logo_square_green_gpt_ia_openai_icon_264976.png" alt="Featured image of post AI" /&gt;</description>
+        </item>
+        <item>
+        <title>八股</title>
+        <link>https://iamxurulin.github.io/categories/%E5%85%AB%E8%82%A1/</link>
+        <pubDate>Mon, 22 Jun 2026 02:28:13 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/categories/%E5%85%AB%E8%82%A1/</guid>
+        <description>&lt;img src="https://iamxurulin.github.io/cover/helena-hertz-wWZzXlDpMog-unsplash.jpg" alt="Featured image of post 八股" /&gt;</description>
+        </item>
+        <item>
+        <title>算法</title>
+        <link>https://iamxurulin.github.io/categories/%E7%AE%97%E6%B3%95/</link>
+        <pubDate>Mon, 22 Jun 2026 02:28:13 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/categories/%E7%AE%97%E6%B3%95/</guid>
+        <description>&lt;img src="https://iamxurulin.github.io/cover/luca-bravo-alS7ewQ41M8-unsplash.jpg" alt="Featured image of post 算法" /&gt;</description>
+        </item>
+        <item>
+        <title>项目</title>
+        <link>https://iamxurulin.github.io/categories/%E9%A1%B9%E7%9B%AE/</link>
+        <pubDate>Mon, 22 Jun 2026 02:28:13 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/categories/%E9%A1%B9%E7%9B%AE/</guid>
+        <description>&lt;img src="https://iamxurulin.github.io/cover/the-creative-exchange-d2zvqp3fpro-unsplash.jpg" alt="Featured image of post 项目" /&gt;</description>
+        </item>
+        
+    </channel>
+</rss>

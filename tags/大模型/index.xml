@@ -1,302 +1,327 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>大模型 on Coder_Studio</title><link>https://iamxurulin.github.io/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/</link><description>Recent content in 大模型 on Coder_Studio</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>iamxurulin</copyright><lastBuildDate>Mon, 22 Jun 2026 02:21:27 +0000</lastBuildDate><atom:link href="https://iamxurulin.github.io/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/index.xml" rel="self" type="application/rss+xml"/><item><title>Windows 环境下 OpenClaw 的安装与千问大模型配置</title><link>https://iamxurulin.github.io/p/windows-%E7%8E%AF%E5%A2%83%E4%B8%8B-openclaw-%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E5%8D%83%E9%97%AE%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%85%8D%E7%BD%AE/</link><pubDate>Fri, 20 Feb 2026 16:53:53 +0000</pubDate><guid>https://iamxurulin.github.io/p/windows-%E7%8E%AF%E5%A2%83%E4%B8%8B-openclaw-%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E5%8D%83%E9%97%AE%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%85%8D%E7%BD%AE/</guid><description>&lt;p&gt;为了不占用 C 盘空间，重装系统也不丢失配置，本文详细记录了如何将 OpenClaw 安装在非系统盘，比如D 盘，并对接阿里云 通义千问大模型的全过程。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>大模型 on Coder_Studio</title>
+        <link>https://iamxurulin.github.io/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/</link>
+        <description>Recent content in 大模型 on Coder_Studio</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>iamxurulin</copyright>
+        <lastBuildDate>Mon, 22 Jun 2026 02:28:13 +0000</lastBuildDate><atom:link href="https://iamxurulin.github.io/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Windows 环境下 OpenClaw 的安装与千问大模型配置</title>
+        <link>https://iamxurulin.github.io/p/windows-%E7%8E%AF%E5%A2%83%E4%B8%8B-openclaw-%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E5%8D%83%E9%97%AE%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%85%8D%E7%BD%AE/</link>
+        <pubDate>Fri, 20 Feb 2026 16:53:53 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/windows-%E7%8E%AF%E5%A2%83%E4%B8%8B-openclaw-%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E5%8D%83%E9%97%AE%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%85%8D%E7%BD%AE/</guid>
+        <description>&lt;p&gt;为了不占用 C 盘空间，重装系统也不丢失配置，本文详细记录了如何将 OpenClaw 安装在非系统盘，比如D 盘，并对接阿里云 通义千问大模型的全过程。&lt;/p&gt;
 &lt;p&gt;主要是利用 NVM 和 npm 进行安装，方便后续一键升级，配置具有免费额度的Qwen API，这个只需要在阿里云百炼注册一个账号就能获得免费额度。&lt;/p&gt;
-&lt;h2 id="准备工作"&gt;准备工作
+&lt;h2 id=&#34;准备工作&#34;&gt;准备工作
 &lt;/h2&gt;&lt;p&gt;1.在安装之前，在D盘创建以下目录：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-markdown" data-lang="markdown"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;D:\SOFT_WARE\OpenClaw\data：用于存放配置文件、日志和数据库。
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;D:\SOFT_WARE\OpenClaw\workspace：用于存放 AI 生成的代码和项目。
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;D:\SOFT_WARE\OpenClaw\data：用于存放配置文件、日志和数据库。
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;D:\SOFT_WARE\OpenClaw\workspace：用于存放 AI 生成的代码和项目。
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;2.配置环境变量&lt;br&gt;
 新建系统环境变量：OPENCLAW_HOME = D:\SOFT_WARE\OpenClaw\data&lt;br&gt;
 这个操作的目的是将原本在 C:\Users\用户名.openclaw 的配置转移到 D 盘。&lt;/p&gt;
 &lt;p&gt;3.安装 NVM和npm&lt;/p&gt;
-&lt;p&gt;下载地址：&lt;a class="link" href="https://github.com/coreybutler/nvm-windows/releases" target="_blank" rel="noopener"
-&gt;https://github.com/coreybutler/nvm-windows/releases&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src="https://iamxurulin.github.io/images/df2b01c9efb77912de73f5dd1019ff16-e3460e91.png"
-loading="lazy"
+&lt;p&gt;下载地址：&lt;a class=&#34;link&#34; href=&#34;https://github.com/coreybutler/nvm-windows/releases&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/coreybutler/nvm-windows/releases&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://iamxurulin.github.io/images/df2b01c9efb77912de73f5dd1019ff16-e3460e91.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
 &gt;&lt;/p&gt;
 &lt;p&gt;安装后配置 NVM 路径：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;nvm&lt;/span&gt; &lt;span class="err"&gt;root&lt;/span&gt; &lt;span class="err"&gt;D:\SOFT_WARE\NVM&lt;/span&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;nvm&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;root&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;D:\SOFT_WARE\NVM&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;安装满足要求的 Node 版本：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
-&lt;/span&gt;&lt;span class="lnt"&gt;3
-&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;nvm&lt;/span&gt; &lt;span class="err"&gt;install&lt;/span&gt; &lt;span class="mf"&gt;22.12&lt;/span&gt;&lt;span class="err"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;nvm&lt;/span&gt; &lt;span class="err"&gt;use&lt;/span&gt; &lt;span class="mf"&gt;22.12&lt;/span&gt;&lt;span class="err"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="err"&gt;切换到该版本&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;node&lt;/span&gt; &lt;span class="err"&gt;-v&lt;/span&gt; &lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="err"&gt;验证&lt;/span&gt; &lt;span class="err"&gt;Node&lt;/span&gt; &lt;span class="err"&gt;版本（显示&lt;/span&gt; &lt;span class="err"&gt;v&lt;/span&gt;&lt;span class="mf"&gt;22.12&lt;/span&gt;&lt;span class="err"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="err"&gt;则表示成功）&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;npm&lt;/span&gt; &lt;span class="err"&gt;-v&lt;/span&gt; &lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="err"&gt;验证&lt;/span&gt; &lt;span class="err"&gt;npm&lt;/span&gt; &lt;span class="err"&gt;可用&lt;/span&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;nvm&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;install&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;22.12&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;nvm&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;use&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;22.12&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;      &lt;span class=&#34;err&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;切换到该版本&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;node&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;-v&lt;/span&gt;  &lt;span class=&#34;err&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;验证&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;Node&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;版本（显示&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;v&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;22.12&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;则表示成功）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;npm&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;-v&lt;/span&gt;   &lt;span class=&#34;err&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;验证&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;npm&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;可用&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="安装步骤"&gt;安装步骤
+&lt;/div&gt;&lt;h2 id=&#34;安装步骤&#34;&gt;安装步骤
 &lt;/h2&gt;&lt;p&gt;以管理员权限打开 PowerShell，执行：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;npm install -g openclaw
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;npm install -g openclaw
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;验证安装的版本：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;openclaw -v
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;openclaw -v
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src="https://iamxurulin.github.io/images/717bf30d7c84b2f28ce867cf00fa751a-ab93e4b4.png"
-loading="lazy"
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://iamxurulin.github.io/images/717bf30d7c84b2f28ce867cf00fa751a-ab93e4b4.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
 &gt;&lt;/p&gt;
-&lt;h2 id="配置-qwen-大模型"&gt;配置 Qwen 大模型
+&lt;h2 id=&#34;配置-qwen-大模型&#34;&gt;配置 Qwen 大模型
 &lt;/h2&gt;&lt;p&gt;以管理员权限打开 PowerShell，执行：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="err"&gt;Environment&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="err"&gt;::SetEnvironmentVariable(&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;DASHSCOPE_API_KEY&amp;#34;&lt;/span&gt;&lt;span class="err"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;你的sk-xxx密钥&amp;#34;&lt;/span&gt;&lt;span class="err"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;User&amp;#34;&lt;/span&gt;&lt;span class="err"&gt;)&lt;/span&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;Environment&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;::SetEnvironmentVariable(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;DASHSCOPE_API_KEY&amp;#34;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;你的sk-xxx密钥&amp;#34;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;User&amp;#34;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;修改 D:\SOFT_WARE\OpenClaw\data.openclaw\openclaw.json 文件。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
-&lt;/span&gt;&lt;span class="lnt"&gt; 2
-&lt;/span&gt;&lt;span class="lnt"&gt; 3
-&lt;/span&gt;&lt;span class="lnt"&gt; 4
-&lt;/span&gt;&lt;span class="lnt"&gt; 5
-&lt;/span&gt;&lt;span class="lnt"&gt; 6
-&lt;/span&gt;&lt;span class="lnt"&gt; 7
-&lt;/span&gt;&lt;span class="lnt"&gt; 8
-&lt;/span&gt;&lt;span class="lnt"&gt; 9
-&lt;/span&gt;&lt;span class="lnt"&gt;10
-&lt;/span&gt;&lt;span class="lnt"&gt;11
-&lt;/span&gt;&lt;span class="lnt"&gt;12
-&lt;/span&gt;&lt;span class="lnt"&gt;13
-&lt;/span&gt;&lt;span class="lnt"&gt;14
-&lt;/span&gt;&lt;span class="lnt"&gt;15
-&lt;/span&gt;&lt;span class="lnt"&gt;16
-&lt;/span&gt;&lt;span class="lnt"&gt;17
-&lt;/span&gt;&lt;span class="lnt"&gt;18
-&lt;/span&gt;&lt;span class="lnt"&gt;19
-&lt;/span&gt;&lt;span class="lnt"&gt;20
-&lt;/span&gt;&lt;span class="lnt"&gt;21
-&lt;/span&gt;&lt;span class="lnt"&gt;22
-&lt;/span&gt;&lt;span class="lnt"&gt;23
-&lt;/span&gt;&lt;span class="lnt"&gt;24
-&lt;/span&gt;&lt;span class="lnt"&gt;25
-&lt;/span&gt;&lt;span class="lnt"&gt;26
-&lt;/span&gt;&lt;span class="lnt"&gt;27
-&lt;/span&gt;&lt;span class="lnt"&gt;28
-&lt;/span&gt;&lt;span class="lnt"&gt;29
-&lt;/span&gt;&lt;span class="lnt"&gt;30
-&lt;/span&gt;&lt;span class="lnt"&gt;31
-&lt;/span&gt;&lt;span class="lnt"&gt;32
-&lt;/span&gt;&lt;span class="lnt"&gt;33
-&lt;/span&gt;&lt;span class="lnt"&gt;34
-&lt;/span&gt;&lt;span class="lnt"&gt;35
-&lt;/span&gt;&lt;span class="lnt"&gt;36
-&lt;/span&gt;&lt;span class="lnt"&gt;37
-&lt;/span&gt;&lt;span class="lnt"&gt;38
-&lt;/span&gt;&lt;span class="lnt"&gt;39
-&lt;/span&gt;&lt;span class="lnt"&gt;40
-&lt;/span&gt;&lt;span class="lnt"&gt;41
-&lt;/span&gt;&lt;span class="lnt"&gt;42
-&lt;/span&gt;&lt;span class="lnt"&gt;43
-&lt;/span&gt;&lt;span class="lnt"&gt;44
-&lt;/span&gt;&lt;span class="lnt"&gt;45
-&lt;/span&gt;&lt;span class="lnt"&gt;46
-&lt;/span&gt;&lt;span class="lnt"&gt;47
-&lt;/span&gt;&lt;span class="lnt"&gt;48
-&lt;/span&gt;&lt;span class="lnt"&gt;49
-&lt;/span&gt;&lt;span class="lnt"&gt;50
-&lt;/span&gt;&lt;span class="lnt"&gt;51
-&lt;/span&gt;&lt;span class="lnt"&gt;52
-&lt;/span&gt;&lt;span class="lnt"&gt;53
-&lt;/span&gt;&lt;span class="lnt"&gt;54
-&lt;/span&gt;&lt;span class="lnt"&gt;55
-&lt;/span&gt;&lt;span class="lnt"&gt;56
-&lt;/span&gt;&lt;span class="lnt"&gt;57
-&lt;/span&gt;&lt;span class="lnt"&gt;58
-&lt;/span&gt;&lt;span class="lnt"&gt;59
-&lt;/span&gt;&lt;span class="lnt"&gt;60
-&lt;/span&gt;&lt;span class="lnt"&gt;61
-&lt;/span&gt;&lt;span class="lnt"&gt;62
-&lt;/span&gt;&lt;span class="lnt"&gt;63
-&lt;/span&gt;&lt;span class="lnt"&gt;64
-&lt;/span&gt;&lt;span class="lnt"&gt;65
-&lt;/span&gt;&lt;span class="lnt"&gt;66
-&lt;/span&gt;&lt;span class="lnt"&gt;67
-&lt;/span&gt;&lt;span class="lnt"&gt;68
-&lt;/span&gt;&lt;span class="lnt"&gt;69
-&lt;/span&gt;&lt;span class="lnt"&gt;70
-&lt;/span&gt;&lt;span class="lnt"&gt;71
-&lt;/span&gt;&lt;span class="lnt"&gt;72
-&lt;/span&gt;&lt;span class="lnt"&gt;73
-&lt;/span&gt;&lt;span class="lnt"&gt;74
-&lt;/span&gt;&lt;span class="lnt"&gt;75
-&lt;/span&gt;&lt;span class="lnt"&gt;76
-&lt;/span&gt;&lt;span class="lnt"&gt;77
-&lt;/span&gt;&lt;span class="lnt"&gt;78
-&lt;/span&gt;&lt;span class="lnt"&gt;79
-&lt;/span&gt;&lt;span class="lnt"&gt;80
-&lt;/span&gt;&lt;span class="lnt"&gt;81
-&lt;/span&gt;&lt;span class="lnt"&gt;82
-&lt;/span&gt;&lt;span class="lnt"&gt;83
-&lt;/span&gt;&lt;span class="lnt"&gt;84
-&lt;/span&gt;&lt;span class="lnt"&gt;85
-&lt;/span&gt;&lt;span class="lnt"&gt;86
-&lt;/span&gt;&lt;span class="lnt"&gt;87
-&lt;/span&gt;&lt;span class="lnt"&gt;88
-&lt;/span&gt;&lt;span class="lnt"&gt;89
-&lt;/span&gt;&lt;span class="lnt"&gt;90
-&lt;/span&gt;&lt;span class="lnt"&gt;91
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;50
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;51
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;52
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;53
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;54
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;55
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;56
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;57
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;58
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;59
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;60
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;61
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;62
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;63
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;64
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;65
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;66
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;67
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;68
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;69
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;70
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;71
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;72
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;73
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;74
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;75
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;76
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;77
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;78
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;79
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;80
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;81
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;82
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;83
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;84
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;85
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;86
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;87
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;88
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;89
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;90
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;91
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;meta&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;lastTouchedVersion&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;2026.2.19-2&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;lastTouchedAt&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;2026-02-20T04:31:04.294Z&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;},&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;wizard&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;lastRunAt&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;2026-02-20T03:22:24.306Z&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;lastRunVersion&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;2026.2.19-2&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;lastRunCommand&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;configure&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;lastRunMode&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;local&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;},&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;agents&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;defaults&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;model&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;primary&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;bailian/qwen3.5-plus-2026-02-15&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;},&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;models&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;bailian/qwen3.5-plus-2026-02-15&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;alias&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;通义千问3.5 Plus&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;},&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;bailian/qwen3.5-plus&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;alias&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;通义千问 Plus&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;},&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;workspace&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;D:\\SOFT_WARE\\OpenClaw\\workspace&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;compaction&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;mode&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;safeguard&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;},&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;maxConcurrent&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;subagents&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;maxConcurrent&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;8&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;},&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;models&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;mode&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;merge&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;providers&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;bailian&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;baseUrl&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;https://dashscope.aliyuncs.com/compatible-mode/v1&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;apiKey&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;${DASHSCOPE_API_KEY}&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;api&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;openai-completions&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;models&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;id&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;qwen3.5-plus-2026-02-15&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;name&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;通义千问3.5 Plus&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;reasoning&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;input&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;text&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;cost&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;input&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.0025&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;output&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.01&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;},&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;contextWindow&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;262144&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;maxTokens&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;65536&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;},&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;id&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;qwen3.5-plus&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;name&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;通义千问3.5 Plus&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;reasoning&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;input&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;text&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;cost&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;input&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.008&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;output&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.008&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;},&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;contextWindow&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1029000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;maxTokens&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;32000&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;},&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;tools&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;web&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;search&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nt"&gt;&amp;#34;enabled&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt; &lt;span class="p"&gt;},&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;fetch&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nt"&gt;&amp;#34;enabled&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;},&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;gateway&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;port&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;12345&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;mode&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;local&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;bind&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;loopback&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;auth&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;mode&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;token&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;token&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;你的自定义Token&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;},&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;commands&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;native&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;auto&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;nativeSkills&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;auto&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;restart&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;#34;meta&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;#34;lastTouchedVersion&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;2026.2.19-2&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;#34;lastTouchedAt&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;2026-02-20T04:31:04.294Z&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;#34;wizard&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;#34;lastRunAt&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;2026-02-20T03:22:24.306Z&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;#34;lastRunVersion&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;2026.2.19-2&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;#34;lastRunCommand&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;configure&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;#34;lastRunMode&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;local&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;#34;agents&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;#34;defaults&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;nt&#34;&gt;&amp;#34;model&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;#34;primary&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;bailian/qwen3.5-plus-2026-02-15&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;nt&#34;&gt;&amp;#34;models&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;#34;bailian/qwen3.5-plus-2026-02-15&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          &lt;span class=&#34;nt&#34;&gt;&amp;#34;alias&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;通义千问3.5 Plus&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;#34;bailian/qwen3.5-plus&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          &lt;span class=&#34;nt&#34;&gt;&amp;#34;alias&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;通义千问 Plus&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;nt&#34;&gt;&amp;#34;workspace&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;D:\\SOFT_WARE\\OpenClaw\\workspace&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;nt&#34;&gt;&amp;#34;compaction&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;#34;mode&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;safeguard&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;nt&#34;&gt;&amp;#34;maxConcurrent&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;nt&#34;&gt;&amp;#34;subagents&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;#34;maxConcurrent&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;8&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;#34;models&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;#34;mode&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;merge&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;#34;providers&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;nt&#34;&gt;&amp;#34;bailian&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;#34;baseUrl&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;https://dashscope.aliyuncs.com/compatible-mode/v1&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;#34;apiKey&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;${DASHSCOPE_API_KEY}&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;#34;api&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;openai-completions&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;#34;models&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nt&#34;&gt;&amp;#34;id&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;qwen3.5-plus-2026-02-15&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nt&#34;&gt;&amp;#34;name&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;通义千问3.5 Plus&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nt&#34;&gt;&amp;#34;reasoning&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;false&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nt&#34;&gt;&amp;#34;input&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;text&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nt&#34;&gt;&amp;#34;cost&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;              &lt;span class=&#34;nt&#34;&gt;&amp;#34;input&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;0.0025&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;              &lt;span class=&#34;nt&#34;&gt;&amp;#34;output&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;0.01&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nt&#34;&gt;&amp;#34;contextWindow&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;262144&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nt&#34;&gt;&amp;#34;maxTokens&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;65536&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          &lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nt&#34;&gt;&amp;#34;id&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;qwen3.5-plus&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nt&#34;&gt;&amp;#34;name&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;通义千问3.5 Plus&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nt&#34;&gt;&amp;#34;reasoning&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;false&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nt&#34;&gt;&amp;#34;input&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;text&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nt&#34;&gt;&amp;#34;cost&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;              &lt;span class=&#34;nt&#34;&gt;&amp;#34;input&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;0.008&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;              &lt;span class=&#34;nt&#34;&gt;&amp;#34;output&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;0.008&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nt&#34;&gt;&amp;#34;contextWindow&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1029000&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nt&#34;&gt;&amp;#34;maxTokens&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;32000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;#34;tools&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;#34;web&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;nt&#34;&gt;&amp;#34;search&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;nt&#34;&gt;&amp;#34;enabled&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;nt&#34;&gt;&amp;#34;fetch&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;nt&#34;&gt;&amp;#34;enabled&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;#34;gateway&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;#34;port&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;12345&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;#34;mode&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;local&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;#34;bind&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;loopback&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;#34;auth&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;nt&#34;&gt;&amp;#34;mode&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;token&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;nt&#34;&gt;&amp;#34;token&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;你的自定义Token&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;#34;commands&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;#34;native&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;auto&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;#34;nativeSkills&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;auto&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;#34;restart&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="启动网关服务"&gt;启动网关服务
+&lt;/div&gt;&lt;h2 id=&#34;启动网关服务&#34;&gt;启动网关服务
 &lt;/h2&gt;&lt;p&gt;OpenClaw 依靠网关（Gateway）提供网页交互界面。以管理员权限打开 PowerShell，执行：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;openclaw gateway install --force &lt;span class="c1"&gt;# 加 --force 避免残留配置冲突&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;openclaw gateway start
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;openclaw gateway install --force  &lt;span class=&#34;c1&#34;&gt;# 加 --force 避免残留配置冲突&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;openclaw gateway start
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="网页端使用与登录"&gt;网页端使用与登录
+&lt;/div&gt;&lt;h2 id=&#34;网页端使用与登录&#34;&gt;网页端使用与登录
 &lt;/h2&gt;&lt;p&gt;在命令行输入&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;openclaw config get gateway.auth.token
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;openclaw config get gateway.auth.token 
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;获取登录 Token或者直接从 JSON 中复制。&lt;/p&gt;
-&lt;p&gt;打开浏览器访问 &lt;a class="link" href="http://127.0.0.1:26220%e3%80%82" target="_blank" rel="noopener"
-&gt;http://127.0.0.1:&lt;/a&gt;你的端口号&lt;/p&gt;
-&lt;h2 id="小贴士"&gt;小贴士
+&lt;p&gt;打开浏览器访问 &lt;a class=&#34;link&#34; href=&#34;http://127.0.0.1:26220%e3%80%82&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;http://127.0.0.1:&lt;/a&gt;你的端口号&lt;/p&gt;
+&lt;h2 id=&#34;小贴士&#34;&gt;小贴士
 &lt;/h2&gt;&lt;p&gt;1.Windows 路径在 JSON 中必须使用双反斜杠 \。&lt;br&gt;
 2.浏览器的无痕模式会丢失本地缓存，可能会导致每次刷新页面都要重新输入 Token。&lt;br&gt;
-&lt;a class="link" href="http://127.0.0.1:26220/?token=%e4%bd%a0%e7%9a%84TOKEN" target="_blank" rel="noopener"
-&gt;http://127.0.0.1:你的端口号/?token=你的TOKEN&lt;/a&gt;&lt;/p&gt;
-&lt;ol start="3"&gt;
+&lt;a class=&#34;link&#34; href=&#34;http://127.0.0.1:26220/?token=%e4%bd%a0%e7%9a%84TOKEN&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;http://127.0.0.1:你的端口号/?token=你的TOKEN&lt;/a&gt;&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
 &lt;li&gt;
 &lt;p&gt;修改 &lt;code&gt;openclaw.json&lt;/code&gt; 后需重启网关（&lt;code&gt;openclaw gateway restart&lt;/code&gt;）才能生效；&lt;/p&gt;
 &lt;/li&gt;
@@ -307,26 +332,71 @@ loading="lazy"
 &lt;p&gt;5.卸载网关：&lt;code&gt;openclaw gateway uninstall --force&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;6.&lt;code&gt;&amp;quot;port&amp;quot;: 你的端口号&lt;/code&gt; ➡️ 填写纯数字（如 12345）；&lt;/p&gt;
 &lt;p&gt;7.&lt;code&gt;&amp;quot;token&amp;quot;: &amp;quot;你的自定义Token&amp;quot;&lt;/code&gt; ➡️ 填写任意字符串（如 &lt;code&gt;openclaw_123456&lt;/code&gt;）&lt;/p&gt;
-&lt;p&gt;AI 浪潮下，工具的配置是第一步。希望这篇笔记能帮大家在 Windows 平台上少走弯路！&lt;/p&gt;</description></item><item><title>说说MCP的工作流程</title><link>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4mcp%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B/</link><pubDate>Wed, 21 Jan 2026 17:29:21 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4mcp%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B/</guid><description>&lt;p&gt;1.首先主机应用程序启动并初始化&lt;strong&gt;MCP客户端&lt;/strong&gt;，每个客户端与一个MCP服务器建立专属连接，确保通信链路的稳定性与安全性。&lt;/p&gt;
+&lt;p&gt;AI 浪潮下，工具的配置是第一步。希望这篇笔记能帮大家在 Windows 平台上少走弯路！&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>说说MCP的工作流程</title>
+        <link>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4mcp%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B/</link>
+        <pubDate>Wed, 21 Jan 2026 17:29:21 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4mcp%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B/</guid>
+        <description>&lt;p&gt;1.首先主机应用程序启动并初始化&lt;strong&gt;MCP客户端&lt;/strong&gt;，每个客户端与一个MCP服务器建立专属连接，确保通信链路的稳定性与安全性。&lt;/p&gt;
 &lt;p&gt;2.在系统初始化阶段，MCP Client首先从MCP Server获取可用的&lt;strong&gt;工具清单和能力描述&lt;/strong&gt;，让模型知道有哪些可以调用的外部技能。&lt;/p&gt;
 &lt;p&gt;3.当用户输入一个问题后，MCP Client会将这些工具描述采用Function Calling格式传给LLM，让模型具备调用外部工具的能力。&lt;/p&gt;
 &lt;p&gt;4.LLM根据当前对话的上下文、用户问题意图以及工具能力描述，判断是否需要使用外部工具，并决定调用哪一个工具、传入什么参数。&lt;/p&gt;
 &lt;p&gt;5.如果模型发起调用请求，MCP Client会根据模型的选择，通过MCP Server发起标准化的工具调用请求，由MCP Server执行实际工具逻辑后，将结果返回给MCP Client。&lt;/p&gt;
 &lt;p&gt;6.当工具的执行结果被传回LLM后，由模型将这个结果与原始用户问题以及已有的上下文等信息进行整合，生成符合用户需求的自然语言回应。&lt;/p&gt;
-&lt;p&gt;7.最后，MCP Client将模型生成的回答展示给用户。&lt;/p&gt;</description></item><item><title>MCP协议的安全性设计包含哪些层面？</title><link>https://iamxurulin.github.io/p/mcp%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%AE%89%E5%85%A8%E6%80%A7%E8%AE%BE%E8%AE%A1%E5%8C%85%E5%90%AB%E5%93%AA%E4%BA%9B%E5%B1%82%E9%9D%A2/</link><pubDate>Tue, 20 Jan 2026 15:43:02 +0000</pubDate><guid>https://iamxurulin.github.io/p/mcp%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%AE%89%E5%85%A8%E6%80%A7%E8%AE%BE%E8%AE%A1%E5%8C%85%E5%90%AB%E5%93%AA%E4%BA%9B%E5%B1%82%E9%9D%A2/</guid><description>&lt;p&gt;MCP协议的安全性设计主要是为了确保大模型系统在与外部工具和资源进行交互时的安全性和可靠性。&lt;/p&gt;
+&lt;p&gt;7.最后，MCP Client将模型生成的回答展示给用户。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>MCP协议的安全性设计包含哪些层面？</title>
+        <link>https://iamxurulin.github.io/p/mcp%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%AE%89%E5%85%A8%E6%80%A7%E8%AE%BE%E8%AE%A1%E5%8C%85%E5%90%AB%E5%93%AA%E4%BA%9B%E5%B1%82%E9%9D%A2/</link>
+        <pubDate>Tue, 20 Jan 2026 15:43:02 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/mcp%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%AE%89%E5%85%A8%E6%80%A7%E8%AE%BE%E8%AE%A1%E5%8C%85%E5%90%AB%E5%93%AA%E4%BA%9B%E5%B1%82%E9%9D%A2/</guid>
+        <description>&lt;p&gt;MCP协议的安全性设计主要是为了确保大模型系统在与外部工具和资源进行交互时的安全性和可靠性。&lt;/p&gt;
 &lt;p&gt;主要包含&lt;strong&gt;用户同意和控制&lt;/strong&gt;、&lt;strong&gt;隔离与沙箱机制&lt;/strong&gt;、&lt;strong&gt;加密传输与来源验证这3个层面&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;1.所有模型对工具、资源和提示的访问请求都必须经过用户的授权，用户必须知道哪些数据是需要提供给大模型的，在授权之前应该了解每个工具的功能。&lt;/p&gt;
 &lt;p&gt;2.MCP将实际工具调用封装在MCP Server内部，模型本身无法直接访问敏感数据；沙箱机制对工具调用的执行环境进行限制，防止恶意操作对系统的破坏。&lt;/p&gt;
-&lt;p&gt;3.MCP内置的安全机制确保只有经过了验证的请求才能访问特定的资源，另外MCP协议还支持多种加密算法。&lt;/p&gt;</description></item><item><title>怎么将已有的应用转换成MCP服务</title><link>https://iamxurulin.github.io/p/%E6%80%8E%E4%B9%88%E5%B0%86%E5%B7%B2%E6%9C%89%E7%9A%84%E5%BA%94%E7%94%A8%E8%BD%AC%E6%8D%A2%E6%88%90mcp%E6%9C%8D%E5%8A%A1/</link><pubDate>Mon, 19 Jan 2026 16:38:18 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E6%80%8E%E4%B9%88%E5%B0%86%E5%B7%B2%E6%9C%89%E7%9A%84%E5%BA%94%E7%94%A8%E8%BD%AC%E6%8D%A2%E6%88%90mcp%E6%9C%8D%E5%8A%A1/</guid><description>&lt;p&gt;将已有的应用转换为MCP（Model Context Protocol）服务需要将该应用的功能封装为标准化的MCP&lt;strong&gt;工具&lt;/strong&gt;、&lt;strong&gt;资源&lt;/strong&gt;或者&lt;strong&gt;提示&lt;/strong&gt;，再通过MCP Server对外&lt;strong&gt;暴露&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;3.MCP内置的安全机制确保只有经过了验证的请求才能访问特定的资源，另外MCP协议还支持多种加密算法。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>怎么将已有的应用转换成MCP服务</title>
+        <link>https://iamxurulin.github.io/p/%E6%80%8E%E4%B9%88%E5%B0%86%E5%B7%B2%E6%9C%89%E7%9A%84%E5%BA%94%E7%94%A8%E8%BD%AC%E6%8D%A2%E6%88%90mcp%E6%9C%8D%E5%8A%A1/</link>
+        <pubDate>Mon, 19 Jan 2026 16:38:18 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E6%80%8E%E4%B9%88%E5%B0%86%E5%B7%B2%E6%9C%89%E7%9A%84%E5%BA%94%E7%94%A8%E8%BD%AC%E6%8D%A2%E6%88%90mcp%E6%9C%8D%E5%8A%A1/</guid>
+        <description>&lt;p&gt;将已有的应用转换为MCP（Model Context Protocol）服务需要将该应用的功能封装为标准化的MCP&lt;strong&gt;工具&lt;/strong&gt;、&lt;strong&gt;资源&lt;/strong&gt;或者&lt;strong&gt;提示&lt;/strong&gt;，再通过MCP Server对外&lt;strong&gt;暴露&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;主要步骤如下：&lt;/p&gt;
 &lt;p&gt;1.首先需要识别应用中要提供给外部调用的功能，比如说API接口、数据查询、业务计算、资源检索这类能力。&lt;/p&gt;
 &lt;p&gt;2.再创建一个新的MCP服务，将其与已有的&lt;strong&gt;业务服务&lt;/strong&gt;隔离开，通过标准化的内部API或SDK和业务服务进行&lt;strong&gt;解耦通信&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;3.对MCP服务需要包含的&lt;strong&gt;工具功能描述&lt;/strong&gt;、&lt;strong&gt;方法入参&lt;/strong&gt;字段、类型、描述，以及&lt;strong&gt;方法返回值&lt;/strong&gt;的字段、类型、描述进行标准化定义。&lt;/p&gt;
-&lt;p&gt;4.根据MCP协议规范，构建一个用于接收MCP 客户端请求、做标准化协议解析与参数校验、调用相应业务功能并返回标准化结果的MCP Server。&lt;/p&gt;</description></item><item><title>大模型的微调和预训练区别是什么</title><link>https://iamxurulin.github.io/p/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BE%AE%E8%B0%83%E5%92%8C%E9%A2%84%E8%AE%AD%E7%BB%83%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88/</link><pubDate>Mon, 19 Jan 2026 16:12:13 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BE%AE%E8%B0%83%E5%92%8C%E9%A2%84%E8%AE%AD%E7%BB%83%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88/</guid><description>&lt;p&gt;大模型微调（Fine-tuning of Large Models）是指在&lt;strong&gt;预训练（Pre-training）模型&lt;/strong&gt;的基础上，使用特定任务的数据对模型进行再训练，使模型适应特定应用场景的需求，本质上就是&lt;strong&gt;迁移学习&lt;/strong&gt;在大模型中的&lt;strong&gt;落地方式&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;4.根据MCP协议规范，构建一个用于接收MCP 客户端请求、做标准化协议解析与参数校验、调用相应业务功能并返回标准化结果的MCP Server。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>大模型的微调和预训练区别是什么</title>
+        <link>https://iamxurulin.github.io/p/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BE%AE%E8%B0%83%E5%92%8C%E9%A2%84%E8%AE%AD%E7%BB%83%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88/</link>
+        <pubDate>Mon, 19 Jan 2026 16:12:13 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BE%AE%E8%B0%83%E5%92%8C%E9%A2%84%E8%AE%AD%E7%BB%83%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88/</guid>
+        <description>&lt;p&gt;大模型微调（Fine-tuning of Large Models）是指在&lt;strong&gt;预训练（Pre-training）模型&lt;/strong&gt;的基础上，使用特定任务的数据对模型进行再训练，使模型适应特定应用场景的需求，本质上就是&lt;strong&gt;迁移学习&lt;/strong&gt;在大模型中的&lt;strong&gt;落地方式&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;微调和预训练的区别主要在于&lt;strong&gt;目标&lt;/strong&gt;、&lt;strong&gt;数据来源&lt;/strong&gt;和&lt;strong&gt;训练方式&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;1.预训练通常是在&lt;strong&gt;大规模通用数据集&lt;/strong&gt;上进行训练，让模型学习&lt;strong&gt;通用的语言规律或者知识&lt;/strong&gt;；而微调通常是在&lt;strong&gt;特定任务的数据集&lt;/strong&gt;上进行训练，让模型&lt;strong&gt;适应特定的任务&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;2.预训练通常采用的是&lt;strong&gt;无监督或者自监督学习&lt;/strong&gt;的方式，而微调通常采用的是&lt;strong&gt;监督学习&lt;/strong&gt;的方式。&lt;/p&gt;
-&lt;p&gt;微调在自然语言处理中的&lt;strong&gt;文本分类&lt;/strong&gt;、&lt;strong&gt;命名实体识别&lt;/strong&gt;以及计算机视觉中的图&lt;strong&gt;像分类&lt;/strong&gt;、&lt;strong&gt;目标检测&lt;/strong&gt;都有广泛的应用。&lt;/p&gt;</description></item><item><title>说说大模型中的PEFT</title><link>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%B8%AD%E7%9A%84peft/</link><pubDate>Sun, 18 Jan 2026 16:51:50 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%B8%AD%E7%9A%84peft/</guid><description>&lt;p&gt;PEFT（Parameter Efficient Fine Tuning）参数高效微调是一种在微调预训练大模型时，只对适配器模块、低秩增量矩阵和提示嵌入这些少量的新增参数进行训练，并对原始模型的大部分权重进行冻结的策略。&lt;/p&gt;
+&lt;p&gt;微调在自然语言处理中的&lt;strong&gt;文本分类&lt;/strong&gt;、&lt;strong&gt;命名实体识别&lt;/strong&gt;以及计算机视觉中的图&lt;strong&gt;像分类&lt;/strong&gt;、&lt;strong&gt;目标检测&lt;/strong&gt;都有广泛的应用。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>说说大模型中的PEFT</title>
+        <link>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%B8%AD%E7%9A%84peft/</link>
+        <pubDate>Sun, 18 Jan 2026 16:51:50 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%B8%AD%E7%9A%84peft/</guid>
+        <description>&lt;p&gt;PEFT（Parameter Efficient Fine Tuning）参数高效微调是一种在微调预训练大模型时，只对适配器模块、低秩增量矩阵和提示嵌入这些少量的新增参数进行训练，并对原始模型的大部分权重进行冻结的策略。&lt;/p&gt;
 &lt;p&gt;PEFT能够在计算和存储成本大幅度降低的前提下，仍然能够保持与全量微调相近的性能。&lt;/p&gt;
 &lt;p&gt;那什么要有这样一种微调方法呢？&lt;/p&gt;
 &lt;p&gt;主要是全量微调对显存、算力以及存储的要求都非常高，并且迭代速度很慢，不利于多任务和在线更新；&lt;/p&gt;
@@ -336,11 +406,20 @@ loading="lazy"
 &lt;p&gt;1.PEFT方法能够将可训练参数比例控制在0.1%~5%之间，能够显著地节省计算资源和存储空间。&lt;/p&gt;
 &lt;p&gt;2.少量的可训练参数往往意味着反向传播与梯度更新的计算量大幅度下降，训练时间也能够缩短数倍，这样就能加快训练的收敛速度。&lt;/p&gt;
 &lt;p&gt;3.由于PEFT保留了预训练阶段学习到的通用知识，因此在数据稀缺或者小样本环境下，还能够降低过拟合的风险。&lt;/p&gt;
-&lt;p&gt;4.PEFT生成的Adapter、LoRA和Prefix这些增量模块可以和基础模型分离存储，这样不同的任务只需要加载对应的模块。&lt;/p&gt;</description></item><item><title>大模型中常见的微调方法</title><link>https://iamxurulin.github.io/p/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%B8%AD%E5%B8%B8%E8%A7%81%E7%9A%84%E5%BE%AE%E8%B0%83%E6%96%B9%E6%B3%95/</link><pubDate>Sun, 18 Jan 2026 16:26:29 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%B8%AD%E5%B8%B8%E8%A7%81%E7%9A%84%E5%BE%AE%E8%B0%83%E6%96%B9%E6%B3%95/</guid><description>&lt;p&gt;Fine-tuning大模型微调指的是在&lt;strong&gt;预训练模型&lt;/strong&gt;的基础上，使用特定的数据对模型进行&lt;strong&gt;再训练&lt;/strong&gt;，以适应特定应用场景的需求。&lt;/p&gt;
+&lt;p&gt;4.PEFT生成的Adapter、LoRA和Prefix这些增量模块可以和基础模型分离存储，这样不同的任务只需要加载对应的模块。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>大模型中常见的微调方法</title>
+        <link>https://iamxurulin.github.io/p/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%B8%AD%E5%B8%B8%E8%A7%81%E7%9A%84%E5%BE%AE%E8%B0%83%E6%96%B9%E6%B3%95/</link>
+        <pubDate>Sun, 18 Jan 2026 16:26:29 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%B8%AD%E5%B8%B8%E8%A7%81%E7%9A%84%E5%BE%AE%E8%B0%83%E6%96%B9%E6%B3%95/</guid>
+        <description>&lt;p&gt;Fine-tuning大模型微调指的是在&lt;strong&gt;预训练模型&lt;/strong&gt;的基础上，使用特定的数据对模型进行&lt;strong&gt;再训练&lt;/strong&gt;，以适应特定应用场景的需求。&lt;/p&gt;
 &lt;p&gt;常见的微调方法分为&lt;strong&gt;全量微调&lt;/strong&gt;、&lt;strong&gt;参数高效微调&lt;/strong&gt;以及&lt;strong&gt;量化与混合微调&lt;/strong&gt;这三类。&lt;/p&gt;
-&lt;h2 id="全量微调"&gt;全量微调
+&lt;h2 id=&#34;全量微调&#34;&gt;全量微调
 &lt;/h2&gt;&lt;p&gt;全量微调是直接对预训练模型中的&lt;strong&gt;所有参数&lt;/strong&gt;进行再训练，使模型适应特定任务或者领域的需求，这种方式可以获得最佳的任务性能，不过缺点也很明显，因为是对所有参数再次训练，所以计算和存储的开销极大。&lt;/p&gt;
-&lt;h2 id="参数高效微调parameter-efficient-fine-tuningpeft"&gt;参数高效微调（Parameter-Efficient Fine-tuning，PEFT）
+&lt;h2 id=&#34;参数高效微调parameter-efficient-fine-tuningpeft&#34;&gt;参数高效微调（Parameter-Efficient Fine-tuning，PEFT）
 &lt;/h2&gt;&lt;p&gt;参数高效微调只更新少量的参数，从而大幅度降低训练和存储的成本。&lt;/p&gt;
 &lt;p&gt;有以下6种方法：&lt;/p&gt;
 &lt;ol&gt;
@@ -363,9 +442,18 @@ loading="lazy"
 &lt;p&gt;&lt;code&gt;BitFit&lt;/code&gt;只更新bias参数，训练参数占比通常小于0.1%。&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id="量化与混合微调"&gt;量化与混合微调
+&lt;h2 id=&#34;量化与混合微调&#34;&gt;量化与混合微调
 &lt;/h2&gt;&lt;p&gt;&lt;code&gt;QLoRA&lt;/code&gt;结合了&lt;code&gt;4-bit&lt;/code&gt;量化、&lt;code&gt;LoRA&lt;/code&gt;、双量化和分页优化器，利用低精度存储与低秩适配，单卡就能对百亿级模型进行微调。&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;IR -QLoRA&lt;/code&gt;在量化阶段引入&lt;strong&gt;信息保留机制&lt;/strong&gt;与&lt;strong&gt;弹性联结&lt;/strong&gt;，进一步减少了量化带来的性能损耗。&lt;/p&gt;</description></item><item><title>常见的微调任务</title><link>https://iamxurulin.github.io/p/%E5%B8%B8%E8%A7%81%E7%9A%84%E5%BE%AE%E8%B0%83%E4%BB%BB%E5%8A%A1/</link><pubDate>Sat, 17 Jan 2026 18:16:33 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E5%B8%B8%E8%A7%81%E7%9A%84%E5%BE%AE%E8%B0%83%E4%BB%BB%E5%8A%A1/</guid><description>&lt;p&gt;大模型微调（Fine-tuning）是指在预训练模型的基础上，使用特定任务的数据对模型进行再训练，以适应特定应用场景的需求。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;IR -QLoRA&lt;/code&gt;在量化阶段引入&lt;strong&gt;信息保留机制&lt;/strong&gt;与&lt;strong&gt;弹性联结&lt;/strong&gt;，进一步减少了量化带来的性能损耗。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>常见的微调任务</title>
+        <link>https://iamxurulin.github.io/p/%E5%B8%B8%E8%A7%81%E7%9A%84%E5%BE%AE%E8%B0%83%E4%BB%BB%E5%8A%A1/</link>
+        <pubDate>Sat, 17 Jan 2026 18:16:33 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E5%B8%B8%E8%A7%81%E7%9A%84%E5%BE%AE%E8%B0%83%E4%BB%BB%E5%8A%A1/</guid>
+        <description>&lt;p&gt;大模型微调（Fine-tuning）是指在预训练模型的基础上，使用特定任务的数据对模型进行再训练，以适应特定应用场景的需求。&lt;/p&gt;
 &lt;p&gt;在实际的应用中，可以采取全模型微调、部分微调、参数高效微调等不同的策略，以适应不同的场景。&lt;/p&gt;
 &lt;p&gt;常见的微调任务主要🈶️以下几类：&lt;/p&gt;
 &lt;p&gt;1.将文本分为不同的类别&lt;/p&gt;
@@ -373,52 +461,106 @@ loading="lazy"
 &lt;p&gt;3.根据指定的问题，从文本总寻找答案&lt;/p&gt;
 &lt;p&gt;4.生成摘要、段落总结等于输入相关的文本&lt;/p&gt;
 &lt;p&gt;5.将某种语言的文本翻译成另外一种语言&lt;/p&gt;
-&lt;p&gt;6.处理图文匹配、生成图像描述等多种类型的数据&lt;/p&gt;</description></item><item><title>MCP协议在大模型中的作用</title><link>https://iamxurulin.github.io/p/mcp%E5%8D%8F%E8%AE%AE%E5%9C%A8%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%B8%AD%E7%9A%84%E4%BD%9C%E7%94%A8/</link><pubDate>Sat, 17 Jan 2026 18:15:49 +0000</pubDate><guid>https://iamxurulin.github.io/p/mcp%E5%8D%8F%E8%AE%AE%E5%9C%A8%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%B8%AD%E7%9A%84%E4%BD%9C%E7%94%A8/</guid><description>&lt;p&gt;MCP（Model Context Protocol）模型上下文协议，主要是为大语言模型和AI助手提供一个统一的标准化接口，突破了模型对静态知识库的依赖，使其具备了更强的动态交互能力。&lt;/p&gt;
+&lt;p&gt;6.处理图文匹配、生成图像描述等多种类型的数据&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>MCP协议在大模型中的作用</title>
+        <link>https://iamxurulin.github.io/p/mcp%E5%8D%8F%E8%AE%AE%E5%9C%A8%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%B8%AD%E7%9A%84%E4%BD%9C%E7%94%A8/</link>
+        <pubDate>Sat, 17 Jan 2026 18:15:49 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/mcp%E5%8D%8F%E8%AE%AE%E5%9C%A8%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%B8%AD%E7%9A%84%E4%BD%9C%E7%94%A8/</guid>
+        <description>&lt;p&gt;MCP（Model Context Protocol）模型上下文协议，主要是为大语言模型和AI助手提供一个统一的标准化接口，突破了模型对静态知识库的依赖，使其具备了更强的动态交互能力。&lt;/p&gt;
 &lt;p&gt;像数据库、API等其他服务，只要是通过MCP接入，大语言模型都能理解并利用这些资源，从而扩展其功能和应用范围。&lt;/p&gt;
 &lt;p&gt;MCP主要由以下3个方面的作用：&lt;/p&gt;
 &lt;p&gt;1.MCP提供了统一的协议接口，可以实现一次集成，随处连接，简化了模型与外部系统的集成过程。&lt;/p&gt;
 &lt;p&gt;2.MCP能够使模型实时地访问最新的数据和工具。&lt;/p&gt;
-&lt;p&gt;3.MCP使得系统的各个组件可以更加模块化地协作，从而降低了系统的维护成本和出错概率。&lt;/p&gt;</description></item><item><title>MCP架构包含哪些核心组件</title><link>https://iamxurulin.github.io/p/mcp%E6%9E%B6%E6%9E%84%E5%8C%85%E5%90%AB%E5%93%AA%E4%BA%9B%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6/</link><pubDate>Fri, 16 Jan 2026 16:28:50 +0000</pubDate><guid>https://iamxurulin.github.io/p/mcp%E6%9E%B6%E6%9E%84%E5%8C%85%E5%90%AB%E5%93%AA%E4%BA%9B%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6/</guid><description>&lt;p&gt;包含&lt;strong&gt;MCP主机&lt;/strong&gt;、&lt;strong&gt;MCP客户端&lt;/strong&gt;、&lt;strong&gt;MCP服务器&lt;/strong&gt;、&lt;strong&gt;本地数据源&lt;/strong&gt;和&lt;strong&gt;远程服务&lt;/strong&gt;五大核心组件。&lt;/p&gt;
+&lt;p&gt;3.MCP使得系统的各个组件可以更加模块化地协作，从而降低了系统的维护成本和出错概率。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>MCP架构包含哪些核心组件</title>
+        <link>https://iamxurulin.github.io/p/mcp%E6%9E%B6%E6%9E%84%E5%8C%85%E5%90%AB%E5%93%AA%E4%BA%9B%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6/</link>
+        <pubDate>Fri, 16 Jan 2026 16:28:50 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/mcp%E6%9E%B6%E6%9E%84%E5%8C%85%E5%90%AB%E5%93%AA%E4%BA%9B%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6/</guid>
+        <description>&lt;p&gt;包含&lt;strong&gt;MCP主机&lt;/strong&gt;、&lt;strong&gt;MCP客户端&lt;/strong&gt;、&lt;strong&gt;MCP服务器&lt;/strong&gt;、&lt;strong&gt;本地数据源&lt;/strong&gt;和&lt;strong&gt;远程服务&lt;/strong&gt;五大核心组件。&lt;/p&gt;
 &lt;p&gt;MCP 主机是希望通过MCP访问数据的程序。&lt;/p&gt;
-&lt;p&gt;MCP Server主要负责向 LLM 提供结构化上下文和可调用的操作能力。&lt;/p&gt;
+&lt;p&gt;MCP  Server主要负责向 LLM 提供结构化上下文和可调用的操作能力。&lt;/p&gt;
 &lt;p&gt;MCP Server定义了&lt;strong&gt;资源&lt;/strong&gt;、&lt;strong&gt;工具&lt;/strong&gt;、&lt;strong&gt;提示&lt;/strong&gt;三大类基础功能，这三类能力为语言模型提供了更强的上下文输入和交互能力。&lt;/p&gt;
 &lt;p&gt;MCP服务器可以安全地访问用户的计算机文件、数据库和服务这些本地数据源。&lt;/p&gt;
 &lt;p&gt;MCP服务器可以通过API连接到外部的系统。&lt;/p&gt;
 &lt;p&gt;MCP客户端是连接大语言模型与MCP服务器的桥梁，负责在模型与外部工具之间传递信息和协调操作。&lt;/p&gt;
-&lt;p&gt;&lt;font style="background-color:#74B602;"&gt;&lt;/font&gt;&lt;/p&gt;</description></item><item><title>说说你了解的向量数据库</title><link>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4%E4%BD%A0%E4%BA%86%E8%A7%A3%E7%9A%84%E5%90%91%E9%87%8F%E6%95%B0%E6%8D%AE%E5%BA%93/</link><pubDate>Fri, 16 Jan 2026 16:27:12 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4%E4%BD%A0%E4%BA%86%E8%A7%A3%E7%9A%84%E5%90%91%E9%87%8F%E6%95%B0%E6%8D%AE%E5%BA%93/</guid><description>&lt;p&gt;主流的向量数据库有&lt;strong&gt;Milvus&lt;/strong&gt;、&lt;strong&gt;Pinecone&lt;/strong&gt;、&lt;strong&gt;Weaviate&lt;/strong&gt;、&lt;strong&gt;Qdrant&lt;/strong&gt;、&lt;strong&gt;Chroma&lt;/strong&gt;等。&lt;/p&gt;
-&lt;h3 id="1-milvus"&gt;1. Milvus
+&lt;p&gt;&lt;font style=&#34;background-color:#74B602;&#34;&gt;&lt;/font&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>说说你了解的向量数据库</title>
+        <link>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4%E4%BD%A0%E4%BA%86%E8%A7%A3%E7%9A%84%E5%90%91%E9%87%8F%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+        <pubDate>Fri, 16 Jan 2026 16:27:12 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4%E4%BD%A0%E4%BA%86%E8%A7%A3%E7%9A%84%E5%90%91%E9%87%8F%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
+        <description>&lt;p&gt;主流的向量数据库有&lt;strong&gt;Milvus&lt;/strong&gt;、&lt;strong&gt;Pinecone&lt;/strong&gt;、&lt;strong&gt;Weaviate&lt;/strong&gt;、&lt;strong&gt;Qdrant&lt;/strong&gt;、&lt;strong&gt;Chroma&lt;/strong&gt;等。&lt;/p&gt;
+&lt;h3 id=&#34;1-milvus&#34;&gt;1. Milvus
 &lt;/h3&gt;&lt;p&gt;支持TB级向量的增删改操作，以及&lt;strong&gt;近实时查询&lt;/strong&gt;；&lt;/p&gt;
 &lt;p&gt;适合推荐系统、图像检索、NLP等场景。&lt;/p&gt;
-&lt;h3 id="2pinecone"&gt;2.Pinecone
+&lt;h3 id=&#34;2pinecone&#34;&gt;2.Pinecone
 &lt;/h3&gt;&lt;p&gt;开箱即用，高并发性能好；&lt;/p&gt;
 &lt;p&gt;适合实时搜索、快速原型开发等场景；&lt;/p&gt;
 &lt;p&gt;缺点是按使用量计费，使用成本较高；&lt;/p&gt;
-&lt;h3 id="3weaviate"&gt;3.Weaviate
+&lt;h3 id=&#34;3weaviate&#34;&gt;3.Weaviate
 &lt;/h3&gt;&lt;p&gt;支持&lt;strong&gt;文本和图像&lt;/strong&gt;等多模态数据；&lt;/p&gt;
 &lt;p&gt;适合知识图谱和智能问答场景；&lt;/p&gt;
 &lt;p&gt;缺点是复杂查询时的延迟较高；&lt;/p&gt;
-&lt;h3 id="4qdrant"&gt;4.Qdrant
+&lt;h3 id=&#34;4qdrant&#34;&gt;4.Qdrant
 &lt;/h3&gt;&lt;p&gt;支持向量与元数据&lt;strong&gt;联合搜索&lt;/strong&gt;；&lt;/p&gt;
 &lt;p&gt;适合推荐系统中元数据与向量结合的&lt;strong&gt;复杂查询&lt;/strong&gt;；&lt;/p&gt;
-&lt;h3 id="5chroma"&gt;5.Chroma
+&lt;h3 id=&#34;5chroma&#34;&gt;5.Chroma
 &lt;/h3&gt;&lt;p&gt;专注嵌入式向量存储，支持本地化部署；&lt;/p&gt;
-&lt;p&gt;适合中小规模数据；&lt;/p&gt;</description></item><item><title>解释一下向量数据库中的HNSW、LSH和PQ</title><link>https://iamxurulin.github.io/p/%E8%A7%A3%E9%87%8A%E4%B8%80%E4%B8%8B%E5%90%91%E9%87%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%9A%84hnswlsh%E5%92%8Cpq/</link><pubDate>Thu, 15 Jan 2026 17:53:06 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E8%A7%A3%E9%87%8A%E4%B8%80%E4%B8%8B%E5%90%91%E9%87%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%9A%84hnswlsh%E5%92%8Cpq/</guid><description>&lt;p&gt;HNSW、LSH和PQ是向量数据库中的3种核心&lt;strong&gt;索引与压缩技&lt;/strong&gt;术，用于加速高维向量的相&lt;strong&gt;似性搜索&lt;/strong&gt;。&lt;/p&gt;
-&lt;h3 id="hnsw"&gt;HNSW
+&lt;p&gt;适合中小规模数据；&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>解释一下向量数据库中的HNSW、LSH和PQ</title>
+        <link>https://iamxurulin.github.io/p/%E8%A7%A3%E9%87%8A%E4%B8%80%E4%B8%8B%E5%90%91%E9%87%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%9A%84hnswlsh%E5%92%8Cpq/</link>
+        <pubDate>Thu, 15 Jan 2026 17:53:06 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E8%A7%A3%E9%87%8A%E4%B8%80%E4%B8%8B%E5%90%91%E9%87%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%9A%84hnswlsh%E5%92%8Cpq/</guid>
+        <description>&lt;p&gt;HNSW、LSH和PQ是向量数据库中的3种核心&lt;strong&gt;索引与压缩技&lt;/strong&gt;术，用于加速高维向量的相&lt;strong&gt;似性搜索&lt;/strong&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;hnsw&#34;&gt;HNSW
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;H&lt;/strong&gt;ierarchical &lt;strong&gt;N&lt;/strong&gt;avigable &lt;strong&gt;S&lt;/strong&gt;mall &lt;strong&gt;W&lt;/strong&gt;orld（HNSW），在高维空间中，构建多层图结构，每一层都是一个小世界网络。&lt;/p&gt;
 &lt;p&gt;上层的节点比较稀疏，能快速跳跃式定位大致的范围；&lt;/p&gt;
 &lt;p&gt;下层的节点比较密集，用于精细搜索。&lt;/p&gt;
 &lt;p&gt;HNSW技术查询&lt;strong&gt;速度和精度的平衡&lt;/strong&gt;比较优秀。&lt;/p&gt;
-&lt;h3 id="lsh"&gt;LSH
+&lt;h3 id=&#34;lsh&#34;&gt;LSH
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;L&lt;/strong&gt;ocality-&lt;strong&gt;S&lt;/strong&gt;ensitive &lt;strong&gt;H&lt;/strong&gt;ashing（LSH），是由经过特殊设计的哈希函数，能够使相似向量以较高的概率映射到同一个哈希桶，不相似的向量尽量分散到不同的哈希桶。&lt;/p&gt;
 &lt;p&gt;在查询的时候，只需要搜索查询向量所在的哈希桶以及相邻的哈希桶，极大地缩小了检索范围。&lt;/p&gt;
 &lt;p&gt;LSH技术在推荐系统、图像检索等&lt;strong&gt;海量数据的近似查询场景&lt;/strong&gt;中应用广泛。&lt;/p&gt;
-&lt;h3 id="pq"&gt;PQ
+&lt;h3 id=&#34;pq&#34;&gt;PQ
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;P&lt;/strong&gt;roduct &lt;strong&gt;Q&lt;/strong&gt;uantization（PQ）将高维的向量拆分成多个低维的子向量，对每个子向量集合进行聚类，生成聚类中心。&lt;/p&gt;
 &lt;p&gt;在存储的时候，用聚类中心的编号表示向量，从而大幅减少存储空间。&lt;/p&gt;
-&lt;p&gt;PQ技术常用于&lt;strong&gt;工业级的向量检索系统&lt;/strong&gt;。&lt;/p&gt;</description></item><item><title>说说Copilot模式和Agent模式的区别</title><link>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4copilot%E6%A8%A1%E5%BC%8F%E5%92%8Cagent%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB/</link><pubDate>Thu, 15 Jan 2026 17:32:27 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4copilot%E6%A8%A1%E5%BC%8F%E5%92%8Cagent%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB/</guid><description>&lt;p&gt;&lt;strong&gt;Copilot模式&lt;/strong&gt;（副驾驶协助模式）是大模型作为“助手”提供实时的建议，比如代码补全、文案的润色等等，最终的决策权保留在用户手中&lt;/p&gt;
+&lt;p&gt;PQ技术常用于&lt;strong&gt;工业级的向量检索系统&lt;/strong&gt;。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>说说Copilot模式和Agent模式的区别</title>
+        <link>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4copilot%E6%A8%A1%E5%BC%8F%E5%92%8Cagent%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
+        <pubDate>Thu, 15 Jan 2026 17:32:27 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4copilot%E6%A8%A1%E5%BC%8F%E5%92%8Cagent%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
+        <description>&lt;p&gt;&lt;strong&gt;Copilot模式&lt;/strong&gt;（副驾驶协助模式）是大模型作为“助手”提供实时的建议，比如代码补全、文案的润色等等，最终的决策权保留在用户手中&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Agent模式&lt;/strong&gt;（代理智能体模式）是可以自主驱动，大模型可以独立的拆解任务、调用工具完成端到端的操作。&lt;/p&gt;
 &lt;p&gt;除了这两个模式之外，还有一个&lt;strong&gt;Embedding模式（嵌入模式）&lt;/strong&gt;，这个模式主要是在后台进行辅助，将大模型作为一个隐藏的组件集成到现有的系统中，这种模式用户是无法感知的。&lt;/p&gt;
-&lt;p&gt;Embedding模式有很多的实际应用的例子，比如在推荐系统中，电商平台用Embedding理解商品和用户的兴趣，但是用户往往只能看到“猜你喜欢”。&lt;/p&gt;</description></item><item><title>说说Computer-Use的原理</title><link>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4computer-use%E7%9A%84%E5%8E%9F%E7%90%86/</link><pubDate>Thu, 15 Jan 2026 16:54:17 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4computer-use%E7%9A%84%E5%8E%9F%E7%90%86/</guid><description>&lt;p&gt;Computer Use是让Claude能够操作计算机。&lt;/p&gt;
+&lt;p&gt;Embedding模式有很多的实际应用的例子，比如在推荐系统中，电商平台用Embedding理解商品和用户的兴趣，但是用户往往只能看到“猜你喜欢”。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>说说Computer-Use的原理</title>
+        <link>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4computer-use%E7%9A%84%E5%8E%9F%E7%90%86/</link>
+        <pubDate>Thu, 15 Jan 2026 16:54:17 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4computer-use%E7%9A%84%E5%8E%9F%E7%90%86/</guid>
+        <description>&lt;p&gt;Computer Use是让Claude能够操作计算机。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;实际工作原理：&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Claude通过截图观察屏幕的内容，基于视觉理解，Claude计算出需要点击或者输入的像素坐标，通过API发送鼠标移动、点击和键盘输入等指令，执行操作后再次截图，观察结果并决定下一步。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Computer Use场景：&lt;/strong&gt;&lt;/p&gt;
@@ -432,20 +574,47 @@ loading="lazy"
 &lt;li&gt;
 &lt;p&gt;操作如PS、PPT、Excel等桌面应用程序&lt;/p&gt;
 &lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title>说说你对Manus的了解</title><link>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4%E4%BD%A0%E5%AF%B9manus%E7%9A%84%E4%BA%86%E8%A7%A3/</link><pubDate>Thu, 15 Jan 2026 15:50:33 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4%E4%BD%A0%E5%AF%B9manus%E7%9A%84%E4%BA%86%E8%A7%A3/</guid><description>&lt;p&gt;Manus是由Monica.im团队于2025年3月推出的全球首款通用型AI智能体，它的重大突破在于&lt;strong&gt;能够独立思考、规划并执行复杂的任务&lt;/strong&gt;，可以直接交付诸如股票分析结果、简历筛选结果这些完整的成果。&lt;/p&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>说说你对Manus的了解</title>
+        <link>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4%E4%BD%A0%E5%AF%B9manus%E7%9A%84%E4%BA%86%E8%A7%A3/</link>
+        <pubDate>Thu, 15 Jan 2026 15:50:33 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4%E4%BD%A0%E5%AF%B9manus%E7%9A%84%E4%BA%86%E8%A7%A3/</guid>
+        <description>&lt;p&gt;Manus是由Monica.im团队于2025年3月推出的全球首款通用型AI智能体，它的重大突破在于&lt;strong&gt;能够独立思考、规划并执行复杂的任务&lt;/strong&gt;，可以直接交付诸如股票分析结果、简历筛选结果这些完整的成果。&lt;/p&gt;
 &lt;p&gt;Manus主要是通过一个&lt;strong&gt;中央模块&lt;/strong&gt;，将用户的指令拆解为多个子任务，再通过不同的内部智能体或者工具执行，形成&lt;strong&gt;端到端的自动化执行流程&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;Manus的底层还是调用了诸如Claude、ChatGPT这些大模型来实现规划和决策。&lt;/p&gt;
 &lt;p&gt;Manus的执行过程可以分为4个主要阶段：&lt;/p&gt;
-&lt;h3 id="1规划器"&gt;1.规划器
+&lt;h3 id=&#34;1规划器&#34;&gt;1.规划器
 &lt;/h3&gt;&lt;p&gt;基于LLM生成总体执行计划，并拆分子任务。&lt;/p&gt;
-&lt;h3 id="2智能体工具"&gt;2.智能体/工具
+&lt;h3 id=&#34;2智能体工具&#34;&gt;2.智能体/工具
 &lt;/h3&gt;&lt;p&gt;每个子任务可以由不同的&lt;strong&gt;模型&lt;/strong&gt;或者外部的&lt;strong&gt;API&lt;/strong&gt;完成。&lt;/p&gt;
-&lt;h3 id="3状态驱动和条件分支"&gt;3.状态驱动和条件分支
+&lt;h3 id=&#34;3状态驱动和条件分支&#34;&gt;3.状态驱动和条件分支
 &lt;/h3&gt;&lt;p&gt;执行过程中根据中间结果动态地决定是否需要重试、是否需要切换方案或者是否需要提前结束。&lt;/p&gt;
-&lt;h3 id="4可回溯和异步执行"&gt;4.可回溯和异步执行
-&lt;/h3&gt;&lt;p&gt;可记录全过程的执行“Trace”，可在Web控制台进行Debug，也支持后台的长期运行。&lt;/p&gt;</description></item><item><title>LangChain和LangGraph两者有什么区别</title><link>https://iamxurulin.github.io/p/langchain%E5%92%8Clanggraph%E4%B8%A4%E8%80%85%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB/</link><pubDate>Wed, 14 Jan 2026 15:52:28 +0000</pubDate><guid>https://iamxurulin.github.io/p/langchain%E5%92%8Clanggraph%E4%B8%A4%E8%80%85%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB/</guid><description>&lt;p&gt;LangChain是基于&lt;strong&gt;链式结构&lt;/strong&gt;的，像一个用于拼接模型、工具和记忆等组件的模块化AI应用框架，通过预定义步骤顺序执行，适合处理文档问答、简单客服这类线性任务。&lt;/p&gt;
+&lt;h3 id=&#34;4可回溯和异步执行&#34;&gt;4.可回溯和异步执行
+&lt;/h3&gt;&lt;p&gt;可记录全过程的执行“Trace”，可在Web控制台进行Debug，也支持后台的长期运行。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>LangChain和LangGraph两者有什么区别</title>
+        <link>https://iamxurulin.github.io/p/langchain%E5%92%8Clanggraph%E4%B8%A4%E8%80%85%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB/</link>
+        <pubDate>Wed, 14 Jan 2026 15:52:28 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/langchain%E5%92%8Clanggraph%E4%B8%A4%E8%80%85%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB/</guid>
+        <description>&lt;p&gt;LangChain是基于&lt;strong&gt;链式结构&lt;/strong&gt;的，像一个用于拼接模型、工具和记忆等组件的模块化AI应用框架，通过预定义步骤顺序执行，适合处理文档问答、简单客服这类线性任务。&lt;/p&gt;
 &lt;p&gt;LangGraph是基于&lt;strong&gt;图结构&lt;/strong&gt;的，像一个专注于流程控制和任务编排的有状态执行图框架，支持循环、分支和动态决策，适合临床试验审批、多智能体投资分析这类需要多角色协作、状态跟踪的复杂任务。&lt;/p&gt;
-&lt;p&gt;在实际的开发过程中，一般简单任务用LangChain，复杂任务用LangGraph，对于特别复杂的任务则会考虑对这两者进行结合使用。&lt;/p&gt;</description></item><item><title>提示词的优化需要考虑哪些维度</title><link>https://iamxurulin.github.io/p/%E6%8F%90%E7%A4%BA%E8%AF%8D%E7%9A%84%E4%BC%98%E5%8C%96%E9%9C%80%E8%A6%81%E8%80%83%E8%99%91%E5%93%AA%E4%BA%9B%E7%BB%B4%E5%BA%A6/</link><pubDate>Wed, 14 Jan 2026 15:06:27 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E6%8F%90%E7%A4%BA%E8%AF%8D%E7%9A%84%E4%BC%98%E5%8C%96%E9%9C%80%E8%A6%81%E8%80%83%E8%99%91%E5%93%AA%E4%BA%9B%E7%BB%B4%E5%BA%A6/</guid><description>&lt;p&gt;提示词的优化需要考虑以下5个维度：&lt;/p&gt;
+&lt;p&gt;在实际的开发过程中，一般简单任务用LangChain，复杂任务用LangGraph，对于特别复杂的任务则会考虑对这两者进行结合使用。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>提示词的优化需要考虑哪些维度</title>
+        <link>https://iamxurulin.github.io/p/%E6%8F%90%E7%A4%BA%E8%AF%8D%E7%9A%84%E4%BC%98%E5%8C%96%E9%9C%80%E8%A6%81%E8%80%83%E8%99%91%E5%93%AA%E4%BA%9B%E7%BB%B4%E5%BA%A6/</link>
+        <pubDate>Wed, 14 Jan 2026 15:06:27 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E6%8F%90%E7%A4%BA%E8%AF%8D%E7%9A%84%E4%BC%98%E5%8C%96%E9%9C%80%E8%A6%81%E8%80%83%E8%99%91%E5%93%AA%E4%BA%9B%E7%BB%B4%E5%BA%A6/</guid>
+        <description>&lt;p&gt;提示词的优化需要考虑以下5个维度：&lt;/p&gt;
 &lt;p&gt;1.让模型清楚地知道要解决的是什么问题（目标明确）&lt;/p&gt;
 &lt;p&gt;2.用分点、markdown/JSON/分隔符拆解任务，使提示词的结构更清晰（结构清晰）&lt;/p&gt;
 &lt;p&gt;3.通过少量的输入输出样例告诉模型用户实际期望的结果到底长什么样，避免理解上的偏差（少量样本）&lt;/p&gt;
@@ -453,40 +622,58 @@ loading="lazy"
 &lt;p&gt;5.限制模型的输出范围，对字数、格式以及禁止的内容进行限定，避免模型出现幻觉（增加约束条件）&lt;/p&gt;
 &lt;p&gt;提示词模板中的常见字段：&lt;/p&gt;
 &lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;角色定义&lt;/th&gt;
-&lt;th&gt;指定模型的身份&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;任务描述&lt;/td&gt;
-&lt;td&gt;用具体的指令多目标进行拆解&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;输入内容&lt;/td&gt;
-&lt;td&gt;提供原始数据或者问题案例&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;输出格式&lt;/td&gt;
-&lt;td&gt;规定结果的格式，比如输出markdown格式&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;约束规则&lt;/td&gt;
-&lt;td&gt;说明限制条件，比如回答不超过多少个字&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;评估标准&lt;/td&gt;
-&lt;td&gt;引导模型自检&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;</description></item><item><title>怎么优化RAG的检索效果</title><link>https://iamxurulin.github.io/p/%E6%80%8E%E4%B9%88%E4%BC%98%E5%8C%96rag%E7%9A%84%E6%A3%80%E7%B4%A2%E6%95%88%E6%9E%9C/</link><pubDate>Tue, 13 Jan 2026 16:06:35 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E6%80%8E%E4%B9%88%E4%BC%98%E5%8C%96rag%E7%9A%84%E6%A3%80%E7%B4%A2%E6%95%88%E6%9E%9C/</guid><description>&lt;p&gt;主要可以从以下几个方面考虑：&lt;/p&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;角色定义&lt;/th&gt;
+					&lt;th&gt;指定模型的身份&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;任务描述&lt;/td&gt;
+					&lt;td&gt;用具体的指令多目标进行拆解&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;输入内容&lt;/td&gt;
+					&lt;td&gt;提供原始数据或者问题案例&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;输出格式&lt;/td&gt;
+					&lt;td&gt;规定结果的格式，比如输出markdown格式&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;约束规则&lt;/td&gt;
+					&lt;td&gt;说明限制条件，比如回答不超过多少个字&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;评估标准&lt;/td&gt;
+					&lt;td&gt;引导模型自检&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+        </item>
+        <item>
+        <title>怎么优化RAG的检索效果</title>
+        <link>https://iamxurulin.github.io/p/%E6%80%8E%E4%B9%88%E4%BC%98%E5%8C%96rag%E7%9A%84%E6%A3%80%E7%B4%A2%E6%95%88%E6%9E%9C/</link>
+        <pubDate>Tue, 13 Jan 2026 16:06:35 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E6%80%8E%E4%B9%88%E4%BC%98%E5%8C%96rag%E7%9A%84%E6%A3%80%E7%B4%A2%E6%95%88%E6%9E%9C/</guid>
+        <description>&lt;p&gt;主要可以从以下几个方面考虑：&lt;/p&gt;
 &lt;p&gt;1.保证知识库中的原始文档&lt;strong&gt;内容准确、结构清晰、格式规范&lt;/strong&gt;，尽量减少水印、不相关图片等噪音。&lt;/p&gt;
 &lt;p&gt;2.由于过小的切片可能会导致&lt;strong&gt;语义不完整&lt;/strong&gt;，过大的切片又可能会引入过多的&lt;strong&gt;无关信息&lt;/strong&gt;，因此，需要采用合适的文档切片策略，避免固定的长度切分导致语义断裂。&lt;/p&gt;
 &lt;p&gt;3.为了后续进行更精准地过滤和检索，可以考虑对文档切片添加来源、日期、类别、标签等&lt;strong&gt;元数据&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;4.使用大模型把用户的原始查询&lt;strong&gt;改写&lt;/strong&gt;得更清晰、详细和规范一些，这样可以提高后续检索的准确性。&lt;/p&gt;
-&lt;p&gt;5.像&lt;strong&gt;关键词检索&lt;/strong&gt;和&lt;strong&gt;向量检索&lt;/strong&gt;都有不同的优势，可以将两者进行结合，比如先用向量检索召回语义相关的文档，然后再使用关键词检索进行精确匹配。&lt;/p&gt;</description></item><item><title>怎么实现AI的多轮对话功能</title><link>https://iamxurulin.github.io/p/%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0ai%E7%9A%84%E5%A4%9A%E8%BD%AE%E5%AF%B9%E8%AF%9D%E5%8A%9F%E8%83%BD/</link><pubDate>Tue, 13 Jan 2026 15:49:02 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0ai%E7%9A%84%E5%A4%9A%E8%BD%AE%E5%AF%B9%E8%AF%9D%E5%8A%9F%E8%83%BD/</guid><description>&lt;p&gt;要实现AI的多轮对话功能，关键在于让AI能够记住与用户之前的对话内容并保持上下文的连贯。&lt;/p&gt;
+&lt;p&gt;5.像&lt;strong&gt;关键词检索&lt;/strong&gt;和&lt;strong&gt;向量检索&lt;/strong&gt;都有不同的优势，可以将两者进行结合，比如先用向量检索召回语义相关的文档，然后再使用关键词检索进行精确匹配。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>怎么实现AI的多轮对话功能</title>
+        <link>https://iamxurulin.github.io/p/%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0ai%E7%9A%84%E5%A4%9A%E8%BD%AE%E5%AF%B9%E8%AF%9D%E5%8A%9F%E8%83%BD/</link>
+        <pubDate>Tue, 13 Jan 2026 15:49:02 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0ai%E7%9A%84%E5%A4%9A%E8%BD%AE%E5%AF%B9%E8%AF%9D%E5%8A%9F%E8%83%BD/</guid>
+        <description>&lt;p&gt;要实现AI的多轮对话功能，关键在于让AI能够记住与用户之前的对话内容并保持上下文的连贯。&lt;/p&gt;
 &lt;p&gt;可以使用Spring AI框架提供的&lt;strong&gt;对话记忆&lt;/strong&gt;和&lt;strong&gt;Adviso&lt;/strong&gt;r特性来实现这个功能。&lt;/p&gt;
 &lt;p&gt;主要是通过构造&lt;code&gt;ChatClient&lt;/code&gt;来实现功能更丰富、更灵活的AI对话。&lt;/p&gt;
 &lt;p&gt;ChatClient可以看成是一系列可插拔的拦截器，在调用AI前后执行一些额外的操作。&lt;/p&gt;
@@ -494,7 +681,16 @@ loading="lazy"
 &lt;p&gt;ChatMemory接口中定义了&lt;strong&gt;保存消息&lt;/strong&gt;、&lt;strong&gt;查询消息&lt;/strong&gt;和&lt;strong&gt;清空历史&lt;/strong&gt;的方法，MessageChatMemoryAdvisor也依赖于这个接口的实现来&lt;strong&gt;存取对话历史&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;为了解决对话记忆仅存在于内存中，在服务重启之后会造成记忆丢失的问题，需要考虑将对话记忆进行&lt;strong&gt;持久化&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;由于spring-ai-starter-model-chat-memory-jdbc的依赖版本较少，可以考虑自定义ChatMemory接口的方式实现：&lt;/p&gt;
-&lt;p&gt;开发一个实现了ChatMemory接口的FileBasedChatMemory类，再使用高性能的&lt;strong&gt;Kryo序列化库&lt;/strong&gt;将对话消息序列化后保存到本地文件中，读取的时候再进行反序列化。&lt;/p&gt;</description></item><item><title>怎么分析LLM在并发访问时的性能瓶颈</title><link>https://iamxurulin.github.io/p/%E6%80%8E%E4%B9%88%E5%88%86%E6%9E%90llm%E5%9C%A8%E5%B9%B6%E5%8F%91%E8%AE%BF%E9%97%AE%E6%97%B6%E7%9A%84%E6%80%A7%E8%83%BD%E7%93%B6%E9%A2%88/</link><pubDate>Tue, 13 Jan 2026 15:28:15 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E6%80%8E%E4%B9%88%E5%88%86%E6%9E%90llm%E5%9C%A8%E5%B9%B6%E5%8F%91%E8%AE%BF%E9%97%AE%E6%97%B6%E7%9A%84%E6%80%A7%E8%83%BD%E7%93%B6%E9%A2%88/</guid><description>&lt;p&gt;试想一下这样一种&lt;strong&gt;场景&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;开发一个实现了ChatMemory接口的FileBasedChatMemory类，再使用高性能的&lt;strong&gt;Kryo序列化库&lt;/strong&gt;将对话消息序列化后保存到本地文件中，读取的时候再进行反序列化。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>怎么分析LLM在并发访问时的性能瓶颈</title>
+        <link>https://iamxurulin.github.io/p/%E6%80%8E%E4%B9%88%E5%88%86%E6%9E%90llm%E5%9C%A8%E5%B9%B6%E5%8F%91%E8%AE%BF%E9%97%AE%E6%97%B6%E7%9A%84%E6%80%A7%E8%83%BD%E7%93%B6%E9%A2%88/</link>
+        <pubDate>Tue, 13 Jan 2026 15:28:15 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E6%80%8E%E4%B9%88%E5%88%86%E6%9E%90llm%E5%9C%A8%E5%B9%B6%E5%8F%91%E8%AE%BF%E9%97%AE%E6%97%B6%E7%9A%84%E6%80%A7%E8%83%BD%E7%93%B6%E9%A2%88/</guid>
+        <description>&lt;p&gt;试想一下这样一种&lt;strong&gt;场景&lt;/strong&gt;：&lt;/p&gt;
 &lt;p&gt;如果一个GPU集群的LLM处理能力为1000 tokens/s，那么1000个用户同时并发访问的话，响应给每个用户的性能只有 1 token/s吗？&lt;/p&gt;
 &lt;hr&gt;
 &lt;p&gt;肯定不是。&lt;/p&gt;
@@ -512,20 +708,47 @@ loading="lazy"
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;资源排队机制&lt;/strong&gt;：FIFO、优先级队列等等策略决定&lt;strong&gt;请求的等待时间&lt;/strong&gt;，不影响最终的处理速度。&lt;/p&gt;
 &lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title>Spring-AI怎么实现结构化输出</title><link>https://iamxurulin.github.io/p/spring-ai%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E7%BB%93%E6%9E%84%E5%8C%96%E8%BE%93%E5%87%BA/</link><pubDate>Mon, 12 Jan 2026 16:12:09 +0000</pubDate><guid>https://iamxurulin.github.io/p/spring-ai%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E7%BB%93%E6%9E%84%E5%8C%96%E8%BE%93%E5%87%BA/</guid><description>&lt;p&gt;结构化输出是将大语言模型返回的自由文本输出转换为预定义的&lt;strong&gt;数据格式&lt;/strong&gt;。&lt;/p&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>Spring-AI怎么实现结构化输出</title>
+        <link>https://iamxurulin.github.io/p/spring-ai%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E7%BB%93%E6%9E%84%E5%8C%96%E8%BE%93%E5%87%BA/</link>
+        <pubDate>Mon, 12 Jan 2026 16:12:09 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/spring-ai%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E7%BB%93%E6%9E%84%E5%8C%96%E8%BE%93%E5%87%BA/</guid>
+        <description>&lt;p&gt;结构化输出是将大语言模型返回的自由文本输出转换为预定义的&lt;strong&gt;数据格式&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;Spring AI是通过&lt;code&gt;StructuredOutputConverter&lt;/code&gt;机制来实现&lt;strong&gt;结构化输出&lt;/strong&gt;的：&lt;/p&gt;
 &lt;p&gt;1.&lt;code&gt;StructuredOutputConverter&lt;/code&gt;实现了&lt;code&gt;FormatProvider&lt;/code&gt;接口，这个接口提供特定的格式指令给AI模型，这些指令附加到用户的提示词后面，明确地告诉模型应该生成何种结构的输出。&lt;/p&gt;
 &lt;p&gt;2.&lt;code&gt;StructuredOutputConverter&lt;/code&gt; 实现了Spring的&lt;code&gt;Converter&amp;lt;String, T&amp;gt;&lt;/code&gt;接口，这个接口负责将大模型返回的文本输出转换为开发者指定的目标类型。&lt;/p&gt;
 &lt;p&gt;Spring AI提供了多种内置的转换器实现：&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;BeanOutputConverter&lt;/code&gt;：转换为自定义Java实体类，在开发中最常用；&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;MapOutputConverter&lt;/code&gt;：转换为松散的Map键值对结构；&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;ListOutputConverter&lt;/code&gt;：转换为指定类型的集合结构。&lt;/p&gt;</description></item><item><title>解释一下Re-Reading</title><link>https://iamxurulin.github.io/p/%E8%A7%A3%E9%87%8A%E4%B8%80%E4%B8%8Bre-reading/</link><pubDate>Mon, 12 Jan 2026 15:32:15 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E8%A7%A3%E9%87%8A%E4%B8%80%E4%B8%8Bre-reading/</guid><description>&lt;p&gt;Re-Reading（重读），是一种通过让大语言模型&lt;strong&gt;重新阅读问题&lt;/strong&gt;来提高其推理能力的技术。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ListOutputConverter&lt;/code&gt;：转换为指定类型的集合结构。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>解释一下Re-Reading</title>
+        <link>https://iamxurulin.github.io/p/%E8%A7%A3%E9%87%8A%E4%B8%80%E4%B8%8Bre-reading/</link>
+        <pubDate>Mon, 12 Jan 2026 15:32:15 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E8%A7%A3%E9%87%8A%E4%B8%80%E4%B8%8Bre-reading/</guid>
+        <description>&lt;p&gt;Re-Reading（重读），是一种通过让大语言模型&lt;strong&gt;重新阅读问题&lt;/strong&gt;来提高其推理能力的技术。&lt;/p&gt;
 &lt;p&gt;有文献研究证明：&lt;/p&gt;
 &lt;p&gt;对于复杂的问题，重复阅读和审视问题有助于模型更好地理解题意和约束，从而能够生成更准确、更深入的回答。&lt;/p&gt;
 &lt;p&gt;在Spring AI中，可以通过自定义Advisor来实现Re-Reading功能：&lt;/p&gt;
 &lt;p&gt;1.创建自定义Advisor类，同时实现用于同步请求的CallAroundAdvisor接口和用于流式请求的StreamAroundAdvisor接口，实现后可以兼容所有大模型调用场景。&lt;/p&gt;
 &lt;p&gt;2.在Advisor的前置处理逻辑中，对用户的原始输入文本进行&lt;strong&gt;重读式Prompt增强改写&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;3.将改写后的提示词传递给&lt;strong&gt;大语言模型&lt;/strong&gt;进行处理。&lt;/p&gt;</description></item><item><title>介绍一下Spring-AI框架</title><link>https://iamxurulin.github.io/p/%E4%BB%8B%E7%BB%8D%E4%B8%80%E4%B8%8Bspring-ai%E6%A1%86%E6%9E%B6/</link><pubDate>Sun, 11 Jan 2026 15:43:59 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E4%BB%8B%E7%BB%8D%E4%B8%80%E4%B8%8Bspring-ai%E6%A1%86%E6%9E%B6/</guid><description>&lt;p&gt;Spring AI是一个基于Spring生态的&lt;strong&gt;AI应用开发框架&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;3.将改写后的提示词传递给&lt;strong&gt;大语言模型&lt;/strong&gt;进行处理。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>介绍一下Spring-AI框架</title>
+        <link>https://iamxurulin.github.io/p/%E4%BB%8B%E7%BB%8D%E4%B8%80%E4%B8%8Bspring-ai%E6%A1%86%E6%9E%B6/</link>
+        <pubDate>Sun, 11 Jan 2026 15:43:59 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E4%BB%8B%E7%BB%8D%E4%B8%80%E4%B8%8Bspring-ai%E6%A1%86%E6%9E%B6/</guid>
+        <description>&lt;p&gt;Spring AI是一个基于Spring生态的&lt;strong&gt;AI应用开发框架&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;通过提供统一的API和抽象，让Java开发者可以不用考虑底层实现的差异，更便捷地接入和使用各种AI大模型及其相关技术。&lt;/p&gt;
 &lt;p&gt;Spring AI框架的核心特性：&lt;/p&gt;
 &lt;p&gt;1.为聊天、文本转图像和嵌入模型提供统一的API，支持流式调用和同步，支持访问特定模型的功能。&lt;/p&gt;
@@ -536,105 +759,177 @@ loading="lazy"
 &lt;p&gt;6.提供文档抽取、转换和加载的组件，可用于数据工程和RAG知识库的构建。&lt;/p&gt;
 &lt;p&gt;7.为AI模型和向量存储提供了自动配置和Starter依赖。&lt;/p&gt;
 &lt;p&gt;8.提供类似于WebClient和RestClient的流式API，便于与AI模型交互。&lt;/p&gt;
-&lt;p&gt;9.提供标准化的Prompt模板引擎，支持动态参数填充和模板复用。&lt;/p&gt;</description></item><item><title>LangGraph的编排原理</title><link>https://iamxurulin.github.io/p/langgraph%E7%9A%84%E7%BC%96%E6%8E%92%E5%8E%9F%E7%90%86/</link><pubDate>Sun, 11 Jan 2026 14:57:27 +0000</pubDate><guid>https://iamxurulin.github.io/p/langgraph%E7%9A%84%E7%BC%96%E6%8E%92%E5%8E%9F%E7%90%86/</guid><description>&lt;p&gt;LangGraph的编排原理是通过图结构将一个复杂的AI任务分解为&lt;strong&gt;可编排的节点&lt;/strong&gt;，通过&lt;strong&gt;状态流转&lt;/strong&gt;和&lt;strong&gt;条件边&lt;/strong&gt;实现&lt;strong&gt;动态流程控制&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;9.提供标准化的Prompt模板引擎，支持动态参数填充和模板复用。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>LangGraph的编排原理</title>
+        <link>https://iamxurulin.github.io/p/langgraph%E7%9A%84%E7%BC%96%E6%8E%92%E5%8E%9F%E7%90%86/</link>
+        <pubDate>Sun, 11 Jan 2026 14:57:27 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/langgraph%E7%9A%84%E7%BC%96%E6%8E%92%E5%8E%9F%E7%90%86/</guid>
+        <description>&lt;p&gt;LangGraph的编排原理是通过图结构将一个复杂的AI任务分解为&lt;strong&gt;可编排的节点&lt;/strong&gt;，通过&lt;strong&gt;状态流转&lt;/strong&gt;和&lt;strong&gt;条件边&lt;/strong&gt;实现&lt;strong&gt;动态流程控制&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;有节点、边、状态三个核心要素：&lt;/p&gt;
 &lt;p&gt;1.节点代表独立处理单元，每个节点负责接收状态并返回更新后的状态。&lt;/p&gt;
 &lt;p&gt;2.边定义节点间的流转路径，支持条件分支和循环。&lt;/p&gt;
 &lt;p&gt;3.状态贯穿整个流程的上下文数据，驱动节点间的动态交互。&lt;/p&gt;
-&lt;p&gt;通过&lt;strong&gt;画图&lt;/strong&gt;描述逻辑任务，框架自动根据状态流转执行节点，支持复杂的多Agent协作和动态决策。&lt;/p&gt;</description></item><item><title>说说LangChain的核心架构</title><link>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4langchain%E7%9A%84%E6%A0%B8%E5%BF%83%E6%9E%B6%E6%9E%84/</link><pubDate>Sat, 10 Jan 2026 15:22:25 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4langchain%E7%9A%84%E6%A0%B8%E5%BF%83%E6%9E%B6%E6%9E%84/</guid><description>&lt;p&gt;LangChain的核心架构主要由LangChain Libraries、LangChain Templates、LangServe和LangSmith&lt;strong&gt;四个模块&lt;/strong&gt;组成。&lt;/p&gt;
-&lt;h3 id="langchain-libraries"&gt;&lt;strong&gt;LangChain Libraries&lt;/strong&gt;
+&lt;p&gt;通过&lt;strong&gt;画图&lt;/strong&gt;描述逻辑任务，框架自动根据状态流转执行节点，支持复杂的多Agent协作和动态决策。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>说说LangChain的核心架构</title>
+        <link>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4langchain%E7%9A%84%E6%A0%B8%E5%BF%83%E6%9E%B6%E6%9E%84/</link>
+        <pubDate>Sat, 10 Jan 2026 15:22:25 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4langchain%E7%9A%84%E6%A0%B8%E5%BF%83%E6%9E%B6%E6%9E%84/</guid>
+        <description>&lt;p&gt;LangChain的核心架构主要由LangChain Libraries、LangChain Templates、LangServe和LangSmith&lt;strong&gt;四个模块&lt;/strong&gt;组成。&lt;/p&gt;
+&lt;h3 id=&#34;langchain-libraries&#34;&gt;&lt;strong&gt;LangChain Libraries&lt;/strong&gt;
 &lt;/h3&gt;&lt;p&gt;整个LangChain框架的基础，包含langchain-core、langchain以及langchain-community三个子模块。&lt;/p&gt;
 &lt;p&gt;其中，langchain-core提供了构建应用所需的核心功能；&lt;/p&gt;
 &lt;p&gt;langchain是构建链和代理的主要模块；&lt;/p&gt;
 &lt;p&gt;langchain-community整合了多个第三方库和集成。&lt;/p&gt;
-&lt;h3 id="langchain-templates"&gt;&lt;strong&gt;LangChain Templates&lt;/strong&gt;
+&lt;h3 id=&#34;langchain-templates&#34;&gt;&lt;strong&gt;LangChain Templates&lt;/strong&gt;
 &lt;/h3&gt;&lt;p&gt;提供了一系列适用于各种任务的参考架构模板，像问答系统、文档解析和对话管理等常见的任务。&lt;/p&gt;
-&lt;h3 id="langserve"&gt;LangServe
+&lt;h3 id=&#34;langserve&#34;&gt;LangServe
 &lt;/h3&gt;&lt;p&gt;用于将LangChain构建的链部署为REST API的库，支持高并发请求和流式操作，适用于构建生产环境中的API服务。&lt;/p&gt;
-&lt;h3 id="langsmith"&gt;LangSmith
-&lt;/h3&gt;&lt;p&gt;这是一个开发者平台，提供调试、测试、评估和监控的功能。&lt;/p&gt;</description></item><item><title>LangChain有哪些核心组件</title><link>https://iamxurulin.github.io/p/langchain%E6%9C%89%E5%93%AA%E4%BA%9B%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6/</link><pubDate>Sat, 10 Jan 2026 14:45:10 +0000</pubDate><guid>https://iamxurulin.github.io/p/langchain%E6%9C%89%E5%93%AA%E4%BA%9B%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6/</guid><description>&lt;p&gt;LangChain是一个专为&lt;strong&gt;大语言模型应用开发&lt;/strong&gt;而设计的框架。&lt;/p&gt;
+&lt;h3 id=&#34;langsmith&#34;&gt;LangSmith
+&lt;/h3&gt;&lt;p&gt;这是一个开发者平台，提供调试、测试、评估和监控的功能。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>LangChain有哪些核心组件</title>
+        <link>https://iamxurulin.github.io/p/langchain%E6%9C%89%E5%93%AA%E4%BA%9B%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6/</link>
+        <pubDate>Sat, 10 Jan 2026 14:45:10 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/langchain%E6%9C%89%E5%93%AA%E4%BA%9B%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6/</guid>
+        <description>&lt;p&gt;LangChain是一个专为&lt;strong&gt;大语言模型应用开发&lt;/strong&gt;而设计的框架。&lt;/p&gt;
 &lt;p&gt;主要有以下6个核心组件：&lt;/p&gt;
 &lt;p&gt;1.模型集成。支持OpenAI、Anthropic、Llama等多种语言模型，提供了统一的接口，可以在不同模型之间切换。&lt;/p&gt;
 &lt;p&gt;2.提示词模板。通过模板化的方式，根据不同的输入生成相应的提示词，引导模型生成更加准确的输出。&lt;/p&gt;
 &lt;p&gt;3.记忆机制。通过存储对话的上下文信息，使得LangChain能够在多轮对话中保持上下文的一致性，提升模型的响应质量。&lt;/p&gt;
 &lt;p&gt;4.链式调用。将多个处理步骤串联起来，形成一个处理流程，使复杂任务的处理更加模块化和可复用。&lt;/p&gt;
 &lt;p&gt;5.智能体。Agent可以根据用户的输入动态地选择合适的工具来完成任务，实现更加灵活的任务处理。&lt;/p&gt;
-&lt;p&gt;6.工具集成。集成各种外部工具，提供访问外部资源的能力，扩展了模型的功能，使其能够处理更复杂的任务。&lt;/p&gt;</description></item><item><title>解释一下Selector、Channel</title><link>https://iamxurulin.github.io/p/%E8%A7%A3%E9%87%8A%E4%B8%80%E4%B8%8Bselectorchannel/</link><pubDate>Fri, 09 Jan 2026 14:15:00 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E8%A7%A3%E9%87%8A%E4%B8%80%E4%B8%8Bselectorchannel/</guid><description>&lt;h3 id="selector"&gt;Selector
-&lt;/h3&gt;&lt;p&gt;Selector是Java Non-blocking I/O中用于实现I/O多路复用的组件。&lt;/p&gt;
+&lt;p&gt;6.工具集成。集成各种外部工具，提供访问外部资源的能力，扩展了模型的功能，使其能够处理更复杂的任务。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>解释一下Selector、Channel</title>
+        <link>https://iamxurulin.github.io/p/%E8%A7%A3%E9%87%8A%E4%B8%80%E4%B8%8Bselectorchannel/</link>
+        <pubDate>Fri, 09 Jan 2026 14:15:00 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E8%A7%A3%E9%87%8A%E4%B8%80%E4%B8%8Bselectorchannel/</guid>
+        <description>&lt;h3 id=&#34;selector&#34;&gt;Selector
+&lt;/h3&gt;&lt;p&gt;Selector是Java Non-blocking  I/O中用于实现I/O多路复用的组件。&lt;/p&gt;
 &lt;p&gt;Selector有4种事件类型，分别是：&lt;/p&gt;
 &lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;OP_READ&lt;/th&gt;
-&lt;th&gt;表示通道中有数据可读&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;OP_WRITE&lt;/td&gt;
-&lt;td&gt;表示可以向通道中写入数据&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;OP_CONNECT&lt;/td&gt;
-&lt;td&gt;表示通道完成连接操作&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;OP_ACCEPT&lt;/td&gt;
-&lt;td&gt;表示通道可以接受新的连接&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;OP_READ&lt;/th&gt;
+					&lt;th&gt;表示通道中有数据可读&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;OP_WRITE&lt;/td&gt;
+					&lt;td&gt;表示可以向通道中写入数据&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;OP_CONNECT&lt;/td&gt;
+					&lt;td&gt;表示通道完成连接操作&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;OP_ACCEPT&lt;/td&gt;
+					&lt;td&gt;表示通道可以接受新的连接&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;Selector的作用有两个：&lt;/p&gt;
 &lt;p&gt;一个是通过一个Selector实例，程序可以同时监听多个通道的I/O事件。&lt;/p&gt;
 &lt;p&gt;另一个是Selector通常与非阻塞通道配合使用，可以实现高效地非阻塞I/O操作。&lt;/p&gt;
-&lt;h3 id="channel"&gt;Channel
-&lt;/h3&gt;&lt;p&gt;Channel是Java Non-blocking I/O中的一个核心概念，主要用于数据的读写操作。&lt;/p&gt;
+&lt;h3 id=&#34;channel&#34;&gt;Channel
+&lt;/h3&gt;&lt;p&gt;Channel是Java Non-blocking  I/O中的一个核心概念，主要用于数据的读写操作。&lt;/p&gt;
 &lt;p&gt;Channel有四种类型：&lt;/p&gt;
 &lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;SocketChannel&lt;/th&gt;
-&lt;th&gt;用于基于TCP的网络通信，可以与服务器或者客户端进行连接&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;ServerSocketChannel&lt;/td&gt;
-&lt;td&gt;仅用于TCP服务端， 用于监听TCP连接&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;DatagramChannel&lt;/td&gt;
-&lt;td&gt;用于基于UDP的网络通信&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;FileChannel&lt;/td&gt;
-&lt;td&gt;用于从文件中读取或者向文件中写入数据&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;SocketChannel&lt;/th&gt;
+					&lt;th&gt;用于基于TCP的网络通信，可以与服务器或者客户端进行连接&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;ServerSocketChannel&lt;/td&gt;
+					&lt;td&gt;仅用于TCP服务端， 用于监听TCP连接&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;DatagramChannel&lt;/td&gt;
+					&lt;td&gt;用于基于UDP的网络通信&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;FileChannel&lt;/td&gt;
+					&lt;td&gt;用于从文件中读取或者向文件中写入数据&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;Channel是双向的，可以同时支持读取和写入。&lt;/p&gt;
 &lt;p&gt;传统的流要么是输入流，要么是输出流，只能是单向的。&lt;/p&gt;
 &lt;p&gt;因此，Channel比传统的I/O流更灵活和高效。&lt;/p&gt;
-&lt;p&gt;Channel可以结合Selector实现多路复用，从而处理多个并发连接。&lt;/p&gt;</description></item><item><title>大模型的结构化输出是什么</title><link>https://iamxurulin.github.io/p/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E7%BB%93%E6%9E%84%E5%8C%96%E8%BE%93%E5%87%BA%E6%98%AF%E4%BB%80%E4%B9%88/</link><pubDate>Fri, 09 Jan 2026 13:00:00 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E7%BB%93%E6%9E%84%E5%8C%96%E8%BE%93%E5%87%BA%E6%98%AF%E4%BB%80%E4%B9%88/</guid><description>&lt;p&gt;结构化输出是让大模型生成符合&lt;strong&gt;特定格式&lt;/strong&gt;的数据，而不是自由文本。&lt;/p&gt;
+&lt;p&gt;Channel可以结合Selector实现多路复用，从而处理多个并发连接。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>大模型的结构化输出是什么</title>
+        <link>https://iamxurulin.github.io/p/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E7%BB%93%E6%9E%84%E5%8C%96%E8%BE%93%E5%87%BA%E6%98%AF%E4%BB%80%E4%B9%88/</link>
+        <pubDate>Fri, 09 Jan 2026 13:00:00 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E7%BB%93%E6%9E%84%E5%8C%96%E8%BE%93%E5%87%BA%E6%98%AF%E4%BB%80%E4%B9%88/</guid>
+        <description>&lt;p&gt;结构化输出是让大模型生成符合&lt;strong&gt;特定格式&lt;/strong&gt;的数据，而不是自由文本。&lt;/p&gt;
 &lt;p&gt;其中，特定的格式可以是JSON、XML、表格等等。&lt;/p&gt;
 &lt;p&gt;这样的输出可以被计算机程序直接解析和处理。&lt;/p&gt;
 &lt;p&gt;常见的&lt;strong&gt;数据格式&lt;/strong&gt;有：JSON、YAML、CSV、XML&lt;/p&gt;
 &lt;p&gt;常见的&lt;strong&gt;结构化文本&lt;/strong&gt;有：表格、键值对&lt;/p&gt;
 &lt;p&gt;还有某些&lt;strong&gt;领域的特定格式&lt;/strong&gt;，比如：SQL语句、HTML、LaTeX&lt;/p&gt;
-&lt;p&gt;要实现这样的结构化输出，需要在&lt;strong&gt;输入提示&lt;/strong&gt;中明确要求输出格式，并用&lt;strong&gt;代码解析&lt;/strong&gt;模型生成的文本，转换为标准结构，然后使用&lt;strong&gt;库或者框架&lt;/strong&gt;自动验证和解析输出格式。&lt;/p&gt;</description></item><item><title>在RAG应用中-有哪些提示工程设计技巧</title><link>https://iamxurulin.github.io/p/%E5%9C%A8rag%E5%BA%94%E7%94%A8%E4%B8%AD-%E6%9C%89%E5%93%AA%E4%BA%9B%E6%8F%90%E7%A4%BA%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1%E6%8A%80%E5%B7%A7/</link><pubDate>Thu, 08 Jan 2026 15:12:58 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E5%9C%A8rag%E5%BA%94%E7%94%A8%E4%B8%AD-%E6%9C%89%E5%93%AA%E4%BA%9B%E6%8F%90%E7%A4%BA%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1%E6%8A%80%E5%B7%A7/</guid><description>&lt;p&gt;提示工程的设计技巧主要有：&lt;/p&gt;
+&lt;p&gt;要实现这样的结构化输出，需要在&lt;strong&gt;输入提示&lt;/strong&gt;中明确要求输出格式，并用&lt;strong&gt;代码解析&lt;/strong&gt;模型生成的文本，转换为标准结构，然后使用&lt;strong&gt;库或者框架&lt;/strong&gt;自动验证和解析输出格式。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>在RAG应用中-有哪些提示工程设计技巧</title>
+        <link>https://iamxurulin.github.io/p/%E5%9C%A8rag%E5%BA%94%E7%94%A8%E4%B8%AD-%E6%9C%89%E5%93%AA%E4%BA%9B%E6%8F%90%E7%A4%BA%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1%E6%8A%80%E5%B7%A7/</link>
+        <pubDate>Thu, 08 Jan 2026 15:12:58 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E5%9C%A8rag%E5%BA%94%E7%94%A8%E4%B8%AD-%E6%9C%89%E5%93%AA%E4%BA%9B%E6%8F%90%E7%A4%BA%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1%E6%8A%80%E5%B7%A7/</guid>
+        <description>&lt;p&gt;提示工程的设计技巧主要有：&lt;/p&gt;
 &lt;p&gt;1.提示中需要清楚地说明&lt;strong&gt;AI的身份&lt;/strong&gt;、能力边界和目标任务。&lt;/p&gt;
 &lt;p&gt;2.需要用明确的格式&lt;strong&gt;指导AI输出&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;3.明确告知AI只能&lt;strong&gt;基于检索到的资料&lt;/strong&gt;进行回答，以免出现“幻觉”。&lt;/p&gt;
 &lt;p&gt;4.可以将&lt;strong&gt;提示设计成模板&lt;/strong&gt;，预留动态的填充位，方便大规模复用和动态地填充检索内容。&lt;/p&gt;
 &lt;p&gt;5.如果没有检索到相关的内容，不要使用模型自身的知识储备进行推断，直接让&lt;strong&gt;AI显示地回复&lt;/strong&gt;“未找到相关的资料”。&lt;/p&gt;
-&lt;p&gt;6.可以给1到2个优质的问答范例，让模型模仿输出&lt;strong&gt;风格&lt;/strong&gt;和&lt;strong&gt;逻辑&lt;/strong&gt;。&lt;/p&gt;</description></item><item><title>在RAG中选择Embedding-Model需要考虑哪些因素</title><link>https://iamxurulin.github.io/p/%E5%9C%A8rag%E4%B8%AD%E9%80%89%E6%8B%A9embedding-model%E9%9C%80%E8%A6%81%E8%80%83%E8%99%91%E5%93%AA%E4%BA%9B%E5%9B%A0%E7%B4%A0/</link><pubDate>Wed, 07 Jan 2026 14:43:53 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E5%9C%A8rag%E4%B8%AD%E9%80%89%E6%8B%A9embedding-model%E9%9C%80%E8%A6%81%E8%80%83%E8%99%91%E5%93%AA%E4%BA%9B%E5%9B%A0%E7%B4%A0/</guid><description>&lt;p&gt;在RAG中选择Embedding Model时，主要考虑的是以下7大因素：&lt;/p&gt;
+&lt;p&gt;6.可以给1到2个优质的问答范例，让模型模仿输出&lt;strong&gt;风格&lt;/strong&gt;和&lt;strong&gt;逻辑&lt;/strong&gt;。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>在RAG中选择Embedding-Model需要考虑哪些因素</title>
+        <link>https://iamxurulin.github.io/p/%E5%9C%A8rag%E4%B8%AD%E9%80%89%E6%8B%A9embedding-model%E9%9C%80%E8%A6%81%E8%80%83%E8%99%91%E5%93%AA%E4%BA%9B%E5%9B%A0%E7%B4%A0/</link>
+        <pubDate>Wed, 07 Jan 2026 14:43:53 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E5%9C%A8rag%E4%B8%AD%E9%80%89%E6%8B%A9embedding-model%E9%9C%80%E8%A6%81%E8%80%83%E8%99%91%E5%93%AA%E4%BA%9B%E5%9B%A0%E7%B4%A0/</guid>
+        <description>&lt;p&gt;在RAG中选择Embedding Model时，主要考虑的是以下7大因素：&lt;/p&gt;
 &lt;p&gt;1.模型能否精准地捕捉&lt;strong&gt;文本语义&lt;/strong&gt;，准确性直接影响到向量相似度计算的可靠性。（语义准确性）&lt;/p&gt;
 &lt;p&gt;2.模型的&lt;strong&gt;推理速度&lt;/strong&gt;能否满足业务的实时性要求，显存和内存的占用能否适配当下的硬件资源。（模型的效率）&lt;/p&gt;
 &lt;p&gt;3.是否专门针对某个垂直领域做过预训练或者微调，原生支持特定术语和逻辑。（领域适配）&lt;/p&gt;
 &lt;p&gt;4.是否支持业务所需的语言，以及具备跨语言对齐能力。（多语言支持）&lt;/p&gt;
 &lt;p&gt;5.模型的参数量和训练数据规模是否匹配语料的复杂度。（数据规模匹配）&lt;/p&gt;
 &lt;p&gt;6.是否开源、是否有活跃的社区在维护，API的调用是否灵活。（开放性与生态）&lt;/p&gt;
-&lt;p&gt;7.训练和推理的硬件投入成本以及使用成本。（成本）&lt;/p&gt;</description></item><item><title>说说RAG中的Embedding嵌入</title><link>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4rag%E4%B8%AD%E7%9A%84embedding%E5%B5%8C%E5%85%A5/</link><pubDate>Tue, 06 Jan 2026 15:43:40 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4rag%E4%B8%AD%E7%9A%84embedding%E5%B5%8C%E5%85%A5/</guid><description>&lt;p&gt;把文本内容、图像、音频、视频等形式的信息映射为高维空间中的&lt;strong&gt;密集向量&lt;/strong&gt;的过程就是“&lt;strong&gt;嵌入&lt;/strong&gt;”。&lt;/p&gt;
+&lt;p&gt;7.训练和推理的硬件投入成本以及使用成本。（成本）&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>说说RAG中的Embedding嵌入</title>
+        <link>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4rag%E4%B8%AD%E7%9A%84embedding%E5%B5%8C%E5%85%A5/</link>
+        <pubDate>Tue, 06 Jan 2026 15:43:40 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4rag%E4%B8%AD%E7%9A%84embedding%E5%B5%8C%E5%85%A5/</guid>
+        <description>&lt;p&gt;把文本内容、图像、音频、视频等形式的信息映射为高维空间中的&lt;strong&gt;密集向量&lt;/strong&gt;的过程就是“&lt;strong&gt;嵌入&lt;/strong&gt;”。&lt;/p&gt;
 &lt;p&gt;向量是语义空间中的坐标，主要用于捕捉对象之间的语义关系和隐含的意义。&lt;/p&gt;
 &lt;p&gt;每个向量相当于文本的数字指纹，里面包含了文本的&lt;strong&gt;语义&lt;/strong&gt;信息。&lt;/p&gt;
 &lt;p&gt;一般来说，语义相近的对象在向量空间中彼此接近，语义相异的对象则彼此远离。&lt;/p&gt;
@@ -642,25 +937,70 @@ loading="lazy"
 &lt;p&gt;分块后的文本块需要先生成Embedding，存入到向量数据库中，在用户提问时，系统通过计算提问的Embedding 与文本块的Embeding之间的相似度，找到和用户的提问最相关的内容，再交给大模型生成回答。&lt;/p&gt;
 &lt;p&gt;那为什么需要Embedding呢？&lt;/p&gt;
 &lt;p&gt;主要是因为传统的检索比较依赖&lt;strong&gt;关键词匹配&lt;/strong&gt;，难以应对同义词、上下文和多样化表达的问题。&lt;/p&gt;
-&lt;p&gt;Embedding是将文本映射到高维的向量空间，如果用户问“怎么泡咖啡”，经过Embedding之后可以将“咖啡的制作步骤”等语义相关的概念通过向量距离自动匹配。&lt;/p&gt;</description></item><item><title>为什么在RAG中需要提示压缩</title><link>https://iamxurulin.github.io/p/%E4%B8%BA%E4%BB%80%E4%B9%88%E5%9C%A8rag%E4%B8%AD%E9%9C%80%E8%A6%81%E6%8F%90%E7%A4%BA%E5%8E%8B%E7%BC%A9/</link><pubDate>Mon, 05 Jan 2026 14:11:44 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E4%B8%BA%E4%BB%80%E4%B9%88%E5%9C%A8rag%E4%B8%AD%E9%9C%80%E8%A6%81%E6%8F%90%E7%A4%BA%E5%8E%8B%E7%BC%A9/</guid><description>&lt;p&gt;在RAG（检索增强生成）中，&lt;strong&gt;提示压缩&lt;/strong&gt;主要是对检索出的文档内容通过&lt;strong&gt;提取核心信息&lt;/strong&gt;、&lt;strong&gt;过滤无关文本&lt;/strong&gt;、&lt;strong&gt;压缩冗长内容&lt;/strong&gt;的方式进行&lt;strong&gt;精简处理&lt;/strong&gt;，使得最终输入给大模型的内容既能够保留关键的信息，又符合模型输入长度的限制。&lt;/p&gt;
+&lt;p&gt;Embedding是将文本映射到高维的向量空间，如果用户问“怎么泡咖啡”，经过Embedding之后可以将“咖啡的制作步骤”等语义相关的概念通过向量距离自动匹配。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>为什么在RAG中需要提示压缩</title>
+        <link>https://iamxurulin.github.io/p/%E4%B8%BA%E4%BB%80%E4%B9%88%E5%9C%A8rag%E4%B8%AD%E9%9C%80%E8%A6%81%E6%8F%90%E7%A4%BA%E5%8E%8B%E7%BC%A9/</link>
+        <pubDate>Mon, 05 Jan 2026 14:11:44 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E4%B8%BA%E4%BB%80%E4%B9%88%E5%9C%A8rag%E4%B8%AD%E9%9C%80%E8%A6%81%E6%8F%90%E7%A4%BA%E5%8E%8B%E7%BC%A9/</guid>
+        <description>&lt;p&gt;在RAG（检索增强生成）中，&lt;strong&gt;提示压缩&lt;/strong&gt;主要是对检索出的文档内容通过&lt;strong&gt;提取核心信息&lt;/strong&gt;、&lt;strong&gt;过滤无关文本&lt;/strong&gt;、&lt;strong&gt;压缩冗长内容&lt;/strong&gt;的方式进行&lt;strong&gt;精简处理&lt;/strong&gt;，使得最终输入给大模型的内容既能够保留关键的信息，又符合模型输入长度的限制。&lt;/p&gt;
 &lt;p&gt;那为什么要这么做呢？&lt;/p&gt;
 &lt;p&gt;因为RAG的生成效果十分依赖“&lt;strong&gt;输入给模型的文档质量&lt;/strong&gt;”。&lt;/p&gt;
 &lt;p&gt;1.如果直接将大量拼接的检索内容输入给大模型，很可能会超出大模型的&lt;strong&gt;输入长度限制&lt;/strong&gt;，而通过压缩可以将关键的信息浓缩进有限的token内。&lt;/p&gt;
 &lt;p&gt;2.检索出的文档中很有可能包含&lt;strong&gt;大量的无关内容&lt;/strong&gt;，这些内容往往会稀释&lt;strong&gt;关键信息&lt;/strong&gt;，最终导致大模型聚焦困难，抓不住重点，如果不经过压缩生成的回答可能出现偏差，甚至出现“幻觉”。&lt;/p&gt;
-&lt;p&gt;3.如果输入的文档存在较多的&lt;strong&gt;非必要内容&lt;/strong&gt;，不经过压缩将增加模型处理和推理的计算负担，像商业的大模型都是通过token来计费的，因此还可能增加成本。&lt;/p&gt;</description></item><item><title>解释一下什么是查询拓展</title><link>https://iamxurulin.github.io/p/%E8%A7%A3%E9%87%8A%E4%B8%80%E4%B8%8B%E4%BB%80%E4%B9%88%E6%98%AF%E6%9F%A5%E8%AF%A2%E6%8B%93%E5%B1%95/</link><pubDate>Sun, 04 Jan 2026 15:03:51 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E8%A7%A3%E9%87%8A%E4%B8%80%E4%B8%8B%E4%BB%80%E4%B9%88%E6%98%AF%E6%9F%A5%E8%AF%A2%E6%8B%93%E5%B1%95/</guid><description>&lt;p&gt;查询拓展是指对用户的原始查询通过添加&lt;strong&gt;同义词&lt;/strong&gt;、&lt;strong&gt;相关术语&lt;/strong&gt;、&lt;strong&gt;隐含意图&lt;/strong&gt;等信息的方式进行优化和补充，使得查询更加精准、覆盖范围更广，从而提升信息检索的效果。&lt;/p&gt;
+&lt;p&gt;3.如果输入的文档存在较多的&lt;strong&gt;非必要内容&lt;/strong&gt;，不经过压缩将增加模型处理和推理的计算负担，像商业的大模型都是通过token来计费的，因此还可能增加成本。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>解释一下什么是查询拓展</title>
+        <link>https://iamxurulin.github.io/p/%E8%A7%A3%E9%87%8A%E4%B8%80%E4%B8%8B%E4%BB%80%E4%B9%88%E6%98%AF%E6%9F%A5%E8%AF%A2%E6%8B%93%E5%B1%95/</link>
+        <pubDate>Sun, 04 Jan 2026 15:03:51 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E8%A7%A3%E9%87%8A%E4%B8%80%E4%B8%8B%E4%BB%80%E4%B9%88%E6%98%AF%E6%9F%A5%E8%AF%A2%E6%8B%93%E5%B1%95/</guid>
+        <description>&lt;p&gt;查询拓展是指对用户的原始查询通过添加&lt;strong&gt;同义词&lt;/strong&gt;、&lt;strong&gt;相关术语&lt;/strong&gt;、&lt;strong&gt;隐含意图&lt;/strong&gt;等信息的方式进行优化和补充，使得查询更加精准、覆盖范围更广，从而提升信息检索的效果。&lt;/p&gt;
 &lt;p&gt;接下来说说为什么在RAG中需要进行查询扩展？&lt;/p&gt;
 &lt;p&gt;如果原始查询&lt;strong&gt;不够准确&lt;/strong&gt;或者&lt;strong&gt;覆盖范围不足&lt;/strong&gt;，就会导致检索到的文档不相关或者信息不全，最终导致生成的回答质量会受到影响。&lt;/p&gt;
 &lt;p&gt;如果增加了查询扩展，当用户的用词和知识库中的术语不一致时，可以在扩展后匹配更多的相关内容；&lt;/p&gt;
-&lt;p&gt;还有就是用户的查询中的描述可能会比较简短或者模糊不清，这样在扩展后能够更加明确需求，使得检索更加精准。&lt;/p&gt;</description></item><item><title>说说混合检索</title><link>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4%E6%B7%B7%E5%90%88%E6%A3%80%E7%B4%A2/</link><pubDate>Sat, 03 Jan 2026 14:31:43 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4%E6%B7%B7%E5%90%88%E6%A3%80%E7%B4%A2/</guid><description>&lt;p&gt;混合检索主要是为了提升大模型的上下文理解和回答的准确性，&lt;/p&gt;
+&lt;p&gt;还有就是用户的查询中的描述可能会比较简短或者模糊不清，这样在扩展后能够更加明确需求，使得检索更加精准。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>说说混合检索</title>
+        <link>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4%E6%B7%B7%E5%90%88%E6%A3%80%E7%B4%A2/</link>
+        <pubDate>Sat, 03 Jan 2026 14:31:43 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4%E6%B7%B7%E5%90%88%E6%A3%80%E7%B4%A2/</guid>
+        <description>&lt;p&gt;混合检索主要是为了提升大模型的上下文理解和回答的准确性，&lt;/p&gt;
 &lt;p&gt;因为&lt;strong&gt;向量检索&lt;/strong&gt;更擅长语义的理解，但是对于一些专有名词就难以做到精准匹配。&lt;/p&gt;
 &lt;p&gt;而&lt;strong&gt;关键词检索&lt;/strong&gt;的特性和向量检索相反，二者正好形成了互补优势，将两者结合能够大幅的提升检索结果的全面性和准确性。&lt;/p&gt;
-&lt;p&gt;在大模型RAG应用中，混合检索主要通过向量检索将文本转化为高维向量，计算语义的相似度，同时并行基于倒排索引算法等关键词检索来精准地匹配关键词，最后将两种结果通过权重的融合或者重排序模型进行合并，最终输出最优的答案。&lt;/p&gt;</description></item><item><title>说说A2A协议的5大设计原则</title><link>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4a2a%E5%8D%8F%E8%AE%AE%E7%9A%845%E5%A4%A7%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/</link><pubDate>Fri, 02 Jan 2026 14:25:49 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4a2a%E5%8D%8F%E8%AE%AE%E7%9A%845%E5%A4%A7%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/</guid><description>&lt;p&gt;&lt;strong&gt;A2A（Agent2Agent）协议&lt;/strong&gt;是为了打破现阶段各个Agent框架之间的隔离，让它们可以实现无障碍地交流而提出的一种AI智能体界的普通话标准。&lt;/p&gt;
+&lt;p&gt;在大模型RAG应用中，混合检索主要通过向量检索将文本转化为高维向量，计算语义的相似度，同时并行基于倒排索引算法等关键词检索来精准地匹配关键词，最后将两种结果通过权重的融合或者重排序模型进行合并，最终输出最优的答案。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>说说A2A协议的5大设计原则</title>
+        <link>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4a2a%E5%8D%8F%E8%AE%AE%E7%9A%845%E5%A4%A7%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/</link>
+        <pubDate>Fri, 02 Jan 2026 14:25:49 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4a2a%E5%8D%8F%E8%AE%AE%E7%9A%845%E5%A4%A7%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/</guid>
+        <description>&lt;p&gt;&lt;strong&gt;A2A（Agent2Agent）协议&lt;/strong&gt;是为了打破现阶段各个Agent框架之间的隔离，让它们可以实现无障碍地交流而提出的一种AI智能体界的普通话标准。&lt;/p&gt;
 &lt;p&gt;A2A协议遵循5大设计原则：&lt;/p&gt;
 &lt;p&gt;1.传统的API是我调用你一下，你就响应一下。但A2A是把Agent当人看，而不是当工具来用。它允许Agent之间像同事一样进行协作，它们可以自己商量怎么完成任务。（自主性）&lt;/p&gt;
 &lt;p&gt;2.A2A协议是建立在现有标准之上的，底层用的是HTTP、SSE、JSON-RPC这些成熟的技术，所以企业现有的IT系统可以直接接入。（标准化）&lt;/p&gt;
 &lt;p&gt;3.A2A集成了企业级的身份验证和授权，和OpenAPI的安全标准看齐，可以确保Agent之间的交互是可控和安全的。（安全性）&lt;/p&gt;
 &lt;p&gt;4.有些AI任务，像写代码或者做研究这种，可能要跑好几个小时甚至好几天才能出结果，为了让用户不用傻等，能够随时查看状态，A2A设计了异步机制，通过SSE可以实时反馈进度。（异步性）&lt;/p&gt;
-&lt;p&gt;5.如果Agent只能发文字，而不能发语音和视频，就显得有些单调了。因此，A2A原生支持音频和视频流传输，为未来的语音助手和视频分析Agent预留了接口。（多模态）&lt;/p&gt;</description></item><item><title>解释一下RAG中的Rerank</title><link>https://iamxurulin.github.io/p/%E8%A7%A3%E9%87%8A%E4%B8%80%E4%B8%8Brag%E4%B8%AD%E7%9A%84rerank/</link><pubDate>Thu, 01 Jan 2026 16:44:33 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E8%A7%A3%E9%87%8A%E4%B8%80%E4%B8%8Brag%E4%B8%AD%E7%9A%84rerank/</guid><description>&lt;p&gt;Rerank其实一个是对初步检索返回的候选文档列表再次进行排序的过程。&lt;/p&gt;
+&lt;p&gt;5.如果Agent只能发文字，而不能发语音和视频，就显得有些单调了。因此，A2A原生支持音频和视频流传输，为未来的语音助手和视频分析Agent预留了接口。（多模态）&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>解释一下RAG中的Rerank</title>
+        <link>https://iamxurulin.github.io/p/%E8%A7%A3%E9%87%8A%E4%B8%80%E4%B8%8Brag%E4%B8%AD%E7%9A%84rerank/</link>
+        <pubDate>Thu, 01 Jan 2026 16:44:33 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E8%A7%A3%E9%87%8A%E4%B8%80%E4%B8%8Brag%E4%B8%AD%E7%9A%84rerank/</guid>
+        <description>&lt;p&gt;Rerank其实一个是对初步检索返回的候选文档列表再次进行排序的过程。&lt;/p&gt;
 &lt;p&gt;如果把RAG的检索过程类比成公司的招聘过程，则有如下对应关系：&lt;/p&gt;
 &lt;p&gt;1.初步检索（Retrieval）
 这一步就类似于HR筛选简历，找工作的人往往很多，HR每天都可能收到上万份甚至几万份简历。&lt;/p&gt;
@@ -672,9 +1012,23 @@ loading="lazy"
 &lt;p&gt;2.重排序（Rerank）&lt;/p&gt;
 &lt;p&gt;这个过程就类似于企业招聘过程的业务面试，也就是主管把这100人的简历打印出来仔细阅读，如果觉得候选人的过往经历和工作经验很符合要求，就会约下一步的一对一业务面试。&lt;/p&gt;
 &lt;p&gt;这个过程花费的时间比较长，消耗的精力也更多，但是筛选出来的候选人也更符合要求。&lt;/p&gt;
-&lt;p&gt;这也就是RAG检索过程的Rerank，可以精准地判断初步检索返回的文档是不是真正能够回答用户的问题，最后再喂给大模型去生成一个答案。&lt;/p&gt;</description></item><item><title>解释一下RAG</title><link>https://iamxurulin.github.io/p/%E8%A7%A3%E9%87%8A%E4%B8%80%E4%B8%8Brag/</link><pubDate>Wed, 31 Dec 2025 15:12:08 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E8%A7%A3%E9%87%8A%E4%B8%80%E4%B8%8Brag/</guid><description>&lt;p&gt;我们可以把大模型想象成一个学霸，这个学霸有两个缺点，一个是他的知识存在滞后性，还有一个就是他不懂一些内部的机密。&lt;/p&gt;
+&lt;p&gt;这也就是RAG检索过程的Rerank，可以精准地判断初步检索返回的文档是不是真正能够回答用户的问题，最后再喂给大模型去生成一个答案。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>解释一下RAG</title>
+        <link>https://iamxurulin.github.io/p/%E8%A7%A3%E9%87%8A%E4%B8%80%E4%B8%8Brag/</link>
+        <pubDate>Wed, 31 Dec 2025 15:12:08 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E8%A7%A3%E9%87%8A%E4%B8%80%E4%B8%8Brag/</guid>
+        <description>&lt;p&gt;我们可以把大模型想象成一个学霸，这个学霸有两个缺点，一个是他的知识存在滞后性，还有一个就是他不懂一些内部的机密。&lt;/p&gt;
 &lt;p&gt;RAG（Retrieval Augmented Generation）检索增强生成，其实就是为了解决这两个问题而出现的。&lt;/p&gt;
 &lt;p&gt;RAG的流程就是检索➡️增强➡️生成：&lt;/p&gt;
 &lt;p&gt;1.当用户提问时，先不急着去问大模型，而是先去向量数据库中，把和这个问题相关的资料片段全部给找出来；（检索）&lt;/p&gt;
 &lt;p&gt;2.接下来，把用户提的问题和第1步找到的资料片段缝合在一起，变成一个新的、信息量也更大的提示词；（增强）&lt;/p&gt;
-&lt;p&gt;3.把第2步生成的提示词喂给大模型，这个时候大模型再根据我们提供的资料，可以生成一个更为准确的答案。（生成）&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;3.把第2步生成的提示词喂给大模型，这个时候大模型再根据我们提供的资料，可以生成一个更为准确的答案。（生成）&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

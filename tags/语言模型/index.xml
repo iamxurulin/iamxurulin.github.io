@@ -1,4 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>语言模型 on Coder_Studio</title><link>https://iamxurulin.github.io/tags/%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/</link><description>Recent content in 语言模型 on Coder_Studio</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>iamxurulin</copyright><lastBuildDate>Mon, 22 Jun 2026 02:21:46 +0000</lastBuildDate><atom:link href="https://iamxurulin.github.io/tags/%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/index.xml" rel="self" type="application/rss+xml"/><item><title>从 MSE 到交叉熵：一文搞懂损失函数</title><link>https://iamxurulin.github.io/p/%E4%BB%8E-mse-%E5%88%B0%E4%BA%A4%E5%8F%89%E7%86%B5%E4%B8%80%E6%96%87%E6%90%9E%E6%87%82%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/</link><pubDate>Sun, 21 Jun 2026 11:48:50 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E4%BB%8E-mse-%E5%88%B0%E4%BA%A4%E5%8F%89%E7%86%B5%E4%B8%80%E6%96%87%E6%90%9E%E6%87%82%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/</guid><description>&lt;h2 id="什么是损失函数"&gt;什么是损失函数？
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>语言模型 on Coder_Studio</title>
+        <link>https://iamxurulin.github.io/tags/%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/</link>
+        <description>Recent content in 语言模型 on Coder_Studio</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>iamxurulin</copyright>
+        <lastBuildDate>Mon, 22 Jun 2026 02:28:13 +0000</lastBuildDate><atom:link href="https://iamxurulin.github.io/tags/%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>从 MSE 到交叉熵：一文搞懂损失函数</title>
+        <link>https://iamxurulin.github.io/p/%E4%BB%8E-mse-%E5%88%B0%E4%BA%A4%E5%8F%89%E7%86%B5%E4%B8%80%E6%96%87%E6%90%9E%E6%87%82%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/</link>
+        <pubDate>Sun, 21 Jun 2026 11:48:50 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E4%BB%8E-mse-%E5%88%B0%E4%BA%A4%E5%8F%89%E7%86%B5%E4%B8%80%E6%96%87%E6%90%9E%E6%87%82%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/</guid>
+        <description>&lt;h2 id=&#34;什么是损失函数&#34;&gt;什么是损失函数？
 &lt;/h2&gt;&lt;p&gt;机器学习模型究竟依靠什么完成&amp;quot;学习&amp;quot;？&lt;/p&gt;
 &lt;p&gt;它凭什么判断自身的表现是否达标、又该在哪些方面做出改进？&lt;/p&gt;
 &lt;p&gt;我们可以通过一个类比来理解——学生在完成课后作业时，老师会给出一个分数。无论是80分、90分还是不及格，学生都能通过这个分数发现自己哪里掌握得不够牢固，并据此调整后续的学习策略，争取下一次取得更好的成绩。&lt;/p&gt;
@@ -14,8 +29,13 @@
 &lt;p&gt;但这里出现了一个问题：&lt;/p&gt;
 &lt;p&gt;如果有100次预报记录，将正偏差和负偏差直接相加会导致它们相互抵消，最终累加结果可能为零——意味着&amp;quot;零误差&amp;quot;，显然这与现实情况是不符的。&lt;/p&gt;
 &lt;p&gt;解决这一问题的方法是对每次偏差进行平方处理，使所有数值都变为正数，然后求取平均值。这就是&amp;quot;均方误差&amp;quot;（Mean Squared Error，简称 MSE）。&lt;/p&gt;
-&lt;p&gt;&lt;img src="https://iamxurulin.github.io/images/b8159ffdc353d69478560d4f24a14215-7f6ab470.png"
-loading="lazy"
+&lt;p&gt;&lt;img src=&#34;https://iamxurulin.github.io/images/b8159ffdc353d69478560d4f24a14215-7f6ab470.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
 &gt;&lt;/p&gt;
 &lt;p&gt;由此可见，损失函数的本质是一个&amp;quot;差距量化器&amp;quot;——它明确告诉模型：你的预测出现了偏差，偏差量为多少，需要做出调整。&lt;/p&gt;
 &lt;p&gt;然而，这种差距信号如何真正转化为模型的改进能力呢？&lt;/p&gt;
@@ -28,7 +48,7 @@ loading="lazy"
 &lt;p&gt;如果没有损失函数，就不会有梯度；&lt;/p&gt;
 &lt;p&gt;没有梯度，模型就只能在参数空间中盲目搜索。&lt;/p&gt;
 &lt;p&gt;因此，损失函数决定了模型能否有效学习，是整个学习过程的灵魂所在。&lt;/p&gt;
-&lt;h2 id="什么样的损失函数才算合格"&gt;什么样的损失函数才算合格？
+&lt;h2 id=&#34;什么样的损失函数才算合格&#34;&gt;什么样的损失函数才算合格？
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;第一，可导性。&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;损失函数最好能够计算梯度，或者在不可导点存在次梯度（Subgradient），从而支持梯度优化算法。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;第二，单调性。&lt;/strong&gt;&lt;/p&gt;
@@ -40,8 +60,8 @@ loading="lazy"
 &lt;p&gt;&lt;strong&gt;第四，计算高效。&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;在大规模数据集训练场景中，损失函数需要被频繁计算，因此计算效率十分重要。&lt;/p&gt;
 &lt;p&gt;在这四项特性中，前两项属于硬性约束，后两项则是理想层面的加分项。&lt;/p&gt;
-&lt;h2 id="具体损失函数分析"&gt;具体损失函数分析
-&lt;/h2&gt;&lt;h3 id="均方误差mse"&gt;均方误差（MSE）
+&lt;h2 id=&#34;具体损失函数分析&#34;&gt;具体损失函数分析
+&lt;/h2&gt;&lt;h3 id=&#34;均方误差mse&#34;&gt;均方误差（MSE）
 &lt;/h3&gt;&lt;p&gt;MSE 的全称为 Mean Squared Error，逐词拆解：Mean 表示&amp;quot;平均&amp;quot;，Squared 表示&amp;quot;平方&amp;quot;，Error 表示&amp;quot;误差&amp;quot;。&lt;/p&gt;
 &lt;p&gt;组合起来的含义即——误差平方的平均值。&lt;/p&gt;
 &lt;p&gt;其计算流程分为四个步骤：&lt;/p&gt;
@@ -60,15 +80,20 @@ loading="lazy"
 &lt;p&gt;在不平方的情况下，误差总和为 6；&lt;/p&gt;
 &lt;p&gt;而经过平方后，1 + 4 + 9 = 14，其中误差为 3 的样本贡献了 9，占总损失的比重超过六成。&lt;/p&gt;
 &lt;p&gt;这说明平方机制天然地让模型更加重视那些预测严重失准的样本，尽量避免出现&amp;quot;离谱的错误&amp;quot;，这通常与实际需求相一致。&lt;/p&gt;
-&lt;p&gt;&lt;img src="https://iamxurulin.github.io/images/798c477b3bdaade06840cccaa54ffae4-4350ed7b.png"
-loading="lazy"
+&lt;p&gt;&lt;img src=&#34;https://iamxurulin.github.io/images/798c477b3bdaade06840cccaa54ffae4-4350ed7b.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
 &gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;第三个理由：求导运算友好。&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;平方函数在其定义域内处处可导，导数形式为线性表达式 2x，结构简洁，使得梯度下降算法的运行非常顺畅。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;第四个理由：拥有深厚的统计学根基。&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;在正态分布假设下，MSE 与最大似然估计在数学上是等价的。&lt;/p&gt;
 &lt;p&gt;它并非一种拍脑袋想出来的启发式技巧，而是建立在严格的概率论基础之上的。&lt;/p&gt;
-&lt;h3 id="mse-的优势与局限"&gt;MSE 的优势与局限
+&lt;h3 id=&#34;mse-的优势与局限&#34;&gt;MSE 的优势与局限
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;优势：&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;计算极为简洁——仅需减法、平方、加法和除法四步运算，即便面对千万级甚至亿级规模的数据也能快速处理。&lt;/p&gt;
 &lt;p&gt;在整个定义域内处处可导，梯度形式简洁干净，不存在任何断点或奇点来阻碍优化过程。&lt;/p&gt;
@@ -85,7 +110,7 @@ loading="lazy"
 &lt;p&gt;&lt;strong&gt;适用场景：&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;回归任务的首选方案——凡是预测连续型数值（如房价、气温、销量等），MSE 通常是最自然且最常用的选择。&lt;/p&gt;
 &lt;p&gt;但如果数据中存在较多异常值，建议考虑 MAE（平均绝对误差）或 Huber Loss，它们对噪声数据具有更强的鲁棒性。&lt;/p&gt;
-&lt;h3 id="梯度下降的训练循环"&gt;梯度下降的训练循环
+&lt;h3 id=&#34;梯度下降的训练循环&#34;&gt;梯度下降的训练循环
 &lt;/h3&gt;&lt;p&gt;利用 MSE 的梯度来驱动模型参数更新，每一轮迭代包含以下四个步骤：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;前向传播&lt;/strong&gt;：使用当前参数对输入数据进行预测。&lt;/li&gt;
@@ -94,10 +119,15 @@ loading="lazy"
 &lt;li&gt;&lt;strong&gt;参数更新&lt;/strong&gt;：沿着梯度的反方向对参数值进行微调——梯度为正值时减小参数，为负值时增大参数。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;重复执行上述流程 50 次（或更多轮），模型便会在损失曲面上逐步滑动，不断逼近最优解。&lt;/p&gt;
-&lt;p&gt;&lt;img src="https://iamxurulin.github.io/images/8ab4d7da54ec8da8613c2469820776a6-762b6751.png"
-loading="lazy"
+&lt;p&gt;&lt;img src=&#34;https://iamxurulin.github.io/images/8ab4d7da54ec8da8613c2469820776a6-762b6751.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
 &gt;&lt;/p&gt;
-&lt;h2 id="交叉熵分类问题的核心损失函数"&gt;交叉熵：分类问题的核心损失函数
+&lt;h2 id=&#34;交叉熵分类问题的核心损失函数&#34;&gt;交叉熵：分类问题的核心损失函数
 &lt;/h2&gt;&lt;p&gt;接下来介绍第二个重要的损失函数——交叉熵（Cross Entropy），它是分类任务中最常用的损失函数。&lt;/p&gt;
 &lt;p&gt;设想这样一个应用场景：&lt;/p&gt;
 &lt;p&gt;向模型输入一张图片，要求它判断图片中的动物是猫、狗还是鸟。&lt;/p&gt;
@@ -116,7 +146,7 @@ loading="lazy"
 &lt;p&gt;那么问题就来了：&lt;/p&gt;
 &lt;p&gt;如何衡量模型输出的概率分布与真实标签之间的差异？&lt;/p&gt;
 &lt;p&gt;这就是交叉熵函数所要解决的问题。&lt;/p&gt;
-&lt;h3 id="交叉熵到底在计算什么"&gt;交叉熵到底在计算什么？
+&lt;h3 id=&#34;交叉熵到底在计算什么&#34;&gt;交叉熵到底在计算什么？
 &lt;/h3&gt;&lt;p&gt;交叉熵的核心思想其实非常简单：&lt;/p&gt;
 &lt;p&gt;如果模型把真实答案的概率预测得越高，那么损失就应该越小；&lt;/p&gt;
 &lt;p&gt;如果模型把真实答案的概率预测得越低，那么损失就应该越大。&lt;/p&gt;
@@ -142,73 +172,92 @@ loading="lazy"
 &lt;p&gt;预测正确且越自信，损失越小；&lt;/p&gt;
 &lt;p&gt;预测错误且越自信，损失越大。&lt;/p&gt;
 &lt;p&gt;正因为这种特性，交叉熵能够为分类模型提供更加清晰有效的优化方向，因此成为分类任务中最主流的损失函数。&lt;/p&gt;
-&lt;h3 id="mse-与交叉熵的核心差异"&gt;MSE 与交叉熵的核心差异
+&lt;h3 id=&#34;mse-与交叉熵的核心差异&#34;&gt;MSE 与交叉熵的核心差异
 &lt;/h3&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;维度&lt;/th&gt;
-&lt;th&gt;MSE&lt;/th&gt;
-&lt;th&gt;交叉熵&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;适用任务&lt;/td&gt;
-&lt;td&gt;回归（预测连续值）&lt;/td&gt;
-&lt;td&gt;分类（预测离散类别）&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;输出形式&lt;/td&gt;
-&lt;td&gt;实数（如 3.5、-2.1）&lt;/td&gt;
-&lt;td&gt;概率（0~1 之间的值）&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;梯度特性&lt;/td&gt;
-&lt;td&gt;梯度受平方项影响较大，对异常敏感&lt;/td&gt;
-&lt;td&gt;梯度与误差成线性关系，传播更平稳&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;收敛行为&lt;/td&gt;
-&lt;td&gt;回归任务上收敛稳定&lt;/td&gt;
-&lt;td&gt;分类任务上收敛更快、更稳定&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;维度&lt;/th&gt;
+					&lt;th&gt;MSE&lt;/th&gt;
+					&lt;th&gt;交叉熵&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;适用任务&lt;/td&gt;
+					&lt;td&gt;回归（预测连续值）&lt;/td&gt;
+					&lt;td&gt;分类（预测离散类别）&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;输出形式&lt;/td&gt;
+					&lt;td&gt;实数（如 3.5、-2.1）&lt;/td&gt;
+					&lt;td&gt;概率（0~1 之间的值）&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;梯度特性&lt;/td&gt;
+					&lt;td&gt;梯度受平方项影响较大，对异常敏感&lt;/td&gt;
+					&lt;td&gt;梯度与误差成线性关系，传播更平稳&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;收敛行为&lt;/td&gt;
+					&lt;td&gt;回归任务上收敛稳定&lt;/td&gt;
+					&lt;td&gt;分类任务上收敛更快、更稳定&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;&lt;img src="https://iamxurulin.github.io/images/0edda457bfad1be6f15822089d879df6-463a1c78.png"
-loading="lazy"
+&lt;p&gt;&lt;img src=&#34;https://iamxurulin.github.io/images/0edda457bfad1be6f15822089d879df6-463a1c78.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
 &gt;&lt;/p&gt;
-&lt;h2 id="如何选择损失函数"&gt;如何选择损失函数
+&lt;h2 id=&#34;如何选择损失函数&#34;&gt;如何选择损失函数
 &lt;/h2&gt;&lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;判断任务类型&lt;/strong&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;如果输出为连续数值 → 回归问题，如果输出为类别标签 → 分类问题。&lt;/p&gt;
-&lt;ol start="2"&gt;
+&lt;ol start=&#34;2&#34;&gt;
 &lt;li&gt;&lt;strong&gt;回归任务看数据质量&lt;/strong&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;如果数据包含较多异常值 → 选择 MAE 或 Huber Loss&lt;/p&gt;
 &lt;p&gt;如果数据较为干净、近似正态分布 → 选择 MSE&lt;/p&gt;
-&lt;ol start="3"&gt;
+&lt;ol start=&#34;3&#34;&gt;
 &lt;li&gt;&lt;strong&gt;分类任务看类别数量&lt;/strong&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;如果仅有两个类别 → 二元交叉熵（Binary Cross Entropy）&lt;/p&gt;
 &lt;p&gt;如果两个以上类别 → 多元分类交叉熵（Categorical Cross Entropy）&lt;/p&gt;
-&lt;h2 id="初学者常犯的三个错误"&gt;初学者常犯的三个错误
+&lt;h2 id=&#34;初学者常犯的三个错误&#34;&gt;初学者常犯的三个错误
 &lt;/h2&gt;&lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;用 MSE 做分类任务。&lt;/strong&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;这是新手最常犯的错误。&lt;/p&gt;
 &lt;p&gt;因为在分类任务中，当分类模型使用 sigmoid 或 softmax 输出概率时，如果再配合 MSE 作为损失函数，梯度在饱和区域会迅速衰减，导致训练速度明显变慢。&lt;/p&gt;
-&lt;ol start="2"&gt;
+&lt;ol start=&#34;2&#34;&gt;
 &lt;li&gt;&lt;strong&gt;用交叉熵做回归任务。&lt;/strong&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;交叉熵要求输出为合法的概率分布（非负且和为 1），回归任务的输出为任意实数，计算框架通常会直接报错；&lt;/p&gt;
 &lt;p&gt;即便绕过了框架检查，梯度也会完全失效，模型无法学到任何有效信息。&lt;/p&gt;
-&lt;ol start="3"&gt;
+&lt;ol start=&#34;3&#34;&gt;
 &lt;li&gt;&lt;strong&gt;只监控训练损失，忽视验证损失。&lt;/strong&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;许多初学者在训练过程中仅关注训练集损失持续下降这一现象便感到满意，却忽略了验证集损失可能已经开始反弹——这标志着过拟合正在发生。&lt;/p&gt;
-&lt;p&gt;正确的方法是同时监控训练损失和验证损失两条曲线，当验证损失不再下降甚至开始上升时，即使训练损失仍在降低，也应当停止训练或引入正则化手段来抑制过拟合。&lt;/p&gt;</description></item><item><title>为什么 temperature=0，模型输出依然不完全一致？</title><link>https://iamxurulin.github.io/p/%E4%B8%BA%E4%BB%80%E4%B9%88-temperature0%E6%A8%A1%E5%9E%8B%E8%BE%93%E5%87%BA%E4%BE%9D%E7%84%B6%E4%B8%8D%E5%AE%8C%E5%85%A8%E4%B8%80%E8%87%B4/</link><pubDate>Sat, 06 Jun 2026 17:50:42 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E4%B8%BA%E4%BB%80%E4%B9%88-temperature0%E6%A8%A1%E5%9E%8B%E8%BE%93%E5%87%BA%E4%BE%9D%E7%84%B6%E4%B8%8D%E5%AE%8C%E5%85%A8%E4%B8%80%E8%87%B4/</guid><description>&lt;p&gt;&lt;img src="https://iamxurulin.github.io/images/edc340ae5dc3b370c4af5b1dac3caadb-8a2a9afe.png"
-loading="lazy"
+&lt;p&gt;正确的方法是同时监控训练损失和验证损失两条曲线，当验证损失不再下降甚至开始上升时，即使训练损失仍在降低，也应当停止训练或引入正则化手段来抑制过拟合。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>为什么 temperature=0，模型输出依然不完全一致？</title>
+        <link>https://iamxurulin.github.io/p/%E4%B8%BA%E4%BB%80%E4%B9%88-temperature0%E6%A8%A1%E5%9E%8B%E8%BE%93%E5%87%BA%E4%BE%9D%E7%84%B6%E4%B8%8D%E5%AE%8C%E5%85%A8%E4%B8%80%E8%87%B4/</link>
+        <pubDate>Sat, 06 Jun 2026 17:50:42 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E4%B8%BA%E4%BB%80%E4%B9%88-temperature0%E6%A8%A1%E5%9E%8B%E8%BE%93%E5%87%BA%E4%BE%9D%E7%84%B6%E4%B8%8D%E5%AE%8C%E5%85%A8%E4%B8%80%E8%87%B4/</guid>
+        <description>&lt;p&gt;&lt;img src=&#34;https://iamxurulin.github.io/images/edc340ae5dc3b370c4af5b1dac3caadb-8a2a9afe.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
 &gt;&lt;/p&gt;
 &lt;p&gt;很多人会觉得：&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;temperature 设成 0，结果应该绝对稳定才对。&lt;/strong&gt;&lt;/p&gt;
@@ -219,8 +268,13 @@ loading="lazy"
 &lt;p&gt;既然最大值是确定的，那么输出自然也应该是固定的。&lt;/p&gt;
 &lt;p&gt;但问题在于：&lt;/p&gt;
 &lt;p&gt;数学世界是理想化的，而模型推理发生在真实硬件上。&lt;/p&gt;
-&lt;p&gt;&lt;img src="https://iamxurulin.github.io/images/e21e14e6eae762e6f56258e4a7c52b15-2d08812d.png"
-loading="lazy"
+&lt;p&gt;&lt;img src=&#34;https://iamxurulin.github.io/images/e21e14e6eae762e6f56258e4a7c52b15-2d08812d.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
 &gt;&lt;/p&gt;
 &lt;p&gt;大模型真正运行时，底层依赖的是 GPU 的并行计算架构，而不是一台计算器按顺序一步一步算。&lt;/p&gt;
 &lt;p&gt;GPU 为了追求吞吐量，会把大量运算同时展开。&lt;/p&gt;
@@ -232,24 +286,34 @@ loading="lazy"
 &lt;p&gt;因为模型最后预测 token 时，会得到一整个词表的 logits 分数。&lt;/p&gt;
 &lt;p&gt;而词表规模往往有几万甚至几十万个 token。&lt;/p&gt;
 &lt;p&gt;很多情况下，Top-1 和 Top-2 的分数差距极其接近。&lt;/p&gt;
-&lt;p&gt;&lt;img src="https://iamxurulin.github.io/images/a53c3662ce191a5c3dce0ae5459cbd5d-02f3692e.png"
-loading="lazy"
+&lt;p&gt;&lt;img src=&#34;https://iamxurulin.github.io/images/a53c3662ce191a5c3dce0ae5459cbd5d-02f3692e.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
 &gt;&lt;/p&gt;
 &lt;p&gt;例如：Token A=10.55555，Token B=10.55554。&lt;/p&gt;
 &lt;p&gt;正常情况下，A 排第一。&lt;/p&gt;
 &lt;p&gt;但如果因为 GPU 并行计算、低精度累积误差，导致某一步出现微小抖动，使得Token A=10.55553，Token B=10.55556，那么排名就可能直接翻转。&lt;/p&gt;
 &lt;p&gt;虽然变化微乎其微，但对于自回归模型来说，第一个 token 一旦不同，后续生成路径就会迅速分叉。&lt;/p&gt;
 &lt;p&gt;于是你看到的现象就是temperature 已经设为 0，输出仍然偶尔不一致。&lt;/p&gt;
-&lt;h2 id="那该怎么提高稳定性"&gt;那该怎么提高稳定性？
-&lt;/h2&gt;&lt;p&gt;&lt;img src="https://iamxurulin.github.io/images/b82e181bae00dd5b5bd414199c83310f-170ee786.png"
-loading="lazy"
+&lt;h2 id=&#34;那该怎么提高稳定性&#34;&gt;那该怎么提高稳定性？
+&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;https://iamxurulin.github.io/images/b82e181bae00dd5b5bd414199c83310f-170ee786.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
 &gt;&lt;/p&gt;
-&lt;h3 id="1-直接使用-argmax"&gt;1. 直接使用 Argmax
+&lt;h3 id=&#34;1-直接使用-argmax&#34;&gt;1. 直接使用 Argmax
 &lt;/h3&gt;&lt;p&gt;这是最直接、也最有效的方法。&lt;/p&gt;
 &lt;p&gt;如果 temperature=0，就不要再经过 sampling 逻辑，而是直接取 logits 最大值。&lt;/p&gt;
 &lt;p&gt;也就是跳过随机采样，强制选择 Top-1。&lt;/p&gt;
 &lt;p&gt;这样可以减少一部分实现层面的不确定性。&lt;/p&gt;
-&lt;h3 id="2-固定随机种子"&gt;2. 固定随机种子
+&lt;h3 id=&#34;2-固定随机种子&#34;&gt;2. 固定随机种子
 &lt;/h3&gt;&lt;p&gt;一些推理框架内部，可能仍然存在随机逻辑。&lt;/p&gt;
 &lt;p&gt;例如：&lt;/p&gt;
 &lt;ul&gt;
@@ -260,12 +324,17 @@ loading="lazy"
 &lt;p&gt;因此固定 seed，可以显著提高复现能力。&lt;/p&gt;
 &lt;p&gt;但需要注意，固定 seed ≠ 绝对确定。&lt;/p&gt;
 &lt;p&gt;因为硬件层面的非确定性依然可能存在。&lt;/p&gt;
-&lt;h3 id="3-开启确定性模式deterministic-mode"&gt;3. 开启确定性模式（Deterministic Mode）
+&lt;h3 id=&#34;3-开启确定性模式deterministic-mode&#34;&gt;3. 开启确定性模式（Deterministic Mode）
 &lt;/h3&gt;&lt;p&gt;主流框架通常会提供 deterministic 模式。&lt;/p&gt;
 &lt;p&gt;本质上就是牺牲一部分性能，换取更稳定的结果。&lt;/p&gt;
 &lt;p&gt;它会尽量避免某些并行乱序计算方式，优先使用可复现的计算路径。&lt;/p&gt;
 &lt;p&gt;代价是推理速度可能下降。&lt;/p&gt;
 &lt;p&gt;所以是否开启，需要看业务更重视性能还是稳定性。&lt;/p&gt;
-&lt;h3 id="4-提高计算精度"&gt;4. 提高计算精度
+&lt;h3 id=&#34;4-提高计算精度&#34;&gt;4. 提高计算精度
 &lt;/h3&gt;&lt;p&gt;既然误差来自低精度计算，那么一种思路就是&lt;strong&gt;在关键计算阶段提高精度。&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;例如，中间过程使用 FP16/BF16，最后一层 logits 计算切换到 FP32，这样能减少数值误差带来的排序抖动。&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;例如，中间过程使用 FP16/BF16，最后一层 logits 计算切换到 FP32，这样能减少数值误差带来的排序抖动。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

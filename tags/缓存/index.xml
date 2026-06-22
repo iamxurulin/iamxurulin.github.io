@@ -1,41 +1,56 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>缓存 on Coder_Studio</title><link>https://iamxurulin.github.io/tags/%E7%BC%93%E5%AD%98/</link><description>Recent content in 缓存 on Coder_Studio</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>iamxurulin</copyright><lastBuildDate>Mon, 22 Jun 2026 02:21:27 +0000</lastBuildDate><atom:link href="https://iamxurulin.github.io/tags/%E7%BC%93%E5%AD%98/index.xml" rel="self" type="application/rss+xml"/><item><title>【面试真题拆解】十万用户并发下，Caffeine+Redis+MySQL多级缓存怎么设计？</title><link>https://iamxurulin.github.io/p/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98%E6%8B%86%E8%A7%A3%E5%8D%81%E4%B8%87%E7%94%A8%E6%88%B7%E5%B9%B6%E5%8F%91%E4%B8%8Bcaffeine-redis-mysql%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1/</link><pubDate>Thu, 26 Mar 2026 14:59:06 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98%E6%8B%86%E8%A7%A3%E5%8D%81%E4%B8%87%E7%94%A8%E6%88%B7%E5%B9%B6%E5%8F%91%E4%B8%8Bcaffeine-redis-mysql%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1/</guid><description>&lt;p&gt;面试官问了这么一道场景题：&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>缓存 on Coder_Studio</title>
+        <link>https://iamxurulin.github.io/tags/%E7%BC%93%E5%AD%98/</link>
+        <description>Recent content in 缓存 on Coder_Studio</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>iamxurulin</copyright>
+        <lastBuildDate>Mon, 22 Jun 2026 02:28:13 +0000</lastBuildDate><atom:link href="https://iamxurulin.github.io/tags/%E7%BC%93%E5%AD%98/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>【面试真题拆解】十万用户并发下，Caffeine&#43;Redis&#43;MySQL多级缓存怎么设计？</title>
+        <link>https://iamxurulin.github.io/p/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98%E6%8B%86%E8%A7%A3%E5%8D%81%E4%B8%87%E7%94%A8%E6%88%B7%E5%B9%B6%E5%8F%91%E4%B8%8Bcaffeine-redis-mysql%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1/</link>
+        <pubDate>Thu, 26 Mar 2026 14:59:06 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98%E6%8B%86%E8%A7%A3%E5%8D%81%E4%B8%87%E7%94%A8%E6%88%B7%E5%B9%B6%E5%8F%91%E4%B8%8Bcaffeine-redis-mysql%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1/</guid>
+        <description>&lt;p&gt;面试官问了这么一道场景题：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;“平台用了Caffeine本地缓存、Redis分布式缓存、MySQL数据库，现在有十万个用户同时访问，相当于每个用户对应一个请求，这多级缓存该怎么设计？”&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;多级缓存就是“分层扛压”，把十万用户的请求，从快到慢、从近到远，一层层分流，别让所有请求都直接打MySQL。&lt;/p&gt;
-&lt;h2 id="设计方案"&gt;设计方案
-&lt;/h2&gt;&lt;h3 id="定好每一层的职责"&gt;定好每一层的职责
+&lt;h2 id=&#34;设计方案&#34;&gt;设计方案
+&lt;/h2&gt;&lt;h3 id=&#34;定好每一层的职责&#34;&gt;定好每一层的职责
 &lt;/h3&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;缓存层级&lt;/th&gt;
-&lt;th&gt;职责&lt;/th&gt;
-&lt;th&gt;放什么数据&lt;/th&gt;
-&lt;th&gt;容量/速度&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Caffeine本地缓存&lt;/td&gt;
-&lt;td&gt;扛超级热点中的超级热点，大幅减少 Redis 压力&lt;/td&gt;
-&lt;td&gt;访问频率 Top10 的极致热门数据（比如首页轮播爆款、正在进行的秒杀活动）&lt;/td&gt;
-&lt;td&gt;容量小（几百MB）、速度极快（纳秒级）&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Redis分布式缓存&lt;/td&gt;
-&lt;td&gt;扛&lt;strong&gt;全局通用&lt;/strong&gt;数据，挡MySQL&lt;/td&gt;
-&lt;td&gt;全平台的业务数据（比如商品详情、用户信息、订单数据）&lt;/td&gt;
-&lt;td&gt;容量大（几十GB）、速度快（毫秒级）&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;MySQL数据库&lt;/td&gt;
-&lt;td&gt;数据&lt;strong&gt;最终兜底&lt;/strong&gt;，保证数据不丢&lt;/td&gt;
-&lt;td&gt;所有的原始业务数据&lt;/td&gt;
-&lt;td&gt;容量无限、速度慢（秒级）&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;缓存层级&lt;/th&gt;
+					&lt;th&gt;职责&lt;/th&gt;
+					&lt;th&gt;放什么数据&lt;/th&gt;
+					&lt;th&gt;容量/速度&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;Caffeine本地缓存&lt;/td&gt;
+					&lt;td&gt;扛超级热点中的超级热点，大幅减少 Redis 压力&lt;/td&gt;
+					&lt;td&gt;访问频率 Top10 的极致热门数据（比如首页轮播爆款、正在进行的秒杀活动）&lt;/td&gt;
+					&lt;td&gt;容量小（几百MB）、速度极快（纳秒级）&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;Redis分布式缓存&lt;/td&gt;
+					&lt;td&gt;扛&lt;strong&gt;全局通用&lt;/strong&gt;数据，挡MySQL&lt;/td&gt;
+					&lt;td&gt;全平台的业务数据（比如商品详情、用户信息、订单数据）&lt;/td&gt;
+					&lt;td&gt;容量大（几十GB）、速度快（毫秒级）&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;MySQL数据库&lt;/td&gt;
+					&lt;td&gt;数据&lt;strong&gt;最终兜底&lt;/strong&gt;，保证数据不丢&lt;/td&gt;
+					&lt;td&gt;所有的原始业务数据&lt;/td&gt;
+					&lt;td&gt;容量无限、速度慢（秒级）&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h3 id="缓存预热"&gt;缓存预热
+&lt;h3 id=&#34;缓存预热&#34;&gt;缓存预热
 &lt;/h3&gt;&lt;p&gt;平台刚启动的时候，Caffeine和Redis里都是空的，如果这时候十万用户同时进来，所有请求都会直接打MySQL，直接把数据库打垮。&lt;/p&gt;
 &lt;p&gt;为了解决这个问题，考虑采用缓存预热：&lt;/p&gt;
 &lt;p&gt;平台启动前，先做两级缓存预热：&lt;/p&gt;
@@ -43,18 +58,18 @@
 &lt;li&gt;把访问频率最高的Top1000 个全量热门 Key（比如全平台热门商品、活动规则），提前从 MySQL 里查出来，全量加载到 Redis；&lt;/li&gt;
 &lt;li&gt;把其中访问频率最高的Top10 个超级热点 Key（比如首页轮播商品、正在进行的爆款活动），额外加载到每台服务器的 Caffeine 本地缓存，作为最外层的扛压层。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h3 id="缓存雪崩击穿穿透"&gt;缓存雪崩、击穿、穿透
-&lt;/h3&gt;&lt;h4 id="缓存雪崩十万个key同时过期"&gt;缓存雪崩：十万个Key同时过期
+&lt;h3 id=&#34;缓存雪崩击穿穿透&#34;&gt;缓存雪崩、击穿、穿透
+&lt;/h3&gt;&lt;h4 id=&#34;缓存雪崩十万个key同时过期&#34;&gt;缓存雪崩：十万个Key同时过期
 &lt;/h4&gt;&lt;p&gt;比如你给所有Key都设置了“1小时过期”，结果十万个Key在同一时间全部过期，所有请求直接打MySQL。&lt;/p&gt;
 &lt;p&gt;解决这个问题的话，就是别给所有Key都设一样的过期时间，可以设置“1小时 + 0~30分钟的随机值”，&lt;strong&gt;让Key的过期时间分散开&lt;/strong&gt;，避免同时过期；&lt;/p&gt;
 &lt;p&gt;对于首页Top10商品这种超级热点数据，还可以设置成“&lt;strong&gt;永不过期&lt;/strong&gt;”，只在数据更新的时候主动删除缓存。&lt;/p&gt;
-&lt;h4 id="缓存击穿超级热门key突然过期"&gt;缓存击穿：超级热门Key突然过期
+&lt;h4 id=&#34;缓存击穿超级热门key突然过期&#34;&gt;缓存击穿：超级热门Key突然过期
 &lt;/h4&gt;&lt;p&gt;比如“双11爆款商品详情”这个Key，每秒有十万个请求，结果它突然过期了，十万个请求同时打Redis，发现没有，又同时打MySQL，直接把两者都打垮。&lt;/p&gt;
 &lt;p&gt;这个问题也可以对超级热点Key&lt;strong&gt;不设过期时间&lt;/strong&gt;，只在更新时主动删；&lt;/p&gt;
 &lt;p&gt;或者加&lt;strong&gt;Redis 分布式互斥锁&lt;/strong&gt;：&lt;/p&gt;
 &lt;p&gt;如果 Key 真的过期了，只让第一个抢到锁的请求去查 MySQL，查出来后更新缓存并释放锁；&lt;/p&gt;
 &lt;p&gt;其他没抢到锁的请求，每隔 100ms 重试一次查缓存，直到缓存更新完成，彻底避免十万请求同时打 MySQL。&lt;/p&gt;
-&lt;h4 id="缓存穿透查根本不存在的key"&gt;缓存穿透：查根本不存在的Key
+&lt;h4 id=&#34;缓存穿透查根本不存在的key&#34;&gt;缓存穿透：查根本不存在的Key
 &lt;/h4&gt;&lt;p&gt;比如有人恶意攻击，每秒发十万个请求查“id=999999999”的商品（这个商品根本不存在），缓存里没有，直接打MySQL，把数据库打垮。&lt;/p&gt;
 &lt;p&gt;这个问题优先采用&lt;strong&gt;布隆过滤器&lt;/strong&gt;拦截：&lt;/p&gt;
 &lt;ol&gt;
@@ -66,14 +81,14 @@
 &lt;p&gt;缓存空值。如果查 MySQL 发现这个 Key 真的不存在，就把【空值】缓存到 Redis 里（设置 5 分钟短过期时间），下次再查这个 Key，直接从 Redis 里拿空值返回，避免重复打 MySQL。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;小贴士&lt;/strong&gt;：&lt;/p&gt;
 &lt;p&gt;空值缓存必须设置短过期时间（3-5 分钟），同时限制单 IP 的请求频率，避免恶意攻击生成大量空值缓存撑爆 Redis 内存。&lt;/p&gt;
-&lt;h3 id="十万并发下的-redis-压力分摊方案"&gt;十万并发下的 Redis 压力分摊方案
+&lt;h3 id=&#34;十万并发下的-redis-压力分摊方案&#34;&gt;十万并发下的 Redis 压力分摊方案
 &lt;/h3&gt;&lt;p&gt;十万个请求同时进来，如果都打到单实例 Redis 上，大概率会直接把 Redis 打宕机，必须做以下 3 件事分摊压力：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;热点隔离，本地优先扛压：把访问频率 Top10 的极致超级热点 Key（比如首页轮播爆款、正在进行的秒杀活动），全量放在每台服务器的 Caffeine 本地缓存里。十万请求里 90% 都能直接在本地命中，Redis 的压力直接降 90%。&lt;/li&gt;
 &lt;li&gt;用 Redis Cluster 集群，把数据分片存储在多个节点上，每个节点只扛一部分请求，避免单节点压力过载；&lt;/li&gt;
 &lt;li&gt;Redis 主节点只负责数据更新的&lt;strong&gt;写请求&lt;/strong&gt;，多个从节点负责处理十万级的&lt;strong&gt;读请求&lt;/strong&gt;，把读压力分摊到多个从节点上。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h3 id="多实例下的本地缓存一致性"&gt;多实例下的本地缓存一致性
+&lt;h3 id=&#34;多实例下的本地缓存一致性&#34;&gt;多实例下的本地缓存一致性
 &lt;/h3&gt;&lt;p&gt;服务基本都是多实例集群部署的（比如 10 台服务器），每台服务器都有自己独立的 Caffeine 本地缓存，很容易出现数据不一致的问题：&lt;/p&gt;
 &lt;p&gt;比如在 A 实例更新了商品价格，删了 A 实例的 Caffeine 和 Redis 缓存，但 B 实例的 Caffeine 里还存着旧价格，用户访问 B 实例就会看到脏数据。&lt;/p&gt;
 &lt;p&gt;考虑用&lt;strong&gt;延迟双删 + Redis 发布订阅&lt;/strong&gt;的组合方案解决这个问题：&lt;/p&gt;
@@ -84,13 +99,23 @@
 &lt;p&gt;② 再更新 MySQL 数据库，写入新数据；&lt;/p&gt;
 &lt;p&gt;③ 等待 1 秒（延迟时间必须略大于你的业务接口平均耗时，根据实际压测结果调整，不能盲目设置），再次删除 Redis 缓存。&lt;/p&gt;
 &lt;p&gt;延迟的目的是等其他实例已经从 MySQL 读到旧数据、更新到缓存后，再删一次缓存，避免脏数据回写。&lt;/p&gt;
-&lt;ol start="2"&gt;
+&lt;ol start=&#34;2&#34;&gt;
 &lt;li&gt;&lt;strong&gt;Redis 发布订阅：保证多实例 Caffeine 的数据一致&lt;/strong&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;①A实例更新完数据、完成延迟双删后，通过 Redis 的发布订阅功能，给集群里所有服务实例广播一条消息：商品 id=123 的缓存已失效，请删除本地缓存；&lt;/p&gt;
 &lt;p&gt;②所有实例收到消息后，立刻删除自己本地Caffeine里对应的Key；&lt;/p&gt;
 &lt;p&gt;③下次用户访问任何实例，都会去 Redis 里查询新数据，再更新到本地 Caffeine，保证全集群所有实例的数据一致。&lt;/p&gt;
-&lt;h2 id="完整的请求数据更新全流程"&gt;完整的请求+数据更新全流程
-&lt;/h2&gt;&lt;p&gt;&lt;img src="https://iamxurulin.github.io/images/a2da2a3c908113eb2f6748a511d86523-c4dbe57e.png"
-loading="lazy"
-&gt;&lt;/p&gt;</description></item></channel></rss>
+&lt;h2 id=&#34;完整的请求数据更新全流程&#34;&gt;完整的请求+数据更新全流程
+&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;https://iamxurulin.github.io/images/a2da2a3c908113eb2f6748a511d86523-c4dbe57e.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

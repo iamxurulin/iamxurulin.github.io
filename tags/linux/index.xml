@@ -1,73 +1,106 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Linux on Coder_Studio</title><link>https://iamxurulin.github.io/tags/linux/</link><description>Recent content in Linux on Coder_Studio</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>iamxurulin</copyright><lastBuildDate>Mon, 22 Jun 2026 02:21:27 +0000</lastBuildDate><atom:link href="https://iamxurulin.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml"/><item><title>Linux系统中常用的日志文件</title><link>https://iamxurulin.github.io/p/linux%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/</link><pubDate>Fri, 16 Jan 2026 17:19:26 +0000</pubDate><guid>https://iamxurulin.github.io/p/linux%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/</guid><description>&lt;p&gt;Linux系统中的日志文件通常都存储在&lt;code&gt;/var/log&lt;/code&gt;目录下。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Linux on Coder_Studio</title>
+        <link>https://iamxurulin.github.io/tags/linux/</link>
+        <description>Recent content in Linux on Coder_Studio</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>iamxurulin</copyright>
+        <lastBuildDate>Mon, 22 Jun 2026 02:28:13 +0000</lastBuildDate><atom:link href="https://iamxurulin.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Linux系统中常用的日志文件</title>
+        <link>https://iamxurulin.github.io/p/linux%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/</link>
+        <pubDate>Fri, 16 Jan 2026 17:19:26 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/linux%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/</guid>
+        <description>&lt;p&gt;Linux系统中的日志文件通常都存储在&lt;code&gt;/var/log&lt;/code&gt;目录下。&lt;/p&gt;
 &lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;messages&lt;/th&gt;
-&lt;th&gt;记录大多数系统范围内的普通信息和错误消息&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;syslog&lt;/td&gt;
-&lt;td&gt;系统日志文件，记录系统范围内包括启动、内核事件设备信息等消息&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;auth.log&lt;/td&gt;
-&lt;td&gt;记录授权相关的日志，比如用户的登录与登出&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;kern.log&lt;/td&gt;
-&lt;td&gt;记录内核产生的日志信息&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;dmesg&lt;/td&gt;
-&lt;td&gt;记录设备和驱动程序的初始化信息，以及内核启动期间产生的消息&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;boot.log&lt;/td&gt;
-&lt;td&gt;记录系统启动过程中发生的事件&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;faillog&lt;/td&gt;
-&lt;td&gt;记录失败的登录尝试信息&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;</description></item><item><title>整理在Linux系统中查看和管理系统服务的命令</title><link>https://iamxurulin.github.io/p/%E6%95%B4%E7%90%86%E5%9C%A8linux%E7%B3%BB%E7%BB%9F%E4%B8%AD%E6%9F%A5%E7%9C%8B%E5%92%8C%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%91%BD%E4%BB%A4/</link><pubDate>Wed, 14 Jan 2026 16:46:44 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E6%95%B4%E7%90%86%E5%9C%A8linux%E7%B3%BB%E7%BB%9F%E4%B8%AD%E6%9F%A5%E7%9C%8B%E5%92%8C%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%91%BD%E4%BB%A4/</guid><description>&lt;p&gt;在Linux系统中，可以使用&lt;code&gt;systemctl&lt;/code&gt;命令来查看和管理系统服务。&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;&lt;code&gt;systemctl list-units --type=service&lt;/code&gt;&lt;/th&gt;
-&lt;th&gt;查看所有服务的状态&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;systemctl status &amp;lt;服务名&amp;gt;&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;查看特定服务的状态&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;systemctl start &amp;lt;服务名&amp;gt;&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;启动服务&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;systemctl stop &amp;lt;服务名&amp;gt;&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;停止服务&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;systemctl restart &amp;lt;服务名&amp;gt;&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;重启服务&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;systemctl enable &amp;lt;服务名&amp;gt;&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;启用服务，设置为开机自启&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;systemctl disable &amp;lt;服务名&amp;gt;&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;禁用服务，取消开机自启&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;messages&lt;/th&gt;
+					&lt;th&gt;记录大多数系统范围内的普通信息和错误消息&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;syslog&lt;/td&gt;
+					&lt;td&gt;系统日志文件，记录系统范围内包括启动、内核事件设备信息等消息&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;auth.log&lt;/td&gt;
+					&lt;td&gt;记录授权相关的日志，比如用户的登录与登出&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;kern.log&lt;/td&gt;
+					&lt;td&gt;记录内核产生的日志信息&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;dmesg&lt;/td&gt;
+					&lt;td&gt;记录设备和驱动程序的初始化信息，以及内核启动期间产生的消息&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;boot.log&lt;/td&gt;
+					&lt;td&gt;记录系统启动过程中发生的事件&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;faillog&lt;/td&gt;
+					&lt;td&gt;记录失败的登录尝试信息&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;Linux 中服务名通常都是带&lt;code&gt;.service&lt;/code&gt;后缀的（如nginx.service、redis-server.service），使用systemctl时省略&lt;code&gt;.service&lt;/code&gt; 后缀，命令仍会生效。&lt;/p&gt;</description></item><item><title>解释一下Linux系统的权限管理机制</title><link>https://iamxurulin.github.io/p/%E8%A7%A3%E9%87%8A%E4%B8%80%E4%B8%8Blinux%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6/</link><pubDate>Tue, 13 Jan 2026 16:28:41 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E8%A7%A3%E9%87%8A%E4%B8%80%E4%B8%8Blinux%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6/</guid><description>&lt;p&gt;Linux中的权限管理机制主要是围绕&lt;strong&gt;用户&lt;/strong&gt;和&lt;strong&gt;组&lt;/strong&gt;的权限展开。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>整理在Linux系统中查看和管理系统服务的命令</title>
+        <link>https://iamxurulin.github.io/p/%E6%95%B4%E7%90%86%E5%9C%A8linux%E7%B3%BB%E7%BB%9F%E4%B8%AD%E6%9F%A5%E7%9C%8B%E5%92%8C%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%91%BD%E4%BB%A4/</link>
+        <pubDate>Wed, 14 Jan 2026 16:46:44 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E6%95%B4%E7%90%86%E5%9C%A8linux%E7%B3%BB%E7%BB%9F%E4%B8%AD%E6%9F%A5%E7%9C%8B%E5%92%8C%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%91%BD%E4%BB%A4/</guid>
+        <description>&lt;p&gt;在Linux系统中，可以使用&lt;code&gt;systemctl&lt;/code&gt;命令来查看和管理系统服务。&lt;/p&gt;
+&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;&lt;code&gt;systemctl list-units --type=service&lt;/code&gt;&lt;/th&gt;
+					&lt;th&gt;查看所有服务的状态&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;systemctl status &amp;lt;服务名&amp;gt;&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;查看特定服务的状态&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;systemctl start &amp;lt;服务名&amp;gt;&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;启动服务&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;systemctl stop &amp;lt;服务名&amp;gt;&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;停止服务&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;systemctl restart &amp;lt;服务名&amp;gt;&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;重启服务&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;systemctl enable &amp;lt;服务名&amp;gt;&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;启用服务，设置为开机自启&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;systemctl disable &amp;lt;服务名&amp;gt;&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;禁用服务，取消开机自启&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Linux 中服务名通常都是带&lt;code&gt;.service&lt;/code&gt;后缀的（如nginx.service、redis-server.service），使用systemctl时省略&lt;code&gt;.service&lt;/code&gt; 后缀，命令仍会生效。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>解释一下Linux系统的权限管理机制</title>
+        <link>https://iamxurulin.github.io/p/%E8%A7%A3%E9%87%8A%E4%B8%80%E4%B8%8Blinux%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6/</link>
+        <pubDate>Tue, 13 Jan 2026 16:28:41 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E8%A7%A3%E9%87%8A%E4%B8%80%E4%B8%8Blinux%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6/</guid>
+        <description>&lt;p&gt;Linux中的权限管理机制主要是围绕&lt;strong&gt;用户&lt;/strong&gt;和&lt;strong&gt;组&lt;/strong&gt;的权限展开。&lt;/p&gt;
 &lt;p&gt;Linux中的文件和目录都是由：&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;所有者（user）、组（Group）、其他人（Others）&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;这三种实体来&lt;strong&gt;管理权限&lt;/strong&gt;。&lt;/p&gt;
@@ -77,441 +110,538 @@
 &lt;p&gt;一个用户&lt;strong&gt;可以属于&lt;/strong&gt;多个组，但是一个文件&lt;strong&gt;只能&lt;/strong&gt;有一个所有者和一个组属性。&lt;/p&gt;
 &lt;p&gt;2.权限可以使用&lt;strong&gt;符号&lt;/strong&gt;来表示，也可以使用&lt;strong&gt;八进制&lt;/strong&gt;来表示。&lt;/p&gt;
 &lt;p&gt;可读（r，read）、可写（w，write）、可执行（x，execute）&lt;/p&gt;
-&lt;p&gt;r对应八进制4，w对应八进制2，x对应八进制1，通过相加和可得出最终的权限数值。&lt;/p&gt;</description></item><item><title>在Linux系统中-如何设置文件的权限和拥有者</title><link>https://iamxurulin.github.io/p/%E5%9C%A8linux%E7%B3%BB%E7%BB%9F%E4%B8%AD-%E5%A6%82%E4%BD%95%E8%AE%BE%E7%BD%AE%E6%96%87%E4%BB%B6%E7%9A%84%E6%9D%83%E9%99%90%E5%92%8C%E6%8B%A5%E6%9C%89%E8%80%85/</link><pubDate>Mon, 12 Jan 2026 16:41:27 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E5%9C%A8linux%E7%B3%BB%E7%BB%9F%E4%B8%AD-%E5%A6%82%E4%BD%95%E8%AE%BE%E7%BD%AE%E6%96%87%E4%BB%B6%E7%9A%84%E6%9D%83%E9%99%90%E5%92%8C%E6%8B%A5%E6%9C%89%E8%80%85/</guid><description>&lt;p&gt;在Linux系统中，文件的权限可以通过&lt;code&gt;chmod&lt;/code&gt;指令来设置，文件的拥有者可以通过&lt;code&gt;chown&lt;/code&gt; 指令来设置。&lt;/p&gt;
+&lt;p&gt;r对应八进制4，w对应八进制2，x对应八进制1，通过相加和可得出最终的权限数值。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>在Linux系统中-如何设置文件的权限和拥有者</title>
+        <link>https://iamxurulin.github.io/p/%E5%9C%A8linux%E7%B3%BB%E7%BB%9F%E4%B8%AD-%E5%A6%82%E4%BD%95%E8%AE%BE%E7%BD%AE%E6%96%87%E4%BB%B6%E7%9A%84%E6%9D%83%E9%99%90%E5%92%8C%E6%8B%A5%E6%9C%89%E8%80%85/</link>
+        <pubDate>Mon, 12 Jan 2026 16:41:27 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E5%9C%A8linux%E7%B3%BB%E7%BB%9F%E4%B8%AD-%E5%A6%82%E4%BD%95%E8%AE%BE%E7%BD%AE%E6%96%87%E4%BB%B6%E7%9A%84%E6%9D%83%E9%99%90%E5%92%8C%E6%8B%A5%E6%9C%89%E8%80%85/</guid>
+        <description>&lt;p&gt;在Linux系统中，文件的权限可以通过&lt;code&gt;chmod&lt;/code&gt;指令来设置，文件的拥有者可以通过&lt;code&gt;chown&lt;/code&gt; 指令来设置。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;1.设置文件的权限&lt;/strong&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;chmod &lt;span class="m"&gt;755&lt;/span&gt; my_file
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;chmod &lt;span class=&#34;m&#34;&gt;755&lt;/span&gt; my_file
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;设置my_file文件的权限为755&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;2.设置文件的拥有者&lt;/strong&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;chown user:group my_file
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;chown user:group my_file
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;将文件my_file的拥有者设置为user，所属的组设置为group&lt;/p&gt;
 &lt;p&gt;在Linux中，文件权限以读（r）、写（w）、执行（x）三个基本权限来表示。&lt;/p&gt;
 &lt;p&gt;权限分用户（u）、组（g）和其他用户（o）三类。&lt;/p&gt;
 &lt;p&gt;755表示的是所有者拥有rwx权限，组合其他用户拥有rx权限，没有w权限。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;配置文件&lt;/strong&gt;一般设置为644，&lt;strong&gt;脚本文件&lt;/strong&gt;设置为755。&lt;/p&gt;</description></item><item><title>在Linux系统中-怎么检查系统的磁盘使用情况</title><link>https://iamxurulin.github.io/p/%E5%9C%A8linux%E7%B3%BB%E7%BB%9F%E4%B8%AD-%E6%80%8E%E4%B9%88%E6%A3%80%E6%9F%A5%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%A3%81%E7%9B%98%E4%BD%BF%E7%94%A8%E6%83%85%E5%86%B5/</link><pubDate>Fri, 09 Jan 2026 15:15:00 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E5%9C%A8linux%E7%B3%BB%E7%BB%9F%E4%B8%AD-%E6%80%8E%E4%B9%88%E6%A3%80%E6%9F%A5%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%A3%81%E7%9B%98%E4%BD%BF%E7%94%A8%E6%83%85%E5%86%B5/</guid><description>&lt;p&gt;检查系统的磁盘使用情况可以使用&lt;code&gt;df&lt;/code&gt;和&lt;code&gt;du&lt;/code&gt;这两个命令。&lt;/p&gt;
-&lt;h3 id="df命令"&gt;df命令
+&lt;p&gt;&lt;strong&gt;配置文件&lt;/strong&gt;一般设置为644，&lt;strong&gt;脚本文件&lt;/strong&gt;设置为755。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>在Linux系统中-怎么检查系统的磁盘使用情况</title>
+        <link>https://iamxurulin.github.io/p/%E5%9C%A8linux%E7%B3%BB%E7%BB%9F%E4%B8%AD-%E6%80%8E%E4%B9%88%E6%A3%80%E6%9F%A5%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%A3%81%E7%9B%98%E4%BD%BF%E7%94%A8%E6%83%85%E5%86%B5/</link>
+        <pubDate>Fri, 09 Jan 2026 15:15:00 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E5%9C%A8linux%E7%B3%BB%E7%BB%9F%E4%B8%AD-%E6%80%8E%E4%B9%88%E6%A3%80%E6%9F%A5%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%A3%81%E7%9B%98%E4%BD%BF%E7%94%A8%E6%83%85%E5%86%B5/</guid>
+        <description>&lt;p&gt;检查系统的磁盘使用情况可以使用&lt;code&gt;df&lt;/code&gt;和&lt;code&gt;du&lt;/code&gt;这两个命令。&lt;/p&gt;
+&lt;h3 id=&#34;df命令&#34;&gt;df命令
 &lt;/h3&gt;&lt;p&gt;df（disk filesystem），用于查看磁盘文件系统的整体使用情况。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;df -h
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;df -h
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;h表示human-readable，就是以人类可读的格式输出磁盘分区、已用空间、空闲空间、总空间和挂载点的信息。&lt;/p&gt;
-&lt;h3 id="du命令"&gt;du命令
+&lt;h3 id=&#34;du命令&#34;&gt;du命令
 &lt;/h3&gt;&lt;p&gt;du（disk usage），用于检查指定目录及其子目录的磁盘使用情况。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;du -sh /home/user
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;du -sh /home/user
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;-s显示目录的总大小，-h以人类可读的格式显示，合起来就是以人类可读的格式查看home/user目录的总大小。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;du -a
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;du -a
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;显示目录和所有文件的大小。&lt;/p&gt;</description></item><item><title>整理Linux文件系统中各个目录的作用</title><link>https://iamxurulin.github.io/p/%E6%95%B4%E7%90%86linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%90%84%E4%B8%AA%E7%9B%AE%E5%BD%95%E7%9A%84%E4%BD%9C%E7%94%A8/</link><pubDate>Thu, 08 Jan 2026 16:25:43 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E6%95%B4%E7%90%86linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%90%84%E4%B8%AA%E7%9B%AE%E5%BD%95%E7%9A%84%E4%BD%9C%E7%94%A8/</guid><description>&lt;p&gt;Linux文件系统采用的是&lt;strong&gt;层次化&lt;/strong&gt;的&lt;strong&gt;树形结构&lt;/strong&gt;。&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;显示目录和所有文件的大小。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>整理Linux文件系统中各个目录的作用</title>
+        <link>https://iamxurulin.github.io/p/%E6%95%B4%E7%90%86linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%90%84%E4%B8%AA%E7%9B%AE%E5%BD%95%E7%9A%84%E4%BD%9C%E7%94%A8/</link>
+        <pubDate>Thu, 08 Jan 2026 16:25:43 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E6%95%B4%E7%90%86linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%90%84%E4%B8%AA%E7%9B%AE%E5%BD%95%E7%9A%84%E4%BD%9C%E7%94%A8/</guid>
+        <description>&lt;p&gt;Linux文件系统采用的是&lt;strong&gt;层次化&lt;/strong&gt;的&lt;strong&gt;树形结构&lt;/strong&gt;。&lt;/p&gt;
 &lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;/&lt;/th&gt;
-&lt;th&gt;根目录，系统的起点，包括所有其他目录&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;/bin&lt;/td&gt;
-&lt;td&gt;存放系统必需的二进制可执行文件&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;/boot&lt;/td&gt;
-&lt;td&gt;存放引导加载程序和内核等系统启动相关的文件&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;/dev&lt;/td&gt;
-&lt;td&gt;存放像硬盘、终端设备、虚拟机等存储设备文件，这些文件只是接口，不存储实际数据&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;/etc&lt;/td&gt;
-&lt;td&gt;存放系统配置文件(用户账号)和脚本(启动脚本)等等&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;/home&lt;/td&gt;
-&lt;td&gt;普通用户的主目录，每个用户会有一个单独的子目录&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;/lib&lt;/td&gt;
-&lt;td&gt;必需的共享库和内核模块&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;/media&lt;/td&gt;
-&lt;td&gt;挂载点，用于挂载像U盘和光盘这类可移除介质&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;/mnt&lt;/td&gt;
-&lt;td&gt;一种临时挂载点，用于系统管理员手动挂载文件系统&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;/opt&lt;/td&gt;
-&lt;td&gt;用于安装附加软件包，通常是第三方应用程序&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;/proc&lt;/td&gt;
-&lt;td&gt;存放系统内核和进程信息的虚拟文件系统&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;/root&lt;/td&gt;
-&lt;td&gt;root的主目录&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;/sbin&lt;/td&gt;
-&lt;td&gt;存放系统管理员使用的系统二进制文件&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;/tmp&lt;/td&gt;
-&lt;td&gt;临时文件目录，各种程序的临时存储空间&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;/usr&lt;/td&gt;
-&lt;td&gt;包含用户执行的应用程序和文件&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;/var&lt;/td&gt;
-&lt;td&gt;存放日志文件、邮件等这类经常变化的文件&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;</description></item><item><title>在Linux系统中-如何进行磁盘配额管理</title><link>https://iamxurulin.github.io/p/%E5%9C%A8linux%E7%B3%BB%E7%BB%9F%E4%B8%AD-%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E7%A3%81%E7%9B%98%E9%85%8D%E9%A2%9D%E7%AE%A1%E7%90%86/</link><pubDate>Wed, 07 Jan 2026 15:49:05 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E5%9C%A8linux%E7%B3%BB%E7%BB%9F%E4%B8%AD-%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E7%A3%81%E7%9B%98%E9%85%8D%E9%A2%9D%E7%AE%A1%E7%90%86/</guid><description>&lt;p&gt;在Linux系统中进行磁盘配额管理的核心步骤：&lt;/p&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;/&lt;/th&gt;
+					&lt;th&gt;根目录，系统的起点，包括所有其他目录&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;/bin&lt;/td&gt;
+					&lt;td&gt;存放系统必需的二进制可执行文件&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;/boot&lt;/td&gt;
+					&lt;td&gt;存放引导加载程序和内核等系统启动相关的文件&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;/dev&lt;/td&gt;
+					&lt;td&gt;存放像硬盘、终端设备、虚拟机等存储设备文件，这些文件只是接口，不存储实际数据&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;/etc&lt;/td&gt;
+					&lt;td&gt;存放系统配置文件(用户账号)和脚本(启动脚本)等等&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;/home&lt;/td&gt;
+					&lt;td&gt;普通用户的主目录，每个用户会有一个单独的子目录&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;/lib&lt;/td&gt;
+					&lt;td&gt;必需的共享库和内核模块&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;/media&lt;/td&gt;
+					&lt;td&gt;挂载点，用于挂载像U盘和光盘这类可移除介质&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;/mnt&lt;/td&gt;
+					&lt;td&gt;一种临时挂载点，用于系统管理员手动挂载文件系统&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;/opt&lt;/td&gt;
+					&lt;td&gt;用于安装附加软件包，通常是第三方应用程序&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;/proc&lt;/td&gt;
+					&lt;td&gt;存放系统内核和进程信息的虚拟文件系统&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;/root&lt;/td&gt;
+					&lt;td&gt;root的主目录&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;/sbin&lt;/td&gt;
+					&lt;td&gt;存放系统管理员使用的系统二进制文件&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;/tmp&lt;/td&gt;
+					&lt;td&gt;临时文件目录，各种程序的临时存储空间&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;/usr&lt;/td&gt;
+					&lt;td&gt;包含用户执行的应用程序和文件&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;/var&lt;/td&gt;
+					&lt;td&gt;存放日志文件、邮件等这类经常变化的文件&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+        </item>
+        <item>
+        <title>在Linux系统中-如何进行磁盘配额管理</title>
+        <link>https://iamxurulin.github.io/p/%E5%9C%A8linux%E7%B3%BB%E7%BB%9F%E4%B8%AD-%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E7%A3%81%E7%9B%98%E9%85%8D%E9%A2%9D%E7%AE%A1%E7%90%86/</link>
+        <pubDate>Wed, 07 Jan 2026 15:49:05 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E5%9C%A8linux%E7%B3%BB%E7%BB%9F%E4%B8%AD-%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E7%A3%81%E7%9B%98%E9%85%8D%E9%A2%9D%E7%AE%A1%E7%90%86/</guid>
+        <description>&lt;p&gt;在Linux系统中进行磁盘配额管理的核心步骤：&lt;/p&gt;
 &lt;p&gt;1.安装磁盘配额管理工具quota&lt;/p&gt;
 &lt;p&gt;如果是Ubuntu/Debian系列的Linux系统，输入以下命令：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo apt-get install quota
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt-get install quota
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;如果是CentOS/RHEL系列的Linux系统，输入以下命令：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo yum install quota
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo yum install quota
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;2.编辑/etc/fstab文件，为需要启用配额的分区添加usrquota和grpquota选项。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;/dev/sda1 /home ext4 defaults,usrquota,grpquota &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda1 /home ext4 defaults,usrquota,grpquota &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;3.为了使第2步的配置生效，需要重新挂载分区&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo mount -o remount /home
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo mount -o remount /home
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;4.生成配额文件aquota.user（用户配额文件）和aquota.group（组配额文件）并初始化配额数据库。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
-&lt;/span&gt;&lt;span class="lnt"&gt;3
-&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;#c=创建配额文件，u=用户，g=组，m=强制检查，v=显示详细过程&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo quotacheck -cugmv /home
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo quotaon /home
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#c=创建配额文件，u=用户，g=组，m=强制检查，v=显示详细过程&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo quotacheck -cugmv /home
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo quotaon /home
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;5.使用edquota命令为用户或组设置软性和硬性限制。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo edquota username
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo edquota username
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>操作系统的进程有哪几种状态</title><link>https://iamxurulin.github.io/p/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%BF%9B%E7%A8%8B%E6%9C%89%E5%93%AA%E5%87%A0%E7%A7%8D%E7%8A%B6%E6%80%81/</link><pubDate>Tue, 06 Jan 2026 17:32:22 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%BF%9B%E7%A8%8B%E6%9C%89%E5%93%AA%E5%87%A0%E7%A7%8D%E7%8A%B6%E6%80%81/</guid><description>&lt;p&gt;在操作系统层面，一个完整的生命周期中包含5种基础状态，分别是新建（New）、就绪（Ready）、运行（Running）、阻塞（Blocked/Waiting）、终止（Terminated）。这5种状态中，中间的就绪、运行、阻塞又是核心状态。&lt;/p&gt;
+&lt;/div&gt;</description>
+        </item>
+        <item>
+        <title>操作系统的进程有哪几种状态</title>
+        <link>https://iamxurulin.github.io/p/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%BF%9B%E7%A8%8B%E6%9C%89%E5%93%AA%E5%87%A0%E7%A7%8D%E7%8A%B6%E6%80%81/</link>
+        <pubDate>Tue, 06 Jan 2026 17:32:22 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%BF%9B%E7%A8%8B%E6%9C%89%E5%93%AA%E5%87%A0%E7%A7%8D%E7%8A%B6%E6%80%81/</guid>
+        <description>&lt;p&gt;在操作系统层面，一个完整的生命周期中包含5种基础状态，分别是新建（New）、就绪（Ready）、运行（Running）、阻塞（Blocked/Waiting）、终止（Terminated）。这5种状态中，中间的就绪、运行、阻塞又是核心状态。&lt;/p&gt;
 &lt;p&gt;我们可以把进程的这5种状态的转换想象成&lt;strong&gt;去银行的柜台办理业务&lt;/strong&gt;的流程：&lt;/p&gt;
 &lt;p&gt;新建状态下，操作系统正在为进程分配进程ID（PID）和进程控制块（PCB），相当于我去银行取好了号，正在填写个人信息，但此时并没有进入到等待大厅；&lt;/p&gt;
 &lt;p&gt;就绪状态就是只要CPU有空闲，进程就能马上执行，相当于我的材料这些都准备齐了，坐在等待大厅里等着叫号；&lt;/p&gt;
 &lt;p&gt;运行状态下，进程此时占用了CPU的资源正在执行指令，相当于叫到我了，我此时就在柜台办理业务；&lt;/p&gt;
 &lt;p&gt;阻塞状态就是进程执行到一半，需要等待某个I/O操作或者某个文件的输入完成后才能往下执行，此时就进入了阻塞状态，相当于业务办理到一半，发现我的身份证复印件没带，让我选择去附近打印室复印或者通知家人朋友送来，这个时候只能等复印件拿到手之后，才能重新排队继续办理，这时不能插队；&lt;/p&gt;
-&lt;p&gt;终止状态，进程执行完毕或者发生了异常退出，资源被回收，相当于业务办理完了或者和柜员拌嘴被保安赶走，柜员可以给其他人接着办理了。&lt;/p&gt;</description></item><item><title>在Linux系统中怎么排查文件占用问题</title><link>https://iamxurulin.github.io/p/%E5%9C%A8linux%E7%B3%BB%E7%BB%9F%E4%B8%AD%E6%80%8E%E4%B9%88%E6%8E%92%E6%9F%A5%E6%96%87%E4%BB%B6%E5%8D%A0%E7%94%A8%E9%97%AE%E9%A2%98/</link><pubDate>Tue, 06 Jan 2026 16:52:26 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E5%9C%A8linux%E7%B3%BB%E7%BB%9F%E4%B8%AD%E6%80%8E%E4%B9%88%E6%8E%92%E6%9F%A5%E6%96%87%E4%BB%B6%E5%8D%A0%E7%94%A8%E9%97%AE%E9%A2%98/</guid><description>&lt;p&gt;平常的办公中，我们用的比较多的是Windows系统，应该也遇到过想删除一个文件但是显示这个文件被某个应用程序占用的问题吧，这个时候我们可以根据提示打开任务管理器把这个程序关闭，就能够删除这个文件了。&lt;/p&gt;
+&lt;p&gt;终止状态，进程执行完毕或者发生了异常退出，资源被回收，相当于业务办理完了或者和柜员拌嘴被保安赶走，柜员可以给其他人接着办理了。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>在Linux系统中怎么排查文件占用问题</title>
+        <link>https://iamxurulin.github.io/p/%E5%9C%A8linux%E7%B3%BB%E7%BB%9F%E4%B8%AD%E6%80%8E%E4%B9%88%E6%8E%92%E6%9F%A5%E6%96%87%E4%BB%B6%E5%8D%A0%E7%94%A8%E9%97%AE%E9%A2%98/</link>
+        <pubDate>Tue, 06 Jan 2026 16:52:26 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E5%9C%A8linux%E7%B3%BB%E7%BB%9F%E4%B8%AD%E6%80%8E%E4%B9%88%E6%8E%92%E6%9F%A5%E6%96%87%E4%BB%B6%E5%8D%A0%E7%94%A8%E9%97%AE%E9%A2%98/</guid>
+        <description>&lt;p&gt;平常的办公中，我们用的比较多的是Windows系统，应该也遇到过想删除一个文件但是显示这个文件被某个应用程序占用的问题吧，这个时候我们可以根据提示打开任务管理器把这个程序关闭，就能够删除这个文件了。&lt;/p&gt;
 &lt;p&gt;那在Linux系统的命令行界面怎么排查文件的占用问题呢？&lt;/p&gt;
 &lt;p&gt;可以使用&lt;code&gt;lsof&lt;/code&gt;命令。&lt;/p&gt;
 &lt;p&gt;这个命令可以列出当前打开的文件以及关联的进程。&lt;/p&gt;
 &lt;p&gt;1.如果需要查&lt;strong&gt;找某个特定文件&lt;/strong&gt;被哪个进程占用，可以执行：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;lsof /path/to/username/file
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;lsof /path/to/username/file
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;以上命令可以列出所有打开该文件的进程信息，像进程ID、用户、文件描述符等等。&lt;/p&gt;
 &lt;p&gt;2.如果需要查找某个特定端口被哪个进程占用，可以执行：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;lsof -i :portnumber
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;lsof -i :portnumber
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;3.如果想要查看某个特定用户打开了哪些文件，可以执行：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;lsof -u username
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;lsof -u username
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;4.当你找到了占用文件的进程ID(PID)之后，可以使用kill命令来终止这个进程：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;kill&lt;/span&gt; -9 PID
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;kill&lt;/span&gt; -9 PID
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>使用Linux的top命令进行性能监控的步骤</title><link>https://iamxurulin.github.io/p/%E4%BD%BF%E7%94%A8linux%E7%9A%84top%E5%91%BD%E4%BB%A4%E8%BF%9B%E8%A1%8C%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E7%9A%84%E6%AD%A5%E9%AA%A4/</link><pubDate>Tue, 06 Jan 2026 16:26:35 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E4%BD%BF%E7%94%A8linux%E7%9A%84top%E5%91%BD%E4%BB%A4%E8%BF%9B%E8%A1%8C%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E7%9A%84%E6%AD%A5%E9%AA%A4/</guid><description>&lt;p&gt;使用top命令可以获取到&lt;strong&gt;CPU使用率&lt;/strong&gt;、&lt;strong&gt;内存使用情况&lt;/strong&gt;、&lt;strong&gt;运行中的进程&lt;/strong&gt;等重要信息。&lt;/p&gt;
+&lt;/div&gt;</description>
+        </item>
+        <item>
+        <title>使用Linux的top命令进行性能监控的步骤</title>
+        <link>https://iamxurulin.github.io/p/%E4%BD%BF%E7%94%A8linux%E7%9A%84top%E5%91%BD%E4%BB%A4%E8%BF%9B%E8%A1%8C%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E7%9A%84%E6%AD%A5%E9%AA%A4/</link>
+        <pubDate>Tue, 06 Jan 2026 16:26:35 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E4%BD%BF%E7%94%A8linux%E7%9A%84top%E5%91%BD%E4%BB%A4%E8%BF%9B%E8%A1%8C%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E7%9A%84%E6%AD%A5%E9%AA%A4/</guid>
+        <description>&lt;p&gt;使用top命令可以获取到&lt;strong&gt;CPU使用率&lt;/strong&gt;、&lt;strong&gt;内存使用情况&lt;/strong&gt;、&lt;strong&gt;运行中的进程&lt;/strong&gt;等重要信息。&lt;/p&gt;
 &lt;p&gt;步骤：&lt;/p&gt;
 &lt;p&gt;1.在终端输入top命令，按Enter键&lt;/p&gt;
 &lt;p&gt;2.之后就能看到一个实时更新的数据表，该数据表主要包含以下信息：&lt;/p&gt;
 &lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;系统信息&lt;/th&gt;
-&lt;th&gt;当前时间、系统运行时间、用户数和平均负载&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;进程摘要&lt;/td&gt;
-&lt;td&gt;总进程数、运行的进程数、睡眠的进程数&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;CPU状态&lt;/td&gt;
-&lt;td&gt;CPU的不同使用状态，比如：用户空间(us)、系统空间(sy)、空闲空间(id)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;内存和交换空间&lt;/td&gt;
-&lt;td&gt;物理内存和交换内存的使用情况&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;进程列表&lt;/td&gt;
-&lt;td&gt;当前所有运行进程的信息，包括进程ID(PID)、用户、优先级、CPU使用率、内存使用率等&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;</description></item><item><title>你给我解释一下Linux系统中的内存泄露问题和排查的方法</title><link>https://iamxurulin.github.io/p/%E4%BD%A0%E7%BB%99%E6%88%91%E8%A7%A3%E9%87%8A%E4%B8%80%E4%B8%8Blinux%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2%E9%97%AE%E9%A2%98%E5%92%8C%E6%8E%92%E6%9F%A5%E7%9A%84%E6%96%B9%E6%B3%95/</link><pubDate>Sun, 04 Jan 2026 15:30:40 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E4%BD%A0%E7%BB%99%E6%88%91%E8%A7%A3%E9%87%8A%E4%B8%80%E4%B8%8Blinux%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2%E9%97%AE%E9%A2%98%E5%92%8C%E6%8E%92%E6%9F%A5%E7%9A%84%E6%96%B9%E6%B3%95/</guid><description>&lt;p&gt;在计算机程序中，当不再被使用的内存没有被程序释放，随着时间的推移，这些内存会逐渐累积起来，最后导致系统内存不足，这就是所谓的&lt;strong&gt;内存泄漏&lt;/strong&gt;。&lt;/p&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;系统信息&lt;/th&gt;
+					&lt;th&gt;当前时间、系统运行时间、用户数和平均负载&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;进程摘要&lt;/td&gt;
+					&lt;td&gt;总进程数、运行的进程数、睡眠的进程数&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;CPU状态&lt;/td&gt;
+					&lt;td&gt;CPU的不同使用状态，比如：用户空间(us)、系统空间(sy)、空闲空间(id)&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;内存和交换空间&lt;/td&gt;
+					&lt;td&gt;物理内存和交换内存的使用情况&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;进程列表&lt;/td&gt;
+					&lt;td&gt;当前所有运行进程的信息，包括进程ID(PID)、用户、优先级、CPU使用率、内存使用率等&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+        </item>
+        <item>
+        <title>你给我解释一下Linux系统中的内存泄露问题和排查的方法</title>
+        <link>https://iamxurulin.github.io/p/%E4%BD%A0%E7%BB%99%E6%88%91%E8%A7%A3%E9%87%8A%E4%B8%80%E4%B8%8Blinux%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2%E9%97%AE%E9%A2%98%E5%92%8C%E6%8E%92%E6%9F%A5%E7%9A%84%E6%96%B9%E6%B3%95/</link>
+        <pubDate>Sun, 04 Jan 2026 15:30:40 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E4%BD%A0%E7%BB%99%E6%88%91%E8%A7%A3%E9%87%8A%E4%B8%80%E4%B8%8Blinux%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2%E9%97%AE%E9%A2%98%E5%92%8C%E6%8E%92%E6%9F%A5%E7%9A%84%E6%96%B9%E6%B3%95/</guid>
+        <description>&lt;p&gt;在计算机程序中，当不再被使用的内存没有被程序释放，随着时间的推移，这些内存会逐渐累积起来，最后导致系统内存不足，这就是所谓的&lt;strong&gt;内存泄漏&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;内存泄漏轻则导致程序性能下降，重则导致系统崩溃。&lt;/p&gt;
 &lt;p&gt;那么排查内存泄漏则有以下方法：&lt;/p&gt;
 &lt;p&gt;1.使用top或者htop命令监视系统的整体内存使用情况，来帮助识别具体哪个进程占用了过多的内存。&lt;/p&gt;
 &lt;p&gt;2.使用free命令查看系统内存的使用情况，包括总内存、已用内存、空闲内存、缓存内存。&lt;/p&gt;
-&lt;p&gt;3.使用ps命令列出进程的详细信息，包括内存的使用情况。&lt;/p&gt;</description></item><item><title>整理一些Linux的常用命令</title><link>https://iamxurulin.github.io/p/%E6%95%B4%E7%90%86%E4%B8%80%E4%BA%9Blinux%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link><pubDate>Sat, 03 Jan 2026 16:40:32 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E6%95%B4%E7%90%86%E4%B8%80%E4%BA%9Blinux%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid><description>&lt;h3 id="文件管理"&gt;文件管理
+&lt;p&gt;3.使用ps命令列出进程的详细信息，包括内存的使用情况。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>整理一些Linux的常用命令</title>
+        <link>https://iamxurulin.github.io/p/%E6%95%B4%E7%90%86%E4%B8%80%E4%BA%9Blinux%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
+        <pubDate>Sat, 03 Jan 2026 16:40:32 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E6%95%B4%E7%90%86%E4%B8%80%E4%BA%9Blinux%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
+        <description>&lt;h3 id=&#34;文件管理&#34;&gt;文件管理
 &lt;/h3&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;ls&lt;/th&gt;
-&lt;th&gt;列出目录的内容&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;cd&lt;/td&gt;
-&lt;td&gt;切换目录&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;cp&lt;/td&gt;
-&lt;td&gt;复制文件或者目录&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;mv&lt;/td&gt;
-&lt;td&gt;移动或者重命名文件或者目录&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;rm&lt;/td&gt;
-&lt;td&gt;删除文件或者目录&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;touch&lt;/td&gt;
-&lt;td&gt;创建空文件或者更新文件的时间戳&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;find&lt;/td&gt;
-&lt;td&gt;查找文件或者目录&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;ls&lt;/th&gt;
+					&lt;th&gt;列出目录的内容&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;cd&lt;/td&gt;
+					&lt;td&gt;切换目录&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;cp&lt;/td&gt;
+					&lt;td&gt;复制文件或者目录&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;mv&lt;/td&gt;
+					&lt;td&gt;移动或者重命名文件或者目录&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;rm&lt;/td&gt;
+					&lt;td&gt;删除文件或者目录&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;touch&lt;/td&gt;
+					&lt;td&gt;创建空文件或者更新文件的时间戳&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;find&lt;/td&gt;
+					&lt;td&gt;查找文件或者目录&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h3 id="权限管理"&gt;权限管理
+&lt;h3 id=&#34;权限管理&#34;&gt;权限管理
 &lt;/h3&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;chmod&lt;/th&gt;
-&lt;th&gt;修改文件或者目录的权限&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;chown&lt;/td&gt;
-&lt;td&gt;修改文件或者目录的所有者&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;chgrp&lt;/td&gt;
-&lt;td&gt;修改文件或者目录的所属组&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;chmod&lt;/th&gt;
+					&lt;th&gt;修改文件或者目录的权限&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;chown&lt;/td&gt;
+					&lt;td&gt;修改文件或者目录的所有者&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;chgrp&lt;/td&gt;
+					&lt;td&gt;修改文件或者目录的所属组&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h3 id="文本处理"&gt;文本处理
+&lt;h3 id=&#34;文本处理&#34;&gt;文本处理
 &lt;/h3&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;cat&lt;/th&gt;
-&lt;th&gt;查看文件的内容&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;grep&lt;/td&gt;
-&lt;td&gt;搜索文本的内容&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;sed&lt;/td&gt;
-&lt;td&gt;流编辑器，主要用于文本的处理&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;awk&lt;/td&gt;
-&lt;td&gt;文本处理工具，适用于处理列数据&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;cat&lt;/th&gt;
+					&lt;th&gt;查看文件的内容&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;grep&lt;/td&gt;
+					&lt;td&gt;搜索文本的内容&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;sed&lt;/td&gt;
+					&lt;td&gt;流编辑器，主要用于文本的处理&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;awk&lt;/td&gt;
+					&lt;td&gt;文本处理工具，适用于处理列数据&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h3 id="系统管理"&gt;系统管理
+&lt;h3 id=&#34;系统管理&#34;&gt;系统管理
 &lt;/h3&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;ps&lt;/th&gt;
-&lt;th&gt;显示当前的进程&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;top&lt;/td&gt;
-&lt;td&gt;动态地显示系统资源的使用情况&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;df&lt;/td&gt;
-&lt;td&gt;显示文件系统的磁盘空间使用情况&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;du&lt;/td&gt;
-&lt;td&gt;显示文件或者目录的磁盘空间使用情况&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;kill&lt;/td&gt;
-&lt;td&gt;终止进程&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;shutdown&lt;/td&gt;
-&lt;td&gt;关机或者重启系统&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;ps&lt;/th&gt;
+					&lt;th&gt;显示当前的进程&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;top&lt;/td&gt;
+					&lt;td&gt;动态地显示系统资源的使用情况&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;df&lt;/td&gt;
+					&lt;td&gt;显示文件系统的磁盘空间使用情况&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;du&lt;/td&gt;
+					&lt;td&gt;显示文件或者目录的磁盘空间使用情况&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;kill&lt;/td&gt;
+					&lt;td&gt;终止进程&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;shutdown&lt;/td&gt;
+					&lt;td&gt;关机或者重启系统&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h3 id="网络管理"&gt;网络管理
+&lt;h3 id=&#34;网络管理&#34;&gt;网络管理
 &lt;/h3&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;ping&lt;/th&gt;
-&lt;th&gt;检测网络的连通性&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;ifconfig/ip&lt;/td&gt;
-&lt;td&gt;配置网络接口&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;netstat&lt;/td&gt;
-&lt;td&gt;显示网络连接、路由表等信息&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;ssh&lt;/td&gt;
-&lt;td&gt;远程登录&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;scp&lt;/td&gt;
-&lt;td&gt;安全复制文件&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;ping&lt;/th&gt;
+					&lt;th&gt;检测网络的连通性&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;ifconfig/ip&lt;/td&gt;
+					&lt;td&gt;配置网络接口&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;netstat&lt;/td&gt;
+					&lt;td&gt;显示网络连接、路由表等信息&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;ssh&lt;/td&gt;
+					&lt;td&gt;远程登录&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;scp&lt;/td&gt;
+					&lt;td&gt;安全复制文件&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h3 id="压缩和解压"&gt;压缩和解压
+&lt;h3 id=&#34;压缩和解压&#34;&gt;压缩和解压
 &lt;/h3&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;tar&lt;/th&gt;
-&lt;th&gt;打包和解包文件&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;gzip&lt;/td&gt;
-&lt;td&gt;压缩和解压文件&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;zip/unzip&lt;/td&gt;
-&lt;td&gt;压缩和解压文件&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;</description></item><item><title>说说Linux-CFS</title><link>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4linux-cfs/</link><pubDate>Sat, 03 Jan 2026 15:53:48 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4linux-cfs/</guid><description>&lt;p&gt;Linux CFS（ Completely Fair Scheduler，全公平调度器 ）是一种用于替代O(1)调度器的进程调度算法。&lt;/p&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;tar&lt;/th&gt;
+					&lt;th&gt;打包和解包文件&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;gzip&lt;/td&gt;
+					&lt;td&gt;压缩和解压文件&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;zip/unzip&lt;/td&gt;
+					&lt;td&gt;压缩和解压文件&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+        </item>
+        <item>
+        <title>说说Linux-CFS</title>
+        <link>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4linux-cfs/</link>
+        <pubDate>Sat, 03 Jan 2026 15:53:48 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4linux-cfs/</guid>
+        <description>&lt;p&gt;Linux CFS（ Completely Fair Scheduler，全公平调度器 ）是一种用于替代O(1)调度器的进程调度算法。&lt;/p&gt;
 &lt;p&gt;CFS主要目的是使每个任务都能够按照其优先级，占用CPU的时间片段，尽可能公平地分配CPU资源。&lt;/p&gt;
 &lt;p&gt;CFS有以下特点：&lt;/p&gt;
 &lt;p&gt;1.每个任务都是按照&lt;strong&gt;优先级&lt;/strong&gt;决定权重，进而根据权重分配CPU时间，尽量保证每个任务都能按比例公平地获得CPU资源。&lt;/p&gt;
 &lt;p&gt;2.使用&lt;strong&gt;虚拟运行时间&lt;/strong&gt;（vruntime）来衡量每个任务的CPU时间，vruntime越低，优先级越高。&lt;/p&gt;
 &lt;p&gt;3.所有可运行的任务都存储在&lt;strong&gt;红黑树&lt;/strong&gt;中，按照vruntime进行排序，其中最左节点也就是vruntime最小的节点更优先获得CPU的调度。&lt;/p&gt;
-&lt;p&gt;4.CFS支持多核调度，能够很好地处理从&lt;strong&gt;嵌入式系统&lt;/strong&gt;到&lt;strong&gt;服务器集群&lt;/strong&gt;的各种应用场景。&lt;/p&gt;</description></item><item><title>如何在Linux系统中查看某个特定进程的内存使用情况</title><link>https://iamxurulin.github.io/p/%E5%A6%82%E4%BD%95%E5%9C%A8linux%E7%B3%BB%E7%BB%9F%E4%B8%AD%E6%9F%A5%E7%9C%8B%E6%9F%90%E4%B8%AA%E7%89%B9%E5%AE%9A%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%86%85%E5%AD%98%E4%BD%BF%E7%94%A8%E6%83%85%E5%86%B5/</link><pubDate>Fri, 02 Jan 2026 15:53:05 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E5%A6%82%E4%BD%95%E5%9C%A8linux%E7%B3%BB%E7%BB%9F%E4%B8%AD%E6%9F%A5%E7%9C%8B%E6%9F%90%E4%B8%AA%E7%89%B9%E5%AE%9A%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%86%85%E5%AD%98%E4%BD%BF%E7%94%A8%E6%83%85%E5%86%B5/</guid><description>&lt;p&gt;1.使用ps命令&lt;/p&gt;
+&lt;p&gt;4.CFS支持多核调度，能够很好地处理从&lt;strong&gt;嵌入式系统&lt;/strong&gt;到&lt;strong&gt;服务器集群&lt;/strong&gt;的各种应用场景。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>如何在Linux系统中查看某个特定进程的内存使用情况</title>
+        <link>https://iamxurulin.github.io/p/%E5%A6%82%E4%BD%95%E5%9C%A8linux%E7%B3%BB%E7%BB%9F%E4%B8%AD%E6%9F%A5%E7%9C%8B%E6%9F%90%E4%B8%AA%E7%89%B9%E5%AE%9A%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%86%85%E5%AD%98%E4%BD%BF%E7%94%A8%E6%83%85%E5%86%B5/</link>
+        <pubDate>Fri, 02 Jan 2026 15:53:05 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E5%A6%82%E4%BD%95%E5%9C%A8linux%E7%B3%BB%E7%BB%9F%E4%B8%AD%E6%9F%A5%E7%9C%8B%E6%9F%90%E4%B8%AA%E7%89%B9%E5%AE%9A%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%86%85%E5%AD%98%E4%BD%BF%E7%94%A8%E6%83%85%E5%86%B5/</guid>
+        <description>&lt;p&gt;1.使用ps命令&lt;/p&gt;
 &lt;p&gt;举个例子，如果要查看进程ID为1527的进程的内存使用情况，可以使用如下命令：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ps -p &lt;span class="m"&gt;1527&lt;/span&gt; -o %mem,%cpu,vsz,rss
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ps -p &lt;span class=&#34;m&#34;&gt;1527&lt;/span&gt; -o %mem,%cpu,vsz,rss
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;其中，vsz表示虚拟内存的大小，rss表示常驻内存的大小。&lt;/p&gt;
@@ -521,7 +651,16 @@
 &lt;p&gt;/proc提供了内核和进程的信息。&lt;/p&gt;
 &lt;p&gt;每个进程都有一个对应的目录，以ID为1527的进程为例，&lt;/p&gt;
 &lt;p&gt;/proc/1527/status包含VmSize虚拟内存大小和VmRSS常驻内存大小这些基本信息；&lt;/p&gt;
-&lt;p&gt;/proc/1527/statm包含进程的内存页面数。&lt;/p&gt;</description></item><item><title>如何防止接口被恶意刷量</title><link>https://iamxurulin.github.io/p/%E5%A6%82%E4%BD%95%E9%98%B2%E6%AD%A2%E6%8E%A5%E5%8F%A3%E8%A2%AB%E6%81%B6%E6%84%8F%E5%88%B7%E9%87%8F/</link><pubDate>Wed, 31 Dec 2025 14:53:21 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E5%A6%82%E4%BD%95%E9%98%B2%E6%AD%A2%E6%8E%A5%E5%8F%A3%E8%A2%AB%E6%81%B6%E6%84%8F%E5%88%B7%E9%87%8F/</guid><description>&lt;p&gt;为了防止被恶意刷量，本能地想到要用限流。&lt;/p&gt;
+&lt;p&gt;/proc/1527/statm包含进程的内存页面数。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>如何防止接口被恶意刷量</title>
+        <link>https://iamxurulin.github.io/p/%E5%A6%82%E4%BD%95%E9%98%B2%E6%AD%A2%E6%8E%A5%E5%8F%A3%E8%A2%AB%E6%81%B6%E6%84%8F%E5%88%B7%E9%87%8F/</link>
+        <pubDate>Wed, 31 Dec 2025 14:53:21 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E5%A6%82%E4%BD%95%E9%98%B2%E6%AD%A2%E6%8E%A5%E5%8F%A3%E8%A2%AB%E6%81%B6%E6%84%8F%E5%88%B7%E9%87%8F/</guid>
+        <description>&lt;p&gt;为了防止被恶意刷量，本能地想到要用限流。&lt;/p&gt;
 &lt;p&gt;当然，除了限流，还有其他的一些方式：&lt;/p&gt;
 &lt;p&gt;1.在前后端约定&lt;strong&gt;一套加密算法和一个密钥&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;在前端把所有参数按照字母进行排序，再加上密钥生成一个签名，将其放在请求头里传给后端。&lt;/p&gt;
@@ -530,88 +669,158 @@
 &lt;p&gt;在后端先对&lt;strong&gt;时间戳&lt;/strong&gt;进行校验，如果是超过了60秒的请求，则直接丢弃；&lt;/p&gt;
 &lt;p&gt;如果请求是在60秒以内的，再检查&lt;strong&gt;随机数&lt;/strong&gt;是否在Redis中已经存在，如果是已经存在，说明这是个重复请求，直接拦截掉。&lt;/p&gt;
 &lt;p&gt;3.当系统检测到某个用户存在频率稍高，但是还没到限流阈值的异常行为或者在进行注册、领券等较为敏感的操作时，强制弹出&lt;strong&gt;滑块验证码&lt;/strong&gt;，从而对人和脚本进行区分。&lt;/p&gt;
-&lt;p&gt;4.如果发现某个IP存在于IP&lt;strong&gt;黑名单&lt;/strong&gt;或者用户的ID黑名单中，可以直接在网关层对这个IP进行封禁，不让它进入到业务层。&lt;/p&gt;</description></item><item><title>如何防止被短信验证码恶意轰炸</title><link>https://iamxurulin.github.io/p/%E5%A6%82%E4%BD%95%E9%98%B2%E6%AD%A2%E8%A2%AB%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81%E7%A0%81%E6%81%B6%E6%84%8F%E8%BD%B0%E7%82%B8/</link><pubDate>Wed, 31 Dec 2025 14:16:30 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E5%A6%82%E4%BD%95%E9%98%B2%E6%AD%A2%E8%A2%AB%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81%E7%A0%81%E6%81%B6%E6%84%8F%E8%BD%B0%E7%82%B8/</guid><description>&lt;p&gt;为了防止被短信验证码恶意轰炸，可以从两方面考虑：一是增加攻击者的成本，再就是降低攻击者的收益。&lt;/p&gt;
+&lt;p&gt;4.如果发现某个IP存在于IP&lt;strong&gt;黑名单&lt;/strong&gt;或者用户的ID黑名单中，可以直接在网关层对这个IP进行封禁，不让它进入到业务层。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>如何防止被短信验证码恶意轰炸</title>
+        <link>https://iamxurulin.github.io/p/%E5%A6%82%E4%BD%95%E9%98%B2%E6%AD%A2%E8%A2%AB%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81%E7%A0%81%E6%81%B6%E6%84%8F%E8%BD%B0%E7%82%B8/</link>
+        <pubDate>Wed, 31 Dec 2025 14:16:30 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E5%A6%82%E4%BD%95%E9%98%B2%E6%AD%A2%E8%A2%AB%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81%E7%A0%81%E6%81%B6%E6%84%8F%E8%BD%B0%E7%82%B8/</guid>
+        <description>&lt;p&gt;为了防止被短信验证码恶意轰炸，可以从两方面考虑：一是增加攻击者的成本，再就是降低攻击者的收益。&lt;/p&gt;
 &lt;p&gt;可以通过以下几种方式实现：&lt;/p&gt;
 &lt;p&gt;1.在调用发送短信的接口之前，需要先校验&lt;strong&gt;图形验证码&lt;/strong&gt;，只有图形验证码校验通过了，才允许请求短信接口，这种方式可以拦截大量的脚本自动刷量。&lt;/p&gt;
 &lt;p&gt;2.基于Redis对&lt;strong&gt;单个手机号进行限制&lt;/strong&gt;，比如限制1分钟内只能发送1条,1小时以内最多发送5条或者24小时以内最多发送10条。&lt;/p&gt;
 &lt;p&gt;3.为了防止有人换手机号进行轰炸，可以对&lt;strong&gt;IP进行限制&lt;/strong&gt;，同一个IP，限制在24小时内最多发送20条短信。一旦该IP的短信发送量超过这个阈值，直接对其进行封禁处理。&lt;/p&gt;
-&lt;p&gt;4.如果是国内的业务，则可以一刀切，直接把所有&lt;strong&gt;境外的号码&lt;/strong&gt;屏蔽掉。&lt;/p&gt;</description></item><item><title>说说Linux系统中crontab的工作原理</title><link>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4linux%E7%B3%BB%E7%BB%9F%E4%B8%ADcrontab%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/</link><pubDate>Tue, 30 Dec 2025 15:07:15 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4linux%E7%B3%BB%E7%BB%9F%E4%B8%ADcrontab%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/</guid><description>&lt;p&gt;crontab是Linux系统中的一个&lt;strong&gt;定时任务调度器&lt;/strong&gt;，能够允许用户在一个特定的时间执行某些任务。&lt;/p&gt;
+&lt;p&gt;4.如果是国内的业务，则可以一刀切，直接把所有&lt;strong&gt;境外的号码&lt;/strong&gt;屏蔽掉。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>说说Linux系统中crontab的工作原理</title>
+        <link>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4linux%E7%B3%BB%E7%BB%9F%E4%B8%ADcrontab%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/</link>
+        <pubDate>Tue, 30 Dec 2025 15:07:15 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4linux%E7%B3%BB%E7%BB%9F%E4%B8%ADcrontab%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/</guid>
+        <description>&lt;p&gt;crontab是Linux系统中的一个&lt;strong&gt;定时任务调度器&lt;/strong&gt;，能够允许用户在一个特定的时间执行某些任务。&lt;/p&gt;
 &lt;p&gt;crontab指令&lt;strong&gt;通常&lt;/strong&gt;是由5个时间字段和1个命令字段组成：&lt;/p&gt;
 &lt;p&gt;5个时间字段分别是：&lt;/p&gt;
 &lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;分钟&lt;/th&gt;
-&lt;th&gt;0~59&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;小时&lt;/td&gt;
-&lt;td&gt;0~23&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;日期&lt;/td&gt;
-&lt;td&gt;1~31&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;月份&lt;/td&gt;
-&lt;td&gt;1~12&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;星期几&lt;/td&gt;
-&lt;td&gt;0~7&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;分钟&lt;/th&gt;
+					&lt;th&gt;0~59&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;小时&lt;/td&gt;
+					&lt;td&gt;0~23&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;日期&lt;/td&gt;
+					&lt;td&gt;1~31&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;月份&lt;/td&gt;
+					&lt;td&gt;1~12&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;星期几&lt;/td&gt;
+					&lt;td&gt;0~7&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;其中，0和7都表示星期日。&lt;/p&gt;
 &lt;p&gt;如果想要在凌晨2点执行一个脚本，可以执行如下crontab指令：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; * * * /path/to/script.sh
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; * * * /path/to/script.sh
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>在Linux中如何查看系统中内存、CPU和网络端口的使用情况</title><link>https://iamxurulin.github.io/p/%E5%9C%A8linux%E4%B8%AD%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%86%85%E5%AD%98cpu%E5%92%8C%E7%BD%91%E7%BB%9C%E7%AB%AF%E5%8F%A3%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%86%B5/</link><pubDate>Tue, 30 Dec 2025 14:29:00 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E5%9C%A8linux%E4%B8%AD%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%86%85%E5%AD%98cpu%E5%92%8C%E7%BD%91%E7%BB%9C%E7%AB%AF%E5%8F%A3%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%86%B5/</guid><description>&lt;h4 id="1top命令"&gt;1.top命令
+&lt;/div&gt;</description>
+        </item>
+        <item>
+        <title>在Linux中如何查看系统中内存、CPU和网络端口的使用情况</title>
+        <link>https://iamxurulin.github.io/p/%E5%9C%A8linux%E4%B8%AD%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%86%85%E5%AD%98cpu%E5%92%8C%E7%BD%91%E7%BB%9C%E7%AB%AF%E5%8F%A3%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%86%B5/</link>
+        <pubDate>Tue, 30 Dec 2025 14:29:00 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E5%9C%A8linux%E4%B8%AD%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%86%85%E5%AD%98cpu%E5%92%8C%E7%BD%91%E7%BB%9C%E7%AB%AF%E5%8F%A3%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%86%B5/</guid>
+        <description>&lt;h4 id=&#34;1top命令&#34;&gt;1.top命令
 &lt;/h4&gt;&lt;p&gt;top命令可以实时地查看当前系统CPU使用率、内存使用率、进场ID等信息。&lt;/p&gt;
-&lt;h4 id="2free命令"&gt;2.free命令
+&lt;h4 id=&#34;2free命令&#34;&gt;2.free命令
 &lt;/h4&gt;&lt;p&gt;free命令可以查看系统中包括总内存量、已使用内存量和可用内存量等内存使用情况。&lt;/p&gt;
-&lt;h4 id="3df命令"&gt;3.df命令
+&lt;h4 id=&#34;3df命令&#34;&gt;3.df命令
 &lt;/h4&gt;&lt;p&gt;df命令可以查看系统中包括磁盘总容量、已使用空间和可用空间等磁盘使用情况。&lt;/p&gt;
-&lt;h4 id="4iostat命令"&gt;4.iostat命令
+&lt;h4 id=&#34;4iostat命令&#34;&gt;4.iostat命令
 &lt;/h4&gt;&lt;p&gt;iostat命令可以查看当前系统的CPU和I/O使用情况。&lt;/p&gt;
-&lt;h4 id="5netstat命令"&gt;5.netstat命令
+&lt;h4 id=&#34;5netstat命令&#34;&gt;5.netstat命令
 &lt;/h4&gt;&lt;p&gt;netstat命令可以查看系统中像本地地址、远程地址、连接状态等网络连接情况。&lt;/p&gt;
-&lt;h4 id="6lsof命令"&gt;6.lsof命令
-&lt;/h4&gt;&lt;p&gt;lsof命令可以查看当前系统中打开的文件和网络连接情况，像文件名、文件扫描符、进程ID、进程名等等。&lt;/p&gt;</description></item><item><title>说说CC攻击、DDOS攻击和网站数据库注入</title><link>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4cc%E6%94%BB%E5%87%BBddos%E6%94%BB%E5%87%BB%E5%92%8C%E7%BD%91%E7%AB%99%E6%95%B0%E6%8D%AE%E5%BA%93%E6%B3%A8%E5%85%A5/</link><pubDate>Tue, 30 Dec 2025 14:15:03 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4cc%E6%94%BB%E5%87%BBddos%E6%94%BB%E5%87%BB%E5%92%8C%E7%BD%91%E7%AB%99%E6%95%B0%E6%8D%AE%E5%BA%93%E6%B3%A8%E5%85%A5/</guid><description>&lt;p&gt;CC攻击和DDOS攻击都是一种&lt;strong&gt;网络攻击方式。&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&#34;6lsof命令&#34;&gt;6.lsof命令
+&lt;/h4&gt;&lt;p&gt;lsof命令可以查看当前系统中打开的文件和网络连接情况，像文件名、文件扫描符、进程ID、进程名等等。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>说说CC攻击、DDOS攻击和网站数据库注入</title>
+        <link>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4cc%E6%94%BB%E5%87%BBddos%E6%94%BB%E5%87%BB%E5%92%8C%E7%BD%91%E7%AB%99%E6%95%B0%E6%8D%AE%E5%BA%93%E6%B3%A8%E5%85%A5/</link>
+        <pubDate>Tue, 30 Dec 2025 14:15:03 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4cc%E6%94%BB%E5%87%BBddos%E6%94%BB%E5%87%BB%E5%92%8C%E7%BD%91%E7%AB%99%E6%95%B0%E6%8D%AE%E5%BA%93%E6%B3%A8%E5%85%A5/</guid>
+        <description>&lt;p&gt;CC攻击和DDOS攻击都是一种&lt;strong&gt;网络攻击方式。&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;CC 攻击&lt;/strong&gt;是攻击者使用大量的机器或者网络中的代理服务器，向某个目标服务器发送大量的请求，以消耗服务器的带宽和资源，导致服务器瘫痪。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;DDOS攻击&lt;/strong&gt;（Distributed Denial of Service Attack）也是利用大量的计算机或者网络中的代理服务器，&lt;strong&gt;同时&lt;/strong&gt;向某个目标服务器发送大量的请求，导致服务器瘫痪。&lt;/p&gt;
 &lt;p&gt;CC攻击其实是DDOS攻击的一种特定的形式，专门针对Web应用程序的一种攻击。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;网站数据库注入&lt;/strong&gt;则是一种&lt;strong&gt;利用Web应用程序漏洞&lt;/strong&gt;的攻击方式。&lt;/p&gt;
-&lt;p&gt;这种攻击方式，攻击者通过将恶意SQL代码插入到Web应用程序的输入字段，对数据库进行未授权访问，从而破坏数据库的完整性、泄露敏感数据等等。&lt;/p&gt;</description></item><item><title>Linux系统的硬链接和软链接有甚区别</title><link>https://iamxurulin.github.io/p/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%A1%AC%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BD%AF%E9%93%BE%E6%8E%A5%E6%9C%89%E7%94%9A%E5%8C%BA%E5%88%AB/</link><pubDate>Mon, 29 Dec 2025 17:04:55 +0000</pubDate><guid>https://iamxurulin.github.io/p/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%A1%AC%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BD%AF%E9%93%BE%E6%8E%A5%E6%9C%89%E7%94%9A%E5%8C%BA%E5%88%AB/</guid><description>&lt;p&gt;在Linux系统中，硬链接和软链接都是用于将一个文件链接到另一个文件。&lt;/p&gt;
+&lt;p&gt;这种攻击方式，攻击者通过将恶意SQL代码插入到Web应用程序的输入字段，对数据库进行未授权访问，从而破坏数据库的完整性、泄露敏感数据等等。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Linux系统的硬链接和软链接有甚区别</title>
+        <link>https://iamxurulin.github.io/p/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%A1%AC%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BD%AF%E9%93%BE%E6%8E%A5%E6%9C%89%E7%94%9A%E5%8C%BA%E5%88%AB/</link>
+        <pubDate>Mon, 29 Dec 2025 17:04:55 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%A1%AC%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BD%AF%E9%93%BE%E6%8E%A5%E6%9C%89%E7%94%9A%E5%8C%BA%E5%88%AB/</guid>
+        <description>&lt;p&gt;在Linux系统中，硬链接和软链接都是用于将一个文件链接到另一个文件。&lt;/p&gt;
 &lt;p&gt;主要区别如下：&lt;/p&gt;
 &lt;p&gt;1.硬链接是通过在文件系统中创建一个&lt;strong&gt;新的目录项&lt;/strong&gt;指向同一文件的inode的位置来实现的，而软链接是通过在文件系统中创建一个包含指向另一个文件的路径的&lt;strong&gt;新文件&lt;/strong&gt;来实现。&lt;/p&gt;
 &lt;p&gt;2.硬链接只能指向同一个文件系统内的文件，并不能&lt;strong&gt;跨文件系统&lt;/strong&gt;创建，而软链接可以跨文件系统创建，并且可以指向任意类型的文件。&lt;/p&gt;
 &lt;p&gt;3.因为硬链接实际上指向的是同一inode，所以如果&lt;strong&gt;原文件被删除了&lt;/strong&gt;，硬链接还是能够访问到原文件的内容；但是对于软链接来说，如果原文件被删除了，软链接也会跟着失效。&lt;/p&gt;
-&lt;p&gt;4.因为硬链接只是增加了一个新的目录项，所以对&lt;strong&gt;磁盘空间的消耗&lt;/strong&gt;比软链接要更小。&lt;/p&gt;</description></item><item><title>Windows-11通过VMware-Workstation-Pro搭建centos7.6系统遇到的问题</title><link>https://iamxurulin.github.io/p/windows-11%E9%80%9A%E8%BF%87vmware-workstation-pro%E6%90%AD%E5%BB%BAcentos7.6%E7%B3%BB%E7%BB%9F%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</link><pubDate>Sun, 07 Sep 2025 23:11:14 +0000</pubDate><guid>https://iamxurulin.github.io/p/windows-11%E9%80%9A%E8%BF%87vmware-workstation-pro%E6%90%AD%E5%BB%BAcentos7.6%E7%B3%BB%E7%BB%9F%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</guid><description>&lt;p&gt;首先，电脑的配置是Windows 11 专业版+VMware Workstation Pro 15.5.&lt;/p&gt;
-&lt;h3 id="1因为开启了hyper--v所以会出现如下问题"&gt;1.因为开启了Hyper -V，所以会出现如下问题：
-&lt;/h3&gt;&lt;p&gt;&lt;img src="https://iamxurulin.github.io/images/1d4a490dde974e4887869fc17eed7a26-6290f395.png"
-loading="lazy"
-alt="在这里插入图片描述"
+&lt;p&gt;4.因为硬链接只是增加了一个新的目录项，所以对&lt;strong&gt;磁盘空间的消耗&lt;/strong&gt;比软链接要更小。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Windows-11通过VMware-Workstation-Pro搭建centos7.6系统遇到的问题</title>
+        <link>https://iamxurulin.github.io/p/windows-11%E9%80%9A%E8%BF%87vmware-workstation-pro%E6%90%AD%E5%BB%BAcentos7.6%E7%B3%BB%E7%BB%9F%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</link>
+        <pubDate>Sun, 07 Sep 2025 23:11:14 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/windows-11%E9%80%9A%E8%BF%87vmware-workstation-pro%E6%90%AD%E5%BB%BAcentos7.6%E7%B3%BB%E7%BB%9F%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
+        <description>&lt;p&gt;首先，电脑的配置是Windows 11 专业版+VMware Workstation Pro 15.5.&lt;/p&gt;
+&lt;h3 id=&#34;1因为开启了hyper--v所以会出现如下问题&#34;&gt;1.因为开启了Hyper -V，所以会出现如下问题：
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://iamxurulin.github.io/images/1d4a490dde974e4887869fc17eed7a26-6290f395.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;在这里插入图片描述&#34;
+	
+	
 &gt;
-&lt;img src="https://iamxurulin.github.io/images/cf63d9eb6b4341dda230c3fd0dc302e5-20ffa8e3.png"
-loading="lazy"
-alt="在这里插入图片描述"
+&lt;img src=&#34;https://iamxurulin.github.io/images/cf63d9eb6b4341dda230c3fd0dc302e5-20ffa8e3.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;在这里插入图片描述&#34;
+	
+	
 &gt;
 根据网上查找到的一些解决方案，将Hyper -V和Device Guard这些禁用掉，以为可以解决这个问题，然而。。。。。。
 出现如下问题2.。&lt;/p&gt;
-&lt;h3 id="2your-device-ran-into-a-problem-and-needs-to-restart-were-just-collecting-some-error-info-and-then-you-can-restart"&gt;2.Your device ran into a problem and needs to restart. We&amp;rsquo;re just collecting some error info, and then you can restart.
+&lt;h3 id=&#34;2your-device-ran-into-a-problem-and-needs-to-restart-were-just-collecting-some-error-info-and-then-you-can-restart&#34;&gt;2.Your device ran into a problem and needs to restart. We&amp;rsquo;re just collecting some error info, and then you can restart.
 &lt;/h3&gt;&lt;p&gt;这个问题直白一点就是蓝屏，但是不知道为什么此时显示黑屏。。。。&lt;/p&gt;
 &lt;p&gt;于是，我感觉是Windows 11 又更新或者删除了什么东西导致了这些所谓的乱七八糟的问题。&lt;/p&gt;
 &lt;p&gt;多次尝试网上的解决方案之后仍然没有解决该问题。&lt;/p&gt;
 &lt;p&gt;当事人十分后悔前几天把电脑更新到了Windows 11，于是决定重新装回稳定一点的Windows 10，但是，等等，重装系统之后又要重新装软件，太麻烦了。&lt;/p&gt;
 &lt;p&gt;灵机一动，将这个问题喂给豆包，得到的回复中有一条是：“旧版本（如 VMware Workstation Pro 15 及以下）对 Windows 11 兼容性较差，可能触发蓝屏。”&lt;/p&gt;
 &lt;p&gt;于是，赶紧把VMware Workstation Pro 15.5给卸载了，重新装了个17.6，你猜怎么着？&lt;/p&gt;
-&lt;p&gt;没错，问题解决了。&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;没错，问题解决了。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>
