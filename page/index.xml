@@ -1,201 +1,151 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-    <channel>
-        <title>Pages on Coder_Studio</title>
-        <link>https://iamxurulin.github.io/page/</link>
-        <description>Recent content in Pages on Coder_Studio</description>
-        <generator>Hugo -- gohugo.io</generator>
-        <language>zh-cn</language>
-        <copyright>iamxurulin</copyright>
-        <lastBuildDate>Mon, 22 Jun 2026 02:28:13 +0000</lastBuildDate><atom:link href="https://iamxurulin.github.io/page/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>关于</title>
-        <link>https://iamxurulin.github.io/%E5%85%B3%E4%BA%8E/</link>
-        <pubDate>Mon, 22 Jun 2026 02:28:13 +0000</pubDate>
-        
-        <guid>https://iamxurulin.github.io/%E5%85%B3%E4%BA%8E/</guid>
-        <description>&lt;p&gt;Coder_Studio 是一个个人技术博客，专注于后端开发、算法数据结构、分布式系统和 AI 应用。这里记录了我的学习过程、项目经验和面试准备笔记。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;网站地址&lt;/strong&gt;：&lt;a class=&#34;link&#34; href=&#34;https://iamxurulin.github.io&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://iamxurulin.github.io&lt;/a&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pages on Coder_Studio</title><link>https://iamxurulin.github.io/page/</link><description>Recent content in Pages on Coder_Studio</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>iamxurulin</copyright><lastBuildDate>Sat, 27 Jun 2026 05:39:28 +0000</lastBuildDate><atom:link href="https://iamxurulin.github.io/page/index.xml" rel="self" type="application/rss+xml"/><item><title>关于</title><link>https://iamxurulin.github.io/%E5%85%B3%E4%BA%8E/</link><pubDate>Sat, 27 Jun 2026 05:39:28 +0000</pubDate><guid>https://iamxurulin.github.io/%E5%85%B3%E4%BA%8E/</guid><description>&lt;p&gt;Coder_Studio 是一个个人技术博客，专注于后端开发、算法数据结构、分布式系统和 AI 应用。这里记录了我的学习过程、项目经验和面试准备笔记。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;网站地址&lt;/strong&gt;：&lt;a class="link" href="https://iamxurulin.github.io" target="_blank" rel="noopener"
+&gt;https://iamxurulin.github.io&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;采用 Hugo 静态站点生成器 + GitHub Pages 托管，实现零服务器成本、全自动部署。&lt;/p&gt;
-&lt;h2 id=&#34;技术栈与工具&#34;&gt;技术栈与工具
+&lt;h2 id="技术栈与工具"&gt;技术栈与工具
 &lt;/h2&gt;&lt;table&gt;
-	&lt;thead&gt;
-			&lt;tr&gt;
-					&lt;th&gt;类别&lt;/th&gt;
-					&lt;th&gt;技术&lt;/th&gt;
-			&lt;/tr&gt;
-	&lt;/thead&gt;
-	&lt;tbody&gt;
-			&lt;tr&gt;
-					&lt;td&gt;静态站点&lt;/td&gt;
-					&lt;td&gt;Hugo (hugo-theme-stack)&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;托管部署&lt;/td&gt;
-					&lt;td&gt;GitHub Pages + GitHub Actions CI/CD&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;脚本&lt;/td&gt;
-					&lt;td&gt;Python (内容同步、图片迁移自动化)&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;评论&lt;/td&gt;
-					&lt;td&gt;giscus (GitHub Discussions)&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;统计&lt;/td&gt;
-					&lt;td&gt;busuanzi 浏览量统计&lt;/td&gt;
-			&lt;/tr&gt;
-	&lt;/tbody&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;类别&lt;/th&gt;
+&lt;th&gt;技术&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;静态站点&lt;/td&gt;
+&lt;td&gt;Hugo (hugo-theme-stack)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;托管部署&lt;/td&gt;
+&lt;td&gt;GitHub Pages + GitHub Actions CI/CD&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;脚本&lt;/td&gt;
+&lt;td&gt;Python (内容同步、图片迁移自动化)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;评论&lt;/td&gt;
+&lt;td&gt;giscus (GitHub Discussions)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;统计&lt;/td&gt;
+&lt;td&gt;busuanzi 浏览量统计&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;主要特性&#34;&gt;主要特性
+&lt;h2 id="主要特性"&gt;主要特性
 &lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;全自动 CI/CD&lt;/strong&gt;：代码 Push 即触发 GitHub Actions 自动构建与部署&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;文章图片自托管&lt;/strong&gt;：Python 脚本自动将博客图片迁移到本地仓库，彻底解决外链失效问题&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;响应式布局&lt;/strong&gt;：适配桌面端与移动端，支持暗色模式&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;用户体验&lt;/strong&gt;：代码高亮与自动折叠、页面加载动画、浏览量统计&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;内容分类&#34;&gt;内容分类
+&lt;h2 id="内容分类"&gt;内容分类
 &lt;/h2&gt;&lt;table&gt;
-	&lt;thead&gt;
-			&lt;tr&gt;
-					&lt;th&gt;分类&lt;/th&gt;
-					&lt;th&gt;说明&lt;/th&gt;
-			&lt;/tr&gt;
-	&lt;/thead&gt;
-	&lt;tbody&gt;
-			&lt;tr&gt;
-					&lt;td&gt;算法&lt;/td&gt;
-					&lt;td&gt;数据结构与算法题解，LeetCode 刷题笔记&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;八股&lt;/td&gt;
-					&lt;td&gt;后端面试必备知识点整理&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;AI&lt;/td&gt;
-					&lt;td&gt;人工智能、大语言模型、RAG 相关内容&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;项目&lt;/td&gt;
-					&lt;td&gt;实战项目记录与总结&lt;/td&gt;
-			&lt;/tr&gt;
-	&lt;/tbody&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;分类&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;算法&lt;/td&gt;
+&lt;td&gt;数据结构与算法题解，LeetCode 刷题笔记&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;八股&lt;/td&gt;
+&lt;td&gt;后端面试必备知识点整理&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;AI&lt;/td&gt;
+&lt;td&gt;人工智能、大语言模型、RAG 相关内容&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;项目&lt;/td&gt;
+&lt;td&gt;实战项目记录与总结&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;博客截图&#34;&gt;博客截图
-&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;https://iamxurulin.github.io/cover/image.jpg&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;博客首页&#34;
-	
-	
+&lt;h2 id="博客截图"&gt;博客截图
+&lt;/h2&gt;&lt;p&gt;&lt;img src="https://iamxurulin.github.io/cover/image.jpg"
+loading="lazy"
+alt="博客首页"
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://iamxurulin.github.io/cover/image-1.jpg&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;博客分类&#34;
-	
-	
+&lt;p&gt;&lt;img src="https://iamxurulin.github.io/cover/image-1.jpg"
+loading="lazy"
+alt="博客分类"
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://iamxurulin.github.io/cover/image-2.jpg&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;博客标签&#34;
-	
-	
+&lt;p&gt;&lt;img src="https://iamxurulin.github.io/cover/image-2.jpg"
+loading="lazy"
+alt="博客标签"
 &gt;&lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;作者&lt;/strong&gt;：&lt;a class=&#34;link&#34; href=&#34;https://github.com/iamxurulin&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;@iamxurulin&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;作者&lt;/strong&gt;：&lt;a class="link" href="https://github.com/iamxurulin" target="_blank" rel="noopener"
+&gt;@iamxurulin&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;GitHub：&lt;a class=&#34;link&#34; href=&#34;https://github.com/iamxurulin&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;github.com/iamxurulin&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;GitHub：&lt;a class="link" href="https://github.com/iamxurulin" target="_blank" rel="noopener"
+&gt;github.com/iamxurulin&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;如果文章对你有所帮助，欢迎在评论区交流讨论。&lt;/p&gt;
-</description>
-        </item>
-        <item>
-        <title>搜索</title>
-        <link>https://iamxurulin.github.io/search/</link>
-        <pubDate>Mon, 22 Jun 2026 02:28:13 +0000</pubDate>
-        
-        <guid>https://iamxurulin.github.io/search/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>隐私政策</title>
-        <link>https://iamxurulin.github.io/%E9%9A%90%E7%A7%81%E6%94%BF%E7%AD%96/</link>
-        <pubDate>Mon, 22 Jun 2026 02:28:13 +0000</pubDate>
-        
-        <guid>https://iamxurulin.github.io/%E9%9A%90%E7%A7%81%E6%94%BF%E7%AD%96/</guid>
-        <description>&lt;h1 id=&#34;隐私政策&#34;&gt;隐私政策
+&lt;p&gt;如果文章对你有所帮助，欢迎在评论区交流讨论。&lt;/p&gt;</description></item><item><title>搜索</title><link>https://iamxurulin.github.io/search/</link><pubDate>Sat, 27 Jun 2026 05:39:28 +0000</pubDate><guid>https://iamxurulin.github.io/search/</guid><description/></item><item><title>隐私政策</title><link>https://iamxurulin.github.io/%E9%9A%90%E7%A7%81%E6%94%BF%E7%AD%96/</link><pubDate>Sat, 27 Jun 2026 05:39:28 +0000</pubDate><guid>https://iamxurulin.github.io/%E9%9A%90%E7%A7%81%E6%94%BF%E7%AD%96/</guid><description>&lt;h1 id="隐私政策"&gt;隐私政策
 &lt;/h1&gt;&lt;p&gt;&lt;strong&gt;生效日期：2026年6月9日&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;欢迎访问 Coder_Studio（https://iamxurulin.github.io/）。您的隐私对我们非常重要。本隐私政策说明了我们在您访问本网站时如何收集、使用和保护您的信息。&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;一我们收集的信息&#34;&gt;一、我们收集的信息
-&lt;/h2&gt;&lt;h3 id=&#34;11-自动收集的信息&#34;&gt;1.1 自动收集的信息
+&lt;h2 id="一我们收集的信息"&gt;一、我们收集的信息
+&lt;/h2&gt;&lt;h3 id="11-自动收集的信息"&gt;1.1 自动收集的信息
 &lt;/h3&gt;&lt;p&gt;当您访问本网站时，我们可能会通过第三方服务自动收集以下信息：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;访问日志&lt;/strong&gt;：包括 IP 地址、浏览器类型、操作系统、访问时间、访问页面等（通过 GitHub Pages 托管服务）&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Cookie&lt;/strong&gt;：本网站可能使用 Cookie 来改善用户体验&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;12-第三方服务&#34;&gt;1.2 第三方服务
+&lt;h3 id="12-第三方服务"&gt;1.2 第三方服务
 &lt;/h3&gt;&lt;p&gt;本网站使用以下第三方服务，它们可能会收集您的信息：&lt;/p&gt;
 &lt;table&gt;
-	&lt;thead&gt;
-			&lt;tr&gt;
-					&lt;th&gt;服务&lt;/th&gt;
-					&lt;th&gt;用途&lt;/th&gt;
-					&lt;th&gt;隐私政策&lt;/th&gt;
-			&lt;/tr&gt;
-	&lt;/thead&gt;
-	&lt;tbody&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;strong&gt;Google AdSense&lt;/strong&gt;&lt;/td&gt;
-					&lt;td&gt;展示广告&lt;/td&gt;
-					&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://policies.google.com/privacy&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Google 隐私政策&lt;/a&gt;&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;strong&gt;Google Analytics&lt;/strong&gt;&lt;/td&gt;
-					&lt;td&gt;网站流量分析&lt;/td&gt;
-					&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://policies.google.com/privacy&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Google 隐私政策&lt;/a&gt;&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;strong&gt;giscus&lt;/strong&gt;&lt;/td&gt;
-					&lt;td&gt;评论系统&lt;/td&gt;
-					&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/giscus/giscus/blob/main/PRIVACY.md&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;giscus 隐私政策&lt;/a&gt;&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;strong&gt;busuanzi&lt;/strong&gt;&lt;/td&gt;
-					&lt;td&gt;浏览量统计&lt;/td&gt;
-					&lt;td&gt;仅统计页面访问次数，不收集个人信息&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;strong&gt;GitHub Pages&lt;/strong&gt;&lt;/td&gt;
-					&lt;td&gt;网站托管&lt;/td&gt;
-					&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://docs.github.com/zh/site-policy/privacy-policies/github-privacy-statement&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;GitHub 隐私政策&lt;/a&gt;&lt;/td&gt;
-			&lt;/tr&gt;
-	&lt;/tbody&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;服务&lt;/th&gt;
+&lt;th&gt;用途&lt;/th&gt;
+&lt;th&gt;隐私政策&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Google AdSense&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;展示广告&lt;/td&gt;
+&lt;td&gt;&lt;a class="link" href="https://policies.google.com/privacy" target="_blank" rel="noopener"
+&gt;Google 隐私政策&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Google Analytics&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;网站流量分析&lt;/td&gt;
+&lt;td&gt;&lt;a class="link" href="https://policies.google.com/privacy" target="_blank" rel="noopener"
+&gt;Google 隐私政策&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;giscus&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;评论系统&lt;/td&gt;
+&lt;td&gt;&lt;a class="link" href="https://github.com/giscus/giscus/blob/main/PRIVACY.md" target="_blank" rel="noopener"
+&gt;giscus 隐私政策&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;busuanzi&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;浏览量统计&lt;/td&gt;
+&lt;td&gt;仅统计页面访问次数，不收集个人信息&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;GitHub Pages&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;网站托管&lt;/td&gt;
+&lt;td&gt;&lt;a class="link" href="https://docs.github.com/zh/site-policy/privacy-policies/github-privacy-statement" target="_blank" rel="noopener"
+&gt;GitHub 隐私政策&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
 &lt;/table&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Google AdSense&lt;/strong&gt; 使用 Cookie 来展示个性化广告。您可以随时通过 &lt;a class=&#34;link&#34; href=&#34;https://adssettings.google.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Google 广告设置&lt;/a&gt; 管理您的广告偏好。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Google AdSense&lt;/strong&gt; 使用 Cookie 来展示个性化广告。您可以随时通过 &lt;a class="link" href="https://adssettings.google.com/" target="_blank" rel="noopener"
+&gt;Google 广告设置&lt;/a&gt; 管理您的广告偏好。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;二信息的使用&#34;&gt;二、信息的使用
+&lt;h2 id="二信息的使用"&gt;二、信息的使用
 &lt;/h2&gt;&lt;p&gt;我们收集的信息仅用于：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;改善网站内容和用户体验&lt;/li&gt;
@@ -204,7 +154,7 @@
 &lt;/ul&gt;
 &lt;p&gt;我们&lt;strong&gt;不会&lt;/strong&gt;将您的个人信息出售、交易或出租给第三方。&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;三cookie-的使用&#34;&gt;三、Cookie 的使用
+&lt;h2 id="三cookie-的使用"&gt;三、Cookie 的使用
 &lt;/h2&gt;&lt;p&gt;本网站可能使用以下类型的 Cookie：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;必要 Cookie&lt;/strong&gt;：确保网站正常运行&lt;/li&gt;
@@ -213,46 +163,25 @@
 &lt;/ul&gt;
 &lt;p&gt;您可以在浏览器设置中禁用 Cookie，但这可能影响部分功能的使用。&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;四数据安全&#34;&gt;四、数据安全
+&lt;h2 id="四数据安全"&gt;四、数据安全
 &lt;/h2&gt;&lt;p&gt;我们采取适当的安全措施保护您的信息。但请注意，互联网上的数据传输无法保证 100% 安全。&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;五第三方链接&#34;&gt;五、第三方链接
+&lt;h2 id="五第三方链接"&gt;五、第三方链接
 &lt;/h2&gt;&lt;p&gt;本网站可能包含指向其他网站的链接。我们对这些网站的隐私做法不承担责任，建议您查看每个网站的隐私政策。&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;六儿童隐私&#34;&gt;六、儿童隐私
+&lt;h2 id="六儿童隐私"&gt;六、儿童隐私
 &lt;/h2&gt;&lt;p&gt;本网站不面向 13 岁以下儿童。我们不会故意收集儿童的个人信息。&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;七隐私政策更新&#34;&gt;七、隐私政策更新
+&lt;h2 id="七隐私政策更新"&gt;七、隐私政策更新
 &lt;/h2&gt;&lt;p&gt;我们可能会不时更新本隐私政策。更新后的版本将在本页面发布。&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;八联系我们&#34;&gt;八、联系我们
+&lt;h2 id="八联系我们"&gt;八、联系我们
 &lt;/h2&gt;&lt;p&gt;如果您对本隐私政策有任何疑问，请通过以下方式联系：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;GitHub Issues&lt;/strong&gt;：&lt;a class=&#34;link&#34; href=&#34;https://github.com/iamxurulin/HugoBlog/issues&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://github.com/iamxurulin/HugoBlog/issues&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;GitHub 主页&lt;/strong&gt;：&lt;a class=&#34;link&#34; href=&#34;https://github.com/iamxurulin&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://github.com/iamxurulin&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GitHub Issues&lt;/strong&gt;：&lt;a class="link" href="https://github.com/iamxurulin/HugoBlog/issues" target="_blank" rel="noopener"
+&gt;https://github.com/iamxurulin/HugoBlog/issues&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GitHub 主页&lt;/strong&gt;：&lt;a class="link" href="https://github.com/iamxurulin" target="_blank" rel="noopener"
+&gt;https://github.com/iamxurulin&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;em&gt;本隐私政策最后更新于 2026年6月9日&lt;/em&gt;&lt;/p&gt;
-</description>
-        </item>
-        <item>
-        <title>友情链接</title>
-        <link>https://iamxurulin.github.io/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/</link>
-        <pubDate>Mon, 22 Jun 2026 02:28:13 +0000</pubDate>
-        
-        <guid>https://iamxurulin.github.io/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>归档</title>
-        <link>https://iamxurulin.github.io/archives/</link>
-        <pubDate>Wed, 14 Jan 2026 00:00:00 +0000</pubDate>
-        
-        <guid>https://iamxurulin.github.io/archives/</guid>
-        <description></description>
-        </item>
-        
-    </channel>
-</rss>
+&lt;p&gt;&lt;em&gt;本隐私政策最后更新于 2026年6月9日&lt;/em&gt;&lt;/p&gt;</description></item><item><title>友情链接</title><link>https://iamxurulin.github.io/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/</link><pubDate>Sat, 27 Jun 2026 05:39:28 +0000</pubDate><guid>https://iamxurulin.github.io/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/</guid><description/></item><item><title>归档</title><link>https://iamxurulin.github.io/archives/</link><pubDate>Wed, 14 Jan 2026 00:00:00 +0000</pubDate><guid>https://iamxurulin.github.io/archives/</guid><description/></item></channel></rss>

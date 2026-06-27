@@ -1,140 +1,110 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-    <channel>
-        <title>Redis on Coder_Studio</title>
-        <link>https://iamxurulin.github.io/tags/redis/</link>
-        <description>Recent content in Redis on Coder_Studio</description>
-        <generator>Hugo -- gohugo.io</generator>
-        <language>zh-cn</language>
-        <copyright>iamxurulin</copyright>
-        <lastBuildDate>Mon, 22 Jun 2026 02:28:13 +0000</lastBuildDate><atom:link href="https://iamxurulin.github.io/tags/redis/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>别再搞混了！Redis、Jedis、Lettuce、Spring Data Redis、Redisson、Spring Session Redis 一次讲透</title>
-        <link>https://iamxurulin.github.io/p/%E5%88%AB%E5%86%8D%E6%90%9E%E6%B7%B7%E4%BA%86redisjedislettucespring-data-redisredissonspring-session-redis-%E4%B8%80%E6%AC%A1%E8%AE%B2%E9%80%8F/</link>
-        <pubDate>Wed, 01 Apr 2026 19:17:35 +0000</pubDate>
-        
-        <guid>https://iamxurulin.github.io/p/%E5%88%AB%E5%86%8D%E6%90%9E%E6%B7%B7%E4%BA%86redisjedislettucespring-data-redisredissonspring-session-redis-%E4%B8%80%E6%AC%A1%E8%AE%B2%E9%80%8F/</guid>
-        <description>&lt;p&gt;平时做Java开发，只要引入Redis做缓存，&lt;code&gt;pom.xml&lt;/code&gt;里总会看到一堆名字相似的东西：一会儿是jedis，一会儿是lettuce，还有Spring Data Redis、Redisson、Spring Session Redis……&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Redis on Coder_Studio</title><link>https://iamxurulin.github.io/tags/redis/</link><description>Recent content in Redis on Coder_Studio</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>iamxurulin</copyright><lastBuildDate>Sat, 27 Jun 2026 05:39:28 +0000</lastBuildDate><atom:link href="https://iamxurulin.github.io/tags/redis/index.xml" rel="self" type="application/rss+xml"/><item><title>别再搞混了！Redis、Jedis、Lettuce、Spring Data Redis、Redisson、Spring Session Redis 一次讲透</title><link>https://iamxurulin.github.io/p/%E5%88%AB%E5%86%8D%E6%90%9E%E6%B7%B7%E4%BA%86redisjedislettucespring-data-redisredissonspring-session-redis-%E4%B8%80%E6%AC%A1%E8%AE%B2%E9%80%8F/</link><pubDate>Wed, 01 Apr 2026 19:17:35 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E5%88%AB%E5%86%8D%E6%90%9E%E6%B7%B7%E4%BA%86redisjedislettucespring-data-redisredissonspring-session-redis-%E4%B8%80%E6%AC%A1%E8%AE%B2%E9%80%8F/</guid><description>&lt;p&gt;平时做Java开发，只要引入Redis做缓存，&lt;code&gt;pom.xml&lt;/code&gt;里总会看到一堆名字相似的东西：一会儿是jedis，一会儿是lettuce，还有Spring Data Redis、Redisson、Spring Session Redis……&lt;/p&gt;
 &lt;p&gt;刚接触的时候真的头大，甚至会把Redis服务端和Java客户端混为一谈，踩了不少坑。&lt;/p&gt;
 &lt;p&gt;今天就把这些东西理清楚，分清谁是底层、谁是封装、谁是专门解决某个场景的。&lt;/p&gt;
 &lt;p&gt;其实，这些东西根本不是平级的，而是有明确的上下层级依赖关系，从底层到上层的完整链路是：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://iamxurulin.github.io/images/f51cc82b1fcb9616aeac893955b6591b-c0c346cb.jpeg&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;画板&#34;
-	
-	
+&lt;p&gt;&lt;img src="https://iamxurulin.github.io/images/f51cc82b1fcb9616aeac893955b6591b-c0c346cb.jpeg"
+loading="lazy"
+alt="画板"
 &gt;&lt;/p&gt;
 &lt;p&gt;先讲清每个东西的定位：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Redis&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;就是你装在服务器上的NoSQL数据库（服务端），所有东西最终都要和它打交道。&lt;/p&gt;
-&lt;ol start=&#34;2&#34;&gt;
+&lt;ol start="2"&gt;
 &lt;li&gt;Jedis、Lettuce、Redisson&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;都是Java连接Redis服务端的&lt;strong&gt;客户端&lt;/strong&gt;，只是定位和特性不同。&lt;/p&gt;
-&lt;ol start=&#34;3&#34;&gt;
+&lt;ol start="3"&gt;
 &lt;li&gt;Spring Data Redis&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Spring对Java客户端做的&lt;strong&gt;统一封装&lt;/strong&gt;，屏蔽底层差异，让你用一套API就能操作Redis。&lt;/p&gt;
-&lt;ol start=&#34;4&#34;&gt;
+&lt;ol start="4"&gt;
 &lt;li&gt;Spring Session Redis&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;基于Spring Data Redis做的&lt;strong&gt;专项场景组件&lt;/strong&gt;，只干1件事：解决分布式系统的Session共享问题。&lt;/p&gt;
-&lt;h2 id=&#34;redis-本身&#34;&gt;Redis 本身
+&lt;h2 id="redis-本身"&gt;Redis 本身
 &lt;/h2&gt;&lt;p&gt;首先，所有东西的核心，就是&lt;strong&gt;Redis&lt;/strong&gt;——它是一个独立跑在服务器上的键值对NoSQL数据库，也就是我们常说的Redis服务端。&lt;/p&gt;
 &lt;p&gt;它完全独立于Java程序，你用Java、Python、Go都能连接它，和jedis这些Java客户端没有任何强绑定，作用就是提供数据存储、缓存、发布订阅、计数器这些能力。&lt;/p&gt;
-&lt;h2 id=&#34;java客户端jedislettuceredisson&#34;&gt;Java客户端：Jedis、Lettuce、Redisson
+&lt;h2 id="java客户端jedislettuceredisson"&gt;Java客户端：Jedis、Lettuce、Redisson
 &lt;/h2&gt;&lt;p&gt;这三个都是Java语言实现的Redis客户端，作用就是让Java程序通过TCP连接Redis服务端、发送命令、接收结果，项目里选其一即可，不用全引。&lt;/p&gt;
-&lt;h3 id=&#34;1-jedis&#34;&gt;1. Jedis
+&lt;h3 id="1-jedis"&gt;1. Jedis
 &lt;/h3&gt;&lt;p&gt;Jedis应该是Java生态里最早流行的Redis客户端了，最大的特点就是&lt;strong&gt;轻量、简单&lt;/strong&gt;，API完全贴合Redis的原生命令。&lt;/p&gt;
 &lt;p&gt;它的底层是&lt;strong&gt;阻塞式、直连模型&lt;/strong&gt;：&lt;/p&gt;
 &lt;p&gt;每个连接对应一个物理TCP连接，多线程环境下是&lt;strong&gt;线程不安全&lt;/strong&gt;的，所以多线程场景用的时候，必须搭配连接池使用。&lt;/p&gt;
-&lt;h4 id=&#34;适用场景&#34;&gt;&lt;strong&gt;适用场景&lt;/strong&gt;
+&lt;h4 id="适用场景"&gt;&lt;strong&gt;适用场景&lt;/strong&gt;
 &lt;/h4&gt;&lt;p&gt;小项目、简单的Redis缓存场景，对性能没有极致要求，就想快速上手用Redis，选Jedis完全够用。&lt;/p&gt;
-&lt;h4 id=&#34;小贴士&#34;&gt;&lt;strong&gt;小贴士&lt;/strong&gt;
+&lt;h4 id="小贴士"&gt;&lt;strong&gt;小贴士&lt;/strong&gt;
 &lt;/h4&gt;&lt;p&gt;Spring Boot 1.x版本，Spring Data Redis默认的客户端就是Jedis，2.x之后换成了Lettuce。&lt;/p&gt;
-&lt;h3 id=&#34;2-lettuce&#34;&gt;2. Lettuce
+&lt;h3 id="2-lettuce"&gt;2. Lettuce
 &lt;/h3&gt;&lt;p&gt;现在用Spring Boot 2.x/3.x，只要引了redis的starter，默认集成的就是Lettuce，它是基于Netty实现的&lt;strong&gt;非阻塞、响应式客户端&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;和Jedis最大的区别就是：&lt;/p&gt;
 &lt;p&gt;它是线程安全的，一个连接实例就能在多线程环境下安全使用，不用额外配置连接池；&lt;/p&gt;
 &lt;p&gt;底层用Netty的NIO模型，支持异步、响应式编程，高并发场景下的性能比Jedis好很多，同时也完美支持Redis哨兵、集群、管道这些高级特性。&lt;/p&gt;
-&lt;h4 id=&#34;适用场景-1&#34;&gt;&lt;strong&gt;适用场景&lt;/strong&gt;
+&lt;h4 id="适用场景-1"&gt;&lt;strong&gt;适用场景&lt;/strong&gt;
 &lt;/h4&gt;&lt;p&gt;高并发、需要异步操作Redis的场景，还有Spring WebFlux响应式编程项目。&lt;/p&gt;
-&lt;h3 id=&#34;redisson&#34;&gt;Redisson
+&lt;h3 id="redisson"&gt;Redisson
 &lt;/h3&gt;&lt;p&gt;Jedis和Lettuce的核心是：&lt;/p&gt;
 &lt;p&gt;封装Redis命令，让你能操作Redis。&lt;/p&gt;
 &lt;p&gt;而Redisson是基于Redis，实现了&lt;strong&gt;大量分布式系统的高级功能&lt;/strong&gt;，是一个更重量级的客户端。&lt;/p&gt;
 &lt;p&gt;Redisson底层也是基于Netty实现的非阻塞模型。&lt;/p&gt;
 &lt;p&gt;它的优势是提供了一整套贴合Java并发编程API的分布式工具：&lt;/p&gt;
 &lt;p&gt;比如业内最常用的分布式锁（可重入锁、公平锁）、分布式信号量、分布式队列、分布式Map/List，甚至还有分布式限流、分布式ID生成这些功能。&lt;/p&gt;
-&lt;h4 id=&#34;适用场景-2&#34;&gt;&lt;strong&gt;适用场景&lt;/strong&gt;
+&lt;h4 id="适用场景-2"&gt;&lt;strong&gt;适用场景&lt;/strong&gt;
 &lt;/h4&gt;&lt;p&gt;项目里需要用分布式锁、分布式队列这些高级分布式功能的时候，首选Redisson。&lt;/p&gt;
-&lt;h2 id=&#34;spring-data-redis&#34;&gt;Spring Data Redis
+&lt;h2 id="spring-data-redis"&gt;Spring Data Redis
 &lt;/h2&gt;&lt;p&gt;Spring Data Redis本身不具备连接Redis的能力，它只是对底层的Java客户端做了一层统一封装，是Spring Data家族的一员，专门用来在Spring/Spring Boot项目里简化Redis操作，作用就是：&lt;/p&gt;
 &lt;p&gt;屏蔽Jedis、Lettuce这些不同客户端的底层API差异，给你提供了一套统一的操作API——就是我们最常用的RedisTemplate、StringRedisTemplate。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;它和客户端的关系&lt;/strong&gt;：&lt;/p&gt;
 &lt;p&gt;Spring Data Redis是上层封装，Jedis/Lettuce/Redisson是底层实现，必须选一个底层客户端，它才能正常工作。&lt;/p&gt;
-&lt;h4 id=&#34;适用场景-3&#34;&gt;&lt;strong&gt;适用场景&lt;/strong&gt;
+&lt;h4 id="适用场景-3"&gt;&lt;strong&gt;适用场景&lt;/strong&gt;
 &lt;/h4&gt;&lt;p&gt;只要是Spring/Spring Boot项目，用Redis就必用Spring Data Redis，这是Spring生态里操作Redis的标准方式，能极大简化代码，不用关心底层客户端的细节。&lt;/p&gt;
-&lt;h2 id=&#34;spring-session-redis&#34;&gt;Spring Session Redis
+&lt;h2 id="spring-session-redis"&gt;Spring Session Redis
 &lt;/h2&gt;&lt;p&gt;这个就更上层了，很多人会把它和Spring Data Redis混为一谈，其实它俩根本不是一个维度的东西：&lt;/p&gt;
 &lt;p&gt;Spring Data Redis是通用的Redis操作封装，而Spring Session Redis只干分布式Session共享这一件事。&lt;/p&gt;
 &lt;p&gt;传统单体项目里，Session是存在Tomcat容器里的，但是分布式微服务项目里，一个用户的请求可能会打到不同的服务节点上，A节点存的用户登录Session，B节点根本拿不到，就会出现用户登录了一次，刷新一下就需要重新登录的问题。&lt;/p&gt;
 &lt;p&gt;最常用的解决方案，就是把Session统一存在Redis里，所有服务节点都从Redis里读写Session，就能实现跨节点的Session共享了。&lt;/p&gt;
 &lt;p&gt;而Spring Session Redis，就是把“Session存Redis、从Redis取Session、过期时间管理、销毁”这一整套逻辑，完全给你封装好了。&lt;/p&gt;
 &lt;p&gt;你不用写任何业务代码，只要引入依赖、加几行简单配置，就能实现分布式Session共享，而且对业务代码完全无侵入。&lt;/p&gt;
-&lt;h4 id=&#34;适用场景-4&#34;&gt;&lt;strong&gt;适用场景&lt;/strong&gt;
-&lt;/h4&gt;&lt;p&gt;分布式微服务项目里，需要实现跨节点的Session共享、单点登录，用它非常方便，几行配置就能搞定，不用自己手写逻辑。&lt;/p&gt;
-</description>
-        </item>
-        <item>
-        <title>【面试真题拆解】十万用户并发下，Caffeine&#43;Redis&#43;MySQL多级缓存怎么设计？</title>
-        <link>https://iamxurulin.github.io/p/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98%E6%8B%86%E8%A7%A3%E5%8D%81%E4%B8%87%E7%94%A8%E6%88%B7%E5%B9%B6%E5%8F%91%E4%B8%8Bcaffeine-redis-mysql%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1/</link>
-        <pubDate>Thu, 26 Mar 2026 14:59:06 +0000</pubDate>
-        
-        <guid>https://iamxurulin.github.io/p/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98%E6%8B%86%E8%A7%A3%E5%8D%81%E4%B8%87%E7%94%A8%E6%88%B7%E5%B9%B6%E5%8F%91%E4%B8%8Bcaffeine-redis-mysql%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1/</guid>
-        <description>&lt;p&gt;面试官问了这么一道场景题：&lt;/p&gt;
+&lt;h4 id="适用场景-4"&gt;&lt;strong&gt;适用场景&lt;/strong&gt;
+&lt;/h4&gt;&lt;p&gt;分布式微服务项目里，需要实现跨节点的Session共享、单点登录，用它非常方便，几行配置就能搞定，不用自己手写逻辑。&lt;/p&gt;</description></item><item><title>【面试真题拆解】十万用户并发下，Caffeine+Redis+MySQL多级缓存怎么设计？</title><link>https://iamxurulin.github.io/p/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98%E6%8B%86%E8%A7%A3%E5%8D%81%E4%B8%87%E7%94%A8%E6%88%B7%E5%B9%B6%E5%8F%91%E4%B8%8Bcaffeine-redis-mysql%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1/</link><pubDate>Thu, 26 Mar 2026 14:59:06 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98%E6%8B%86%E8%A7%A3%E5%8D%81%E4%B8%87%E7%94%A8%E6%88%B7%E5%B9%B6%E5%8F%91%E4%B8%8Bcaffeine-redis-mysql%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1/</guid><description>&lt;p&gt;面试官问了这么一道场景题：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;“平台用了Caffeine本地缓存、Redis分布式缓存、MySQL数据库，现在有十万个用户同时访问，相当于每个用户对应一个请求，这多级缓存该怎么设计？”&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;多级缓存就是“分层扛压”，把十万用户的请求，从快到慢、从近到远，一层层分流，别让所有请求都直接打MySQL。&lt;/p&gt;
-&lt;h2 id=&#34;设计方案&#34;&gt;设计方案
-&lt;/h2&gt;&lt;h3 id=&#34;定好每一层的职责&#34;&gt;定好每一层的职责
+&lt;h2 id="设计方案"&gt;设计方案
+&lt;/h2&gt;&lt;h3 id="定好每一层的职责"&gt;定好每一层的职责
 &lt;/h3&gt;&lt;table&gt;
-	&lt;thead&gt;
-			&lt;tr&gt;
-					&lt;th&gt;缓存层级&lt;/th&gt;
-					&lt;th&gt;职责&lt;/th&gt;
-					&lt;th&gt;放什么数据&lt;/th&gt;
-					&lt;th&gt;容量/速度&lt;/th&gt;
-			&lt;/tr&gt;
-	&lt;/thead&gt;
-	&lt;tbody&gt;
-			&lt;tr&gt;
-					&lt;td&gt;Caffeine本地缓存&lt;/td&gt;
-					&lt;td&gt;扛超级热点中的超级热点，大幅减少 Redis 压力&lt;/td&gt;
-					&lt;td&gt;访问频率 Top10 的极致热门数据（比如首页轮播爆款、正在进行的秒杀活动）&lt;/td&gt;
-					&lt;td&gt;容量小（几百MB）、速度极快（纳秒级）&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;Redis分布式缓存&lt;/td&gt;
-					&lt;td&gt;扛&lt;strong&gt;全局通用&lt;/strong&gt;数据，挡MySQL&lt;/td&gt;
-					&lt;td&gt;全平台的业务数据（比如商品详情、用户信息、订单数据）&lt;/td&gt;
-					&lt;td&gt;容量大（几十GB）、速度快（毫秒级）&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;MySQL数据库&lt;/td&gt;
-					&lt;td&gt;数据&lt;strong&gt;最终兜底&lt;/strong&gt;，保证数据不丢&lt;/td&gt;
-					&lt;td&gt;所有的原始业务数据&lt;/td&gt;
-					&lt;td&gt;容量无限、速度慢（秒级）&lt;/td&gt;
-			&lt;/tr&gt;
-	&lt;/tbody&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;缓存层级&lt;/th&gt;
+&lt;th&gt;职责&lt;/th&gt;
+&lt;th&gt;放什么数据&lt;/th&gt;
+&lt;th&gt;容量/速度&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Caffeine本地缓存&lt;/td&gt;
+&lt;td&gt;扛超级热点中的超级热点，大幅减少 Redis 压力&lt;/td&gt;
+&lt;td&gt;访问频率 Top10 的极致热门数据（比如首页轮播爆款、正在进行的秒杀活动）&lt;/td&gt;
+&lt;td&gt;容量小（几百MB）、速度极快（纳秒级）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Redis分布式缓存&lt;/td&gt;
+&lt;td&gt;扛&lt;strong&gt;全局通用&lt;/strong&gt;数据，挡MySQL&lt;/td&gt;
+&lt;td&gt;全平台的业务数据（比如商品详情、用户信息、订单数据）&lt;/td&gt;
+&lt;td&gt;容量大（几十GB）、速度快（毫秒级）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;MySQL数据库&lt;/td&gt;
+&lt;td&gt;数据&lt;strong&gt;最终兜底&lt;/strong&gt;，保证数据不丢&lt;/td&gt;
+&lt;td&gt;所有的原始业务数据&lt;/td&gt;
+&lt;td&gt;容量无限、速度慢（秒级）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h3 id=&#34;缓存预热&#34;&gt;缓存预热
+&lt;h3 id="缓存预热"&gt;缓存预热
 &lt;/h3&gt;&lt;p&gt;平台刚启动的时候，Caffeine和Redis里都是空的，如果这时候十万用户同时进来，所有请求都会直接打MySQL，直接把数据库打垮。&lt;/p&gt;
 &lt;p&gt;为了解决这个问题，考虑采用缓存预热：&lt;/p&gt;
 &lt;p&gt;平台启动前，先做两级缓存预热：&lt;/p&gt;
@@ -142,18 +112,18 @@
 &lt;li&gt;把访问频率最高的Top1000 个全量热门 Key（比如全平台热门商品、活动规则），提前从 MySQL 里查出来，全量加载到 Redis；&lt;/li&gt;
 &lt;li&gt;把其中访问频率最高的Top10 个超级热点 Key（比如首页轮播商品、正在进行的爆款活动），额外加载到每台服务器的 Caffeine 本地缓存，作为最外层的扛压层。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h3 id=&#34;缓存雪崩击穿穿透&#34;&gt;缓存雪崩、击穿、穿透
-&lt;/h3&gt;&lt;h4 id=&#34;缓存雪崩十万个key同时过期&#34;&gt;缓存雪崩：十万个Key同时过期
+&lt;h3 id="缓存雪崩击穿穿透"&gt;缓存雪崩、击穿、穿透
+&lt;/h3&gt;&lt;h4 id="缓存雪崩十万个key同时过期"&gt;缓存雪崩：十万个Key同时过期
 &lt;/h4&gt;&lt;p&gt;比如你给所有Key都设置了“1小时过期”，结果十万个Key在同一时间全部过期，所有请求直接打MySQL。&lt;/p&gt;
 &lt;p&gt;解决这个问题的话，就是别给所有Key都设一样的过期时间，可以设置“1小时 + 0~30分钟的随机值”，&lt;strong&gt;让Key的过期时间分散开&lt;/strong&gt;，避免同时过期；&lt;/p&gt;
 &lt;p&gt;对于首页Top10商品这种超级热点数据，还可以设置成“&lt;strong&gt;永不过期&lt;/strong&gt;”，只在数据更新的时候主动删除缓存。&lt;/p&gt;
-&lt;h4 id=&#34;缓存击穿超级热门key突然过期&#34;&gt;缓存击穿：超级热门Key突然过期
+&lt;h4 id="缓存击穿超级热门key突然过期"&gt;缓存击穿：超级热门Key突然过期
 &lt;/h4&gt;&lt;p&gt;比如“双11爆款商品详情”这个Key，每秒有十万个请求，结果它突然过期了，十万个请求同时打Redis，发现没有，又同时打MySQL，直接把两者都打垮。&lt;/p&gt;
 &lt;p&gt;这个问题也可以对超级热点Key&lt;strong&gt;不设过期时间&lt;/strong&gt;，只在更新时主动删；&lt;/p&gt;
 &lt;p&gt;或者加&lt;strong&gt;Redis 分布式互斥锁&lt;/strong&gt;：&lt;/p&gt;
 &lt;p&gt;如果 Key 真的过期了，只让第一个抢到锁的请求去查 MySQL，查出来后更新缓存并释放锁；&lt;/p&gt;
 &lt;p&gt;其他没抢到锁的请求，每隔 100ms 重试一次查缓存，直到缓存更新完成，彻底避免十万请求同时打 MySQL。&lt;/p&gt;
-&lt;h4 id=&#34;缓存穿透查根本不存在的key&#34;&gt;缓存穿透：查根本不存在的Key
+&lt;h4 id="缓存穿透查根本不存在的key"&gt;缓存穿透：查根本不存在的Key
 &lt;/h4&gt;&lt;p&gt;比如有人恶意攻击，每秒发十万个请求查“id=999999999”的商品（这个商品根本不存在），缓存里没有，直接打MySQL，把数据库打垮。&lt;/p&gt;
 &lt;p&gt;这个问题优先采用&lt;strong&gt;布隆过滤器&lt;/strong&gt;拦截：&lt;/p&gt;
 &lt;ol&gt;
@@ -165,14 +135,14 @@
 &lt;p&gt;缓存空值。如果查 MySQL 发现这个 Key 真的不存在，就把【空值】缓存到 Redis 里（设置 5 分钟短过期时间），下次再查这个 Key，直接从 Redis 里拿空值返回，避免重复打 MySQL。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;小贴士&lt;/strong&gt;：&lt;/p&gt;
 &lt;p&gt;空值缓存必须设置短过期时间（3-5 分钟），同时限制单 IP 的请求频率，避免恶意攻击生成大量空值缓存撑爆 Redis 内存。&lt;/p&gt;
-&lt;h3 id=&#34;十万并发下的-redis-压力分摊方案&#34;&gt;十万并发下的 Redis 压力分摊方案
+&lt;h3 id="十万并发下的-redis-压力分摊方案"&gt;十万并发下的 Redis 压力分摊方案
 &lt;/h3&gt;&lt;p&gt;十万个请求同时进来，如果都打到单实例 Redis 上，大概率会直接把 Redis 打宕机，必须做以下 3 件事分摊压力：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;热点隔离，本地优先扛压：把访问频率 Top10 的极致超级热点 Key（比如首页轮播爆款、正在进行的秒杀活动），全量放在每台服务器的 Caffeine 本地缓存里。十万请求里 90% 都能直接在本地命中，Redis 的压力直接降 90%。&lt;/li&gt;
 &lt;li&gt;用 Redis Cluster 集群，把数据分片存储在多个节点上，每个节点只扛一部分请求，避免单节点压力过载；&lt;/li&gt;
 &lt;li&gt;Redis 主节点只负责数据更新的&lt;strong&gt;写请求&lt;/strong&gt;，多个从节点负责处理十万级的&lt;strong&gt;读请求&lt;/strong&gt;，把读压力分摊到多个从节点上。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h3 id=&#34;多实例下的本地缓存一致性&#34;&gt;多实例下的本地缓存一致性
+&lt;h3 id="多实例下的本地缓存一致性"&gt;多实例下的本地缓存一致性
 &lt;/h3&gt;&lt;p&gt;服务基本都是多实例集群部署的（比如 10 台服务器），每台服务器都有自己独立的 Caffeine 本地缓存，很容易出现数据不一致的问题：&lt;/p&gt;
 &lt;p&gt;比如在 A 实例更新了商品价格，删了 A 实例的 Caffeine 和 Redis 缓存，但 B 实例的 Caffeine 里还存着旧价格，用户访问 B 实例就会看到脏数据。&lt;/p&gt;
 &lt;p&gt;考虑用&lt;strong&gt;延迟双删 + Redis 发布订阅&lt;/strong&gt;的组合方案解决这个问题：&lt;/p&gt;
@@ -183,246 +153,208 @@
 &lt;p&gt;② 再更新 MySQL 数据库，写入新数据；&lt;/p&gt;
 &lt;p&gt;③ 等待 1 秒（延迟时间必须略大于你的业务接口平均耗时，根据实际压测结果调整，不能盲目设置），再次删除 Redis 缓存。&lt;/p&gt;
 &lt;p&gt;延迟的目的是等其他实例已经从 MySQL 读到旧数据、更新到缓存后，再删一次缓存，避免脏数据回写。&lt;/p&gt;
-&lt;ol start=&#34;2&#34;&gt;
+&lt;ol start="2"&gt;
 &lt;li&gt;&lt;strong&gt;Redis 发布订阅：保证多实例 Caffeine 的数据一致&lt;/strong&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;①A实例更新完数据、完成延迟双删后，通过 Redis 的发布订阅功能，给集群里所有服务实例广播一条消息：商品 id=123 的缓存已失效，请删除本地缓存；&lt;/p&gt;
 &lt;p&gt;②所有实例收到消息后，立刻删除自己本地Caffeine里对应的Key；&lt;/p&gt;
 &lt;p&gt;③下次用户访问任何实例，都会去 Redis 里查询新数据，再更新到本地 Caffeine，保证全集群所有实例的数据一致。&lt;/p&gt;
-&lt;h2 id=&#34;完整的请求数据更新全流程&#34;&gt;完整的请求+数据更新全流程
-&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;https://iamxurulin.github.io/images/a2da2a3c908113eb2f6748a511d86523-c4dbe57e.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-</description>
-        </item>
-        <item>
-        <title>【面试真题拆解】Redis的8种内存淘汰策略</title>
-        <link>https://iamxurulin.github.io/p/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98%E6%8B%86%E8%A7%A3redis%E7%9A%848%E7%A7%8D%E5%86%85%E5%AD%98%E6%B7%98%E6%B1%B0%E7%AD%96%E7%95%A5/</link>
-        <pubDate>Mon, 16 Mar 2026 22:54:44 +0000</pubDate>
-        
-        <guid>https://iamxurulin.github.io/p/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98%E6%8B%86%E8%A7%A3redis%E7%9A%848%E7%A7%8D%E5%86%85%E5%AD%98%E6%B7%98%E6%B1%B0%E7%AD%96%E7%95%A5/</guid>
-        <description>&lt;p&gt;Redis 内存淘汰策略共 8 种，分两大类：不淘汰和淘汰数据；&lt;/p&gt;
+&lt;h2 id="完整的请求数据更新全流程"&gt;完整的请求+数据更新全流程
+&lt;/h2&gt;&lt;p&gt;&lt;img src="https://iamxurulin.github.io/images/a2da2a3c908113eb2f6748a511d86523-c4dbe57e.png"
+loading="lazy"
+&gt;&lt;/p&gt;</description></item><item><title>【面试真题拆解】Redis的8种内存淘汰策略</title><link>https://iamxurulin.github.io/p/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98%E6%8B%86%E8%A7%A3redis%E7%9A%848%E7%A7%8D%E5%86%85%E5%AD%98%E6%B7%98%E6%B1%B0%E7%AD%96%E7%95%A5/</link><pubDate>Mon, 16 Mar 2026 22:54:44 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98%E6%8B%86%E8%A7%A3redis%E7%9A%848%E7%A7%8D%E5%86%85%E5%AD%98%E6%B7%98%E6%B1%B0%E7%AD%96%E7%95%A5/</guid><description>&lt;p&gt;Redis 内存淘汰策略共 8 种，分两大类：不淘汰和淘汰数据；&lt;/p&gt;
 &lt;p&gt;纯缓存场景优先选 allkeys-lru，混合场景选 volatile-lru，数据不能丢的话选 noeviction。&lt;/p&gt;
-&lt;h2 id=&#34;maxmemory-参数&#34;&gt;&lt;code&gt;maxmemory&lt;/code&gt; 参数
+&lt;h2 id="maxmemory-参数"&gt;&lt;code&gt;maxmemory&lt;/code&gt; 参数
 &lt;/h2&gt;&lt;p&gt;只有设置了 &lt;code&gt;maxmemory&lt;/code&gt;（Redis 最大内存限制），内存淘汰策略才会生效。&lt;/p&gt;
-&lt;h3 id=&#34;设置-maxmemory的两种方式&#34;&gt;设置 &lt;code&gt;maxmemory&lt;/code&gt;的两种方式
+&lt;h3 id="设置-maxmemory的两种方式"&gt;设置 &lt;code&gt;maxmemory&lt;/code&gt;的两种方式
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;配置文件 &lt;code&gt;redis.conf&lt;/code&gt;：&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-nginx&#34; data-lang=&#34;nginx&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 限制 Redis 最大使用 1GB 内存
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;maxmemory&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;1gb&lt;/span&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-nginx" data-lang="nginx"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 限制 Redis 最大使用 1GB 内存
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;maxmemory&lt;/span&gt; &lt;span class="s"&gt;1gb&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;命令行动态设置（重启后会失效）：&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;127.0.0.1:6379&amp;gt; CONFIG SET maxmemory 1gb
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;127.0.0.1:6379&amp;gt; CONFIG SET maxmemory 1gb
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;redis-的8种内存淘汰策略&#34;&gt;Redis 的8种内存淘汰策略
+&lt;/div&gt;&lt;h2 id="redis-的8种内存淘汰策略"&gt;Redis 的8种内存淘汰策略
 &lt;/h2&gt;&lt;p&gt;可以分为&lt;strong&gt;两大类&lt;/strong&gt;：&lt;/p&gt;
 &lt;table&gt;
-	&lt;thead&gt;
-			&lt;tr&gt;
-					&lt;th&gt;大类&lt;/th&gt;
-					&lt;th&gt;策略名称&lt;/th&gt;
-					&lt;th&gt;含义&lt;/th&gt;
-			&lt;/tr&gt;
-	&lt;/thead&gt;
-	&lt;tbody&gt;
-			&lt;tr&gt;
-					&lt;td&gt;不淘汰数据&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;noeviction&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;内存满了，新写入直接报错，不淘汰任何数据&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;淘汰过期键&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;volatile-lru&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;淘汰设置了过期时间的键中，&lt;strong&gt;最近最少使用&lt;/strong&gt;的&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;volatile-lfu&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;淘汰设置了过期时间的键中，&lt;strong&gt;最不经常使用&lt;/strong&gt;的&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;volatile-ttl&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;淘汰设置了过期时间的键中，&lt;strong&gt;即将过期&lt;/strong&gt;的&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;volatile-random&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;随机淘汰设置了过期时间的键&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;淘汰所有键&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;allkeys-lru&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;淘汰&lt;strong&gt;所有键&lt;/strong&gt;中，&lt;strong&gt;最近最少使用&lt;/strong&gt;的&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;allkeys-lfu&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;淘汰&lt;strong&gt;所有键&lt;/strong&gt;中，&lt;strong&gt;最不经常使用&lt;/strong&gt;的&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;allkeys-random&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;随机淘汰&lt;strong&gt;所有键&lt;/strong&gt;&lt;/td&gt;
-			&lt;/tr&gt;
-	&lt;/tbody&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;大类&lt;/th&gt;
+&lt;th&gt;策略名称&lt;/th&gt;
+&lt;th&gt;含义&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;不淘汰数据&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;noeviction&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;内存满了，新写入直接报错，不淘汰任何数据&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;淘汰过期键&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;volatile-lru&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;淘汰设置了过期时间的键中，&lt;strong&gt;最近最少使用&lt;/strong&gt;的&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;volatile-lfu&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;淘汰设置了过期时间的键中，&lt;strong&gt;最不经常使用&lt;/strong&gt;的&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;volatile-ttl&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;淘汰设置了过期时间的键中，&lt;strong&gt;即将过期&lt;/strong&gt;的&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;volatile-random&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;随机淘汰设置了过期时间的键&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;淘汰所有键&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;allkeys-lru&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;淘汰&lt;strong&gt;所有键&lt;/strong&gt;中，&lt;strong&gt;最近最少使用&lt;/strong&gt;的&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;allkeys-lfu&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;淘汰&lt;strong&gt;所有键&lt;/strong&gt;中，&lt;strong&gt;最不经常使用&lt;/strong&gt;的&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;allkeys-random&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;随机淘汰&lt;strong&gt;所有键&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h3 id=&#34;1-noeviction&#34;&gt;1. &lt;code&gt;noeviction&lt;/code&gt;
-&lt;/h3&gt;&lt;p&gt;当内存满了，新写入的请求（比如 &lt;code&gt;SET&lt;/code&gt;、&lt;code&gt;LPUSH&lt;/code&gt;）会直接报错 &lt;code&gt;(error) OOM command not allowed when used memory &amp;gt; &#39;maxmemory&#39;&lt;/code&gt;，&lt;strong&gt;不淘汰任何数据&lt;/strong&gt;。&lt;/p&gt;
+&lt;h3 id="1-noeviction"&gt;1. &lt;code&gt;noeviction&lt;/code&gt;
+&lt;/h3&gt;&lt;p&gt;当内存满了，新写入的请求（比如 &lt;code&gt;SET&lt;/code&gt;、&lt;code&gt;LPUSH&lt;/code&gt;）会直接报错 &lt;code&gt;(error) OOM command not allowed when used memory &amp;gt; 'maxmemory'&lt;/code&gt;，&lt;strong&gt;不淘汰任何数据&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;适用于&lt;/strong&gt;数据绝对不能丢，且有完善的内存监控和扩容机制（比如金融级核心数据）的场景。&lt;/p&gt;
-&lt;h3 id=&#34;2-淘汰过期键的4种策略&#34;&gt;2. 淘汰过期键的4种策略
+&lt;h3 id="2-淘汰过期键的4种策略"&gt;2. 淘汰过期键的4种策略
 &lt;/h3&gt;&lt;p&gt;这类策略只淘汰设置了 &lt;code&gt;expire&lt;/code&gt; 过期时间的键，不会碰永久键，适合“缓存+持久化”混合的场景（比如永久键存重要数据，过期键存缓存）。&lt;/p&gt;
-&lt;h4 id=&#34;volatile-lru&#34;&gt;&lt;code&gt;volatile-lru&lt;/code&gt;
+&lt;h4 id="volatile-lru"&gt;&lt;code&gt;volatile-lru&lt;/code&gt;
 &lt;/h4&gt;&lt;p&gt;LRU = Least Recently Used（最近最少使用）。&lt;/p&gt;
 &lt;p&gt;在设置了过期时间的键中，淘汰&lt;strong&gt;最久没被访问过&lt;/strong&gt;的键。&lt;/p&gt;
 &lt;p&gt;比如缓存场景，往往会希望保留“最近刚用过的热数据”。&lt;/p&gt;
-&lt;h4 id=&#34;volatile-lfu&#34;&gt;&lt;code&gt;volatile-lfu&lt;/code&gt;
+&lt;h4 id="volatile-lfu"&gt;&lt;code&gt;volatile-lfu&lt;/code&gt;
 &lt;/h4&gt;&lt;p&gt;LFU = Least Frequently Used（最不经常使用）。&lt;/p&gt;
 &lt;p&gt;在设置了过期时间的键中，淘汰&lt;strong&gt;访问次数最少&lt;/strong&gt;的键。&lt;/p&gt;
-&lt;h4 id=&#34;volatile-ttl&#34;&gt;&lt;code&gt;volatile-ttl&lt;/code&gt;
+&lt;h4 id="volatile-ttl"&gt;&lt;code&gt;volatile-ttl&lt;/code&gt;
 &lt;/h4&gt;&lt;p&gt;TTL = Time To Live（剩余生存时间）。&lt;/p&gt;
 &lt;p&gt;在设置了过期时间的键中，淘汰&lt;strong&gt;剩余时间最短、即将过期&lt;/strong&gt;的键。&lt;/p&gt;
-&lt;h4 id=&#34;volatile-random&#34;&gt;&lt;code&gt;volatile-random&lt;/code&gt;
+&lt;h4 id="volatile-random"&gt;&lt;code&gt;volatile-random&lt;/code&gt;
 &lt;/h4&gt;&lt;p&gt;在设置了过期时间的键中，&lt;strong&gt;随机淘汰&lt;/strong&gt;一个。&lt;/p&gt;
-&lt;h3 id=&#34;3-淘汰所有键的3种策略&#34;&gt;3. 淘汰所有键的3种策略
+&lt;h3 id="3-淘汰所有键的3种策略"&gt;3. 淘汰所有键的3种策略
 &lt;/h3&gt;&lt;p&gt;这类策略&lt;strong&gt;不管键有没有设置过期时间，都会淘汰&lt;/strong&gt;，适合纯缓存场景（所有数据都是缓存，丢了也没关系，可以从数据库重新加载）。&lt;/p&gt;
-&lt;h4 id=&#34;allkeys-lru&#34;&gt;&lt;code&gt;allkeys-lru&lt;/code&gt;
+&lt;h4 id="allkeys-lru"&gt;&lt;code&gt;allkeys-lru&lt;/code&gt;
 &lt;/h4&gt;&lt;p&gt;在所有键中，淘汰&lt;strong&gt;最近最少使用&lt;/strong&gt;的键。&lt;/p&gt;
 &lt;p&gt;比较适合电商商品缓存、用户Session缓存这些纯缓存场景。&lt;/p&gt;
-&lt;h4 id=&#34;allkeys-lfu&#34;&gt;&lt;code&gt;allkeys-lfu&lt;/code&gt;
+&lt;h4 id="allkeys-lfu"&gt;&lt;code&gt;allkeys-lfu&lt;/code&gt;
 &lt;/h4&gt;&lt;p&gt;在所有键中，淘汰&lt;strong&gt;访问次数最少&lt;/strong&gt;的键。&lt;/p&gt;
-&lt;h4 id=&#34;allkeys-random&#34;&gt;&lt;code&gt;allkeys-random&lt;/code&gt;
+&lt;h4 id="allkeys-random"&gt;&lt;code&gt;allkeys-random&lt;/code&gt;
 &lt;/h4&gt;&lt;p&gt;在所有键中，&lt;strong&gt;随机淘汰&lt;/strong&gt;一个。&lt;/p&gt;
-&lt;h2 id=&#34;lru-vs-lfu到底有啥区别&#34;&gt;LRU vs LFU，到底有啥区别？
+&lt;h2 id="lru-vs-lfu到底有啥区别"&gt;LRU vs LFU，到底有啥区别？
 &lt;/h2&gt;&lt;table&gt;
-	&lt;thead&gt;
-			&lt;tr&gt;
-					&lt;th&gt;对比维度&lt;/th&gt;
-					&lt;th&gt;LRU（最近最少使用）&lt;/th&gt;
-					&lt;th&gt;LFU（最不经常使用）&lt;/th&gt;
-			&lt;/tr&gt;
-	&lt;/thead&gt;
-	&lt;tbody&gt;
-			&lt;tr&gt;
-					&lt;td&gt;核心依据&lt;/td&gt;
-					&lt;td&gt;看最近多久没被访问&lt;/td&gt;
-					&lt;td&gt;看访问次数多少&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;优点&lt;/td&gt;
-					&lt;td&gt;实现简单，符合“热数据最近常用”的直觉&lt;/td&gt;
-					&lt;td&gt;更精准，能识别“真正的热数据”（比如某个键虽然最近没被访问，但总访问次数极高）&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;缺点&lt;/td&gt;
-					&lt;td&gt;可能误删“偶尔访问一次的冷数据，但其实总访问次数很高”&lt;/td&gt;
-					&lt;td&gt;实现复杂，需要额外空间记录访问次数&lt;/td&gt;
-			&lt;/tr&gt;
-	&lt;/tbody&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;对比维度&lt;/th&gt;
+&lt;th&gt;LRU（最近最少使用）&lt;/th&gt;
+&lt;th&gt;LFU（最不经常使用）&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;核心依据&lt;/td&gt;
+&lt;td&gt;看最近多久没被访问&lt;/td&gt;
+&lt;td&gt;看访问次数多少&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;优点&lt;/td&gt;
+&lt;td&gt;实现简单，符合“热数据最近常用”的直觉&lt;/td&gt;
+&lt;td&gt;更精准，能识别“真正的热数据”（比如某个键虽然最近没被访问，但总访问次数极高）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;缺点&lt;/td&gt;
+&lt;td&gt;可能误删“偶尔访问一次的冷数据，但其实总访问次数很高”&lt;/td&gt;
+&lt;td&gt;实现复杂，需要额外空间记录访问次数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h3 id=&#34;举个例子&#34;&gt;举个例子
+&lt;h3 id="举个例子"&gt;举个例子
 &lt;/h3&gt;&lt;p&gt;假设键A昨天被访问100次，今天没被访问；&lt;/p&gt;
 &lt;p&gt;键B今天被访问1次。&lt;/p&gt;
 &lt;p&gt;因为最近没被访问，所以LRU会删键A。&lt;/p&gt;
-&lt;p&gt;但是，因为总访问次数只有1次，所以LFU会删键B。&lt;/p&gt;
-</description>
-        </item>
-        <item>
-        <title>怎么知道本地的Redis有没有设置密码</title>
-        <link>https://iamxurulin.github.io/p/%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93%E6%9C%AC%E5%9C%B0%E7%9A%84redis%E6%9C%89%E6%B2%A1%E6%9C%89%E8%AE%BE%E7%BD%AE%E5%AF%86%E7%A0%81/</link>
-        <pubDate>Wed, 11 Feb 2026 11:50:41 +0000</pubDate>
-        
-        <guid>https://iamxurulin.github.io/p/%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93%E6%9C%AC%E5%9C%B0%E7%9A%84redis%E6%9C%89%E6%B2%A1%E6%9C%89%E8%AE%BE%E7%BD%AE%E5%AF%86%E7%A0%81/</guid>
-        <description>&lt;p&gt;进入到Redis的安装目录：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://iamxurulin.github.io/images/cc6fa33f644e59bef9ec14ab8538fb48-a68cba51.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
+&lt;p&gt;但是，因为总访问次数只有1次，所以LFU会删键B。&lt;/p&gt;</description></item><item><title>怎么知道本地的Redis有没有设置密码</title><link>https://iamxurulin.github.io/p/%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93%E6%9C%AC%E5%9C%B0%E7%9A%84redis%E6%9C%89%E6%B2%A1%E6%9C%89%E8%AE%BE%E7%BD%AE%E5%AF%86%E7%A0%81/</link><pubDate>Wed, 11 Feb 2026 11:50:41 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93%E6%9C%AC%E5%9C%B0%E7%9A%84redis%E6%9C%89%E6%B2%A1%E6%9C%89%E8%AE%BE%E7%BD%AE%E5%AF%86%E7%A0%81/</guid><description>&lt;p&gt;进入到Redis的安装目录：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://iamxurulin.github.io/images/cc6fa33f644e59bef9ec14ab8538fb48-a68cba51.png"
+loading="lazy"
 &gt;&lt;/p&gt;
 &lt;p&gt;双击【redis-server.exe】,如果双击之后窗口一闪而过， 检查一下默认的6379端口是否被占用：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 查看 6379 端口是否被占用&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;netstat -ano &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; findstr &lt;span class=&#34;m&#34;&gt;6379&lt;/span&gt;  
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 查看 6379 端口是否被占用&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;netstat -ano &lt;span class="p"&gt;|&lt;/span&gt; findstr &lt;span class="m"&gt;6379&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;如果输出类似下面这样的信息：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 类似这样的输出:&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;TCP    127.0.0.1:6379    0.0.0.0:0    LISTENING    &lt;span class=&#34;m&#34;&gt;12345&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                                                      ↑这是进程ID
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 类似这样的输出:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;TCP 127.0.0.1:6379 0.0.0.0:0 LISTENING &lt;span class="m"&gt;12345&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; ↑这是进程ID
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;说明 6379 端口已被进程占用，再检查是否已有 Redis 服务在运行：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 查看 Redis 服务状态&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sc query Redis
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 查看 Redis 服务状态&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sc query Redis
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;如果输出：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;SERVICE_NAME: Redis
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        TYPE               : &lt;span class=&#34;m&#34;&gt;10&lt;/span&gt;  WIN32_OWN_PROCESS
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        STATE              : &lt;span class=&#34;m&#34;&gt;4&lt;/span&gt;  RUNNING
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;SERVICE_NAME: Redis
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; TYPE : &lt;span class="m"&gt;10&lt;/span&gt; WIN32_OWN_PROCESS
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; STATE : &lt;span class="m"&gt;4&lt;/span&gt; RUNNING
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;说明Redis 已经作为 Windows 服务 在后台运行了，导致了端口被占用。&lt;/p&gt;
 &lt;p&gt;接下来，直接使用已经运行的 Redis，直接双击安装目录下的【redis-cli.exe】，在弹出的窗口输入【config get requirepass】,如果以下的（2）为空，表示 没有设置密码。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://iamxurulin.github.io/images/57e3e7efb507f5f8bc9645df91d99303-7137055e.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-</description>
-        </item>
-        
-    </channel>
-</rss>
+&lt;p&gt;&lt;img src="https://iamxurulin.github.io/images/57e3e7efb507f5f8bc9645df91d99303-7137055e.png"
+loading="lazy"
+&gt;&lt;/p&gt;</description></item></channel></rss>
