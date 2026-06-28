@@ -1,28 +1,1747 @@
-<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content='什么是损失函数？ 机器学习模型究竟依靠什么完成"学习"？\n它凭什么判断自身的表现是否达标、又该在哪些方面做出改进？\n我们可以通过一个类比来理解——学生在完成课后作业时，老师会给出一个分数。无论是80分、90分还是不及格，学生都能通过这个分数发现自己哪里掌握得不够牢固，并据此调整后续的学习策略，争取下一次取得更好的成绩。\n'><title>从 MSE 到交叉熵：一文搞懂损失函数</title><link rel=canonical href=https://iamxurulin.github.io/p/%E4%BB%8E-mse-%E5%88%B0%E4%BA%A4%E5%8F%89%E7%86%B5%E4%B8%80%E6%96%87%E6%90%9E%E6%87%82%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/><link rel=stylesheet href=/scss/style.min.6e9c513e2b18fb90ba80ef8f1310b1122153a8397e5271e51b034f6a1f7377f5.css><meta property='og:title' content="从 MSE 到交叉熵：一文搞懂损失函数"><meta property='og:description' content='什么是损失函数？ 机器学习模型究竟依靠什么完成"学习"？\n它凭什么判断自身的表现是否达标、又该在哪些方面做出改进？\n我们可以通过一个类比来理解——学生在完成课后作业时，老师会给出一个分数。无论是80分、90分还是不及格，学生都能通过这个分数发现自己哪里掌握得不够牢固，并据此调整后续的学习策略，争取下一次取得更好的成绩。\n'><meta property='og:url' content='https://iamxurulin.github.io/p/%E4%BB%8E-mse-%E5%88%B0%E4%BA%A4%E5%8F%89%E7%86%B5%E4%B8%80%E6%96%87%E6%90%9E%E6%87%82%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/'><meta property='og:site_name' content='Coder_Studio'><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='机器学习'><meta property='article:tag' content='人工智能'><meta property='article:tag' content='语言模型'><meta property='article:tag' content='AI编程'><meta property='article:published_time' content='2026-06-21T11:48:50+00:00'><meta property='article:modified_time' content='2026-06-27T05:48:14+00:00'><meta name=twitter:title content="从 MSE 到交叉熵：一文搞懂损失函数"><meta name=twitter:description content='什么是损失函数？ 机器学习模型究竟依靠什么完成"学习"？\n它凭什么判断自身的表现是否达标、又该在哪些方面做出改进？\n我们可以通过一个类比来理解——学生在完成课后作业时，老师会给出一个分数。无论是80分、90分还是不及格，学生都能通过这个分数发现自己哪里掌握得不够牢固，并据此调整后续的学习策略，争取下一次取得更好的成绩。\n'><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5123323391207523" crossorigin=anonymous></script><link rel="shortcut icon" href=/favicon.ico><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preconnect href=https://cdn.jsdelivr.net><link rel=dns-prefetch href=https://cdn.jsdelivr.net><div class=loading><div class=liquid-loader><div class=loading-text>Loading<span class=dot>.</span><span class=dot>.</span><span class=dot>.</span></div><div class=loader-track><div class=liquid-fill></div></div></div></div><style>.loading{position:fixed;display:none;justify-content:center;align-items:center;top:0;left:0;width:100%;height:100%;z-index:9999;background-color:#f5f5fa;transition:all .3s ease}.liquid-loader{display:flex;flex-direction:column;align-items:center;gap:15px;padding:20px;font-family:system-ui,sans-serif}.loader-track{position:relative;width:180px;height:32px;background:linear-gradient(135deg,#2a2a2a,#1a1a1a);border-radius:16px;overflow:hidden;box-shadow:inset 0 2px 4px rgba(0,0,0,.6),0 1px 3px rgba(255,255,255,.1)}.liquid-fill{position:absolute;top:2px;left:2px;height:calc(100% - 4px);background:linear-gradient(90deg,#4f46e5,#7c3aed,#ec4899,#f59e0b);border-radius:14px;animation:fillProgress 4s ease-out infinite,colorShift 3s linear infinite;box-shadow:0 0 12px rgba(124,58,237,.4),inset 0 1px 2px rgba(255,255,255,.2)}.animated-stop{animation-play-state:paused!important;-webkit-animation-play-state:paused!important}.loading-text{color:#fff;font-size:18px;font-weight:600;letter-spacing:1px;animation:textGlow 1s ease-in-out infinite}.dot{margin-left:3px;animation:blink 1.5s infinite}.dot:nth-of-type(1){animation-delay:0s}.dot:nth-of-type(2){animation-delay:.3s}.dot:nth-of-type(3){animation-delay:.6s}@keyframes fillProgress{0%{width:4px}25%{width:25%}50%{width:50%}75%{width:75%}100%{width:calc(100% - 4px)}}@keyframes colorShift{0%{filter:hue-rotate(0)brightness(1)}33%{filter:hue-rotate(120deg)brightness(1.1)}66%{filter:hue-rotate(240deg)brightness(.9)}100%{filter:hue-rotate(360deg)brightness(1)}}@keyframes textGlow{0%,100%{opacity:.7;text-shadow:0 0 8px rgba(139,92,246,.3)}50%{opacity:1;text-shadow:0 0 16px rgba(139,92,246,.6)}}@keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}@keyframes scaleAndFadeout{0%{transform:scale(1);opacity:1}100%{transform:scale(1.2);opacity:0}}.scaleAndFadeout{animation:scaleAndFadeout 1.5s ease-out forwards!important}.article-view{display:flex}.article-list .article-view{display:none!important}</style><script>function initLoading(){const e=!sessionStorage.getItem("visited");if(e){const e=document.querySelector(".loading"),t=document.querySelector(".liquid-fill");e.style.display="flex",setTimeout(()=>{loadFinish(e,t),setTimeout(()=>{e.style.display="none"},1500),sessionStorage.setItem("visited","true")},4e3)}}function loadFinish(e,t){t.classList.add("animated-stop"),e.classList.add("scaleAndFadeout")}initLoading()</script></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
-<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hu_5b4689d2dc4cdce3.png width=300 height=300 class=site-logo loading=lazy alt=Avatar>
-</a><span class=emoji>💦</span></figure><div class=site-meta><h1 class=site-name><a href=/>Coder_Studio</a></h1><h2 class=site-description>专注后端开发、算法与 AI 的技术博客</h2></div></header><ol class=menu-social><li><a href=https://github.com/iamxurulin/ target=_blank title=GitHub rel=me><svg class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
-<span>主页</span></a></li><li><a href=/search/><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
-<span>搜索</span></a></li><li><a href=/categories/><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg>
-<span>分类</span></a></li><li><a href=/tags/><svg class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11 3l9 9a1.5 1.5.0 010 2l-6 6a1.5 1.5.0 01-2 0L3 11V7a4 4 0 014-4h4"/><circle cx="9" cy="9" r="2"/></svg>
-<span>标签</span></a></li><li><a href=/archives/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
-<span>归档</span></a></li><li><a href=/%E5%85%B3%E4%BA%8E/><svg class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
-<span>关于</span></a></li><li><a href=/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/><svg class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
-<span>友情链接</span></a></li><li><a href=/%E9%9A%90%E7%A7%81%E6%94%BF%E7%AD%96/><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
-<span>隐私政策</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
-<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
-<span>暗色模式</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#什么是损失函数>什么是损失函数？</a></li><li><a href=#什么样的损失函数才算合格>什么样的损失函数才算合格？</a></li><li><a href=#具体损失函数分析>具体损失函数分析</a><ol><li><a href=#均方误差mse>均方误差（MSE）</a></li><li><a href=#mse-的优势与局限>MSE 的优势与局限</a></li><li><a href=#梯度下降的训练循环>梯度下降的训练循环</a></li></ol></li><li><a href=#交叉熵分类问题的核心损失函数>交叉熵：分类问题的核心损失函数</a><ol><li><a href=#交叉熵到底在计算什么>交叉熵到底在计算什么？</a></li><li><a href=#mse-与交叉熵的核心差异>MSE 与交叉熵的核心差异</a></li></ol></li><li><a href=#如何选择损失函数>如何选择损失函数</a></li><li><a href=#初学者常犯的三个错误>初学者常犯的三个错误</a></li></ol></nav></div></section></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category><a href=/categories/%E7%AE%97%E6%B3%95/>算法</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/%E4%BB%8E-mse-%E5%88%B0%E4%BA%A4%E5%8F%89%E7%86%B5%E4%B8%80%E6%96%87%E6%90%9E%E6%87%82%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/>从 MSE 到交叉熵：一文搞懂损失函数</a></h2></div><footer class=article-time><div style=display:flex;flex-direction:column;gap:4px;font-size:14px><div class=article-date style=display:flex;align-items:center><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
-<span style=margin-left:5px>发布于: </span><time class=article-time--published datetime=2026-06-21T11:48:50Z style=margin-left:5px>2026-06-21 11:48:50</time></div></div><div class=article-view style=align-items:center;gap:5px;margin-left:auto;font-size:14px><svg class="icon icon-tabler icon-tabler-eye" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="12" cy="12" r="2"/><path d="M22 12c-2.667 4.667-6 7-10 7s-7.333-2.333-10-7c2.667-4.667 6-7 10-7s10 2.333 10 7"/></svg>
-<span id=vercount_container_page_pv>阅读
-<span id=vercount_value_page_pv>...</span> 次</span></div></footer></div></header><section class=article-content><h2 id=什么是损失函数>什么是损失函数？</h2><p>机器学习模型究竟依靠什么完成"学习"？</p><p>它凭什么判断自身的表现是否达标、又该在哪些方面做出改进？</p><p>我们可以通过一个类比来理解——学生在完成课后作业时，老师会给出一个分数。无论是80分、90分还是不及格，学生都能通过这个分数发现自己哪里掌握得不够牢固，并据此调整后续的学习策略，争取下一次取得更好的成绩。</p><p>机器学习的模型同样具备类似的反馈机制，这个机制的名称就叫——损失函数。</p><p>损失函数在机器学习中占据着比较重要的位置。</p><p>如果无法理解损失函数的工作原理，就很难真正搞清楚模型是如何完成训练的。</p><p>因此，想要真正掌握机器学习的核心原理，损失函数是一个必须深入理解的基础概念。</p><p>从数学角度来讲，损失函数是用于衡量模型预测输出与真实标签之间差异的一种量化方法。</p><p>设想这样一个场景：</p><p>一个气象预报员，预测明天的气温是20℃，而实际观测值是22℃。</p><p>预测值与真实值之间的偏差是多少？</p><p>最直接的计算方式是用 20 减去 22 得到 -2，偏差为2℃。</p><p>但这里出现了一个问题：</p><p>如果有100次预报记录，将正偏差和负偏差直接相加会导致它们相互抵消，最终累加结果可能为零——意味着"零误差"，显然这与现实情况是不符的。</p><p>解决这一问题的方法是对每次偏差进行平方处理，使所有数值都变为正数，然后求取平均值。这就是"均方误差"（Mean Squared Error，简称 MSE）。</p><p><img src=/images/b8159ffdc353d69478560d4f24a14215-7f6ab470.png loading=lazy></p><p>由此可见，损失函数的本质是一个"差距量化器"——它明确告诉模型：你的预测出现了偏差，偏差量为多少，需要做出调整。</p><p>然而，这种差距信号如何真正转化为模型的改进能力呢？</p><p>关键在于梯度。</p><p>具体而言，我们可以通过反向传播算法，利用链式法则逐层计算损失函数对各参数的梯度，得到的梯度方向指示了参数应该增大还是减小，梯度的大小则给出了调整的幅度。</p><p>模型根据这些梯度信息更新自身参数，持续缩小与真实值之间的距离。</p><p>这一优化过程被称为梯度下降。</p><p>需要明确的一个核心认知是：</p><p>驱动模型学习的根本动力，来源于损失函数所提供的梯度信号。</p><p>如果没有损失函数，就不会有梯度；</p><p>没有梯度，模型就只能在参数空间中盲目搜索。</p><p>因此，损失函数决定了模型能否有效学习，是整个学习过程的灵魂所在。</p><h2 id=什么样的损失函数才算合格>什么样的损失函数才算合格？</h2><p><strong>第一，可导性。</strong></p><p>损失函数最好能够计算梯度，或者在不可导点存在次梯度（Subgradient），从而支持梯度优化算法。</p><p><strong>第二，单调性。</strong></p><p>模型的预测越接近真实值，损失值应当越小；</p><p>预测偏离真实值越远，损失值应当越大。</p><p>只有满足这一性质，模型才能形成明确的优化方向感，持续向最优解靠近。</p><p><strong>第三，良好的优化性质。</strong></p><p>理想情况下，损失函数及其对应优化目标具有良好的优化性质，能够帮助模型更稳定地收敛到低损失区域。</p><p><strong>第四，计算高效。</strong></p><p>在大规模数据集训练场景中，损失函数需要被频繁计算，因此计算效率十分重要。</p><p>在这四项特性中，前两项属于硬性约束，后两项则是理想层面的加分项。</p><h2 id=具体损失函数分析>具体损失函数分析</h2><h3 id=均方误差mse>均方误差（MSE）</h3><p>MSE 的全称为 Mean Squared Error，逐词拆解：Mean 表示"平均"，Squared 表示"平方"，Error 表示"误差"。</p><p>组合起来的含义即——误差平方的平均值。</p><p>其计算流程分为四个步骤：</p><ol><li>对每个样本分别计算预测值与真实值之间的差值（也称为残差）。</li><li>对每个残差执行平方运算。</li><li>将所有平方后的残差累加求和。</li><li>除以样本总数 N，得到平均值。</li></ol><p>为什么不直接使用残差的绝对值，而一定要选择平方？</p><p><strong>第一个理由：消除符号干扰。</strong></p><p>假设模型对样本 A 的预测偏高了 5 个单位，对样本 B 的预测偏低了 5 个单位。如果直接将两者相加，5 + (-5) = 0，表面上看起来误差为零，但实际上模型的两次预测都是错误的。</p><p>经过平方运算后，5² = 25，(-5)² = 25，两项均为正数相加，真实误差便无法被掩盖。</p><p><strong>第二个理由：放大较大误差。</strong></p><p>假设有三个样本的绝对误差分别为 1、2、3。</p><p>在不平方的情况下，误差总和为 6；</p><p>而经过平方后，1 + 4 + 9 = 14，其中误差为 3 的样本贡献了 9，占总损失的比重超过六成。</p><p>这说明平方机制天然地让模型更加重视那些预测严重失准的样本，尽量避免出现"离谱的错误"，这通常与实际需求相一致。</p><p><img src=/images/798c477b3bdaade06840cccaa54ffae4-4350ed7b.png loading=lazy></p><p><strong>第三个理由：求导运算友好。</strong></p><p>平方函数在其定义域内处处可导，导数形式为线性表达式 2x，结构简洁，使得梯度下降算法的运行非常顺畅。</p><p><strong>第四个理由：拥有深厚的统计学根基。</strong></p><p>在正态分布假设下，MSE 与最大似然估计在数学上是等价的。</p><p>它并非一种拍脑袋想出来的启发式技巧，而是建立在严格的概率论基础之上的。</p><h3 id=mse-的优势与局限>MSE 的优势与局限</h3><p><strong>优势：</strong></p><p>计算极为简洁——仅需减法、平方、加法和除法四步运算，即便面对千万级甚至亿级规模的数据也能快速处理。</p><p>在整个定义域内处处可导，梯度形式简洁干净，不存在任何断点或奇点来阻碍优化过程。</p><p>数学性质优良，许多优化算法的理论分析都建立在 MSE 这类凸函数的框架之上。</p><p><strong>局限：</strong></p><p>最突出的短板是对异常值（离群点）极度敏感。</p><p>平方的放大效应意味着一个极端异常值可能主导整个损失函数的值。</p><p>例如假设有 10 个样本的偏差均为 1，另有 1 个样本的偏差为 10。</p><p>前 10 个样本各自贡献 1，合计 10；</p><p>而异常样本贡献了 100，占总损失的约 91%。</p><p>模型因此可能被这一个异常样本带偏方向，从而忽略了大多数正常数据的分布特征。</p><p>另一个问题是量纲失真。</p><p>原始数据如果分布在 0 到 100 之间，MSE 的值域可能膨胀到 0 到 10000，损失值本身的直观含义变得模糊。</p><p><strong>适用场景：</strong></p><p>回归任务的首选方案——凡是预测连续型数值（如房价、气温、销量等），MSE 通常是最自然且最常用的选择。</p><p>但如果数据中存在较多异常值，建议考虑 MAE（平均绝对误差）或 Huber Loss，它们对噪声数据具有更强的鲁棒性。</p><h3 id=梯度下降的训练循环>梯度下降的训练循环</h3><p>利用 MSE 的梯度来驱动模型参数更新，每一轮迭代包含以下四个步骤：</p><ol><li><strong>前向传播</strong>：使用当前参数对输入数据进行预测。</li><li><strong>计算损失</strong>：通过 MSE 公式量化预测值与真实标签之间的差距。</li><li><strong>反向传播</strong>：沿计算图从输出层向输入层逐层回溯，依次计算每个参数的梯度，明确每个参数应该朝哪个方向调整、调整的幅度有多大。</li><li><strong>参数更新</strong>：沿着梯度的反方向对参数值进行微调——梯度为正值时减小参数，为负值时增大参数。</li></ol><p>重复执行上述流程 50 次（或更多轮），模型便会在损失曲面上逐步滑动，不断逼近最优解。</p><p><img src=/images/8ab4d7da54ec8da8613c2469820776a6-762b6751.png loading=lazy></p><h2 id=交叉熵分类问题的核心损失函数>交叉熵：分类问题的核心损失函数</h2><p>接下来介绍第二个重要的损失函数——交叉熵（Cross Entropy），它是分类任务中最常用的损失函数。</p><p>设想这样一个应用场景：</p><p>向模型输入一张图片，要求它判断图片中的动物是猫、狗还是鸟。</p><p>有人可能会认为，模型直接输出一个整数编码即可——0 代表猫，1 代表狗，2 代表鸟，然后取最大值的对应类别就行了。</p><p>这种思路在逻辑上看似合理，但存在一个缺陷：</p><p>模型对自己的预测结果有多大把握？</p><p>这种确定性完全无法从单一整数编码中获知。</p><p>更为合理的方式是让模型输出一个概率向量。</p><p>例如：猫 0.7、狗 0.2、鸟 0.1，三个概率值之和为 1，构成一个完整的概率分布。</p><p>通过这种方式，我们不仅获得了模型的预测结果，还获得了衡量模型"自信程度"的依据。</p><p>在很多实际应用场景中，这种置信度信息至关重要。</p><p>例如医疗影像诊断：</p><p>模型 A 判定为恶性肿瘤，置信度 0.95。</p><p>模型 B 判定为恶性肿瘤，置信度 0.52。</p><p>虽然两者结论一致，但前者的预测可信度明显更高，因此更值得进一步关注。</p><p>那么问题就来了：</p><p>如何衡量模型输出的概率分布与真实标签之间的差异？</p><p>这就是交叉熵函数所要解决的问题。</p><h3 id=交叉熵到底在计算什么>交叉熵到底在计算什么？</h3><p>交叉熵的核心思想其实非常简单：</p><p>如果模型把真实答案的概率预测得越高，那么损失就应该越小；</p><p>如果模型把真实答案的概率预测得越低，那么损失就应该越大。</p><p>例如有一个三分类任务：</p><p>真实答案是：</p><p>猫 = 1<br>狗 = 0<br>鸟 = 0</p><p>模型 A 的预测结果为：</p><p>猫：0.90<br>狗：0.05<br>鸟：0.05</p><p>由于模型给正确类别“猫”分配了 90% 的概率，说明模型非常有把握地预测正确，此时交叉熵损失会非常小。</p><p>而模型 B 的预测结果为：</p><p>猫：0.01<br>狗：0.98<br>鸟：0.01</p><p>虽然三个概率之和同样为 1，但模型几乎把全部概率都给了错误类别“狗”。</p><p>这意味着模型不仅预测错误，而且错得非常自信。</p><p>对于这种情况，交叉熵会给予极大的惩罚。</p><p>因此可以把交叉熵理解为一种专门衡量“预测概率质量”的损失函数。</p><p>它不仅关心模型有没有预测正确，更关心模型到底有多大的把握。</p><p>预测正确且越自信，损失越小；</p><p>预测错误且越自信，损失越大。</p><p>正因为这种特性，交叉熵能够为分类模型提供更加清晰有效的优化方向，因此成为分类任务中最主流的损失函数。</p><h3 id=mse-与交叉熵的核心差异>MSE 与交叉熵的核心差异</h3><div class=table-wrapper><table><thead><tr><th>维度</th><th>MSE</th><th>交叉熵</th></tr></thead><tbody><tr><td>适用任务</td><td>回归（预测连续值）</td><td>分类（预测离散类别）</td></tr><tr><td>输出形式</td><td>实数（如 3.5、-2.1）</td><td>概率（0~1 之间的值）</td></tr><tr><td>梯度特性</td><td>梯度受平方项影响较大，对异常敏感</td><td>梯度与误差成线性关系，传播更平稳</td></tr><tr><td>收敛行为</td><td>回归任务上收敛稳定</td><td>分类任务上收敛更快、更稳定</td></tr></tbody></table></div><p><img src=/images/0edda457bfad1be6f15822089d879df6-463a1c78.png loading=lazy></p><h2 id=如何选择损失函数>如何选择损失函数</h2><ol><li><strong>判断任务类型</strong></li></ol><p>如果输出为连续数值 → 回归问题，如果输出为类别标签 → 分类问题。</p><ol start=2><li><strong>回归任务看数据质量</strong></li></ol><p>如果数据包含较多异常值 → 选择 MAE 或 Huber Loss</p><p>如果数据较为干净、近似正态分布 → 选择 MSE</p><ol start=3><li><strong>分类任务看类别数量</strong></li></ol><p>如果仅有两个类别 → 二元交叉熵（Binary Cross Entropy）</p><p>如果两个以上类别 → 多元分类交叉熵（Categorical Cross Entropy）</p><h2 id=初学者常犯的三个错误>初学者常犯的三个错误</h2><ol><li><strong>用 MSE 做分类任务。</strong></li></ol><p>这是新手最常犯的错误。</p><p>因为在分类任务中，当分类模型使用 sigmoid 或 softmax 输出概率时，如果再配合 MSE 作为损失函数，梯度在饱和区域会迅速衰减，导致训练速度明显变慢。</p><ol start=2><li><strong>用交叉熵做回归任务。</strong></li></ol><p>交叉熵要求输出为合法的概率分布（非负且和为 1），回归任务的输出为任意实数，计算框架通常会直接报错；</p><p>即便绕过了框架检查，梯度也会完全失效，模型无法学到任何有效信息。</p><ol start=3><li><strong>只监控训练损失，忽视验证损失。</strong></li></ol><p>许多初学者在训练过程中仅关注训练集损失持续下降这一现象便感到满意，却忽略了验证集损失可能已经开始反弹——这标志着过拟合正在发生。</p><p>正确的方法是同时监控训练损失和验证损失两条曲线，当验证损失不再下降甚至开始上升时，即使训练损失仍在降低，也应当停止训练或引入正则化手段来抑制过拟合。</p></section><footer class=article-footer><section class=article-tags><a href=/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/>机器学习</a>
-<a href=/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/>人工智能</a>
-<a href=/tags/%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/>语言模型</a>
-<a href=/tags/ai%E7%BC%96%E7%A8%8B/>AI编程</a></section><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
-<span>本文由 iamxurulin 原创发布，转载请保留原文链接。</span></section><section class=article-lastmod><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
-<span>最后更新于 2026-06-27 05:48:14</span></section><section class=article-original-declaration><div class=declaration-icon><svg class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg></div><div class=declaration-content><strong>关于作者与文章</strong><p>本文为 <a href=https://github.com/iamxurulin target=_blank rel=noopener>iamxurulin</a> 原创技术文章。如对内容有疑问或建议，欢迎在评论区交流讨论。</p></div></section></footer><style>.article-original-declaration{margin-top:2rem;padding:1.2rem 1.5rem;background:var(--card-background);border:1px solid var(--card-border-color);border-radius:var(--card-border-radius);display:flex;gap:.8rem;font-size:.9rem;line-height:1.7;color:var(--card-text-color-secondary)}.article-original-declaration .declaration-icon{flex-shrink:0;width:20px;height:20px;margin-top:2px;color:var(--accent-color)}.article-original-declaration .declaration-content{flex:1}.article-original-declaration strong{display:block;margin-bottom:.3rem;color:var(--card-text-color-main);font-size:.95rem}.article-original-declaration p{margin:.3rem 0}.article-original-declaration a{color:var(--accent-color);text-decoration:none}.article-original-declaration a:hover{text-decoration:underline}</style><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css integrity=sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js integrity=sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8 crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js integrity=sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05 crossorigin=anonymous defer></script><script>window.addEventListener("DOMContentLoaded",()=>{const e=[".main-article",".widget--toc"];e.forEach(e=>{const t=document.querySelector(e);t&&renderMathInElement(t,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}],ignoredClasses:["gist"]})})})</script></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/p/%E9%9B%B6%E5%9F%BA%E7%A1%80%E7%9C%8B%E6%87%82%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8D%E7%94%A8%E6%95%B0%E5%AD%A6%E5%8F%AA%E8%A6%81%E7%94%9F%E6%B4%BB%E7%BB%8F%E9%AA%8C/><div class=article-details><h2 class=article-title>零基础看懂机器学习：不用数学，只要生活经验</h2></div></a></article><article><a href=/p/claude-code-%E5%85%8D%E8%B4%B9%E6%8E%A5%E5%85%A5%E8%AE%AF%E9%A3%9E%E6%98%9F%E8%BE%B0-qwen3.6-35b-a3b-%E6%A8%A1%E5%9E%8B%E7%99%BD%E5%AB%96%E6%94%BB%E7%95%A5%E6%9D%A5%E4%BA%86/><div class=article-details><h2 class=article-title>Claude Code 免费接入讯飞星辰 Qwen3.6-35B-A3B 模型，白嫖攻略来了！</h2></div></a></article><article><a href=/p/%E4%BD%A0%E7%9A%84rag%E7%B3%BB%E7%BB%9F%E6%98%AF%E6%80%8E%E4%B9%88%E8%BF%9B%E8%A1%8Cquery%E6%94%B9%E5%86%99%E7%9A%84/><div class=article-details><h2 class=article-title>你的RAG系统是怎么进行Query改写的？</h2></div></a></article><article><a href=/p/windows%E7%B3%BB%E7%BB%9Fcodex-%E6%8E%A5%E5%85%A5%E9%98%BF%E9%87%8C%E4%BA%91%E7%99%BE%E7%82%BC%E7%9A%84%E5%9B%BD%E4%BA%A7%E5%A4%A7%E6%A8%A1%E5%9E%8B/><div class=article-details><h2 class=article-title>Windows系统Codex 接入阿里云百炼的国产大模型</h2></div></a></article><article><a href=/p/slkj%E7%AC%94%E8%AF%95%E9%A2%98%E8%A7%A3%E6%9E%90/><div class=article-details><h2 class=article-title>SLKJ笔试题解析</h2></div></a></article></div></div></aside><div id=giscus-container class=giscus-container></div><script>(function(){function e(){const t=document.getElementById("giscus-container");if(!t)return;t.innerHTML="";const e=document.createElement("script");e.src="https://giscus.app/client.js",e.setAttribute("data-repo","iamxurulin/iamxurulin.github.io"),e.setAttribute("data-repo-id","R_kgDOQ4sEwg"),e.setAttribute("data-category","Announcements"),e.setAttribute("data-category-id","DIC_kwDOQ4sEws4C1Yw9"),e.setAttribute("data-mapping","title"),e.setAttribute("data-strict","0"),e.setAttribute("data-reactions-enabled","1"),e.setAttribute("data-emit-metadata","0"),e.setAttribute("data-input-position","top"),e.setAttribute("data-lang","zh-CN"),e.setAttribute("crossorigin","anonymous"),e.async=!0,e.setAttribute("data-theme","transparent_dark"),t.appendChild(e)}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",e):e(),window._giscusPjaxBound||(window._giscusPjaxBound=!0,document.addEventListener("pjax:complete",function(){setTimeout(e,50)}))})()</script><style>#giscus-container{min-height:150px;width:100%;margin-top:2rem;background:rgba(30,30,30,.8)!important;border-radius:15px;padding:20px;box-sizing:border-box;border:1px solid rgba(255,255,255,.1);box-shadow:0 4px 15px rgba(0,0,0,.2)}</style><footer class=site-footer><section class=copyright>&copy;
-2025 -
-2026 iamxurulin</section><section class=powerby>Coder_Studio - 记录后端开发、算法与 AI 的成长之路<br></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-<button class="pswp__button pswp__button--share" title=Share></button>
-<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-</button>
-<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.b4654cd74006fe7475d7723cd7373672b5ea2035ab23404eb9ff511cb27b581c.js defer></script><script type=text/javascript src=/ts/custom.d06f31744de6062060249fb2de5a784912bfa25d124b9b3d97c1f1281811a258.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script><div id=aplayer></div><script>window._aplayerInit=function(){const e=document.createElement("script");e.src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js",e.onload=function(){const e=new APlayer({container:document.getElementById("aplayer"),fixed:!0,lrcType:3,audio:[{name:"远行",artist:"大青山",url:"/music/大青山-远行.mp3",cover:"/music/cover.jpg",lrc:"/music/大青山-远行-歌词.lrc"}]});window.onbeforeunload=()=>{const t={index:e.list.index,currentTime:e.audio.currentTime,paused:e.paused};localStorage.setItem("playInfo",JSON.stringify(t))};const t=JSON.parse(localStorage.getItem("playInfo"));t&&(e.list.switch(t.index),setTimeout(()=>{e.seek(t.currentTime),t.paused||e.play()},500))},document.head.appendChild(e)},window.requestIdleCallback?requestIdleCallback(window._aplayerInit,{timeout:3e3}):setTimeout(window._aplayerInit,2e3)</script><script>(function(){var e,t="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js",i="https://unpkg.com/pjax/pjax.min.js",n="https://iamxurulin.github.io/js/topbar.min.js";function s(e,t){return new Promise(function(n,s){var r,a=!1,o=document.createElement("script");o.src=e,o.async=!0;function i(e){if(a)return;a=!0,o.onload=o.onerror=null,clearTimeout(r),e?s(e):n()}o.onload=function(){i(null)},o.onerror=function(){i(new Error("HTTP error: "+e))},r=t?setTimeout(function(){i(new Error("Timeout: "+e))},t):null,document.head.appendChild(o)})}function o(e){return s(e,1e4).catch(function(){if(e===t)return o(i);throw new Error("All PJAX CDNs failed")})}e=[o(t)],n&&e.push(s(n,8e3)),Promise.all(e).then(function(){var e=new Pjax({selectors:[".main-container"]});e._handleResponse=e.handleResponse,e.handleResponse=function(t,n,s,o){if(n.responseText.match("<html")&&t){var i,a=(new DOMParser).parseFromString(t,"text/html");document.body.setAttribute("class",a.body.className),i=a.title,i&&(document.title=i)}e._handleResponse(t,n,s,o)},typeof topbar!="undefined"&&topbar.config({barColors:{0:"rgba(255,255,255,1)",1.0:"rgba(0,149,234,1)"}}),document.addEventListener("pjax:send",function(){typeof topbar!="undefined"&&topbar.show()}),document.addEventListener("pjax:complete",function(){window.Stack&&window.Stack.init(),typeof topbar!="undefined"&&topbar.hide()})}).catch(function(e){console.warn("PJAX 未加载，使用普通导航:",e.message)})})()</script><link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap" rel=stylesheet><style>:root{--base-font-family:'Fira Code', monospace;--code-font-family:'Fira Code', monospace}</style><style>#TableOfContents>ul,ol{ul, ol{display:none}.open{display:block}}</style><script>function initTocHide(){let e=document.querySelector(".widget--toc");if(!e)return;window.addEventListener("scroll",function(){let n=document.querySelectorAll(".open");n.length>0&&n.forEach(e=>{e.classList.remove("open")});let t=document.querySelector(".active-class");if(!t)return;t.children.length>1&&t.children[1].classList.add("open");let e=t.parentElement;do e.classList.add("open"),e=e.parentElement.parentElement;while(e!==0[0]&&(e.localName==="ul"||e.localName==="ol"))})}initTocHide()</script><style>#backTopBtn{display:none;position:fixed;bottom:20px;z-index:99;cursor:pointer;width:20px;height:20px;background-image:url(https://iamxurulin.github.io/icons/backTop.svg)}</style><script>function initScrollTop(){let t=document.querySelector(".right-sidebar");if(!t)return;let e=document.createElement("div");e.id="backTopBtn",e.onclick=backToTop,t.appendChild(e),window.addEventListener("scroll",function(){document.body.scrollTop>20||document.documentElement.scrollTop>20?e.style.display="block":e.style.display="none"},{passive:!0})}function backToTop(){window.scrollTo({top:0,behavior:"smooth"})}initScrollTop()</script><style>.highlight{max-height:400px;overflow:hidden}.code-show{max-height:none!important}.code-more-box{width:100%;padding-top:78px;background-image:-webkit-gradient(linear,left top,left bottom,from(rgba(255,255,255,0)),to(#fff));position:absolute;left:0;right:0;bottom:0;z-index:1}.code-more-btn{display:block;margin:auto;width:44px;height:22px;background:#f0f0f5;border-top-left-radius:8px;border-top-right-radius:8px;padding-top:6px;cursor:pointer}.code-more-img{cursor:pointer!important;display:block;margin:auto;width:22px;height:16px}</style><style>.highlight{max-height:400px;overflow:hidden;position:relative}.code-show{max-height:none!important}.code-more-box{width:100%;padding-top:78px;background-image:-webkit-gradient(linear,left top,left bottom,from(rgba(255,255,255,0)),to(#fff));background-image:linear-gradient(to bottom,rgba(255,255,255,0),#fff);position:absolute;left:0;right:0;bottom:0;z-index:1;pointer-events:none}.code-more-btn{pointer-events:auto;display:block;margin:auto;width:44px;height:22px;background:var(--card-background);border-top-left-radius:8px;border-top-right-radius:8px;padding-top:6px;cursor:pointer;box-shadow:0 -2px 10px rgba(0,0,0,.1)}.code-more-img{display:block;margin:auto;width:22px;height:16px}[data-scheme=dark] .code-more-box{background-image:linear-gradient(to bottom,rgba(30,30,40,0),#1e1e28)}[data-scheme=dark] .code-more-btn{background:var(--card-background)}</style><script>function initCodeMoreBox(){const e=document.querySelectorAll(".highlight:not(.code-inited)");e.forEach(e=>{if(e.classList.add("code-inited"),e.scrollHeight<=e.clientHeight+5)return;const t=document.createElement("div");t.classList.add("code-more-box");const n=document.createElement("span");n.classList.add("code-more-btn"),n.addEventListener("click",n=>{n.stopPropagation(),e.classList.add("code-show"),t.style.display="none",window.dispatchEvent(new Event("resize"))});const s=document.createElement("img");s.classList.add("code-more-img"),s.src="https://iamxurulin.github.io/icons/codeMore.png",s.alt="展开代码",n.appendChild(s),t.appendChild(n),e.appendChild(t)})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",initCodeMoreBox):initCodeMoreBox(),document.addEventListener("pjax:complete",initCodeMoreBox),document.addEventListener("swup:contentReplaced",initCodeMoreBox),window.addEventListener("popstate",initCodeMoreBox);const observer=new MutationObserver(e=>{let t=!1;e.forEach(e=>{e.addedNodes.length&&(t=!0)}),t&&setTimeout(initCodeMoreBox,100)});observer.observe(document.body,{childList:!0,subtree:!0})</script><style>body{background:url(https://iamxurulin.github.io/background/wallhaven-qr27rq.jpg)no-repeat 50% 0;background-size:cover;background-attachment:fixed}</style><script>window._sakuraInit=function(){const e=document.createElement("script");e.src="https://iamxurulin.github.io/background/sakura.js",document.body.appendChild(e)},window.requestIdleCallback?requestIdleCallback(window._sakuraInit,{timeout:4e3}):setTimeout(window._sakuraInit,2e3)</script><div id=particles-js></div><script>window._particlesInit=function(){const e=document.createElement("script");e.src="https://iamxurulin.github.io/background/particles.min.js",e.onload=function(){window.particlesJS&&particlesJS.load("particles-js","https://iamxurulin.github.io/background/particlesjs-config.json",function(){console.log("particles.js loaded")})},document.body.appendChild(e)},window.requestIdleCallback?requestIdleCallback(window._particlesInit,{timeout:5e3}):setTimeout(window._particlesInit,3e3)</script><style>#particles-js{position:fixed;top:0;left:0;width:100%;z-index:-1}</style><script>window._live2dInit=function(){const t="https://cdn.jsdelivr.net/gh/iamxurulin/live2d-widget-v3@v1.0.2",e={path:{homePath:"/",modelPath:t+"/Resources/",tipsJsPath:"https://iamxurulin.github.io/waifu/waifu-tips.js",live2dCorePath:t+"/Core/live2dcubismcore.js",live2dSdkPath:t+"/live2d-sdk.js",cssPath:"https://iamxurulin.github.io/waifu/waifu.css",tipsJsonPath:"https://iamxurulin.github.io/waifu/waifu-tips.json"},tools:["hitokoto","asteroids","express","photo","info","quit"],drag:{enable:!0,direction:["x","y"]}},n=document.createElement("link");n.rel="stylesheet",n.href=e.path.cssPath,document.head.appendChild(n);function s(e){return new Promise((t,n)=>{const s=document.createElement("script");s.src=e,s.async=!0,s.onload=()=>t(e),s.onerror=()=>n(new Error("Failed to load "+e)),document.head.appendChild(s)})}s(e.path.live2dCorePath).then(()=>s(e.path.live2dSdkPath)).then(()=>s(e.path.tipsJsPath)).then(()=>{localStorage.setItem("modelId","0"),localStorage.setItem("modelTexturesId","0"),initWidget({waifuPath:e.path.tipsJsonPath,cdnPath:e.path.modelPath,tools:e.tools,dragEnable:e.drag.enable,dragDirection:e.drag.direction})}).catch(e=>console.warn("Live2D load failed:",e))},screen.width>=768&&(window.requestIdleCallback?requestIdleCallback(window._live2dInit,{timeout:6e3}):setTimeout(window._live2dInit,4e3))</script><script>(function(){var t="https://cn.vercount.one/js";function e(){for(var e,s=document.querySelectorAll("script[data-vercount-loader]"),n=0;n<s.length;n++)s[n].remove();e=document.createElement("script"),e.src=t,e.setAttribute("data-vercount-loader","true"),e.async=!0,document.head.appendChild(e)}e(),window._vercountPjaxBound||(window._vercountPjaxBound=!0,document.addEventListener("pjax:complete",function(){setTimeout(e,300)}))})()</script></body></html>
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="什么是损失函数？ 机器学习模型究竟依靠什么完成&quot;学习&quot;？\n它凭什么判断自身的表现是否达标、又该在哪些方面做出改进？\n我们可以通过一个类比来理解——学生在完成课后作业时，老师会给出一个分数。无论是80分、90分还是不及格，学生都能通过这个分数发现自己哪里掌握得不够牢固，并据此调整后续的学习策略，争取下一次取得更好的成绩。\n">
+<title>从 MSE 到交叉熵：一文搞懂损失函数</title>
+
+<link rel='canonical' href='https://iamxurulin.github.io/p/%E4%BB%8E-mse-%E5%88%B0%E4%BA%A4%E5%8F%89%E7%86%B5%E4%B8%80%E6%96%87%E6%90%9E%E6%87%82%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/'>
+
+<link rel="stylesheet" href="/scss/style.min.6e9c513e2b18fb90ba80ef8f1310b1122153a8397e5271e51b034f6a1f7377f5.css"><meta property='og:title' content="从 MSE 到交叉熵：一文搞懂损失函数">
+<meta property='og:description' content="什么是损失函数？ 机器学习模型究竟依靠什么完成&quot;学习&quot;？\n它凭什么判断自身的表现是否达标、又该在哪些方面做出改进？\n我们可以通过一个类比来理解——学生在完成课后作业时，老师会给出一个分数。无论是80分、90分还是不及格，学生都能通过这个分数发现自己哪里掌握得不够牢固，并据此调整后续的学习策略，争取下一次取得更好的成绩。\n">
+<meta property='og:url' content='https://iamxurulin.github.io/p/%E4%BB%8E-mse-%E5%88%B0%E4%BA%A4%E5%8F%89%E7%86%B5%E4%B8%80%E6%96%87%E6%90%9E%E6%87%82%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/'>
+<meta property='og:site_name' content='Coder_Studio'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='机器学习' /><meta property='article:tag' content='人工智能' /><meta property='article:tag' content='语言模型' /><meta property='article:tag' content='AI编程' /><meta property='article:published_time' content='2026-06-21T11:48:50&#43;00:00'/><meta property='article:modified_time' content='2026-06-28T18:06:21&#43;00:00'/>
+<meta name="twitter:title" content="从 MSE 到交叉熵：一文搞懂损失函数">
+<meta name="twitter:description" content="什么是损失函数？ 机器学习模型究竟依靠什么完成&quot;学习&quot;？\n它凭什么判断自身的表现是否达标、又该在哪些方面做出改进？\n我们可以通过一个类比来理解——学生在完成课后作业时，老师会给出一个分数。无论是80分、90分还是不及格，学生都能通过这个分数发现自己哪里掌握得不够牢固，并据此调整后续的学习策略，争取下一次取得更好的成绩。\n"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5123323391207523"
+     crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+
+<div class="loading">
+ 
+<div class="liquid-loader">
+  <div class="loading-text">
+    Loading<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span>
+  </div>
+  <div class="loader-track">
+    <div class="liquid-fill"></div>
+  </div>
+</div>
+</div>
+
+<style>
+    .loading {
+        position: fixed;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;  
+        background-color: #f5f5fa;
+         
+        transition: all 0.3s ease;
+    }
+	
+  
+.liquid-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;  
+  padding: 20px;
+  font-family: system-ui, sans-serif;
+}
+
+.loader-track {
+  position: relative;
+  width: 180px;
+  height: 32px;
+  background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.6),0 1px 3px rgba(255, 255, 255, 0.1);
+}
+
+.liquid-fill {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  height: calc(100% - 4px);
+  background: linear-gradient(90deg, #4f46e5, #7c3aed, #ec4899, #f59e0b);
+  border-radius: 14px;
+  animation: fillProgress 4s ease-out infinite, colorShift 3s linear infinite;
+  box-shadow:0 0 12px rgba(124, 58, 237, 0.4),inset 0 1px 2px rgba(255, 255, 255, 0.2);
+}
+
+ 
+.animated-stop {
+  animation-play-state: paused !important;
+  -webkit-animation-play-state: paused !important;
+}
+
+.loading-text {
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  animation: textGlow 1s ease-in-out infinite;
+}
+
+.dot {
+  margin-left: 3px;
+  animation: blink 1.5s infinite;
+}
+.dot:nth-of-type(1) { animation-delay: 0s; }
+.dot:nth-of-type(2) { animation-delay: 0.3s; }
+.dot:nth-of-type(3) { animation-delay: 0.6s; }
+
+@keyframes fillProgress {
+  0% { width: 4px; }
+  25% { width: 25%; }
+  50% { width: 50%; }
+  75% { width: 75%; }
+  100% { width: calc(100% - 4px); }
+}
+@keyframes colorShift {
+  0% { filter: hue-rotate(0deg) brightness(1); }
+  33% { filter: hue-rotate(120deg) brightness(1.1); }
+  66% { filter: hue-rotate(240deg) brightness(0.9); }
+  100% { filter: hue-rotate(360deg) brightness(1); }
+}
+@keyframes textGlow {
+  0%,100% { opacity: 0.7;text-shadow: 0 0 8px rgba(139, 92, 246, 0.3); }
+  50% { opacity: 1;text-shadow: 0 0 16px rgba(139, 92, 246, 0.6); }
+}
+@keyframes blink {
+  0%,50% { opacity: 1; }
+  51%,100% { opacity: 0; }
+}
+
+ 
+@keyframes scaleAndFadeout {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.2);  
+    opacity: 0;
+  }
+}
+.scaleAndFadeout {
+  animation: scaleAndFadeout 1.5s ease-out forwards !important;
+}
+
+ 
+.article-view {
+    display: flex;
+}
+
+ 
+ 
+.article-list .article-view {
+    display: none !important;
+}
+ 
+</style>
+
+<script>	
+    function initLoading() {
+        const isFirstVisit = !sessionStorage.getItem('visited');
+        if (isFirstVisit) {
+            const loading = document.querySelector(".loading");
+            const liquidFill = document.querySelector(".liquid-fill"); 
+            loading.style.display = "flex";
+            
+            
+            setTimeout(() => {
+                loadFinish(loading, liquidFill);
+                
+                setTimeout(() => {
+                    loading.style.display = "none";
+                }, 1500);
+                
+                sessionStorage.setItem('visited', 'true');
+            }, 4000); 
+        }
+    }
+	
+    function loadFinish(loading, liquidFill) {
+        
+        liquidFill.classList.add("animated-stop");
+        
+        loading.classList.add("scaleAndFadeout");
+    }
+	
+    
+    initLoading();
+</script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_5b4689d2dc4cdce3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">💦</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coder_Studio</a></h1>
+            <h2 class="site-description">专注后端开发、算法与 AI 的技术博客</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/iamxurulin/'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                
+                <span>分类</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/tags/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11 3L20 12a1.5 1.5 0 0 1 0 2L14 20a1.5 1.5 0 0 1 -2 0L3 11v-4a4 4 0 0 1 4 -4h4" />
+  <circle cx="9" cy="9" r="2" />
+</svg>
+
+
+
+                
+                <span>标签</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友情链接</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E9%9A%90%E7%A7%81%E6%94%BF%E7%AD%96/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+                
+                <span>隐私政策</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#什么是损失函数">什么是损失函数？</a></li>
+    <li><a href="#什么样的损失函数才算合格">什么样的损失函数才算合格？</a></li>
+    <li><a href="#具体损失函数分析">具体损失函数分析</a>
+      <ol>
+        <li><a href="#均方误差mse">均方误差（MSE）</a></li>
+        <li><a href="#mse-的优势与局限">MSE 的优势与局限</a></li>
+        <li><a href="#梯度下降的训练循环">梯度下降的训练循环</a></li>
+      </ol>
+    </li>
+    <li><a href="#交叉熵分类问题的核心损失函数">交叉熵：分类问题的核心损失函数</a>
+      <ol>
+        <li><a href="#交叉熵到底在计算什么">交叉熵到底在计算什么？</a></li>
+        <li><a href="#mse-与交叉熵的核心差异">MSE 与交叉熵的核心差异</a></li>
+      </ol>
+    </li>
+    <li><a href="#如何选择损失函数">如何选择损失函数</a></li>
+    <li><a href="#初学者常犯的三个错误">初学者常犯的三个错误</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+  
+  <header class="article-category">
+    
+    <a
+      href="/categories/%E7%AE%97%E6%B3%95/"
+      
+    >
+      算法
+    </a>
+    
+  </header>
+  
+
+  <div class="article-title-wrapper">
+    <h2 class="article-title">
+      <a href="/p/%E4%BB%8E-mse-%E5%88%B0%E4%BA%A4%E5%8F%89%E7%86%B5%E4%B8%80%E6%96%87%E6%90%9E%E6%87%82%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/">从 MSE 到交叉熵：一文搞懂损失函数</a>
+    </h2>
+
+    
+  </div>
+
+     
+  <footer class="article-time">
+    
+    <div style="display: flex; flex-direction: column; gap: 4px;font-size: 14px;">
+      
+      <div class="article-date" style="display: flex; align-items: center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+        <span style="margin-left: 5px">发布于: </span>
+        <time
+          class="article-time--published"
+          datetime='2026-06-21T11:48:50Z'
+          style="margin-left: 5px"
+        >2026-06-21 11:48:50</time>
+      </div>
+
+      
+      
+    </div>
+
+    
+    <div
+      class="article-view"
+      style="align-items: center; gap: 5px; margin-left: auto; font-size: 14px;"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="icon icon-tabler icon-tabler-eye"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <circle cx="12" cy="12" r="2"></circle>
+        <path
+          d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s10 2.333 10 7"
+        ></path>
+      </svg>
+      <span id="vercount_container_page_pv">阅读
+        <span id="vercount_value_page_pv">...</span> 次
+      </span>
+    </div>
+  </footer>
+   
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="什么是损失函数">什么是损失函数？
+</h2><p>机器学习模型究竟依靠什么完成&quot;学习&quot;？</p>
+<p>它凭什么判断自身的表现是否达标、又该在哪些方面做出改进？</p>
+<p>我们可以通过一个类比来理解——学生在完成课后作业时，老师会给出一个分数。无论是80分、90分还是不及格，学生都能通过这个分数发现自己哪里掌握得不够牢固，并据此调整后续的学习策略，争取下一次取得更好的成绩。</p>
+<p>机器学习的模型同样具备类似的反馈机制，这个机制的名称就叫——损失函数。</p>
+<p>损失函数在机器学习中占据着比较重要的位置。</p>
+<p>如果无法理解损失函数的工作原理，就很难真正搞清楚模型是如何完成训练的。</p>
+<p>因此，想要真正掌握机器学习的核心原理，损失函数是一个必须深入理解的基础概念。</p>
+<p>从数学角度来讲，损失函数是用于衡量模型预测输出与真实标签之间差异的一种量化方法。</p>
+<p>设想这样一个场景：</p>
+<p>一个气象预报员，预测明天的气温是20℃，而实际观测值是22℃。</p>
+<p>预测值与真实值之间的偏差是多少？</p>
+<p>最直接的计算方式是用 20 减去 22 得到 -2，偏差为2℃。</p>
+<p>但这里出现了一个问题：</p>
+<p>如果有100次预报记录，将正偏差和负偏差直接相加会导致它们相互抵消，最终累加结果可能为零——意味着&quot;零误差&quot;，显然这与现实情况是不符的。</p>
+<p>解决这一问题的方法是对每次偏差进行平方处理，使所有数值都变为正数，然后求取平均值。这就是&quot;均方误差&quot;（Mean Squared Error，简称 MSE）。</p>
+<p><img src="/images/b8159ffdc353d69478560d4f24a14215-7f6ab470.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>由此可见，损失函数的本质是一个&quot;差距量化器&quot;——它明确告诉模型：你的预测出现了偏差，偏差量为多少，需要做出调整。</p>
+<p>然而，这种差距信号如何真正转化为模型的改进能力呢？</p>
+<p>关键在于梯度。</p>
+<p>具体而言，我们可以通过反向传播算法，利用链式法则逐层计算损失函数对各参数的梯度，得到的梯度方向指示了参数应该增大还是减小，梯度的大小则给出了调整的幅度。</p>
+<p>模型根据这些梯度信息更新自身参数，持续缩小与真实值之间的距离。</p>
+<p>这一优化过程被称为梯度下降。</p>
+<p>需要明确的一个核心认知是：</p>
+<p>驱动模型学习的根本动力，来源于损失函数所提供的梯度信号。</p>
+<p>如果没有损失函数，就不会有梯度；</p>
+<p>没有梯度，模型就只能在参数空间中盲目搜索。</p>
+<p>因此，损失函数决定了模型能否有效学习，是整个学习过程的灵魂所在。</p>
+<h2 id="什么样的损失函数才算合格">什么样的损失函数才算合格？
+</h2><p><strong>第一，可导性。</strong></p>
+<p>损失函数最好能够计算梯度，或者在不可导点存在次梯度（Subgradient），从而支持梯度优化算法。</p>
+<p><strong>第二，单调性。</strong></p>
+<p>模型的预测越接近真实值，损失值应当越小；</p>
+<p>预测偏离真实值越远，损失值应当越大。</p>
+<p>只有满足这一性质，模型才能形成明确的优化方向感，持续向最优解靠近。</p>
+<p><strong>第三，良好的优化性质。</strong></p>
+<p>理想情况下，损失函数及其对应优化目标具有良好的优化性质，能够帮助模型更稳定地收敛到低损失区域。</p>
+<p><strong>第四，计算高效。</strong></p>
+<p>在大规模数据集训练场景中，损失函数需要被频繁计算，因此计算效率十分重要。</p>
+<p>在这四项特性中，前两项属于硬性约束，后两项则是理想层面的加分项。</p>
+<h2 id="具体损失函数分析">具体损失函数分析
+</h2><h3 id="均方误差mse">均方误差（MSE）
+</h3><p>MSE 的全称为 Mean Squared Error，逐词拆解：Mean 表示&quot;平均&quot;，Squared 表示&quot;平方&quot;，Error 表示&quot;误差&quot;。</p>
+<p>组合起来的含义即——误差平方的平均值。</p>
+<p>其计算流程分为四个步骤：</p>
+<ol>
+<li>对每个样本分别计算预测值与真实值之间的差值（也称为残差）。</li>
+<li>对每个残差执行平方运算。</li>
+<li>将所有平方后的残差累加求和。</li>
+<li>除以样本总数 N，得到平均值。</li>
+</ol>
+<p>为什么不直接使用残差的绝对值，而一定要选择平方？</p>
+<p><strong>第一个理由：消除符号干扰。</strong></p>
+<p>假设模型对样本 A 的预测偏高了 5 个单位，对样本 B 的预测偏低了 5 个单位。如果直接将两者相加，5 + (-5) = 0，表面上看起来误差为零，但实际上模型的两次预测都是错误的。</p>
+<p>经过平方运算后，5² = 25，(-5)² = 25，两项均为正数相加，真实误差便无法被掩盖。</p>
+<p><strong>第二个理由：放大较大误差。</strong></p>
+<p>假设有三个样本的绝对误差分别为 1、2、3。</p>
+<p>在不平方的情况下，误差总和为 6；</p>
+<p>而经过平方后，1 + 4 + 9 = 14，其中误差为 3 的样本贡献了 9，占总损失的比重超过六成。</p>
+<p>这说明平方机制天然地让模型更加重视那些预测严重失准的样本，尽量避免出现&quot;离谱的错误&quot;，这通常与实际需求相一致。</p>
+<p><img src="/images/798c477b3bdaade06840cccaa54ffae4-4350ed7b.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p><strong>第三个理由：求导运算友好。</strong></p>
+<p>平方函数在其定义域内处处可导，导数形式为线性表达式 2x，结构简洁，使得梯度下降算法的运行非常顺畅。</p>
+<p><strong>第四个理由：拥有深厚的统计学根基。</strong></p>
+<p>在正态分布假设下，MSE 与最大似然估计在数学上是等价的。</p>
+<p>它并非一种拍脑袋想出来的启发式技巧，而是建立在严格的概率论基础之上的。</p>
+<h3 id="mse-的优势与局限">MSE 的优势与局限
+</h3><p><strong>优势：</strong></p>
+<p>计算极为简洁——仅需减法、平方、加法和除法四步运算，即便面对千万级甚至亿级规模的数据也能快速处理。</p>
+<p>在整个定义域内处处可导，梯度形式简洁干净，不存在任何断点或奇点来阻碍优化过程。</p>
+<p>数学性质优良，许多优化算法的理论分析都建立在 MSE 这类凸函数的框架之上。</p>
+<p><strong>局限：</strong></p>
+<p>最突出的短板是对异常值（离群点）极度敏感。</p>
+<p>平方的放大效应意味着一个极端异常值可能主导整个损失函数的值。</p>
+<p>例如假设有 10 个样本的偏差均为 1，另有 1 个样本的偏差为 10。</p>
+<p>前 10 个样本各自贡献 1，合计 10；</p>
+<p>而异常样本贡献了 100，占总损失的约 91%。</p>
+<p>模型因此可能被这一个异常样本带偏方向，从而忽略了大多数正常数据的分布特征。</p>
+<p>另一个问题是量纲失真。</p>
+<p>原始数据如果分布在 0 到 100 之间，MSE 的值域可能膨胀到 0 到 10000，损失值本身的直观含义变得模糊。</p>
+<p><strong>适用场景：</strong></p>
+<p>回归任务的首选方案——凡是预测连续型数值（如房价、气温、销量等），MSE 通常是最自然且最常用的选择。</p>
+<p>但如果数据中存在较多异常值，建议考虑 MAE（平均绝对误差）或 Huber Loss，它们对噪声数据具有更强的鲁棒性。</p>
+<h3 id="梯度下降的训练循环">梯度下降的训练循环
+</h3><p>利用 MSE 的梯度来驱动模型参数更新，每一轮迭代包含以下四个步骤：</p>
+<ol>
+<li><strong>前向传播</strong>：使用当前参数对输入数据进行预测。</li>
+<li><strong>计算损失</strong>：通过 MSE 公式量化预测值与真实标签之间的差距。</li>
+<li><strong>反向传播</strong>：沿计算图从输出层向输入层逐层回溯，依次计算每个参数的梯度，明确每个参数应该朝哪个方向调整、调整的幅度有多大。</li>
+<li><strong>参数更新</strong>：沿着梯度的反方向对参数值进行微调——梯度为正值时减小参数，为负值时增大参数。</li>
+</ol>
+<p>重复执行上述流程 50 次（或更多轮），模型便会在损失曲面上逐步滑动，不断逼近最优解。</p>
+<p><img src="/images/8ab4d7da54ec8da8613c2469820776a6-762b6751.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<h2 id="交叉熵分类问题的核心损失函数">交叉熵：分类问题的核心损失函数
+</h2><p>接下来介绍第二个重要的损失函数——交叉熵（Cross Entropy），它是分类任务中最常用的损失函数。</p>
+<p>设想这样一个应用场景：</p>
+<p>向模型输入一张图片，要求它判断图片中的动物是猫、狗还是鸟。</p>
+<p>有人可能会认为，模型直接输出一个整数编码即可——0 代表猫，1 代表狗，2 代表鸟，然后取最大值的对应类别就行了。</p>
+<p>这种思路在逻辑上看似合理，但存在一个缺陷：</p>
+<p>模型对自己的预测结果有多大把握？</p>
+<p>这种确定性完全无法从单一整数编码中获知。</p>
+<p>更为合理的方式是让模型输出一个概率向量。</p>
+<p>例如：猫 0.7、狗 0.2、鸟 0.1，三个概率值之和为 1，构成一个完整的概率分布。</p>
+<p>通过这种方式，我们不仅获得了模型的预测结果，还获得了衡量模型&quot;自信程度&quot;的依据。</p>
+<p>在很多实际应用场景中，这种置信度信息至关重要。</p>
+<p>例如医疗影像诊断：</p>
+<p>模型 A 判定为恶性肿瘤，置信度 0.95。</p>
+<p>模型 B 判定为恶性肿瘤，置信度 0.52。</p>
+<p>虽然两者结论一致，但前者的预测可信度明显更高，因此更值得进一步关注。</p>
+<p>那么问题就来了：</p>
+<p>如何衡量模型输出的概率分布与真实标签之间的差异？</p>
+<p>这就是交叉熵函数所要解决的问题。</p>
+<h3 id="交叉熵到底在计算什么">交叉熵到底在计算什么？
+</h3><p>交叉熵的核心思想其实非常简单：</p>
+<p>如果模型把真实答案的概率预测得越高，那么损失就应该越小；</p>
+<p>如果模型把真实答案的概率预测得越低，那么损失就应该越大。</p>
+<p>例如有一个三分类任务：</p>
+<p>真实答案是：</p>
+<p>猫 = 1<br>
+狗 = 0<br>
+鸟 = 0</p>
+<p>模型 A 的预测结果为：</p>
+<p>猫：0.90<br>
+狗：0.05<br>
+鸟：0.05</p>
+<p>由于模型给正确类别“猫”分配了 90% 的概率，说明模型非常有把握地预测正确，此时交叉熵损失会非常小。</p>
+<p>而模型 B 的预测结果为：</p>
+<p>猫：0.01<br>
+狗：0.98<br>
+鸟：0.01</p>
+<p>虽然三个概率之和同样为 1，但模型几乎把全部概率都给了错误类别“狗”。</p>
+<p>这意味着模型不仅预测错误，而且错得非常自信。</p>
+<p>对于这种情况，交叉熵会给予极大的惩罚。</p>
+<p>因此可以把交叉熵理解为一种专门衡量“预测概率质量”的损失函数。</p>
+<p>它不仅关心模型有没有预测正确，更关心模型到底有多大的把握。</p>
+<p>预测正确且越自信，损失越小；</p>
+<p>预测错误且越自信，损失越大。</p>
+<p>正因为这种特性，交叉熵能够为分类模型提供更加清晰有效的优化方向，因此成为分类任务中最主流的损失函数。</p>
+<h3 id="mse-与交叉熵的核心差异">MSE 与交叉熵的核心差异
+</h3><div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>维度</th>
+					<th>MSE</th>
+					<th>交叉熵</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>适用任务</td>
+					<td>回归（预测连续值）</td>
+					<td>分类（预测离散类别）</td>
+			</tr>
+			<tr>
+					<td>输出形式</td>
+					<td>实数（如 3.5、-2.1）</td>
+					<td>概率（0~1 之间的值）</td>
+			</tr>
+			<tr>
+					<td>梯度特性</td>
+					<td>梯度受平方项影响较大，对异常敏感</td>
+					<td>梯度与误差成线性关系，传播更平稳</td>
+			</tr>
+			<tr>
+					<td>收敛行为</td>
+					<td>回归任务上收敛稳定</td>
+					<td>分类任务上收敛更快、更稳定</td>
+			</tr>
+	</tbody>
+</table></div>
+<p><img src="/images/0edda457bfad1be6f15822089d879df6-463a1c78.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<h2 id="如何选择损失函数">如何选择损失函数
+</h2><ol>
+<li><strong>判断任务类型</strong></li>
+</ol>
+<p>如果输出为连续数值 → 回归问题，如果输出为类别标签 → 分类问题。</p>
+<ol start="2">
+<li><strong>回归任务看数据质量</strong></li>
+</ol>
+<p>如果数据包含较多异常值 → 选择 MAE 或 Huber Loss</p>
+<p>如果数据较为干净、近似正态分布 → 选择 MSE</p>
+<ol start="3">
+<li><strong>分类任务看类别数量</strong></li>
+</ol>
+<p>如果仅有两个类别 → 二元交叉熵（Binary Cross Entropy）</p>
+<p>如果两个以上类别 → 多元分类交叉熵（Categorical Cross Entropy）</p>
+<h2 id="初学者常犯的三个错误">初学者常犯的三个错误
+</h2><ol>
+<li><strong>用 MSE 做分类任务。</strong></li>
+</ol>
+<p>这是新手最常犯的错误。</p>
+<p>因为在分类任务中，当分类模型使用 sigmoid 或 softmax 输出概率时，如果再配合 MSE 作为损失函数，梯度在饱和区域会迅速衰减，导致训练速度明显变慢。</p>
+<ol start="2">
+<li><strong>用交叉熵做回归任务。</strong></li>
+</ol>
+<p>交叉熵要求输出为合法的概率分布（非负且和为 1），回归任务的输出为任意实数，计算框架通常会直接报错；</p>
+<p>即便绕过了框架检查，梯度也会完全失效，模型无法学到任何有效信息。</p>
+<ol start="3">
+<li><strong>只监控训练损失，忽视验证损失。</strong></li>
+</ol>
+<p>许多初学者在训练过程中仅关注训练集损失持续下降这一现象便感到满意，却忽略了验证集损失可能已经开始反弹——这标志着过拟合正在发生。</p>
+<p>正确的方法是同时监控训练损失和验证损失两条曲线，当验证损失不再下降甚至开始上升时，即使训练损失仍在降低，也应当停止训练或引入正则化手段来抑制过拟合。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+        
+            <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a>
+        
+            <a href="/tags/%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/">语言模型</a>
+        
+            <a href="/tags/ai%E7%BC%96%E7%A8%8B/">AI编程</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>本文由 iamxurulin 原创发布，转载请保留原文链接。</span>
+    </section>
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            最后更新于 2026-06-28 18:06:21
+        </span>
+    </section><section class="article-original-declaration">
+        <div class="declaration-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+</div>
+        <div class="declaration-content">
+            <strong>关于作者与文章</strong>
+            <p>本文为 <a href="https://github.com/iamxurulin" target="_blank" rel="noopener">iamxurulin</a> 原创技术文章。如对内容有疑问或建议，欢迎在评论区交流讨论。</p>
+        </div>
+    </section>
+</footer>
+
+<style>
+.article-original-declaration {
+    margin-top: 2rem;
+    padding: 1.2rem 1.5rem;
+    background: var(--card-background);
+    border: 1px solid var(--card-border-color);
+    border-radius: var(--card-border-radius);
+    display: flex;
+    gap: 0.8rem;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--card-text-color-secondary);
+}
+.article-original-declaration .declaration-icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    margin-top: 2px;
+    color: var(--accent-color);
+}
+.article-original-declaration .declaration-content {
+    flex: 1;
+}
+.article-original-declaration strong {
+    display: block;
+    margin-bottom: 0.3rem;
+    color: var(--card-text-color-main);
+    font-size: 0.95rem;
+}
+.article-original-declaration p {
+    margin: 0.3rem 0;
+}
+.article-original-declaration a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+.article-original-declaration a:hover {
+    text-decoration: underline;
+}
+</style>
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        const elementsToRender = [".main-article", ".widget--toc"];
+
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/%E9%9B%B6%E5%9F%BA%E7%A1%80%E7%9C%8B%E6%87%82%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8D%E7%94%A8%E6%95%B0%E5%AD%A6%E5%8F%AA%E8%A6%81%E7%94%9F%E6%B4%BB%E7%BB%8F%E9%AA%8C/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">零基础看懂机器学习：不用数学，只要生活经验</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/claude-code-%E5%85%8D%E8%B4%B9%E6%8E%A5%E5%85%A5%E8%AE%AF%E9%A3%9E%E6%98%9F%E8%BE%B0-qwen3.6-35b-a3b-%E6%A8%A1%E5%9E%8B%E7%99%BD%E5%AB%96%E6%94%BB%E7%95%A5%E6%9D%A5%E4%BA%86/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Claude Code 免费接入讯飞星辰 Qwen3.6-35B-A3B 模型，白嫖攻略来了！</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/%E4%BD%A0%E7%9A%84rag%E7%B3%BB%E7%BB%9F%E6%98%AF%E6%80%8E%E4%B9%88%E8%BF%9B%E8%A1%8Cquery%E6%94%B9%E5%86%99%E7%9A%84/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">你的RAG系统是怎么进行Query改写的？</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/windows%E7%B3%BB%E7%BB%9Fcodex-%E6%8E%A5%E5%85%A5%E9%98%BF%E9%87%8C%E4%BA%91%E7%99%BE%E7%82%BC%E7%9A%84%E5%9B%BD%E4%BA%A7%E5%A4%A7%E6%A8%A1%E5%9E%8B/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Windows系统Codex 接入阿里云百炼的国产大模型</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/slkj%E7%AC%94%E8%AF%95%E9%A2%98%E8%A7%A3%E6%9E%90/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">SLKJ笔试题解析</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+<div id="giscus-container" class="giscus-container"></div>
+
+<script>
+(function() {
+    function reloadGiscus() {
+        const container = document.getElementById('giscus-container');
+        if (!container) return;
+
+        container.innerHTML = '';
+
+        const script = document.createElement('script');
+        script.src = "https://giscus.app/client.js";
+
+        script.setAttribute("data-repo", "iamxurulin/iamxurulin.github.io");
+        script.setAttribute("data-repo-id", "R_kgDOQ4sEwg");
+        script.setAttribute("data-category", "Announcements");
+        script.setAttribute("data-category-id", "DIC_kwDOQ4sEws4C1Yw9");
+        script.setAttribute("data-mapping", "title");
+        script.setAttribute("data-strict", "0");
+        script.setAttribute("data-reactions-enabled", "1");
+        script.setAttribute("data-emit-metadata", "0");
+        script.setAttribute("data-input-position", "top");
+        script.setAttribute("data-lang", "zh-CN");
+        script.setAttribute("crossorigin", "anonymous");
+        script.async = true;
+        script.setAttribute("data-theme", "transparent_dark");
+
+        container.appendChild(script);
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', reloadGiscus);
+    } else {
+        reloadGiscus();
+    }
+
+    
+    if (!window._giscusPjaxBound) {
+        window._giscusPjaxBound = true;
+        document.addEventListener('pjax:complete', function() {
+            setTimeout(reloadGiscus, 50);
+        });
+    }
+})();
+</script>
+
+<style>
+     
+    #giscus-container {
+        min-height: 150px;
+        width: 100%;
+        margin-top: 2rem;
+        
+         
+        background: rgba(30, 30, 30, 0.8) !important;
+        
+         
+         
+        
+         
+        border-radius: 15px;
+        padding: 20px;
+        box-sizing: border-box;
+        
+         
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 4px 15px rgba(0,0,0, 0.2);
+    }
+</style>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2025 - 
+        
+        2026 iamxurulin
+    </section>
+    
+    <section class="powerby">
+        
+            Coder_Studio - 记录后端开发、算法与 AI 的成长之路 <br/>
+        
+
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+    
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.b4654cd74006fe7475d7723cd7373672b5ea2035ab23404eb9ff511cb27b581c.js" defer></script><script type="text/javascript" src="/ts/custom.d06f31744de6062060249fb2de5a784912bfa25d124b9b3d97c1f1281811a258.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<div id="aplayer"></div>
+<script>
+window._aplayerInit = function() {
+    const apScript = document.createElement('script');
+    apScript.src = 'https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js';
+    apScript.onload = function() {
+        const ap = new APlayer({
+            container: document.getElementById('aplayer'),
+            fixed: true,
+            lrcType: 3,
+            audio: [
+                
+                {
+                    name: '远行',
+                    artist: '大青山',
+                    url: '\/music\/大青山-远行.mp3',
+                    cover: '\/music\/cover.jpg',
+                    lrc: '\/music\/大青山-远行-歌词.lrc'
+                }
+                
+            ]
+        });
+
+        window.onbeforeunload = () => {
+            const playInfo = {
+                index: ap.list.index,
+                currentTime: ap.audio.currentTime,
+                paused: ap.paused
+            };
+            localStorage.setItem("playInfo", JSON.stringify(playInfo));
+        };
+
+        const playInfo = JSON.parse(localStorage.getItem("playInfo"));
+        if (playInfo) {
+            ap.list.switch(playInfo.index);
+            setTimeout(() => {
+                ap.seek(playInfo.currentTime);
+                if (!playInfo.paused) ap.play();
+            }, 500);
+        }
+    };
+    document.head.appendChild(apScript);
+};
+
+if (window.requestIdleCallback) {
+    requestIdleCallback(window._aplayerInit, { timeout: 3000 });
+} else {
+    setTimeout(window._aplayerInit, 2000);
+}
+</script>
+<script>
+(function() {
+    var PJAX_CDN = 'https://cdn.jsdelivr.net/npm/pjax/pjax.min.js';
+    var PJAX_FALLBACK = 'https://unpkg.com/pjax/pjax.min.js';
+    
+    var TOPBAR_URL = 'https:\/\/iamxurulin.github.io\/js\/topbar.min.js';
+    
+
+    function loadJs(url, timeout) {
+        return new Promise(function(resolve, reject) {
+            var done = false;
+            var s = document.createElement('script');
+            s.src = url;
+            s.async = true;
+            function finish(err) {
+                if (done) return;
+                done = true;
+                s.onload = s.onerror = null;
+                clearTimeout(timer);
+                if (err) reject(err); else resolve();
+            }
+            s.onload = function() { finish(null); };
+            s.onerror = function() { finish(new Error('HTTP error: ' + url)); };
+            var timer = timeout ? setTimeout(function() { finish(new Error('Timeout: ' + url)); }, timeout) : null;
+            document.head.appendChild(s);
+        });
+    }
+
+    function loadPjax(cdnUrl) {
+        return loadJs(cdnUrl, 10000).catch(function() {
+            
+            if (cdnUrl === PJAX_CDN) return loadPjax(PJAX_FALLBACK);
+            throw new Error('All PJAX CDNs failed');
+        });
+    }
+
+    var scripts = [loadPjax(PJAX_CDN)];
+    if (TOPBAR_URL) scripts.push(loadJs(TOPBAR_URL, 8000));
+
+    Promise.all(scripts).then(function() {
+        var pjax = new Pjax({ selectors: ['.main-container'] });
+
+        pjax._handleResponse = pjax.handleResponse;
+        pjax.handleResponse = function(responseText, request, href, options) {
+            if (request.responseText.match('<html')) {
+                if (responseText) {
+                    var newDom = new DOMParser().parseFromString(responseText, 'text/html');
+                    document.body.setAttribute('class', newDom.body.className);
+                    var t = newDom.title;
+                    if (t) document.title = t;
+                }
+            }
+            pjax._handleResponse(responseText, request, href, options);
+        };
+
+        if (typeof topbar !== 'undefined') {
+            topbar.config({ barColors: { '0': 'rgba(255,255,255,1)', '1.0': 'rgba(0,149,234,1)' } });
+        }
+
+        document.addEventListener('pjax:send', function() {
+            if (typeof topbar !== 'undefined') topbar.show();
+        });
+        document.addEventListener('pjax:complete', function() {
+            window.Stack && window.Stack.init();
+            if (typeof topbar !== 'undefined') topbar.hide();
+        });
+    }).catch(function(err) {
+        console.warn('PJAX 未加载，使用普通导航:', err.message);
+    });
+})();
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --base-font-family: 'Fira Code', monospace;
+    --code-font-family: 'Fira Code', monospace;
+  }
+</style>
+<style>
+    #TableOfContents > ul, ol {
+        ul, ol {
+            display: none;
+        }
+        .open {
+            display: block;
+        }
+    }
+</style>
+
+<script>
+    function initTocHide() {
+        
+        let toc = document.querySelector(".widget--toc");
+        if (!toc) {
+            return;
+        }
+        
+        window.addEventListener('scroll', function() {
+            
+            let openUl = document.querySelectorAll(".open");
+            if (openUl.length > 0) {
+              openUl.forEach((ul) => {
+                ul.classList.remove("open")
+              })
+            }
+            
+            let currentLi = document.querySelector(".active-class");
+            if (!currentLi) {
+                return
+            }
+            
+            if (currentLi.children.length > 1) {
+                currentLi.children[1].classList.add("open")
+            }
+            
+            let ul = currentLi.parentElement;
+            do {
+                ul.classList.add("open");
+                ul = ul.parentElement.parentElement
+            } while (ul !== undefined && (ul.localName === 'ul' || ul.localName === 'ol'))
+        });
+    }
+    initTocHide()
+</script>
+
+<style>
+    #backTopBtn {
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        z-index: 99;
+        cursor: pointer;
+        width: 20px;
+        height: 20px;
+        background-image: url(https://iamxurulin.github.io/icons/backTop.svg);
+    }
+</style>
+
+<script>
+    
+
+    function initScrollTop() {
+        let rightSideBar = document.querySelector(".right-sidebar");
+        if (!rightSideBar) {
+            return;
+        }
+        
+        let btn = document.createElement("div");
+        btn.id = "backTopBtn";
+        btn.onclick = backToTop
+        rightSideBar.appendChild(btn)
+        
+        window.addEventListener('scroll', function() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        }, { passive: true });
+    }
+
+    
+
+    function backToTop(){
+        window.scrollTo({ top: 0, behavior: "smooth" })
+    }
+
+    initScrollTop();
+</script>
+
+<style>
+    .highlight {
+         
+        max-height: 400px;
+        overflow: hidden;
+    }
+
+    .code-show {
+        max-height: none !important;
+    }
+
+    .code-more-box {
+        width: 100%;
+        padding-top: 78px;
+        background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0)), to(#fff));
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+    }
+
+    .code-more-btn {
+        display: block;
+        margin: auto;
+        width: 44px;
+        height: 22px;
+        background: #f0f0f5;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        padding-top: 6px;
+        cursor: pointer;
+    }
+
+    .code-more-img {
+        cursor: pointer !important;
+        display: block;
+        margin: auto;
+        width: 22px;
+        height: 16px;
+    }
+</style>
+
+<style>
+    .highlight {
+        max-height: 400px;
+        overflow: hidden;
+        position: relative;  
+    }
+
+    .code-show {
+        max-height: none !important;
+    }
+
+    .code-more-box {
+        width: 100%;
+        padding-top: 78px;
+        background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0)), to(#fff));
+        background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+        pointer-events: none;  
+    }
+
+    .code-more-btn {
+        pointer-events: auto;  
+        display: block;
+        margin: auto;
+        width: 44px;
+        height: 22px;
+        background: var(--card-background);
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        padding-top: 6px;
+        cursor: pointer;
+        box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    }
+
+    .code-more-img {
+        display: block;
+        margin: auto;
+        width: 22px;
+        height: 16px;
+    }
+
+     
+    [data-scheme="dark"] .code-more-box {
+        background-image: linear-gradient(to bottom, rgba(30,30,40,0), #1e1e28);
+    }
+    [data-scheme="dark"] .code-more-btn {
+        background: var(--card-background);
+    }
+</style>
+
+<script>
+  function initCodeMoreBox() {
+    const codeBlocks = document.querySelectorAll(".highlight:not(.code-inited)");
+    
+    codeBlocks.forEach(codeBlock => {
+      
+      codeBlock.classList.add("code-inited");
+
+      
+      if (codeBlock.scrollHeight <= codeBlock.clientHeight + 5) { 
+        return;
+      }
+
+      
+      const codeMoreBox = document.createElement('div');
+      codeMoreBox.classList.add('code-more-box');
+
+      const codeMoreBtn = document.createElement('span');
+      codeMoreBtn.classList.add('code-more-btn');
+      codeMoreBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        codeBlock.classList.add('code-show');
+        codeMoreBox.style.display = 'none';
+        
+        window.dispatchEvent(new Event('resize'));
+      });
+
+      const img = document.createElement('img');
+      img.classList.add('code-more-img');
+      img.src = "https://iamxurulin.github.io/icons/codeMore.png";
+      img.alt = "展开代码";
+
+      codeMoreBtn.appendChild(img);
+      codeMoreBox.appendChild(codeMoreBtn);
+      codeBlock.appendChild(codeMoreBox);
+    });
+  }
+
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCodeMoreBox);
+  } else {
+    initCodeMoreBox();
+  }
+
+  
+  document.addEventListener('pjax:complete', initCodeMoreBox);
+  document.addEventListener('swup:contentReplaced', initCodeMoreBox); 
+  window.addEventListener('popstate', initCodeMoreBox); 
+
+  
+  const observer = new MutationObserver((mutations) => {
+    let shouldRun = false;
+    mutations.forEach(mutation => {
+      if (mutation.addedNodes.length) {
+        shouldRun = true;
+      }
+    });
+    if (shouldRun) {
+      
+      setTimeout(initCodeMoreBox, 100);
+    }
+  });
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+</script>
+<style>
+  body {
+    background: url(https://iamxurulin.github.io/background/wallhaven-qr27rq.jpg) no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+</style>
+
+
+<script>
+window._sakuraInit = function() {
+    const s = document.createElement('script');
+    s.src = 'https:\/\/iamxurulin.github.io\/background\/sakura.js';
+    document.body.appendChild(s);
+};
+if (window.requestIdleCallback) {
+    requestIdleCallback(window._sakuraInit, { timeout: 4000 });
+} else {
+    setTimeout(window._sakuraInit, 2000);
+}
+</script>
+
+<div id="particles-js"></div>
+<script>
+window._particlesInit = function() {
+    const s = document.createElement('script');
+    s.src = 'https:\/\/iamxurulin.github.io\/background\/particles.min.js';
+    s.onload = function() {
+        if (window.particlesJS) {
+            particlesJS.load('particles-js', 'https:\/\/iamxurulin.github.io\/background\/particlesjs-config.json',
+                function() { console.log('particles.js loaded'); }
+            );
+        }
+    };
+    document.body.appendChild(s);
+};
+if (window.requestIdleCallback) {
+    requestIdleCallback(window._particlesInit, { timeout: 5000 });
+} else {
+    setTimeout(window._particlesInit, 3000);
+}
+</script>
+<style>
+#particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: -1;
+}
+</style>
+<script>
+
+window._live2dInit = function() {
+    const cdnPath = "https://cdn.jsdelivr.net/gh/iamxurulin/live2d-widget-v3@v1.0.2";
+    const config = {
+        path: {
+            homePath: "/",
+            modelPath: cdnPath + "/Resources/",
+            tipsJsPath: "https://iamxurulin.github.io/waifu/waifu-tips.js",
+            live2dCorePath: cdnPath + "/Core/live2dcubismcore.js",
+            live2dSdkPath: cdnPath + "/live2d-sdk.js",
+            cssPath: "https://iamxurulin.github.io/waifu/waifu.css",
+            tipsJsonPath: "https://iamxurulin.github.io/waifu/waifu-tips.json"
+        },
+        tools: ["hitokoto", "asteroids", "express", "photo", "info", "quit"],
+        drag: { enable: true, direction: ["x", "y"] }
+    };
+
+    const css = document.createElement('link');
+    css.rel = 'stylesheet';
+    css.href = config.path.cssPath;
+    document.head.appendChild(css);
+
+    function loadScript(url) {
+        return new Promise((resolve, reject) => {
+            const s = document.createElement('script');
+            s.src = url;
+            s.async = true;
+            s.onload = () => resolve(url);
+            s.onerror = () => reject(new Error('Failed to load ' + url));
+            document.head.appendChild(s);
+        });
+    }
+
+    loadScript(config.path.live2dCorePath)
+        .then(() => loadScript(config.path.live2dSdkPath))
+        .then(() => loadScript(config.path.tipsJsPath))
+        .then(() => {
+            localStorage.setItem("modelId", "0");
+            localStorage.setItem("modelTexturesId", "0");
+            initWidget({
+                waifuPath: config.path.tipsJsonPath,
+                cdnPath: config.path.modelPath,
+                tools: config.tools,
+                dragEnable: config.drag.enable,
+                dragDirection: config.drag.direction,
+            });
+        })
+        .catch(e => console.warn('Live2D load failed:', e));
+};
+
+if (screen.width >= 768) {
+    if (window.requestIdleCallback) {
+        requestIdleCallback(window._live2dInit, { timeout: 6000 });
+    } else {
+        setTimeout(window._live2dInit, 4000);
+    }
+}
+</script>
+<script>
+
+(function() {
+    var VERCOUNT_JS = 'https://cn.vercount.one/js';
+
+    function injectVercount() {
+        
+        var old = document.querySelectorAll('script[data-vercount-loader]');
+        for (var i = 0; i < old.length; i++) {
+            old[i].remove();
+        }
+
+        var s = document.createElement('script');
+        s.src = VERCOUNT_JS;
+        s.setAttribute('data-vercount-loader', 'true');
+        s.async = true;
+        document.head.appendChild(s);
+    }
+
+    
+    injectVercount();
+
+    
+    if (!window._vercountPjaxBound) {
+        window._vercountPjaxBound = true;
+        document.addEventListener('pjax:complete', function() {
+            
+            setTimeout(injectVercount, 300);
+        });
+    }
+})();
+</script>
+
+
+    </body>
+</html>

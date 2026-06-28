@@ -1,47 +1,62 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>架构 on Coder_Studio</title><link>https://iamxurulin.github.io/tags/%E6%9E%B6%E6%9E%84/</link><description>Recent content in 架构 on Coder_Studio</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>iamxurulin</copyright><lastBuildDate>Sat, 27 Jun 2026 05:48:14 +0000</lastBuildDate><atom:link href="https://iamxurulin.github.io/tags/%E6%9E%B6%E6%9E%84/index.xml" rel="self" type="application/rss+xml"/><item><title>前后端分离+微服务架构下的用户认证</title><link>https://iamxurulin.github.io/p/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E4%B8%8B%E7%9A%84%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81/</link><pubDate>Tue, 17 Mar 2026 19:38:35 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E4%B8%8B%E7%9A%84%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81/</guid><description>&lt;p&gt;先明确一些核心组件：&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>架构 on Coder_Studio</title>
+        <link>https://iamxurulin.github.io/tags/%E6%9E%B6%E6%9E%84/</link>
+        <description>Recent content in 架构 on Coder_Studio</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>iamxurulin</copyright>
+        <lastBuildDate>Sun, 28 Jun 2026 18:06:21 +0000</lastBuildDate><atom:link href="https://iamxurulin.github.io/tags/%E6%9E%B6%E6%9E%84/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>前后端分离&#43;微服务架构下的用户认证</title>
+        <link>https://iamxurulin.github.io/p/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E4%B8%8B%E7%9A%84%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81/</link>
+        <pubDate>Tue, 17 Mar 2026 19:38:35 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E4%B8%8B%E7%9A%84%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81/</guid>
+        <description>&lt;p&gt;先明确一些核心组件：&lt;/p&gt;
 &lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;组件&lt;/th&gt;
-&lt;th&gt;作用&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;前端&lt;/td&gt;
-&lt;td&gt;页面展示、用户交互、存储Token&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;API网关&lt;/td&gt;
-&lt;td&gt;统一入口、路由转发、Token校验&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;认证中心&lt;/td&gt;
-&lt;td&gt;用户登录验证、生成/刷新Token&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;微服务&lt;/td&gt;
-&lt;td&gt;处理业务逻辑、获取用户信息&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;数据库&lt;/td&gt;
-&lt;td&gt;存储用户账号密码、权限信息&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;组件&lt;/th&gt;
+					&lt;th&gt;作用&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;前端&lt;/td&gt;
+					&lt;td&gt;页面展示、用户交互、存储Token&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;API网关&lt;/td&gt;
+					&lt;td&gt;统一入口、路由转发、Token校验&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;认证中心&lt;/td&gt;
+					&lt;td&gt;用户登录验证、生成/刷新Token&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;微服务&lt;/td&gt;
+					&lt;td&gt;处理业务逻辑、获取用户信息&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;数据库&lt;/td&gt;
+					&lt;td&gt;存储用户账号密码、权限信息&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;当时面试官跟我说，你可以从前端打开一个页面开始讲。&lt;/p&gt;
 &lt;p&gt;那我们就举个例子：&lt;/p&gt;
 &lt;p&gt;以用户打开一个电商网站首页➡️跳转登录➡️输入账号密码登录➡️携带Token请求商品列表为例，说一下这个完整的流程。&lt;/p&gt;
-&lt;h3 id="1前端打开页面检查本地是否有token"&gt;1.前端打开页面，检查本地是否有Token
+&lt;h3 id=&#34;1前端打开页面检查本地是否有token&#34;&gt;1.前端打开页面，检查本地是否有Token
 &lt;/h3&gt;&lt;p&gt;用户在浏览器输入 &lt;code&gt;https://www.example.com&lt;/code&gt;，前端代码首先检查&lt;strong&gt;本地存储&lt;/strong&gt;中是否存在有效的Token。&lt;/p&gt;
-&lt;h3 id="2没有token前端跳转登录页用户输入账号密码"&gt;2.没有Token，前端跳转登录页，用户输入账号密码
+&lt;h3 id=&#34;2没有token前端跳转登录页用户输入账号密码&#34;&gt;2.没有Token，前端跳转登录页，用户输入账号密码
 &lt;/h3&gt;&lt;p&gt;如果本地没有Token，前端路由跳转到 &lt;code&gt;/login&lt;/code&gt; 登录页，用户输入账号和密码，点击【登录】按钮。&lt;/p&gt;
-&lt;h3 id="3前端发送登录请求到api网关"&gt;3.前端发送登录请求到API网关
+&lt;h3 id=&#34;3前端发送登录请求到api网关&#34;&gt;3.前端发送登录请求到API网关
 &lt;/h3&gt;&lt;p&gt;前端将账号密码封装成POST请求，发送到API网关。&lt;/p&gt;
 &lt;p&gt;需要注意的是：前端不直接请求认证中心，所有请求都走网关统一入口。&lt;/p&gt;
-&lt;h3 id="4api网关转发登录请求到认证中心"&gt;4.API网关转发登录请求到认证中心
+&lt;h3 id=&#34;4api网关转发登录请求到认证中心&#34;&gt;4.API网关转发登录请求到认证中心
 &lt;/h3&gt;&lt;p&gt;API网关收到 &lt;code&gt;/auth/login&lt;/code&gt; 请求，根据路由规则，将请求转发到认证中心服务。&lt;/p&gt;
-&lt;h3 id="5认证中心验证用户信息生成jwt-token"&gt;5.认证中心验证用户信息，生成JWT Token
+&lt;h3 id=&#34;5认证中心验证用户信息生成jwt-token&#34;&gt;5.认证中心验证用户信息，生成JWT Token
 &lt;/h3&gt;&lt;p&gt;认证中心做以下3件事：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;从数据库查询用户信息，验证账号密码是否正确；&lt;/li&gt;
@@ -55,13 +70,13 @@
 &lt;li&gt;&lt;strong&gt;Payload&lt;/strong&gt;：载荷，存用户信息（比如userId、username、过期时间）；&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Signature&lt;/strong&gt;：签名，用密钥对Header和Payload签名，防止Token被篡改。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id="6前端收到token存储到本地"&gt;6.前端收到Token，存储到本地
+&lt;h3 id=&#34;6前端收到token存储到本地&#34;&gt;6.前端收到Token，存储到本地
 &lt;/h3&gt;&lt;p&gt;前端收到认证中心返回的 &lt;code&gt;access_token&lt;/code&gt; 和 &lt;code&gt;refresh_token&lt;/code&gt;，存到本地存储中。&lt;/p&gt;
-&lt;h3 id="7前端携带token请求业务接口"&gt;7.前端携带Token请求业务接口
+&lt;h3 id=&#34;7前端携带token请求业务接口&#34;&gt;7.前端携带Token请求业务接口
 &lt;/h3&gt;&lt;p&gt;用户登录成功后，前端请求商品列表接口，在请求头 &lt;code&gt;Authorization&lt;/code&gt; 中携带 &lt;code&gt;Bearer Token&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;Bearer 这个单词的意思是“持票人”、“持有者”。&lt;/p&gt;
 &lt;p&gt;Bearer Token 就是：“谁持有这个 Token，谁就是合法的访问者，服务器就认谁”。&lt;/p&gt;
-&lt;h3 id="8api网关校验token"&gt;8.API网关校验Token
+&lt;h3 id=&#34;8api网关校验token&#34;&gt;8.API网关校验Token
 &lt;/h3&gt;&lt;p&gt;API网关收到 &lt;code&gt;/product/list&lt;/code&gt; 请求，通过全局过滤器校验Token的有效性：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;从请求头 &lt;code&gt;Authorization&lt;/code&gt; 中取出Token；&lt;/li&gt;
@@ -70,8 +85,13 @@
 &lt;li&gt;校验通过后，将用户信息（比如userId）放入请求头，转发给微服务；&lt;/li&gt;
 &lt;li&gt;如果校验失败，直接返回401未授权。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h3 id="9微服务获取用户信息处理业务逻辑"&gt;9.微服务获取用户信息，处理业务逻辑
+&lt;h3 id=&#34;9微服务获取用户信息处理业务逻辑&#34;&gt;9.微服务获取用户信息，处理业务逻辑
 &lt;/h3&gt;&lt;p&gt;微服务（比如商品服务）收到网关转发的请求，从请求头 &lt;code&gt;X-User-Id&lt;/code&gt; 中取出userId，处理业务逻辑（比如查询该用户的商品列表）。&lt;/p&gt;
-&lt;h3 id="10token过期前端用refresh-token刷新"&gt;10.Token过期，前端用Refresh Token刷新
+&lt;h3 id=&#34;10token过期前端用refresh-token刷新&#34;&gt;10.Token过期，前端用Refresh Token刷新
 &lt;/h3&gt;&lt;p&gt;Access Token有效期比较短（比如只有2小时），过期后前端请求会收到401；&lt;/p&gt;
-&lt;p&gt;此时前端不用让用户重新登录，而是用&lt;strong&gt;Refresh Token&lt;/strong&gt;去认证中心刷新Access Token。&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;此时前端不用让用户重新登录，而是用&lt;strong&gt;Refresh Token&lt;/strong&gt;去认证中心刷新Access Token。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

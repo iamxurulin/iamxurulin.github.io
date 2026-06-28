@@ -1,5 +1,20 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>消息队列 on Coder_Studio</title><link>https://iamxurulin.github.io/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/</link><description>Recent content in 消息队列 on Coder_Studio</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>iamxurulin</copyright><lastBuildDate>Sat, 27 Jun 2026 05:48:14 +0000</lastBuildDate><atom:link href="https://iamxurulin.github.io/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/index.xml" rel="self" type="application/rss+xml"/><item><title>RabbitMQ怎么实现延迟消息</title><link>https://iamxurulin.github.io/p/rabbitmq%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E5%BB%B6%E8%BF%9F%E6%B6%88%E6%81%AF/</link><pubDate>Sat, 17 Jan 2026 18:19:27 +0000</pubDate><guid>https://iamxurulin.github.io/p/rabbitmq%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E5%BB%B6%E8%BF%9F%E6%B6%88%E6%81%AF/</guid><description>&lt;p&gt;在RabbitMQ中，实现延迟消息可以通过死信交换机（DLX）+过期时间（TTL）的方案，也可以采用RabbitMQ官方提供的延迟消息插件。&lt;/p&gt;
-&lt;h3 id="dlxttl"&gt;DLX+TTL。
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>消息队列 on Coder_Studio</title>
+        <link>https://iamxurulin.github.io/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/</link>
+        <description>Recent content in 消息队列 on Coder_Studio</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>iamxurulin</copyright>
+        <lastBuildDate>Sun, 28 Jun 2026 18:06:21 +0000</lastBuildDate><atom:link href="https://iamxurulin.github.io/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>RabbitMQ怎么实现延迟消息</title>
+        <link>https://iamxurulin.github.io/p/rabbitmq%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E5%BB%B6%E8%BF%9F%E6%B6%88%E6%81%AF/</link>
+        <pubDate>Sat, 17 Jan 2026 18:19:27 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/rabbitmq%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E5%BB%B6%E8%BF%9F%E6%B6%88%E6%81%AF/</guid>
+        <description>&lt;p&gt;在RabbitMQ中，实现延迟消息可以通过死信交换机（DLX）+过期时间（TTL）的方案，也可以采用RabbitMQ官方提供的延迟消息插件。&lt;/p&gt;
+&lt;h3 id=&#34;dlxttl&#34;&gt;DLX+TTL。
 &lt;/h3&gt;&lt;p&gt;主要步骤如下：&lt;/p&gt;
 &lt;p&gt;1.声明并创建普通交换机和普通队列，完成二者的绑定。&lt;/p&gt;
 &lt;p&gt;2.声明并创建死信交换机和死信队列，也完成二者的绑定。&lt;/p&gt;
@@ -7,27 +22,63 @@
 &lt;p&gt;4.不给普通队列配置任何的消费者，使普通队列只做消息暂存和过期，不消费。&lt;/p&gt;
 &lt;p&gt;5.在生产者发送消息时，为消息设置TTL，将消息发送到普通队列和普通交换机。&lt;/p&gt;
 &lt;p&gt;6当消息在普通队列的存活时间达到TTL后，过期的消息会被自动转发到DLX中，DLX再重新路由到死信队列，从死信队列中发送的消息就是延迟消息。&lt;/p&gt;
-&lt;h3 id="rabbitmq_delayed_message_exchange插件"&gt;rabbitmq_delayed_message_exchange插件
+&lt;h3 id=&#34;rabbitmq_delayed_message_exchange插件&#34;&gt;rabbitmq_delayed_message_exchange插件
 &lt;/h3&gt;&lt;p&gt;主要步骤：&lt;/p&gt;
 &lt;p&gt;1.将插件放到RabbitMQ的plugins目录&lt;/p&gt;
 &lt;p&gt;2.执行rabbitmq-plugins enable rabbitmq_delayed_message_exchange命令启用插件&lt;/p&gt;
 &lt;p&gt;3.声明一个延迟交换机&lt;/p&gt;
 &lt;p&gt;4.声明一个普通队列并绑定该延迟交换机&lt;/p&gt;
-&lt;p&gt;5.生产者在发送消息时，设置消息投x-dlay:延迟时间(ms)&lt;/p&gt;</description></item><item><title>说说RabbitMQ的集群模式</title><link>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4rabbitmq%E7%9A%84%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F/</link><pubDate>Thu, 15 Jan 2026 17:21:36 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4rabbitmq%E7%9A%84%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F/</guid><description>&lt;p&gt;RabbitMQ的集群主要分为&lt;strong&gt;标准集群&lt;/strong&gt;、&lt;strong&gt;镜像集群&lt;/strong&gt;和&lt;strong&gt;联邦集群&lt;/strong&gt;三种。&lt;/p&gt;
-&lt;h3 id="标准集群"&gt;标准集群
+&lt;p&gt;5.生产者在发送消息时，设置消息投x-dlay:延迟时间(ms)&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>说说RabbitMQ的集群模式</title>
+        <link>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4rabbitmq%E7%9A%84%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F/</link>
+        <pubDate>Thu, 15 Jan 2026 17:21:36 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4rabbitmq%E7%9A%84%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F/</guid>
+        <description>&lt;p&gt;RabbitMQ的集群主要分为&lt;strong&gt;标准集群&lt;/strong&gt;、&lt;strong&gt;镜像集群&lt;/strong&gt;和&lt;strong&gt;联邦集群&lt;/strong&gt;三种。&lt;/p&gt;
+&lt;h3 id=&#34;标准集群&#34;&gt;标准集群
 &lt;/h3&gt;&lt;p&gt;标准集群是多台RabbitMQ服务器通过网络连接组成一个集群，所有节点共享元数据，但是一个消息只存储在单个节点上。&lt;/p&gt;
 &lt;p&gt;在标准集群模式下，因为元数据是共享的，所以任何一个节点都知道消息在哪个节点上，可以实现负载均衡。&lt;/p&gt;
 &lt;p&gt;消息存储在某个节点上但是不会自动复制到其他节点。&lt;/p&gt;
-&lt;h3 id="镜像集群"&gt;镜像集群
+&lt;h3 id=&#34;镜像集群&#34;&gt;镜像集群
 &lt;/h3&gt;&lt;p&gt;和标准集群模式不同，镜像集群模式下，队列的消息会复制到多个节点上，如果主队列所在的节点发生故障，副本节点会自动接管，从而保证队列的可用性。&lt;/p&gt;
-&lt;h3 id="federated-集群"&gt;Federated 集群
-&lt;/h3&gt;&lt;p&gt;通过Federated Exchange或Federated Queue实现消息的跨节点路由 / 复制，节点之间无需共享元数据，解决了标准 / 镜像集群无法&lt;strong&gt;跨广域网部署&lt;/strong&gt;的问题。&lt;/p&gt;</description></item><item><title>什么是RabbitMQ中的死信队列</title><link>https://iamxurulin.github.io/p/%E4%BB%80%E4%B9%88%E6%98%AFrabbitmq%E4%B8%AD%E7%9A%84%E6%AD%BB%E4%BF%A1%E9%98%9F%E5%88%97/</link><pubDate>Mon, 12 Jan 2026 14:44:12 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E4%BB%80%E4%B9%88%E6%98%AFrabbitmq%E4%B8%AD%E7%9A%84%E6%AD%BB%E4%BF%A1%E9%98%9F%E5%88%97/</guid><description>&lt;p&gt;在消息队列系统中，&lt;strong&gt;死信队列&lt;/strong&gt;（Dead Letter Queue,DLQ）是一种处理无法正常消费的消息的&lt;strong&gt;机制&lt;/strong&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;federated-集群&#34;&gt;Federated 集群
+&lt;/h3&gt;&lt;p&gt;通过Federated Exchange或Federated Queue实现消息的跨节点路由 / 复制，节点之间无需共享元数据，解决了标准 / 镜像集群无法&lt;strong&gt;跨广域网部署&lt;/strong&gt;的问题。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>什么是RabbitMQ中的死信队列</title>
+        <link>https://iamxurulin.github.io/p/%E4%BB%80%E4%B9%88%E6%98%AFrabbitmq%E4%B8%AD%E7%9A%84%E6%AD%BB%E4%BF%A1%E9%98%9F%E5%88%97/</link>
+        <pubDate>Mon, 12 Jan 2026 14:44:12 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E4%BB%80%E4%B9%88%E6%98%AFrabbitmq%E4%B8%AD%E7%9A%84%E6%AD%BB%E4%BF%A1%E9%98%9F%E5%88%97/</guid>
+        <description>&lt;p&gt;在消息队列系统中，&lt;strong&gt;死信队列&lt;/strong&gt;（Dead Letter Queue,DLQ）是一种处理无法正常消费的消息的&lt;strong&gt;机制&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;RabbitMQ 中实现死信机制的核心是&lt;strong&gt;死信交换机&lt;/strong&gt;（Dead Letter Exchange, DLX），绑定该交换机的队列就是&lt;strong&gt;死信队列&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;死信队列是用来接收那些&lt;strong&gt;被拒绝的&lt;/strong&gt;、&lt;strong&gt;过期的&lt;/strong&gt;或者已经&lt;strong&gt;达到最大传递次数&lt;/strong&gt;的消息。&lt;/p&gt;
-&lt;p&gt;可以通过给队列设置&lt;code&gt;x-dead-letter-exchange&lt;/code&gt; 参数来指定死信交换机，搭配&lt;code&gt;x-dead-letter-routing-key&lt;/code&gt;指定死信路由键，从而实现死信队列的绑定。&lt;/p&gt;</description></item><item><title>怎么在RabbitMQ中配置消息的TTL</title><link>https://iamxurulin.github.io/p/%E6%80%8E%E4%B9%88%E5%9C%A8rabbitmq%E4%B8%AD%E9%85%8D%E7%BD%AE%E6%B6%88%E6%81%AF%E7%9A%84ttl/</link><pubDate>Mon, 12 Jan 2026 14:17:02 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E6%80%8E%E4%B9%88%E5%9C%A8rabbitmq%E4%B8%AD%E9%85%8D%E7%BD%AE%E6%B6%88%E6%81%AF%E7%9A%84ttl/</guid><description>&lt;p&gt;TTL（Time To Live）表示&lt;strong&gt;消息在队列中存活的时间&lt;/strong&gt;，主要用于防止消息在队列中无限积压，导致系统资源的耗尽。&lt;/p&gt;
+&lt;p&gt;可以通过给队列设置&lt;code&gt;x-dead-letter-exchange&lt;/code&gt; 参数来指定死信交换机，搭配&lt;code&gt;x-dead-letter-routing-key&lt;/code&gt;指定死信路由键，从而实现死信队列的绑定。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>怎么在RabbitMQ中配置消息的TTL</title>
+        <link>https://iamxurulin.github.io/p/%E6%80%8E%E4%B9%88%E5%9C%A8rabbitmq%E4%B8%AD%E9%85%8D%E7%BD%AE%E6%B6%88%E6%81%AF%E7%9A%84ttl/</link>
+        <pubDate>Mon, 12 Jan 2026 14:17:02 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E6%80%8E%E4%B9%88%E5%9C%A8rabbitmq%E4%B8%AD%E9%85%8D%E7%BD%AE%E6%B6%88%E6%81%AF%E7%9A%84ttl/</guid>
+        <description>&lt;p&gt;TTL（Time To Live）表示&lt;strong&gt;消息在队列中存活的时间&lt;/strong&gt;，主要用于防止消息在队列中无限积压，导致系统资源的耗尽。&lt;/p&gt;
 &lt;p&gt;配置TTL有两种方式，一种是&lt;strong&gt;队列级别的TTL&lt;/strong&gt;，另外一种是&lt;strong&gt;消息级别的TTL&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;1.在声明队列时通过设置&lt;code&gt;x-message-ttl&lt;/code&gt;参数来指定队列中所有消息的TTL。&lt;/p&gt;
-&lt;p&gt;2.在发送消息时通过&lt;code&gt;AMQP.BasicProperties&lt;/code&gt;属性指定单个消息的TTL。&lt;/p&gt;</description></item><item><title>RabbitMQ中的Prefetch参数</title><link>https://iamxurulin.github.io/p/rabbitmq%E4%B8%AD%E7%9A%84prefetch%E5%8F%82%E6%95%B0/</link><pubDate>Sun, 11 Jan 2026 17:07:58 +0000</pubDate><guid>https://iamxurulin.github.io/p/rabbitmq%E4%B8%AD%E7%9A%84prefetch%E5%8F%82%E6%95%B0/</guid><description>&lt;p&gt;在RabbitMQ中，prefetch参数主要是用于限制消费者端可以同时&lt;strong&gt;预取并未确认&lt;/strong&gt;消息的最大数量，帮助消费者端&lt;strong&gt;控制&lt;/strong&gt;消息处理的&lt;strong&gt;流量&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;2.在发送消息时通过&lt;code&gt;AMQP.BasicProperties&lt;/code&gt;属性指定单个消息的TTL。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>RabbitMQ中的Prefetch参数</title>
+        <link>https://iamxurulin.github.io/p/rabbitmq%E4%B8%AD%E7%9A%84prefetch%E5%8F%82%E6%95%B0/</link>
+        <pubDate>Sun, 11 Jan 2026 17:07:58 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/rabbitmq%E4%B8%AD%E7%9A%84prefetch%E5%8F%82%E6%95%B0/</guid>
+        <description>&lt;p&gt;在RabbitMQ中，prefetch参数主要是用于限制消费者端可以同时&lt;strong&gt;预取并未确认&lt;/strong&gt;消息的最大数量，帮助消费者端&lt;strong&gt;控制&lt;/strong&gt;消息处理的&lt;strong&gt;流量&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;举个例子说明一下：&lt;/p&gt;
 &lt;p&gt;如果prefetch的参数设置为1，那么消费者会在未确认消息之前，只预取一个消息，这样可以确保每个消息在被处理成功之后，才接收下一个消息，从而避免消息的积压和资源耗尽。&lt;/p&gt;
 &lt;p&gt;在&lt;strong&gt;负载均衡&lt;/strong&gt;、&lt;strong&gt;避免内存溢出&lt;/strong&gt;以及&lt;strong&gt;优先级处理&lt;/strong&gt;这些场景下会用到prefetch参数的设置。&lt;/p&gt;
@@ -36,90 +87,144 @@
 &lt;p&gt;2.如果有大量未处理的消息堆积在内存中可能会导致内存溢出，这时通过设置一个较小的prefetch值可以避免这种情况。&lt;/p&gt;
 &lt;p&gt;3.配合RabbitMQ的优先级队列，设置prefetch值可以确保队列优先推送高优先级的消息，让其被及时处理。&lt;/p&gt;
 &lt;p&gt;注意⚠️：&lt;/p&gt;
-&lt;p&gt;prefetch仅在&lt;strong&gt;消费者手动确认消息模式&lt;/strong&gt;下生效。&lt;/p&gt;</description></item><item><title>RabbitMQ的消息确认机制是怎么工作的</title><link>https://iamxurulin.github.io/p/rabbitmq%E7%9A%84%E6%B6%88%E6%81%AF%E7%A1%AE%E8%AE%A4%E6%9C%BA%E5%88%B6%E6%98%AF%E6%80%8E%E4%B9%88%E5%B7%A5%E4%BD%9C%E7%9A%84/</link><pubDate>Sat, 10 Jan 2026 16:33:38 +0000</pubDate><guid>https://iamxurulin.github.io/p/rabbitmq%E7%9A%84%E6%B6%88%E6%81%AF%E7%A1%AE%E8%AE%A4%E6%9C%BA%E5%88%B6%E6%98%AF%E6%80%8E%E4%B9%88%E5%B7%A5%E4%BD%9C%E7%9A%84/</guid><description>&lt;p&gt;RabbitMQ的消息确认机制主要是用于确保消息的&lt;strong&gt;可靠传递，防止消息丢失&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;prefetch仅在&lt;strong&gt;消费者手动确认消息模式&lt;/strong&gt;下生效。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>RabbitMQ的消息确认机制是怎么工作的</title>
+        <link>https://iamxurulin.github.io/p/rabbitmq%E7%9A%84%E6%B6%88%E6%81%AF%E7%A1%AE%E8%AE%A4%E6%9C%BA%E5%88%B6%E6%98%AF%E6%80%8E%E4%B9%88%E5%B7%A5%E4%BD%9C%E7%9A%84/</link>
+        <pubDate>Sat, 10 Jan 2026 16:33:38 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/rabbitmq%E7%9A%84%E6%B6%88%E6%81%AF%E7%A1%AE%E8%AE%A4%E6%9C%BA%E5%88%B6%E6%98%AF%E6%80%8E%E4%B9%88%E5%B7%A5%E4%BD%9C%E7%9A%84/</guid>
+        <description>&lt;p&gt;RabbitMQ的消息确认机制主要是用于确保消息的&lt;strong&gt;可靠传递，防止消息丢失&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;通过&lt;strong&gt;发布确认&lt;/strong&gt;和&lt;strong&gt;消费者确认&lt;/strong&gt;来实现。&lt;/p&gt;
-&lt;h3 id="发布确认"&gt;发布确认
+&lt;h3 id=&#34;发布确认&#34;&gt;发布确认
 &lt;/h3&gt;&lt;p&gt;当生产者发送消息到RabbitMQ时，可以选择开启发布确认模式，当RabbitMQ成功将消息入队/持久化之后，会发送一个ACK回复生产者，告知消息成功到达队列；
 仅当消息处理失败时会返回NACK。&lt;/p&gt;
 &lt;p&gt;如果生产者在合理的时间内没有收到ACK或者NACK，则可以&lt;strong&gt;重发消息&lt;/strong&gt;。&lt;/p&gt;
-&lt;h3 id="消费者确认"&gt;消费者确认
+&lt;h3 id=&#34;消费者确认&#34;&gt;消费者确认
 &lt;/h3&gt;&lt;p&gt;消费者在处理完一条消息之后，必须发送一个ACK给RabbitMQ，告知RabbitMQ该消息已经处理完成，RabbitMQ在收到ACK之后会将该消息从队列中永久删除。&lt;/p&gt;
-&lt;p&gt;如果RabbitMQ在收到消费者ACK之前检测到消费者已经断开连接，则认为该消息没有被成功处理，RabbitMQ会&lt;strong&gt;重新发送给其他消费者消费&lt;/strong&gt;。&lt;/p&gt;</description></item><item><title>在RabbitMQ中-怎么确保消息不会丢失</title><link>https://iamxurulin.github.io/p/%E5%9C%A8rabbitmq%E4%B8%AD-%E6%80%8E%E4%B9%88%E7%A1%AE%E4%BF%9D%E6%B6%88%E6%81%AF%E4%B8%8D%E4%BC%9A%E4%B8%A2%E5%A4%B1/</link><pubDate>Thu, 08 Jan 2026 17:15:44 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E5%9C%A8rabbitmq%E4%B8%AD-%E6%80%8E%E4%B9%88%E7%A1%AE%E4%BF%9D%E6%B6%88%E6%81%AF%E4%B8%8D%E4%BC%9A%E4%B8%A2%E5%A4%B1/</guid><description>&lt;p&gt;为了确保消息不会丢失，可以从以下3个方面解决：&lt;/p&gt;
+&lt;p&gt;如果RabbitMQ在收到消费者ACK之前检测到消费者已经断开连接，则认为该消息没有被成功处理，RabbitMQ会&lt;strong&gt;重新发送给其他消费者消费&lt;/strong&gt;。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>在RabbitMQ中-怎么确保消息不会丢失</title>
+        <link>https://iamxurulin.github.io/p/%E5%9C%A8rabbitmq%E4%B8%AD-%E6%80%8E%E4%B9%88%E7%A1%AE%E4%BF%9D%E6%B6%88%E6%81%AF%E4%B8%8D%E4%BC%9A%E4%B8%A2%E5%A4%B1/</link>
+        <pubDate>Thu, 08 Jan 2026 17:15:44 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E5%9C%A8rabbitmq%E4%B8%AD-%E6%80%8E%E4%B9%88%E7%A1%AE%E4%BF%9D%E6%B6%88%E6%81%AF%E4%B8%8D%E4%BC%9A%E4%B8%A2%E5%A4%B1/</guid>
+        <description>&lt;p&gt;为了确保消息不会丢失，可以从以下3个方面解决：&lt;/p&gt;
 &lt;p&gt;1.在创建队列的时候设置durable为true，发布消息的时候设置delivery为2，从而确保队列和消息都是&lt;strong&gt;持久&lt;/strong&gt;的。&lt;/p&gt;
 &lt;p&gt;这样，就算是RabbitMQ服务器重启也不会造成消息的丢失。&lt;/p&gt;
 &lt;p&gt;2.开启&lt;strong&gt;发布确认模式&lt;/strong&gt;，这样的话，生产者会等待服务器的确认响应，确保消息已经成功存储。&lt;/p&gt;
-&lt;p&gt;3.使用明确的&lt;strong&gt;消费者确认&lt;/strong&gt;机制，当消费者处理完消息之后，向RabbitMQ发送确认，只有在RabbitMQ收到消费者发来的确认之后才会将消息从队列中删除。&lt;/p&gt;</description></item><item><title>RabbitMQ的交换机有哪几种类型</title><link>https://iamxurulin.github.io/p/rabbitmq%E7%9A%84%E4%BA%A4%E6%8D%A2%E6%9C%BA%E6%9C%89%E5%93%AA%E5%87%A0%E7%A7%8D%E7%B1%BB%E5%9E%8B/</link><pubDate>Tue, 06 Jan 2026 17:52:56 +0000</pubDate><guid>https://iamxurulin.github.io/p/rabbitmq%E7%9A%84%E4%BA%A4%E6%8D%A2%E6%9C%BA%E6%9C%89%E5%93%AA%E5%87%A0%E7%A7%8D%E7%B1%BB%E5%9E%8B/</guid><description>&lt;p&gt;RabbitMQ是一个可实现异步通信和任务解耦的消息队列系统。&lt;/p&gt;
+&lt;p&gt;3.使用明确的&lt;strong&gt;消费者确认&lt;/strong&gt;机制，当消费者处理完消息之后，向RabbitMQ发送确认，只有在RabbitMQ收到消费者发来的确认之后才会将消息从队列中删除。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>RabbitMQ的交换机有哪几种类型</title>
+        <link>https://iamxurulin.github.io/p/rabbitmq%E7%9A%84%E4%BA%A4%E6%8D%A2%E6%9C%BA%E6%9C%89%E5%93%AA%E5%87%A0%E7%A7%8D%E7%B1%BB%E5%9E%8B/</link>
+        <pubDate>Tue, 06 Jan 2026 17:52:56 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/rabbitmq%E7%9A%84%E4%BA%A4%E6%8D%A2%E6%9C%BA%E6%9C%89%E5%93%AA%E5%87%A0%E7%A7%8D%E7%B1%BB%E5%9E%8B/</guid>
+        <description>&lt;p&gt;RabbitMQ是一个可实现异步通信和任务解耦的消息队列系统。&lt;/p&gt;
 &lt;p&gt;主要有Direct、Fanout、Topic、Headers这4种类型。&lt;/p&gt;
 &lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Direct&lt;/th&gt;
-&lt;th&gt;根据消息的routing key精确匹配binding key，只有完全匹配的消息才会被转发到对应的Queue&lt;/th&gt;
-&lt;th&gt;适合像日志系统这种需要精确匹配的场景&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Fanout&lt;/td&gt;
-&lt;td&gt;不考虑routing key，直接将接收到的每一条消息都广播到所有绑定到它的Queue&lt;/td&gt;
-&lt;td&gt;适合广播消息，比如社交媒体的消息推送&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Topic&lt;/td&gt;
-&lt;td&gt;根据消息的routing key和binding key的模式匹配决定消息的流转路径&lt;/td&gt;
-&lt;td&gt;适合需要根据特定模式进行消息路由的场景，比如订单系统&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Headers&lt;/td&gt;
-&lt;td&gt;根据消息的头部属性来路由，提供更加复杂和灵活的路由策略&lt;/td&gt;
-&lt;td&gt;适合需要更复杂路由逻辑的场景，比如不同部门处理的邮件系统&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;</description></item><item><title>说说RabbitMQ的基本架构</title><link>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4rabbitmq%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%84/</link><pubDate>Mon, 05 Jan 2026 15:37:48 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4rabbitmq%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%84/</guid><description>&lt;p&gt;RabbitMQ的架构有以下6个关键组件：&lt;/p&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;Direct&lt;/th&gt;
+					&lt;th&gt;根据消息的routing key精确匹配binding key，只有完全匹配的消息才会被转发到对应的Queue&lt;/th&gt;
+					&lt;th&gt;适合像日志系统这种需要精确匹配的场景&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;Fanout&lt;/td&gt;
+					&lt;td&gt;不考虑routing key，直接将接收到的每一条消息都广播到所有绑定到它的Queue&lt;/td&gt;
+					&lt;td&gt;适合广播消息，比如社交媒体的消息推送&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;Topic&lt;/td&gt;
+					&lt;td&gt;根据消息的routing key和binding key的模式匹配决定消息的流转路径&lt;/td&gt;
+					&lt;td&gt;适合需要根据特定模式进行消息路由的场景，比如订单系统&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;Headers&lt;/td&gt;
+					&lt;td&gt;根据消息的头部属性来路由，提供更加复杂和灵活的路由策略&lt;/td&gt;
+					&lt;td&gt;适合需要更复杂路由逻辑的场景，比如不同部门处理的邮件系统&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+        </item>
+        <item>
+        <title>说说RabbitMQ的基本架构</title>
+        <link>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4rabbitmq%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%84/</link>
+        <pubDate>Mon, 05 Jan 2026 15:37:48 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4rabbitmq%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%84/</guid>
+        <description>&lt;p&gt;RabbitMQ的架构有以下6个关键组件：&lt;/p&gt;
 &lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Producer&lt;/th&gt;
-&lt;th&gt;生产者&lt;/th&gt;
-&lt;th&gt;主要负责生产消息并发送给RabbitMQ&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Exchange&lt;/td&gt;
-&lt;td&gt;交换机&lt;/td&gt;
-&lt;td&gt;生产者发过来的消息并不是直接投进队列，而是 交给Exchange，让Exchange根据消息中的Routing Key来决定把它扔进哪个队列&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Queue&lt;/td&gt;
-&lt;td&gt;队列&lt;/td&gt;
-&lt;td&gt;这是消息最终存放的地方，在这里等待被取走&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Binding&lt;/td&gt;
-&lt;td&gt;绑定&lt;/td&gt;
-&lt;td&gt;把Exchange和Queue连接起来，告诉交换机这个消息需要扔进哪个队列&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Consumer&lt;/td&gt;
-&lt;td&gt;消费者&lt;/td&gt;
-&lt;td&gt;从Queue中取出消息并处理&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Virtual Host&lt;/td&gt;
-&lt;td&gt;虚拟主机&lt;/td&gt;
-&lt;td&gt;VHost之间是完全隔离的，互不影响，通常用于区分不同的业务线&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;Producer&lt;/th&gt;
+					&lt;th&gt;生产者&lt;/th&gt;
+					&lt;th&gt;主要负责生产消息并发送给RabbitMQ&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;Exchange&lt;/td&gt;
+					&lt;td&gt;交换机&lt;/td&gt;
+					&lt;td&gt;生产者发过来的消息并不是直接投进队列，而是 交给Exchange，让Exchange根据消息中的Routing Key来决定把它扔进哪个队列&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;Queue&lt;/td&gt;
+					&lt;td&gt;队列&lt;/td&gt;
+					&lt;td&gt;这是消息最终存放的地方，在这里等待被取走&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;Binding&lt;/td&gt;
+					&lt;td&gt;绑定&lt;/td&gt;
+					&lt;td&gt;把Exchange和Queue连接起来，告诉交换机这个消息需要扔进哪个队列&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;Consumer&lt;/td&gt;
+					&lt;td&gt;消费者&lt;/td&gt;
+					&lt;td&gt;从Queue中取出消息并处理&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;Virtual Host&lt;/td&gt;
+					&lt;td&gt;虚拟主机&lt;/td&gt;
+					&lt;td&gt;VHost之间是完全隔离的，互不影响，通常用于区分不同的业务线&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;如果把RabbitMQ比作&lt;strong&gt;快递物流系统&lt;/strong&gt;，那么6个关键组件分别对应的角色如下：&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;生产者&lt;/strong&gt;是&lt;em&gt;发件人&lt;/em&gt;，&lt;strong&gt;交换机&lt;/strong&gt;是&lt;em&gt;快递分拣中心&lt;/em&gt;，&lt;strong&gt;队列&lt;/strong&gt;就是&lt;em&gt;快递仓库&lt;/em&gt;，&lt;strong&gt;绑定&lt;/strong&gt;就是&lt;em&gt;分拣规则表&lt;/em&gt;，&lt;strong&gt;消费者&lt;/strong&gt;就是&lt;em&gt;收件人&lt;/em&gt;，&lt;strong&gt;虚拟主机&lt;/strong&gt;就是&lt;em&gt;快递分公司&lt;/em&gt;。&lt;/p&gt;
 &lt;p&gt;注意⚠️：&lt;/p&gt;
-&lt;p&gt;一个消息可以被拷贝到多个Queue，但是一个队列里的消息只能被消费一次。&lt;/p&gt;</description></item><item><title>A2A协议和MCP协议的关系</title><link>https://iamxurulin.github.io/p/a2a%E5%8D%8F%E8%AE%AE%E5%92%8Cmcp%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%85%B3%E7%B3%BB/</link><pubDate>Mon, 05 Jan 2026 13:34:53 +0000</pubDate><guid>https://iamxurulin.github.io/p/a2a%E5%8D%8F%E8%AE%AE%E5%92%8Cmcp%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%85%B3%E7%B3%BB/</guid><description>&lt;p&gt;在AI生态系统中，A2A协议和MCP协议是两个扮演着不同角色但是又&lt;strong&gt;互补&lt;/strong&gt;的&lt;strong&gt;标准协议&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;一个消息可以被拷贝到多个Queue，但是一个队列里的消息只能被消费一次。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>A2A协议和MCP协议的关系</title>
+        <link>https://iamxurulin.github.io/p/a2a%E5%8D%8F%E8%AE%AE%E5%92%8Cmcp%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%85%B3%E7%B3%BB/</link>
+        <pubDate>Mon, 05 Jan 2026 13:34:53 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/a2a%E5%8D%8F%E8%AE%AE%E5%92%8Cmcp%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%85%B3%E7%B3%BB/</guid>
+        <description>&lt;p&gt;在AI生态系统中，A2A协议和MCP协议是两个扮演着不同角色但是又&lt;strong&gt;互补&lt;/strong&gt;的&lt;strong&gt;标准协议&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;A2A（Agent to Agent）协议是一个应用层协议，允许不同的AI智能体以“智能体”或者“用户”的身份进行交流，更关注智能体之间的沟通和协作。&lt;/p&gt;
 &lt;p&gt;MCP（Model Context Protocol）协议则提供了AI模型与外部的数据源和工具的标准化连接方式，允许AI模型通过统一的接口访问文件、数据库、API等资源。&lt;/p&gt;
 &lt;p&gt;A2A类似于一个&lt;strong&gt;电话簿&lt;/strong&gt;，目的是让不同的AI智能体可以相互 联系和协作；&lt;/p&gt;
-&lt;p&gt;而MCP则类似于一个&lt;strong&gt;工具说明书&lt;/strong&gt;，主要是为了告诉AI模型怎么使用外部的工具和数据。&lt;/p&gt;</description></item><item><title>聊聊RabbitMQ</title><link>https://iamxurulin.github.io/p/%E8%81%8A%E8%81%8Arabbitmq/</link><pubDate>Sun, 04 Jan 2026 16:07:46 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E8%81%8A%E8%81%8Arabbitmq/</guid><description>&lt;p&gt;RabbitMQ是一个开源的&lt;strong&gt;消息中间件&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;而MCP则类似于一个&lt;strong&gt;工具说明书&lt;/strong&gt;，主要是为了告诉AI模型怎么使用外部的工具和数据。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>聊聊RabbitMQ</title>
+        <link>https://iamxurulin.github.io/p/%E8%81%8A%E8%81%8Arabbitmq/</link>
+        <pubDate>Sun, 04 Jan 2026 16:07:46 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E8%81%8A%E8%81%8Arabbitmq/</guid>
+        <description>&lt;p&gt;RabbitMQ是一个开源的&lt;strong&gt;消息中间件&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;如果没有RabbitMQ，系统A直接把数据传给系统B，这样当B忙不过来或者挂了的时候，A就会卡死或者造成数据丢失。&lt;/p&gt;
 &lt;p&gt;但是，如果有了RabbitMQ，系统A可以把数据传给RabbitMQ，而RabbitMQ则负责把数据暂存起来，再按照系统B的处理能力，稳稳地传送给B。&lt;/p&gt;
 &lt;p&gt;RabbitMQ主要有3大应用场景：&lt;/p&gt;
@@ -134,21 +239,57 @@
 &lt;p&gt;所以，中间加个RabbitMQ，这样订单系统只需要把“我要下单”的消息发送给RabbitMQ，而积分系统什么时候恢复那就什么时候再去取消息，从而累加积分。&lt;/p&gt;
 &lt;p&gt;通过这样引入RabbitMQ，可以实现&lt;strong&gt;应用之间的解耦&lt;/strong&gt;，从而降低系统的依赖。&lt;/p&gt;
 &lt;p&gt;3.在双十一的秒杀场景下，通常会有几百上千万的请求在一瞬间涌进来，这个时候数据库可能就直接崩了。&lt;/p&gt;
-&lt;p&gt;通过引入RabbitMQ，先把请求全部扔进RabbitMQ排队，后台系统再按照自己的节奏从RabbitMQ中拉取请求进行处理，从而实现&lt;strong&gt;流量削峰&lt;/strong&gt;，保护数据库的作用。&lt;/p&gt;</description></item><item><title>什么是循环依赖</title><link>https://iamxurulin.github.io/p/%E4%BB%80%E4%B9%88%E6%98%AF%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96/</link><pubDate>Mon, 29 Dec 2025 16:48:25 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E4%BB%80%E4%B9%88%E6%98%AF%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96/</guid><description>&lt;p&gt;循环依赖是指两个或者多个bean之间相互引用，形成了一个闭环。&lt;/p&gt;
+&lt;p&gt;通过引入RabbitMQ，先把请求全部扔进RabbitMQ排队，后台系统再按照自己的节奏从RabbitMQ中拉取请求进行处理，从而实现&lt;strong&gt;流量削峰&lt;/strong&gt;，保护数据库的作用。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>什么是循环依赖</title>
+        <link>https://iamxurulin.github.io/p/%E4%BB%80%E4%B9%88%E6%98%AF%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96/</link>
+        <pubDate>Mon, 29 Dec 2025 16:48:25 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E4%BB%80%E4%B9%88%E6%98%AF%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96/</guid>
+        <description>&lt;p&gt;循环依赖是指两个或者多个bean之间相互引用，形成了一个闭环。&lt;/p&gt;
 &lt;p&gt;最典型的场景就是：&lt;/p&gt;
 &lt;p&gt;比如Spring正在创建Bean A，发现它依赖B，于是就去创建B，结果在创建B的时候，又发现它依赖A。&lt;/p&gt;
 &lt;p&gt;但是这个时候A正在创建中，还没有完全生成，这样B就拿不到A的引用，所以该咋办呢？&lt;/p&gt;
 &lt;p&gt;这里又分为&lt;strong&gt;构造器注入&lt;/strong&gt;和&lt;strong&gt;Setter注入&lt;/strong&gt;两种情况：&lt;/p&gt;
 &lt;p&gt;如果是构造器注入，那好办，Spring直接就给你抛出&lt;strong&gt;BeanCurrentlyInCreationException&lt;/strong&gt;错误。&lt;/p&gt;
-&lt;p&gt;如果是Setter注入，Spring则是通过&lt;strong&gt;三级缓存机制&lt;/strong&gt;来解决。&lt;/p&gt;</description></item><item><title>Kafka的索引设计有什么亮点</title><link>https://iamxurulin.github.io/p/kafka%E7%9A%84%E7%B4%A2%E5%BC%95%E8%AE%BE%E8%AE%A1%E6%9C%89%E4%BB%80%E4%B9%88%E4%BA%AE%E7%82%B9/</link><pubDate>Mon, 29 Dec 2025 16:31:00 +0000</pubDate><guid>https://iamxurulin.github.io/p/kafka%E7%9A%84%E7%B4%A2%E5%BC%95%E8%AE%BE%E8%AE%A1%E6%9C%89%E4%BB%80%E4%B9%88%E4%BA%AE%E7%82%B9/</guid><description>&lt;p&gt;Kafka索引设计的亮点主要有以下4个方面：&lt;/p&gt;
+&lt;p&gt;如果是Setter注入，Spring则是通过&lt;strong&gt;三级缓存机制&lt;/strong&gt;来解决。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Kafka的索引设计有什么亮点</title>
+        <link>https://iamxurulin.github.io/p/kafka%E7%9A%84%E7%B4%A2%E5%BC%95%E8%AE%BE%E8%AE%A1%E6%9C%89%E4%BB%80%E4%B9%88%E4%BA%AE%E7%82%B9/</link>
+        <pubDate>Mon, 29 Dec 2025 16:31:00 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/kafka%E7%9A%84%E7%B4%A2%E5%BC%95%E8%AE%BE%E8%AE%A1%E6%9C%89%E4%BB%80%E4%B9%88%E4%BA%AE%E7%82%B9/</guid>
+        <description>&lt;p&gt;Kafka索引设计的亮点主要有以下4个方面：&lt;/p&gt;
 &lt;p&gt;1.kafka通过&lt;strong&gt;稀疏索引&lt;/strong&gt;只存储每隔一定间隔的消息位置，而不是对每条消息都建立索引，这样可以大幅度减少内存的占用。&lt;/p&gt;
 &lt;p&gt;2.Kafka通过将日志文件拆分成多个&lt;strong&gt;段文件&lt;/strong&gt;来存储，每个段文件中包含一个日志文件和对应的索引文件。&lt;/p&gt;
 &lt;p&gt;3.kafka为了降低磁盘的随机写入成本，采用&lt;strong&gt;顺序写入&lt;/strong&gt;文件的方式，提升了写入性能。&lt;/p&gt;
-&lt;p&gt;4.Kafka为了避免逐个扫描，通过&lt;strong&gt;offset&lt;/strong&gt;定位消息，再结合稀疏索引可以快速定位到近似位置后再进行顺序查找，从而保证高效地读取。&lt;/p&gt;</description></item><item><title>kafka中的时间轮实现</title><link>https://iamxurulin.github.io/p/kafka%E4%B8%AD%E7%9A%84%E6%97%B6%E9%97%B4%E8%BD%AE%E5%AE%9E%E7%8E%B0/</link><pubDate>Mon, 29 Dec 2025 15:49:00 +0000</pubDate><guid>https://iamxurulin.github.io/p/kafka%E4%B8%AD%E7%9A%84%E6%97%B6%E9%97%B4%E8%BD%AE%E5%AE%9E%E7%8E%B0/</guid><description>&lt;p&gt;Kafka中的时间轮是一种用于实现&lt;strong&gt;定时清理&lt;/strong&gt;、&lt;strong&gt;消息过期&lt;/strong&gt;、&lt;strong&gt;心跳超时&lt;/strong&gt;等功能的定时任务调度机制。&lt;/p&gt;
+&lt;p&gt;4.Kafka为了避免逐个扫描，通过&lt;strong&gt;offset&lt;/strong&gt;定位消息，再结合稀疏索引可以快速定位到近似位置后再进行顺序查找，从而保证高效地读取。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>kafka中的时间轮实现</title>
+        <link>https://iamxurulin.github.io/p/kafka%E4%B8%AD%E7%9A%84%E6%97%B6%E9%97%B4%E8%BD%AE%E5%AE%9E%E7%8E%B0/</link>
+        <pubDate>Mon, 29 Dec 2025 15:49:00 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/kafka%E4%B8%AD%E7%9A%84%E6%97%B6%E9%97%B4%E8%BD%AE%E5%AE%9E%E7%8E%B0/</guid>
+        <description>&lt;p&gt;Kafka中的时间轮是一种用于实现&lt;strong&gt;定时清理&lt;/strong&gt;、&lt;strong&gt;消息过期&lt;/strong&gt;、&lt;strong&gt;心跳超时&lt;/strong&gt;等功能的定时任务调度机制。&lt;/p&gt;
 &lt;p&gt;通过时间轮可以避免在大量的定时任务中进行逐个扫描，可以实现接近&lt;strong&gt;O(1)&lt;strong&gt;的延迟任务管理，降低了内存和CPU的消耗，比较适合管理大量&lt;/strong&gt;短时和中长期的定时任务&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;时间轮，它可以看成是一个&lt;strong&gt;环形数组&lt;/strong&gt;，其中，每个槽表示一个时间间隔。&lt;/p&gt;
 &lt;p&gt;Kafka会在时间轮的每个槽中根据&lt;strong&gt;任务的到期时间&lt;/strong&gt;放置延迟任务，当时间轮转到任务所在的槽时，就执行该槽内的任务。&lt;/p&gt;
-&lt;p&gt;如果存在到期未完成的任务，则会被&lt;strong&gt;重新分配到下一轮&lt;/strong&gt;。&lt;/p&gt;</description></item><item><title>Kafka中关于事务消息的实现</title><link>https://iamxurulin.github.io/p/kafka%E4%B8%AD%E5%85%B3%E4%BA%8E%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF%E7%9A%84%E5%AE%9E%E7%8E%B0/</link><pubDate>Mon, 29 Dec 2025 15:06:48 +0000</pubDate><guid>https://iamxurulin.github.io/p/kafka%E4%B8%AD%E5%85%B3%E4%BA%8E%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF%E7%9A%84%E5%AE%9E%E7%8E%B0/</guid><description>&lt;p&gt;Kafka的事务消息实现了消息在生产、传输和消费的过程中的“仅一次”传递，也就是所谓的Exactly Once语义。&lt;/p&gt;
+&lt;p&gt;如果存在到期未完成的任务，则会被&lt;strong&gt;重新分配到下一轮&lt;/strong&gt;。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Kafka中关于事务消息的实现</title>
+        <link>https://iamxurulin.github.io/p/kafka%E4%B8%AD%E5%85%B3%E4%BA%8E%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF%E7%9A%84%E5%AE%9E%E7%8E%B0/</link>
+        <pubDate>Mon, 29 Dec 2025 15:06:48 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/kafka%E4%B8%AD%E5%85%B3%E4%BA%8E%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF%E7%9A%84%E5%AE%9E%E7%8E%B0/</guid>
+        <description>&lt;p&gt;Kafka的事务消息实现了消息在生产、传输和消费的过程中的“仅一次”传递，也就是所谓的Exactly Once语义。&lt;/p&gt;
 &lt;p&gt;Kafka的事务消息主要由&lt;strong&gt;事务协调器&lt;/strong&gt;、&lt;strong&gt;幂等生产者&lt;/strong&gt;和&lt;strong&gt;事务性消费&lt;/strong&gt;这三个核心组件来实现。&lt;/p&gt;
 &lt;p&gt;事务协调器主要负责事务的启动、提交和终止管理，将事务状态记录到__transaction_state内部的主题；&lt;/p&gt;
 &lt;p&gt;为了确保同一事务的每条消息只写入一次，Kafka Producer通过Producer ID来作为事务的唯一性标志。&lt;/p&gt;
@@ -157,13 +298,40 @@
 &lt;p&gt;首先是生产者向Transaction Coordinator&lt;strong&gt;请求&lt;/strong&gt;启动事务；&lt;/p&gt;
 &lt;p&gt;接下来生产者为了保证幂等性，给每条消息都带上唯一的Producer ID和Sequence Number，&lt;strong&gt;开始向Kafka写入事务消息&lt;/strong&gt;；&lt;/p&gt;
 &lt;p&gt;当所有消息都写入完成后，生产者开始向事务协调去发送commit或者abort请求提交或者终止事务。&lt;/p&gt;
-&lt;p&gt;最后，消费者为了实现最终的数据一致性，可以通过设置read_commited 隔离级别，&lt;strong&gt;只消费已提交的消息&lt;/strong&gt;。&lt;/p&gt;</description></item><item><title>RocketMQ的事务消息有什么缺点你知道吗</title><link>https://iamxurulin.github.io/p/rocketmq%E7%9A%84%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF%E6%9C%89%E4%BB%80%E4%B9%88%E7%BC%BA%E7%82%B9%E4%BD%A0%E7%9F%A5%E9%81%93%E5%90%97/</link><pubDate>Sun, 28 Dec 2025 17:01:10 +0000</pubDate><guid>https://iamxurulin.github.io/p/rocketmq%E7%9A%84%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF%E6%9C%89%E4%BB%80%E4%B9%88%E7%BC%BA%E7%82%B9%E4%BD%A0%E7%9F%A5%E9%81%93%E5%90%97/</guid><description>&lt;p&gt;RockMQ事务消息的缺点主要就以下几个方面：&lt;/p&gt;
+&lt;p&gt;最后，消费者为了实现最终的数据一致性，可以通过设置read_commited 隔离级别，&lt;strong&gt;只消费已提交的消息&lt;/strong&gt;。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>RocketMQ的事务消息有什么缺点你知道吗</title>
+        <link>https://iamxurulin.github.io/p/rocketmq%E7%9A%84%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF%E6%9C%89%E4%BB%80%E4%B9%88%E7%BC%BA%E7%82%B9%E4%BD%A0%E7%9F%A5%E9%81%93%E5%90%97/</link>
+        <pubDate>Sun, 28 Dec 2025 17:01:10 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/rocketmq%E7%9A%84%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF%E6%9C%89%E4%BB%80%E4%B9%88%E7%BC%BA%E7%82%B9%E4%BD%A0%E7%9F%A5%E9%81%93%E5%90%97/</guid>
+        <description>&lt;p&gt;RockMQ事务消息的缺点主要就以下几个方面：&lt;/p&gt;
 &lt;p&gt;从&lt;strong&gt;改造成本&lt;/strong&gt;来看，RocketMQ需要改造它的原始逻辑来实现一个特定的接口，并且还需要在应用层来处理一个复杂的回查逻辑，从而确保回查不会重复或者丢失。&lt;/p&gt;
 &lt;p&gt;在&lt;strong&gt;可用性&lt;/strong&gt;方面，由于RocketMQ的事务消息的实现是先发送半消息，如果MQ集群挂了，那么半消息就没法发送成功，后续的逻辑就无法再执行下去了，也就是说整个应用无法正常执行了。&lt;/p&gt;
-&lt;p&gt;还有一个缺点就是RocketMQ只支持&lt;strong&gt;单事务消息&lt;/strong&gt;。&lt;/p&gt;</description></item><item><title>说说消息队列的推模式和拉模式</title><link>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%9A%84%E6%8E%A8%E6%A8%A1%E5%BC%8F%E5%92%8C%E6%8B%89%E6%A8%A1%E5%BC%8F/</link><pubDate>Sun, 28 Dec 2025 16:28:14 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%9A%84%E6%8E%A8%E6%A8%A1%E5%BC%8F%E5%92%8C%E6%8B%89%E6%A8%A1%E5%BC%8F/</guid><description>&lt;p&gt;&lt;strong&gt;推模式&lt;/strong&gt;是消息队列主动将消息从Broker推送给Consumer，这种模式它的实时性比较好，消息可以立即送达消费者，但是缺点就是决定权不在消费者手上，在高并发场景下容易造成消费者过载。&lt;/p&gt;
+&lt;p&gt;还有一个缺点就是RocketMQ只支持&lt;strong&gt;单事务消息&lt;/strong&gt;。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>说说消息队列的推模式和拉模式</title>
+        <link>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%9A%84%E6%8E%A8%E6%A8%A1%E5%BC%8F%E5%92%8C%E6%8B%89%E6%A8%A1%E5%BC%8F/</link>
+        <pubDate>Sun, 28 Dec 2025 16:28:14 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%9A%84%E6%8E%A8%E6%A8%A1%E5%BC%8F%E5%92%8C%E6%8B%89%E6%A8%A1%E5%BC%8F/</guid>
+        <description>&lt;p&gt;&lt;strong&gt;推模式&lt;/strong&gt;是消息队列主动将消息从Broker推送给Consumer，这种模式它的实时性比较好，消息可以立即送达消费者，但是缺点就是决定权不在消费者手上，在高并发场景下容易造成消费者过载。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;拉模式&lt;/strong&gt;是消费者主动从消息队列中的Broker拉取消息，这种模式就是根据消费者自身的负载和消费能力来决定拉去消息的频率，这样就可以避免过载，但是这种模式的实时性比不上推模式，而且还会导致消息延迟。&lt;/p&gt;
 &lt;p&gt;RocketMQ和Kafka都选择了&lt;strong&gt;拉模式&lt;/strong&gt;，对于拉模式无法保证实时性的缺点，他们采取的是&lt;strong&gt;长轮询&lt;/strong&gt;的方式来解决。&lt;/p&gt;
-&lt;p&gt;主要是通过在消费者去Broker拉取消息时，当有消息存在的话，那自然就直接返回消息；当没有消息时，则保持连接，暂时hold住请求，之后如果在对应的队列或者分区有新的消息到来时就通过之前hold住的请求及时地返回消息。&lt;/p&gt;</description></item><item><title>消息队列如何处理消息堆积</title><link>https://iamxurulin.github.io/p/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E6%B6%88%E6%81%AF%E5%A0%86%E7%A7%AF/</link><pubDate>Sun, 28 Dec 2025 15:14:44 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E6%B6%88%E6%81%AF%E5%A0%86%E7%A7%AF/</guid><description>&lt;p&gt;在消息队列中，当消息的生产速度远远大于消费速度时，将会导致大量的消息积压在队列中，这样就会形成&lt;strong&gt;消息堆积&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;主要是通过在消费者去Broker拉取消息时，当有消息存在的话，那自然就直接返回消息；当没有消息时，则保持连接，暂时hold住请求，之后如果在对应的队列或者分区有新的消息到来时就通过之前hold住的请求及时地返回消息。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>消息队列如何处理消息堆积</title>
+        <link>https://iamxurulin.github.io/p/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E6%B6%88%E6%81%AF%E5%A0%86%E7%A7%AF/</link>
+        <pubDate>Sun, 28 Dec 2025 15:14:44 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E6%B6%88%E6%81%AF%E5%A0%86%E7%A7%AF/</guid>
+        <description>&lt;p&gt;在消息队列中，当消息的生产速度远远大于消费速度时，将会导致大量的消息积压在队列中，这样就会形成&lt;strong&gt;消息堆积&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;那如何处理消息堆积呢？&lt;/p&gt;
 &lt;p&gt;一般来说，我们需要定位一下消费慢的原因，如果是bug则处理bug；
 如果是因为消费者自身的&lt;strong&gt;消费能力弱&lt;/strong&gt;，则需要考虑提升消费者的消费能力。&lt;/p&gt;
@@ -171,26 +339,85 @@
 &lt;p&gt;1.可以考虑增加消费者的线程数量，提高消费者的并发消费能力；&lt;/p&gt;
 &lt;p&gt;2.如果是在分布式系统中，可以增加多个消费实例，从而提高消费速率。&lt;/p&gt;
 &lt;p&gt;3.优化消费者的代码，比如可以减少I/O操作或者使用批量处理等等。&lt;/p&gt;
-&lt;p&gt;上面这些是通过消费者端进行解决的方法，如果是从生产端解决的话，可以考虑对生产端进行&lt;strong&gt;限流&lt;/strong&gt;，降低生产速率。&lt;/p&gt;</description></item><item><title>消息队列如何保证消息的有效性</title><link>https://iamxurulin.github.io/p/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%B6%88%E6%81%AF%E7%9A%84%E6%9C%89%E6%95%88%E6%80%A7/</link><pubDate>Sat, 27 Dec 2025 17:56:38 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%B6%88%E6%81%AF%E7%9A%84%E6%9C%89%E6%95%88%E6%80%A7/</guid><description>&lt;p&gt;为了保证消息的有效性，可采取如下方法：&lt;/p&gt;
+&lt;p&gt;上面这些是通过消费者端进行解决的方法，如果是从生产端解决的话，可以考虑对生产端进行&lt;strong&gt;限流&lt;/strong&gt;，降低生产速率。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>消息队列如何保证消息的有效性</title>
+        <link>https://iamxurulin.github.io/p/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%B6%88%E6%81%AF%E7%9A%84%E6%9C%89%E6%95%88%E6%80%A7/</link>
+        <pubDate>Sat, 27 Dec 2025 17:56:38 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%B6%88%E6%81%AF%E7%9A%84%E6%9C%89%E6%95%88%E6%80%A7/</guid>
+        <description>&lt;p&gt;为了保证消息的有效性，可采取如下方法：&lt;/p&gt;
 &lt;p&gt;1.为了确保消息按照生产者的发送顺序来消费，可以使用&lt;strong&gt;单个生产者&lt;/strong&gt;向&lt;strong&gt;单个队列&lt;/strong&gt;发送消息，再由&lt;strong&gt;单个消费者&lt;/strong&gt;来处理消息。&lt;/p&gt;
 &lt;p&gt;2.对于像Kafka和RocketMQ这种支持分区的消息队列，可以通过&lt;strong&gt;Partition Key&lt;/strong&gt;将消息发送到一个特定的分区。因为每个分区的内部都是有序的，这样一来就能保证具有相同Partition Key的消息都按照顺序来消费。&lt;/p&gt;
-&lt;p&gt;3.对于像RabbitMQ这种支持&lt;strong&gt;顺序队列&lt;/strong&gt;的消息队列，因为消息在队列中的存储顺序和投递顺序都是一致的，如果使用单个顺序队列，那么消息也将按照顺序被消费。&lt;/p&gt;</description></item><item><title>消息队列如何处理重复消息</title><link>https://iamxurulin.github.io/p/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E9%87%8D%E5%A4%8D%E6%B6%88%E6%81%AF/</link><pubDate>Sat, 27 Dec 2025 17:03:04 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E9%87%8D%E5%A4%8D%E6%B6%88%E6%81%AF/</guid><description>&lt;p&gt;对于平常的业务而言，消息重复一般是不可避免的，我们只能在业务上来处理重复消息所带来的影响。&lt;/p&gt;
+&lt;p&gt;3.对于像RabbitMQ这种支持&lt;strong&gt;顺序队列&lt;/strong&gt;的消息队列，因为消息在队列中的存储顺序和投递顺序都是一致的，如果使用单个顺序队列，那么消息也将按照顺序被消费。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>消息队列如何处理重复消息</title>
+        <link>https://iamxurulin.github.io/p/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E9%87%8D%E5%A4%8D%E6%B6%88%E6%81%AF/</link>
+        <pubDate>Sat, 27 Dec 2025 17:03:04 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E9%87%8D%E5%A4%8D%E6%B6%88%E6%81%AF/</guid>
+        <description>&lt;p&gt;对于平常的业务而言，消息重复一般是不可避免的，我们只能在业务上来处理重复消息所带来的影响。&lt;/p&gt;
 &lt;p&gt;为了保证同一条消息无论被消费多少次，它的结果都是一样的，需要让消费者的处理逻辑具有幂等性。&lt;/p&gt;
 &lt;p&gt;为了实现幂等处理重复消息，可以给每条消息分配一个全局的唯一ID，当消费者接收消息时，先检查一下这个ID是否已经处理，如果已经处理则直接返回，如果没有处理，则执行逻辑并记录一下ID。&lt;/p&gt;
-&lt;p&gt;除了分配全局唯一ID，对于订单数据来说，还可以设计一个严格的状态流转（比如：待支付→已支付→待发货→已发货），这样在每次处理消息前对当前状态进行检查，看是否符合操作条件。&lt;/p&gt;</description></item><item><title>消息队列如何保证消息不丢失</title><link>https://iamxurulin.github.io/p/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%B6%88%E6%81%AF%E4%B8%8D%E4%B8%A2%E5%A4%B1/</link><pubDate>Sat, 27 Dec 2025 16:15:36 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%B6%88%E6%81%AF%E4%B8%8D%E4%B8%A2%E5%A4%B1/</guid><description>&lt;p&gt;为了保证消息不丢失，需要&lt;strong&gt;生产消&lt;/strong&gt;息、&lt;strong&gt;存储消息&lt;/strong&gt;和&lt;strong&gt;消费消息&lt;/strong&gt;这三个阶段协同配合。&lt;/p&gt;
+&lt;p&gt;除了分配全局唯一ID，对于订单数据来说，还可以设计一个严格的状态流转（比如：待支付→已支付→待发货→已发货），这样在每次处理消息前对当前状态进行检查，看是否符合操作条件。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>消息队列如何保证消息不丢失</title>
+        <link>https://iamxurulin.github.io/p/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%B6%88%E6%81%AF%E4%B8%8D%E4%B8%A2%E5%A4%B1/</link>
+        <pubDate>Sat, 27 Dec 2025 16:15:36 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%B6%88%E6%81%AF%E4%B8%8D%E4%B8%A2%E5%A4%B1/</guid>
+        <description>&lt;p&gt;为了保证消息不丢失，需要&lt;strong&gt;生产消&lt;/strong&gt;息、&lt;strong&gt;存储消息&lt;/strong&gt;和&lt;strong&gt;消费消息&lt;/strong&gt;这三个阶段协同配合。&lt;/p&gt;
 &lt;p&gt;当生产者在发送消息时，需要通过消息确认机制来确保消息的成功到达。&lt;/p&gt;
 &lt;p&gt;我们知道存储在内存中的消息是断电不保存的，因此，为了避免消息因为服务器的宕机或者重启而丢失，需要在Broker收到消息后，将其持久化到磁盘中。&lt;/p&gt;
-&lt;p&gt;在消费者处理完消息后，需要向消息队列发送确认，如果没有收到消费者发送过来的确认，消息队列则需要重新投递该消息。&lt;/p&gt;</description></item><item><title>说一下消息队列有哪些模型</title><link>https://iamxurulin.github.io/p/%E8%AF%B4%E4%B8%80%E4%B8%8B%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E6%9C%89%E5%93%AA%E4%BA%9B%E6%A8%A1%E5%9E%8B/</link><pubDate>Sat, 27 Dec 2025 15:36:30 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E8%AF%B4%E4%B8%80%E4%B8%8B%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E6%9C%89%E5%93%AA%E4%BA%9B%E6%A8%A1%E5%9E%8B/</guid><description>&lt;p&gt;常见的消息队列模型主要有&lt;strong&gt;发布/订阅模型&lt;/strong&gt;和&lt;strong&gt;队列模型&lt;/strong&gt;（也称点对点模型）两种。&lt;/p&gt;
+&lt;p&gt;在消费者处理完消息后，需要向消息队列发送确认，如果没有收到消费者发送过来的确认，消息队列则需要重新投递该消息。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>说一下消息队列有哪些模型</title>
+        <link>https://iamxurulin.github.io/p/%E8%AF%B4%E4%B8%80%E4%B8%8B%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E6%9C%89%E5%93%AA%E4%BA%9B%E6%A8%A1%E5%9E%8B/</link>
+        <pubDate>Sat, 27 Dec 2025 15:36:30 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E8%AF%B4%E4%B8%80%E4%B8%8B%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E6%9C%89%E5%93%AA%E4%BA%9B%E6%A8%A1%E5%9E%8B/</guid>
+        <description>&lt;p&gt;常见的消息队列模型主要有&lt;strong&gt;发布/订阅模型&lt;/strong&gt;和&lt;strong&gt;队列模型&lt;/strong&gt;（也称点对点模型）两种。&lt;/p&gt;
 &lt;p&gt;那什么是队列模型呢？所谓的队列模型，指的是消息从生产者发送到队列中，其中的消息只能被一个消费者消费一次，在消费者消费完之后，消息就在队列中被删除了。&lt;/p&gt;
 &lt;p&gt;而发布/订阅模型，则指的是生产者将消息发布到某个Topic中，这样所有订阅了这个主题的消费者都可以接收到这个消息，这种模型比较适用于像广播通知和实时推送这样的场景。&lt;/p&gt;
 &lt;p&gt;需要说明的是，RabbitMQ虽然具有发布/订阅模式，但是在本质上RabbitMQ还是通过同时将消息发送给多个队列来模拟出发布/订阅的效果，其底层依然是基于队列模型的。&lt;/p&gt;
-&lt;p&gt;而RocketMQ和Kafka则都是采用发布/订阅模型的。&lt;/p&gt;</description></item><item><title>解释一下什么是消息队列</title><link>https://iamxurulin.github.io/p/%E8%A7%A3%E9%87%8A%E4%B8%80%E4%B8%8B%E4%BB%80%E4%B9%88%E6%98%AF%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/</link><pubDate>Sat, 27 Dec 2025 14:42:56 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E8%A7%A3%E9%87%8A%E4%B8%80%E4%B8%8B%E4%BB%80%E4%B9%88%E6%98%AF%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/</guid><description>&lt;p&gt;消息队列是一种用于在分布式系统中，解耦发送方和接收方之间通信的&lt;strong&gt;异步通信机制&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;而RocketMQ和Kafka则都是采用发布/订阅模型的。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>解释一下什么是消息队列</title>
+        <link>https://iamxurulin.github.io/p/%E8%A7%A3%E9%87%8A%E4%B8%80%E4%B8%8B%E4%BB%80%E4%B9%88%E6%98%AF%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/</link>
+        <pubDate>Sat, 27 Dec 2025 14:42:56 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E8%A7%A3%E9%87%8A%E4%B8%80%E4%B8%8B%E4%BB%80%E4%B9%88%E6%98%AF%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/</guid>
+        <description>&lt;p&gt;消息队列是一种用于在分布式系统中，解耦发送方和接收方之间通信的&lt;strong&gt;异步通信机制&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;消息队列通过引入一个broker作为中间缓冲区，然后将消息存储在broker中，接下来再由消费者从broker中读取和处理消息，从而实现异步通信。&lt;/p&gt;
 &lt;p&gt;消息队列常见的用途主要有：&lt;/p&gt;
 &lt;p&gt;1.生产者可以在发送消息之后立即返回，而消费者也可以在恰当的时机对消息进行处理。&lt;/p&gt;
 &lt;p&gt;2.在高并发的场景下，消息队列可以暂时存储大量的请求，平滑高峰期的流量，不至于使系统过载。&lt;/p&gt;
-&lt;p&gt;3.为了减少用户请求的响应时间，可以选择将不需要立即处理的任务放入消息队列中异步执行。&lt;/p&gt;</description></item><item><title>说说RocketMQ中关于事务消息的实现</title><link>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4rocketmq%E4%B8%AD%E5%85%B3%E4%BA%8E%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF%E7%9A%84%E5%AE%9E%E7%8E%B0/</link><pubDate>Fri, 26 Dec 2025 16:46:06 +0000</pubDate><guid>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4rocketmq%E4%B8%AD%E5%85%B3%E4%BA%8E%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF%E7%9A%84%E5%AE%9E%E7%8E%B0/</guid><description>&lt;p&gt;在RocketMQ中，为了确保消息与本地事务的&lt;strong&gt;一致性&lt;/strong&gt;，生产者会先将消息发送到RocketMQ的Topic中，这个时候消息的状态为半消息，对于消费者来说，还是不可见的。&lt;/p&gt;
+&lt;p&gt;3.为了减少用户请求的响应时间，可以选择将不需要立即处理的任务放入消息队列中异步执行。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>说说RocketMQ中关于事务消息的实现</title>
+        <link>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4rocketmq%E4%B8%AD%E5%85%B3%E4%BA%8E%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF%E7%9A%84%E5%AE%9E%E7%8E%B0/</link>
+        <pubDate>Fri, 26 Dec 2025 16:46:06 +0000</pubDate>
+        
+        <guid>https://iamxurulin.github.io/p/%E8%AF%B4%E8%AF%B4rocketmq%E4%B8%AD%E5%85%B3%E4%BA%8E%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF%E7%9A%84%E5%AE%9E%E7%8E%B0/</guid>
+        <description>&lt;p&gt;在RocketMQ中，为了确保消息与本地事务的&lt;strong&gt;一致性&lt;/strong&gt;，生产者会先将消息发送到RocketMQ的Topic中，这个时候消息的状态为半消息，对于消费者来说，还是不可见的。&lt;/p&gt;
 &lt;p&gt;接下来，生产者会执行本地事务：&lt;/p&gt;
 &lt;p&gt;如果本地事务&lt;strong&gt;成功&lt;/strong&gt;了，生产者就会向RocketMQ执行commit操作，将半消息转变为正式消息，这样消费者就可见了。&lt;/p&gt;
 &lt;p&gt;如果本地事务&lt;strong&gt;失败&lt;/strong&gt;了，生产者就会向RocketMQ执行Rollback操作，然后RocketMQ就会丢弃这个半消息。&lt;/p&gt;
-&lt;p&gt;如果生产者没有及时地执行commit或者rollback操作，那么RocketMQ就会定时地回查本地事务的状态，从而来决定是否commit或者rollback消息。&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;如果生产者没有及时地执行commit或者rollback操作，那么RocketMQ就会定时地回查本地事务的状态，从而来决定是否commit或者rollback消息。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>
