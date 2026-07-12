@@ -10,7 +10,7 @@
 <meta property='og:description' content="在前后端分离的开发中，数据库里存的主键 ID 明明是：1750433246798835714，但是前端接收到数据后，ID 却变成了：1750433246798835700，后几位莫名其妙变成了 0！\n">
 <meta property='og:url' content='https://iamxurulin.github.io/p/%E5%90%8E%E7%AB%AF-long-%E7%B1%BB%E5%9E%8B-id-%E4%BC%A0%E7%BB%99%E5%89%8D%E7%AB%AF%E7%B2%BE%E5%BA%A6%E4%B8%A2%E5%A4%B1%E5%8F%9800%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/'>
 <meta property='og:site_name' content='Coder_Studio'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Code' /><meta property='article:published_time' content='2026-01-28T13:23:17&#43;00:00'/><meta property='article:modified_time' content='2026-07-05T18:05:28&#43;00:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Code' /><meta property='article:published_time' content='2026-01-28T13:23:17&#43;00:00'/><meta property='article:modified_time' content='2026-07-12T17:59:49&#43;00:00'/>
 <meta name="twitter:title" content="后端 Long 类型 ID 传给前端精度丢失（变00）的解决方案">
 <meta name="twitter:description" content="在前后端分离的开发中，数据库里存的主键 ID 明明是：1750433246798835714，但是前端接收到数据后，ID 却变成了：1750433246798835700，后几位莫名其妙变成了 0！\n"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5123323391207523"
      crossorigin="anonymous"></script>
@@ -631,17 +631,17 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">ObjectMapper</span><span class="w"> </span><span class="n">objectMapper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="p">.</span><span class="na">createXmlMapper</span><span class="p">(</span><span class="kc">false</span><span class="p">).</span><span class="na">build</span><span class="p">();</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 创建自定义序列化模块</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">SimpleModule</span><span class="w"> </span><span class="n">module</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SimpleModule</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">SimpleModule</span><span class="w"> </span><span class="kd">module</span> <span class="err">=</span> <span class="nc">new</span><span class="w"> </span><span class="n">SimpleModule</span><span class="p">();</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 将 Long 类（包装类）和 long（基本类型）都序列化为字符串</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// ToStringSerializer.instance 会调用对象的 toString() 方法</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">module</span><span class="p">.</span><span class="na">addSerializer</span><span class="p">(</span><span class="n">Long</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="n">ToStringSerializer</span><span class="p">.</span><span class="na">instance</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">module</span><span class="p">.</span><span class="na">addSerializer</span><span class="p">(</span><span class="n">Long</span><span class="p">.</span><span class="na">TYPE</span><span class="p">,</span><span class="w"> </span><span class="n">ToStringSerializer</span><span class="p">.</span><span class="na">instance</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">module</span><span class="err">.</span><span class="nc">addSerializer</span><span class="p">(</span><span class="n">Long</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="n">ToStringSerializer</span><span class="p">.</span><span class="na">instance</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">module</span><span class="err">.</span><span class="nc">addSerializer</span><span class="p">(</span><span class="n">Long</span><span class="p">.</span><span class="na">TYPE</span><span class="p">,</span><span class="w"> </span><span class="n">ToStringSerializer</span><span class="p">.</span><span class="na">instance</span><span class="p">);</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 注册模块</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">objectMapper</span><span class="p">.</span><span class="na">registerModule</span><span class="p">(</span><span class="n">module</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">objectMapper</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">objectMapper</span><span class="p">.</span><span class="na">registerModule</span><span class="p">(</span><span class="kd">module</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="nc">return</span><span class="w"> </span><span class="n">objectMapper</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
@@ -682,7 +682,7 @@
 
 
         <span>
-            最后更新于 2026-07-05 18:05:28
+            最后更新于 2026-07-12 17:59:49
         </span>
     </section><section class="article-original-declaration">
         <div class="declaration-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
