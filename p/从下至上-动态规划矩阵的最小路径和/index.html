@@ -6,11 +6,11 @@
 
 <link rel='canonical' href='https://iamxurulin.github.io/p/%E4%BB%8E%E4%B8%8B%E8%87%B3%E4%B8%8A-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%9F%A9%E9%98%B5%E7%9A%84%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C/'>
 
-<link rel="stylesheet" href="/scss/style.min.6e9c513e2b18fb90ba80ef8f1310b1122153a8397e5271e51b034f6a1f7377f5.css"><meta property='og:title' content="【从下至上+动态规划】矩阵的最小路径和">
+<link rel="stylesheet" href="/scss/style.min.07633a36e1f4ce145f50328fcf36bb3d77499b8813a2988f54ae4d016476467a.css"><meta property='og:title' content="【从下至上+动态规划】矩阵的最小路径和">
 <meta property='og:description' content=" 求解代码 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 public int minPathSum(int[][] matrix) { int m = matrix.length; int n = matrix[0].length; int[][] dp = new int[m][n]; dp[0][0] = matrix[0][0]; for (int i = 1; i &lt; m; i++) { dp[i][0] = dp[i - 1][0] + matrix[i][0]; } for (int j = 1; j &lt; n; j++) { dp[0][j] = dp[0][j - 1] + matrix[0][j]; } for (int i = 1; i &lt; m; i++) { for (int j = 1; j &lt; n; j++) { dp[i][j] = Math.min(dp[i - 1][j], dp[i][j - 1]) + matrix[i][j]; } } return dp[m - 1][n - 1]; } 小贴士 代码结构跟上一篇【至下而上+动态规划】不同路径的数目（一）是一样的。\n">
 <meta property='og:url' content='https://iamxurulin.github.io/p/%E4%BB%8E%E4%B8%8B%E8%87%B3%E4%B8%8A-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%9F%A9%E9%98%B5%E7%9A%84%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C/'>
 <meta property='og:site_name' content='Coder_Studio'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='动态规划' /><meta property='article:published_time' content='2026-01-20T21:07:31&#43;00:00'/><meta property='article:modified_time' content='2026-08-09T17:33:07&#43;00:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='动态规划' /><meta property='article:published_time' content='2026-01-20T21:07:31&#43;00:00'/><meta property='article:modified_time' content='2026-08-16T17:20:36&#43;00:00'/>
 <meta name="twitter:title" content="【从下至上+动态规划】矩阵的最小路径和">
 <meta name="twitter:description" content=" 求解代码 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 public int minPathSum(int[][] matrix) { int m = matrix.length; int n = matrix[0].length; int[][] dp = new int[m][n]; dp[0][0] = matrix[0][0]; for (int i = 1; i &lt; m; i++) { dp[i][0] = dp[i - 1][0] + matrix[i][0]; } for (int j = 1; j &lt; n; j++) { dp[0][j] = dp[0][j - 1] + matrix[0][j]; } for (int i = 1; i &lt; m; i++) { for (int j = 1; j &lt; n; j++) { dp[i][j] = Math.min(dp[i - 1][j], dp[i][j - 1]) + matrix[i][j]; } } return dp[m - 1][n - 1]; } 小贴士 代码结构跟上一篇【至下而上+动态规划】不同路径的数目（一）是一样的。\n"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5123323391207523"
      crossorigin="anonymous"></script>
@@ -676,7 +676,7 @@
 
 
         <span>
-            最后更新于 2026-08-09 17:33:07
+            最后更新于 2026-08-16 17:20:36
         </span>
     </section><section class="article-original-declaration">
         <div class="declaration-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">

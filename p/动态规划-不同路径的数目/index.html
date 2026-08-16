@@ -6,11 +6,11 @@
 
 <link rel='canonical' href='https://iamxurulin.github.io/p/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84%E7%9A%84%E6%95%B0%E7%9B%AE/'>
 
-<link rel="stylesheet" href="/scss/style.min.6e9c513e2b18fb90ba80ef8f1310b1122153a8397e5271e51b034f6a1f7377f5.css"><meta property='og:title' content="动态规划-不同路径的数目">
+<link rel="stylesheet" href="/scss/style.min.07633a36e1f4ce145f50328fcf36bb3d77499b8813a2988f54ae4d016476467a.css"><meta property='og:title' content="动态规划-不同路径的数目">
 <meta property='og:description' content="\n求解代码 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 public int uniquePaths(int m, int n) { int[][] dp = new int[m][n]; for (int i = 0; i &lt; m; i++) { dp[i][0] = 1; } for (int j = 0; j &lt; n; j++) { dp[0][j] = 1; } for (int i = 1; i &lt; m; i++) { for (int j = 1; j &lt; n; j++) { dp[i][j] = dp[i - 1][j] + dp[i][j - 1]; } } return dp[m - 1][n - 1]; } 小贴士 因为只能从上面或左边走过来，所以递推公式是 dp[i][j]=dp[i-1][j]+dp[i][j-1]；\n">
 <meta property='og:url' content='https://iamxurulin.github.io/p/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84%E7%9A%84%E6%95%B0%E7%9B%AE/'>
 <meta property='og:site_name' content='Coder_Studio'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='动态规划' /><meta property='article:published_time' content='2026-01-20T00:51:24&#43;00:00'/><meta property='article:modified_time' content='2026-08-09T17:33:07&#43;00:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='动态规划' /><meta property='article:published_time' content='2026-01-20T00:51:24&#43;00:00'/><meta property='article:modified_time' content='2026-08-16T17:20:36&#43;00:00'/>
 <meta name="twitter:title" content="动态规划-不同路径的数目">
 <meta name="twitter:description" content="\n求解代码 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 public int uniquePaths(int m, int n) { int[][] dp = new int[m][n]; for (int i = 0; i &lt; m; i++) { dp[i][0] = 1; } for (int j = 0; j &lt; n; j++) { dp[0][j] = 1; } for (int i = 1; i &lt; m; i++) { for (int j = 1; j &lt; n; j++) { dp[i][j] = dp[i - 1][j] + dp[i][j - 1]; } } return dp[m - 1][n - 1]; } 小贴士 因为只能从上面或左边走过来，所以递推公式是 dp[i][j]=dp[i-1][j]+dp[i][j-1]；\n"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5123323391207523"
      crossorigin="anonymous"></script>
@@ -659,7 +659,7 @@
 
 
         <span>
-            最后更新于 2026-08-09 17:33:07
+            最后更新于 2026-08-16 17:20:36
         </span>
     </section><section class="article-original-declaration">
         <div class="declaration-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
